@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The Rust Edition Guide</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="_FontAwesome/css/font-awesome.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+
+    </head>
+    <body class="light">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="editions/index.html"><strong aria-hidden="true">1.</strong> What are Editions?</a></li><li><ol class="section"><li><a href="editions/transitioning.html"><strong aria-hidden="true">1.1.</strong> Transitioning your code to a new edition</a></li></ol></li><li><a href="2015/index.html"><strong aria-hidden="true">2.</strong> Rust 2015</a></li><li><a href="2018/index.html"><strong aria-hidden="true">3.</strong> Rust 2018</a></li><li><ol class="section"><li><a href="2018/transitioning/to-rust-2018.html"><strong aria-hidden="true">3.1.</strong> Transitioning to Rust 2018</a></li><li><ol class="section"><li><a href="2018/transitioning/traits/index.html"><strong aria-hidden="true">3.1.1.</strong> Trait system</a></li><li><ol class="section"><li><a href="2018/transitioning/traits/impl-trait.html"><strong aria-hidden="true">3.1.1.1.</strong> impl Trait</a></li><li><a href="2018/transitioning/traits/dyn-trait.html"><strong aria-hidden="true">3.1.1.2.</strong> dyn Trait</a></li></ol></li><li><a href="2018/transitioning/modules/index.html"><strong aria-hidden="true">3.1.2.</strong> Module system</a></li><li><ol class="section"><li><a href="2018/transitioning/modules/path-clarity.html"><strong aria-hidden="true">3.1.2.1.</strong> Path clarity</a></li><li><a href="2018/transitioning/modules/macros.html"><strong aria-hidden="true">3.1.2.2.</strong> Macro changes</a></li></ol></li><li><a href="2018/transitioning/concurrency/index.html"><strong aria-hidden="true">3.1.3.</strong> Concurrency additions</a></li><li><ol class="section"><li><a href="2018/transitioning/concurrency/async-await.html"><strong aria-hidden="true">3.1.3.1.</strong> async/await</a></li></ol></li><li><a href="2018/transitioning/ownership-and-lifetimes/index.html"><strong aria-hidden="true">3.1.4.</strong> Ownership and lifetimes</a></li><li><ol class="section"><li><a href="2018/transitioning/ownership-and-lifetimes/anonymous-lifetime.html"><strong aria-hidden="true">3.1.4.1.</strong> '_, the anonymous lifetime</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.html"><strong aria-hidden="true">3.1.4.2.</strong> In-band lifetimes</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/default-match-bindings.html"><strong aria-hidden="true">3.1.4.3.</strong> Defaut match bindings</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/lifetime-elision-in-impl.html"><strong aria-hidden="true">3.1.4.4.</strong> Lifetime elision in impl</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/struct-inference.html"><strong aria-hidden="true">3.1.4.5.</strong> T: 'a inference in structs</a></li></ol></li><li><a href="2018/transitioning/errors/index.html"><strong aria-hidden="true">3.1.5.</strong> Error Handling</a></li><li><ol class="section"><li><a href="2018/transitioning/errors/question-mark.html"><strong aria-hidden="true">3.1.5.1.</strong> ? in main and tests</a></li><li><a href="2018/transitioning/errors/try-throw-fail.html"><strong aria-hidden="true">3.1.5.2.</strong> try, throw, and fail</a></li></ol></li><li><a href="2018/transitioning/raw-identifiers.html"><strong aria-hidden="true">3.1.6.</strong> Raw identifiers</a></li></ol></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">The Rust Edition Guide</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="print.html#introduction" id="introduction"><h1>Introduction</h1></a>
+<p>Welcome to the Rust Edition Guide! &quot;Editions&quot; are Rust's way of communicating
+large changes in the way that it feels to write Rust code.</p>
+<p>In this guide, we'll discuss:</p>
+<ul>
+<li>What editions are</li>
+<li>What each edition is about</li>
+<li>How to migrate your code from one edition to another</li>
+</ul>
+<p>Read on for more!</p>
+<a class="header" href="print.html#what-are-editions" id="what-are-editions"><h1>What are Editions?</h1></a>
+<p>Rust usually releases on a six-week cycle. This means that users get a
+constant stream of new features. This is much, much faster than other
+languages update, but also means that each individual update is smaller.</p>
+<p>After a while, all of those tiny changes add up. It can be hard to look back
+and say &quot;Wow, between Rust 1.10 and Rust 1.20, Rust has changed a lot!&quot;
+Furhermore, since everything must be backwards compatible, we can't make certain
+tiny changes, like adding keywords. Finally, various parts of the project,
+since they update at different paces, may feel like they &quot;lag&quot; in various ways.
+If a new language feature lands in Rust 1.15, and a new chapter of the book
+on it lands in 1.16, and the IDE integration lands in 1.17, this can feel
+very disjointed. But if you were to compare Rust 1.15 to Rust 1.17, you'd see
+one cohesive feature being added.</p>
+<p>&quot;Editions&quot; are a concept to help with these kinds of problems. Every two or
+three years, we'll be producing a new edition of Rust. This serves different
+purposes for different people: for those working on Rust, it's a great way to
+focus on looking at the project as a whole, and being able to see the big
+picture. For those who haven't used Rust yet, or for those who may have tried
+Rust in the past and found it lacking in some way, a new edition signals that
+major advancements have landed, and you may want to give it a look!</p>
+<a class="header" href="print.html#compatibility" id="compatibility"><h2>Compatibility</h2></a>
+<p>Editions are allowed to introduce minor kinds of incompatibilities, such as
+turning a warning into a hard error, or adding new keywords. At the same
+time, it's very important that we don't split the Rust ecosystem. Therefore,
+each project can list which edition that it's using, and the Rust compiler
+can link crates of any editions together. Therefore, if you're using Rust 2015,
+and one of your dependencies uses Rust 2018, it all works just fine. The
+opposite situation works as well.</p>
+<a class="header" href="print.html#trying-out-the-2018-edition" id="trying-out-the-2018-edition"><h2>Trying out the 2018 edition</h2></a>
+<p>At the time of writing, there are two editions: 2015 and 2018. 2015 is today's
+Rust; Rust 2018 will ship later this year. To give Rust 2018 a try, you can
+add this feature to your crate root:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(rust_2018_preview)]
+#fn main() {
+#}</code></pre></pre>
+<p>Like all <code>#![feautre]</code> flags, this will only work on nightly Rust. This
+flag will enable all of the new 2018 specific features. You can also use</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(rust_2018_idioms)]
+#fn main() {
+#}</code></pre></pre>
+<p>This will turn on a series of lints that suggest new idioms. The old
+code will still work, but trigger warnings.</p>
+<p>As new nightlies are released, more functionality will be enabled, and
+so you may experience new warnings, features, and other things. This is
+exactly why nightly is unstable! Something to keep in mind, however.</p>
+<a class="header" href="print.html#transitioning-your-code-to-a-new-edition" id="transitioning-your-code-to-a-new-edition"><h1>Transitioning your code to a new edition</h1></a>
+<p>In general, to update your code to a new edition, the process
+will look like this:</p>
+<ul>
+<li>Make sure your build is warning-free.</li>
+<li>Update or add the <code>edition</code> key in <code>Cargo.toml</code></li>
+<li>Fix any warnings, possibly by running <code>rustfix</code>.</li>
+</ul>
+<p>At this time, the <code>edition</code> key does not yet work, and <code>rustfix</code> is in a
+larval state. This section will update as our story gets better here.</p>
+<a class="header" href="print.html#rust-2015" id="rust-2015"><h1>Rust 2015</h1></a>
+<p>Rust 2015 has a theme of &quot;stability.&quot; It commenced with the release of 1.0,
+and is the &quot;default edition.&quot; The edition system was concieved in late 2017,
+but Rust 1.0 was released in May of 2015. As such, 2015 is the edition
+that you get when you don't specify any particular edition, for backwards
+compatibility reasons.</p>
+<p>&quot;Stability&quot; is the theme of Rust 2015 because 1.0 marked a huge change in
+Rust development. Previous to Rust 1.0, Rust was changing on a daily basis.
+This made it very difficult to write large software in Rust, and made it
+difficult to learn. With the release of Rust 1.0 and Rust 2015, we committed
+to backwards compatibility, ensuring a solid foundation for people to build
+projects on top of.</p>
+<p>Since it's the default edition, there's no way to port your code to Rust
+2015; it just <em>is</em>. You'll be transitioning <em>away</em> from 2015, but never
+really <em>to</em> 2015. As such, there's not much else to say about it!</p>
+<a class="header" href="print.html#rust-2018" id="rust-2018"><h1>Rust 2018</h1></a>
+<p>The edition system was created in order to create Rust 2018. The theme of Rust 2018
+is <em>productivity</em>. Rust 2018 improves upon Rust 2015 through new features, simpler
+syntax in some cases, a smarter borrow-checker, and a host of other things. These
+are all in service of the productivity goal. Rust 2015 was a foundation; Rust 2018
+smooths off rough edges, makes writing code simpler and easier, and removes some
+inconsistencies.</p>
+<a class="header" href="print.html#transitioning-to-rust-2018" id="transitioning-to-rust-2018"><h1>Transitioning to Rust 2018</h1></a>
+<p>There's a lot of new stuff in Rust 2018! This section will cover, bit by bit,
+each new major feature of the edition, and how to move your code from Rust
+2015 to Rust 2018.</p>
+<a class="header" href="print.html#trait-system" id="trait-system"><h1>Trait system</h1></a>
+<p>The trait system has received some nice upgrades in Rust 2018. These come with two
+new syntactic forms: <code>impl Trait</code> and <code>dyn Trait</code>. The former gives you new powers,
+the latter clarifies syntax for trait objects.</p>
+<a class="header" href="print.html#impl-trait" id="impl-trait"><h1>impl Trait</h1></a>
+<a class="header" href="print.html#dyn-trait" id="dyn-trait"><h1>dyn Trait</h1></a>
+<a class="header" href="print.html#module-system" id="module-system"><h1>Module system</h1></a>
+<p>The module system is one of the most confusing aspects of Rust 2015 for many
+Rustaceans. Rust 2018 includes an overhaul of the module system. In the
+words of the core team:</p>
+<blockquote>
+<p>In other words, while there are simple and consistent rules defining the
+module system, their consequences can feel inconsistent, counterintuitive and
+mysterious.</p>
+</blockquote>
+<p>Rust 2018's module system also consists of simple rules, but they fit
+together in a much nicer way. We expect these changes to be one of the
+favorites in this edition.</p>
+<a class="header" href="print.html#path-clarity" id="path-clarity"><h1>Path clarity</h1></a>
+<a class="header" href="print.html#macro-changes" id="macro-changes"><h1>Macro changes</h1></a>
+<a class="header" href="print.html#concurrency-additions" id="concurrency-additions"><h1>Concurrency additions</h1></a>
+<p>While concurrency and parallelism has always been a strong suit of Rust, it
+often requires a lot of boilerplate. In Rust 2018, two new keywords, <code>async</code>
+and <code>await</code>, help you write code that appears sequential, but executes
+concurrently.</p>
+<a class="header" href="print.html#asyncawait" id="asyncawait"><h1>async/await</h1></a>
+<a class="header" href="print.html#ownership-and-lifetimes" id="ownership-and-lifetimes"><h1>Ownership and lifetimes</h1></a>
+<p>Some of the largest changes in Rust 2018 are in ownership and lifetimes. Some
+features are for your convenience, some make the borrow checker smarter, and
+others reduce boilerplate.</p>
+<a class="header" href="print.html#a_-the-anonymous-lifetime" id="a_-the-anonymous-lifetime"><h1>'_, the anonymous lifetime</h1></a>
+<a class="header" href="print.html#in-band-lifetimes" id="in-band-lifetimes"><h1>In-band lifetimes</h1></a>
+<a class="header" href="print.html#defaut-match-bindings" id="defaut-match-bindings"><h1>Defaut match bindings</h1></a>
+<a class="header" href="print.html#lifetime-elision-in-impl" id="lifetime-elision-in-impl"><h1>Lifetime elision in impl</h1></a>
+<a class="header" href="print.html#t-a-inference-in-structs" id="t-a-inference-in-structs"><h1>T: 'a inference in structs</h1></a>
+<a class="header" href="print.html#error-handling" id="error-handling"><h1>Error Handling</h1></a>
+<p>Rust 2015 evolved its error handling story over time, from <code>try!</code> to <code>?</code>.
+Rust 2018 continues this evolution, allowing you to use <code>?</code> in more places,
+and adding even more convenient syntactic forms.</p>
+<a class="header" href="print.html#a-in-main-and-tests" id="a-in-main-and-tests"><h1>? in main and tests</h1></a>
+<a class="header" href="print.html#try-throw-and-fail" id="try-throw-and-fail"><h1>try, throw, and fail</h1></a>
+<a class="header" href="print.html#raw-identifiers" id="raw-identifiers"><h1>Raw identifiers</h1></a>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                window.print();
+            })
+        </script>
+        
+
+        
+
+        
+        <script src="searchindex.js" type="text/javascript" charset="utf-8"></script>
+        
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+    </body>
+</html>
