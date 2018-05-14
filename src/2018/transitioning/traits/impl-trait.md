@@ -156,3 +156,12 @@ trait, but I'm not gonna tell you what it is." ("existential" in the jargon,
 "some type exists"). So now, the caller can't choose, and the function itself
 gets to choose. If we tried to define parse with `Result<impl F,...` as the
 return type, it wouldn't work.
+
+### Using `impl Trait` in more places
+
+As previously mentioned, as a start, you will only be able to use `impl Trait`
+as the argument or return type of a free or inherent function. However,
+`impl Trait` can't be used inside implementations of traits, nor can it be
+used as the type of a let binding or inside a type alias. Some of these
+restrictions will eventually be lifted. For more information, see the
+[tracking issue on `impl Trait`](https://github.com/rust-lang/rust/issues/34511).
