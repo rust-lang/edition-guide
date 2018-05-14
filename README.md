@@ -10,8 +10,8 @@ online](https://rust-lang-nursery.github.io/edition-guide/).
 
 ## License
 
-The Edition Guide is dual licensed under `MIT`/`Apache2`, just like Rust itself. See the `LICESNE-*`
-files in this repository for more details.
+The Edition Guide is dual licensed under `MIT`/`Apache2`, just like Rust itself.
+See the `LICENSE-*` files in this repository for more details.
 
 ## Building locally
 
