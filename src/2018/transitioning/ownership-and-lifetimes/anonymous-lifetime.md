@@ -76,6 +76,10 @@ We can rewrite this as:
 ```rust
 #![feature(rust_2018_preview)]
 
+struct Foo<'a, 'b: 'a> {
+    field: &'a &'b str,
+}
+
 impl Foo<'_, '_> {
     // some methods...
 }
