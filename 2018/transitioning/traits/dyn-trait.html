@@ -134,6 +134,38 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="2018/transitioning/traits/dyn-trait.html#dyn-trait" id="dyn-trait"><h1>dyn Trait</h1></a>
+<p>The <code>dyn Trait</code> feature is a new way of writing trait objects. In short:</p>
+<ul>
+<li><code>Box&lt;Trait&gt;</code> becomes <code>Box&lt;dyn Trait&gt;</code></li>
+<li><code>&amp;Trait</code> and <code>&amp;mut Trait</code> become <code>&amp;dyn Trait</code> and <code>&amp;mut dyn Trait</code></li>
+</ul>
+<p>And so on. In code:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait Trait {}
+
+impl Trait for i32 {}
+
+// old
+fn function1() -&gt; Box&lt;Trait&gt; {
+# unimplemented!()
+}
+
+// new
+fn function2() -&gt; Box&lt;dyn Trait&gt; {
+# unimplemented!()
+}
+#}</code></pre></pre>
+<p>That's it!</p>
+<a class="header" href="2018/transitioning/traits/dyn-trait.html#more-details" id="more-details"><h2>More details</h2></a>
+<p>Using just the trait name for trait objects has turned out to be a bad
+decision. The current syntax is often ambiguous and confusing, even to
+veterans, and favors a feature that is not more frequently used than its
+alternatives, is sometimes slower, and often cannot be used at all when its
+alternatives can.</p>
+<p>Furthermore, with <code>impl Trait</code> arriving, &quot;<code>impl Trait</code> vs <code>dyn Trait</code>&quot; is much
+more symmetric, and therefore a bit nicer, than &quot;<code>impl Trait</code> vs <code>Trait</code>&quot;.</p>
 
                     </main>
 
