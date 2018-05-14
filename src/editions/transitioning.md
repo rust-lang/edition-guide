@@ -21,18 +21,44 @@ You can get `rustfix` from crates.io. Given that you're probably using Cargo,
 you'll want to run this:
 
 ```shell
-$ cargo +nightly install cargo-fix --git https://github.com/killercup/rustfix.git
+$ cargo install cargo-fix --git https://github.com/rust-lang-nursery/rustfix
 ```
 
-And that's it! Note that you do need a nightly Cargo to use `rustfix` at the
-moment; in fact, all of the edition stuff is nightly only for now. Eventually
-this will be stable! Same with installing from `git`, for now, it's needed.
+And that's it!
 
 ## Prepare for the next edition
 
+Before we talk about how to move to the new edition, a reminder:
+
+
+* New editions may have features that are only available in the new edition.
+  For example, `async`/`await` is available in Rust 2018, but not Rust 2015.
+* It's our intention that the migration to new editions is as smooth an experience
+  as possible. It's considered a bug if it's difficult to upgrade your crate to
+  a new edition. If you have a difficult time then a bug should be filed
+  with either rustfix or Rust itself.
+
+With that out of the way, let's get into it!
+
+### The preview period
+
+First, editions have a "preview" phase. This lets you try out the new edition
+in nightly Rust. During the preview, there's an extra step you need to take
+to opt in. At the time of writing, Rust 2018 is in its preview phase.
+
+To do that, add this feature flag to your `lib.rs` or `main.rs`:
+
+```rust
+#![feature(rust_2018_preview)]
+```
+
+This will ensure that you're enabling all of the relevant features.
+
+### Running rustfix
+
 There are some lints that can help you prepare for the next edition, but
-they're not currently turned on by default. `rustfix` has your back
-though! To turn them on and have `rustfix` fix up your code, run this:
+they're not currently turned on by default. `rustfix` has your back though!
+To turn them on and have `rustfix` fix up your code, run this:
 
 ```shell
 $ cargo +nightly fix --prepare-for 2018
