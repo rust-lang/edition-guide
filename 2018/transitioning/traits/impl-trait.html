@@ -230,8 +230,9 @@ fn returns_closure() -&gt; impl Fn(i32) -&gt; i32 {
 <p>We can now return closures by value, just like any other type!</p>
 <a class="header" href="2018/transitioning/traits/impl-trait.html#more-details" id="more-details"><h2>More details</h2></a>
 <p>The above is all you need to know to get going with <code>impl Trait</code>, but for
-some more nitty-gritty details: type parameters are universals, <code>impl Trait</code>
-are existentials. Okay, maybe that's a bit too jargon-heavy. Let's step back.</p>
+some more nitty-gritty details: type parameters and <code>impl Trait</code> in argument
+position are universals (universally quantified types). Meanwhile, <code>impl Trait</code> in return position are existentials (existentially quantified types).
+Okay, maybe that's a bit too jargon-heavy. Let's step back.</p>
 <p>Consider this function:</p>
 <pre><code class="language-rust ignore">fn foo&lt;T: Trait&gt;(x: T) {
 </code></pre>
