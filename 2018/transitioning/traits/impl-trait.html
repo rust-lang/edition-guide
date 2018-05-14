@@ -148,7 +148,7 @@ fn foo() -&gt; impl Trait {
 </code></pre>
 <a class="header" href="2018/transitioning/traits/impl-trait.html#argument-position" id="argument-position"><h2>Argument Position</h2></a>
 <p>In argument position, this feature is quite simple. These two forms
-are the same:</p>
+are almost the same:</p>
 <pre><code class="language-rust ignore">trait Trait {}
 
 fn foo(arg: impl Trait) {
@@ -160,6 +160,13 @@ fn foo&lt;T: Trait&gt;(arg: T) {
 <p>That is, it's a slightly shorter syntax for a generic type parameter. It
 means, &quot;<code>arg</code> is an argument that takes any type that implements the <code>Trait</code>
 trait.&quot;</p>
+<p>However, there's also an important technical difference between <code>T: Trait</code> and
+<code>impl Trait</code> here. When you write the former, you can specify the type of <code>T</code>
+at the call site with turbo-fish syntax as with <code>foo::&lt;usize&gt;(1)</code>.
+In the case of <code>impl Trait</code>, if it is used anywhere in the function definition,
+then you can't use turbo-fish at all. Therefore, you should be mindful that
+changing both from and to <code>impl Trait</code> can constitute a breaking change for the
+users of your code.</p>
 <a class="header" href="2018/transitioning/traits/impl-trait.html#return-position" id="return-position"><h2>Return Position</h2></a>
 <p>In return position, this feature is more interesting. It means &quot;I am
 returning some type that implements the <code>Trait</code> trait, but I'm not going
