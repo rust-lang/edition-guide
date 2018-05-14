@@ -18,7 +18,7 @@ fn foo() -> impl Trait {
 ## Argument Position
 
 In argument position, this feature is quite simple. These two forms
-are the same:
+are almost the same:
 
 ```rust,ignore
 trait Trait {}
@@ -33,6 +33,14 @@ fn foo<T: Trait>(arg: T) {
 That is, it's a slightly shorter syntax for a generic type parameter. It
 means, "`arg` is an argument that takes any type that implements the `Trait`
 trait."
+
+However, there's also an important technical difference between `T: Trait` and
+`impl Trait` here. When you write the former, you can specify the type of `T`
+at the call site with turbo-fish syntax as with `foo::<usize>(1)`.
+In the case of `impl Trait`, if it is used anywhere in the function definition,
+then you can't use turbo-fish at all. Therefore, you should be mindful that
+changing both from and to `impl Trait` can constitute a breaking change for the
+users of your code.
 
 ## Return Position
 
