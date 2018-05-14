@@ -5,8 +5,8 @@ constant stream of new features. This is much, much faster than other
 languages update, but also means that each individual update is smaller.
 
 After a while, all of those tiny changes add up. It can be hard to look back
-and say "Wow, between Rust 1.10 and Rust 1.20, Rust has changed a lot!"
-Furhermore, since everything must be backwards compatible, we can't make certain
+and say *"Wow, between Rust 1.10 and Rust 1.20, Rust has changed a lot!"*
+Furthermore, since everything must be backwards compatible, we can't make certain
 tiny changes, like adding keywords. Finally, various parts of the project,
 since they update at different paces, may feel like they "lag" in various ways.
 If a new language feature lands in Rust 1.15, and a new chapter of the book
@@ -42,16 +42,16 @@ add this feature to your crate root:
 #![feature(rust_2018_preview)]
 ```
 
-Like all `#![feautre]` flags, this will only work on nightly Rust. This
-flag will enable all of the new 2018 specific features. You can also use
+Like all `#![feature(..)]` flags, this will only work on nightly Rust. This
+flag will enable all of the new 2018 specific features. You can also use:
 
 ```rust
 #![feature(rust_2018_idioms)]
 ```
 
-This will turn on a series of lints that suggest new idioms. The old
-code will still work, but trigger warnings.
+This will turn on a series of lints that suggest new idioms.
+The old code will still work, but trigger warnings.
 
-As new nightlies are released, more functionality will be enabled, and
-so you may experience new warnings, features, and other things. This is
-exactly why nightly is unstable! Something to keep in mind, however.
+As new nightly compilers are released, more functionality will be enabled,
+and so you may experience new warnings, features, and other things.
+This is exactly why nightly is unstable! Something to keep in mind, however.

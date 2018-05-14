@@ -1,1 +1,1 @@
-# Defaut match bindings
+# Default match bindings

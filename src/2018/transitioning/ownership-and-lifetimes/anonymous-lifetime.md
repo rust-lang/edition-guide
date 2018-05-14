@@ -1,1 +1,1 @@
-# '_, the anonymous lifetime
+# `'_`, the anonymous lifetime

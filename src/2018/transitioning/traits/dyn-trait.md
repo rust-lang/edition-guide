@@ -27,11 +27,10 @@ That's it!
 
 ## More details
 
-Using just the trait name for trait objects has turned out to be a bad
-decision. The current syntax is often ambiguous and confusing, even to
-veterans, and favors a feature that is not more frequently used than its
-alternatives, is sometimes slower, and often cannot be used at all when its
-alternatives can.
+Using just the trait name for trait objects has turned out to be a bad decision.
+The current syntax is often ambiguous and confusing, even to veterans,
+and favors a feature that is not more frequently used than its alternatives,
+is sometimes slower, and often cannot be used at all when its alternatives can.
 
 Furthermore, with `impl Trait` arriving, "`impl Trait` vs `dyn Trait`" is much
 more symmetric, and therefore a bit nicer, than "`impl Trait` vs `Trait`".

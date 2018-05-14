@@ -1,7 +1,7 @@
 # Rust 2015
 
-Rust 2015 has a theme of "stability." It commenced with the release of 1.0,
-and is the "default edition." The edition system was concieved in late 2017,
+Rust 2015 has a theme of "stability". It commenced with the release of 1.0,
+and is the "default edition". The edition system was conceived in late 2017,
 but Rust 1.0 was released in May of 2015. As such, 2015 is the edition
 that you get when you don't specify any particular edition, for backwards
 compatibility reasons.

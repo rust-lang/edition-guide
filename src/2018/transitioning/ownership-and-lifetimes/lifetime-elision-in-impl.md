@@ -1,1 +1,1 @@
-# Lifetime elision in impl
+# Lifetime elision in `impl`

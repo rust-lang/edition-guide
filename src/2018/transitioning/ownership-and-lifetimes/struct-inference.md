@@ -1,1 +1,1 @@
-# T: 'a inference in structs
+# `T: 'a` inference in structs

@@ -1,13 +1,13 @@
 # impl Trait
 
-`impl Trait` is new syntax that works in function signatures. There's two
-places you can put it: argument position, and return position.
+`impl Trait` is new syntax that currently works in function signatures.
+There are two places you can put it: argument position, and return position.
 
 ```rust,ignore
 trait Trait {}
 
 // argument position
-fn foo(t: impl Trait) {
+fn foo(arg: impl Trait) {
 }
 
 // return position
@@ -23,15 +23,15 @@ are the same:
 ```rust,ignore
 trait Trait {}
 
-fn foo(t: impl Trait) {
+fn foo(arg: impl Trait) {
 }
 
-fn foo<T: Trait>(t: T) {
+fn foo<T: Trait>(arg: T) {
 }
 ```
 
 That is, it's a slightly shorter syntax for a generic type parameter. It
-means, "`t` is an argument that takes any type that implements the `Trait`
+means, "`arg` is an argument that takes any type that implements the `Trait`
 trait."
 
 ## Return Position
