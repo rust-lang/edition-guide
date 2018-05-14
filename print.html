@@ -359,6 +359,13 @@ trait, but I'm not gonna tell you what it is.&quot; (&quot;existential&quot; in 
 &quot;some type exists&quot;). So now, the caller can't choose, and the function itself
 gets to choose. If we tried to define parse with <code>Result&lt;impl F,...</code> as the
 return type, it wouldn't work.</p>
+<a class="header" href="print.html#using-impl-trait-in-more-places" id="using-impl-trait-in-more-places"><h3>Using <code>impl Trait</code> in more places</h3></a>
+<p>As previously mentioned, as a start, you will only be able to use <code>impl Trait</code>
+as the argument or return type of a free or inherent function. However,
+<code>impl Trait</code> can't be used inside implementations of traits, nor can it be
+used as the type of a let binding or inside a type alias. Some of these
+restrictions will eventually be lifted. For more information, see the
+<a href="https://github.com/rust-lang/rust/issues/34511">tracking issue on <code>impl Trait</code></a>.</p>
 <a class="header" href="print.html#dyn-trait" id="dyn-trait"><h1>dyn Trait</h1></a>
 <p>The <code>dyn Trait</code> feature is a new way of writing trait objects. In short:</p>
 <ul>
