@@ -74,6 +74,8 @@ impl<'a, 'b: 'a> Foo<'a, 'b> {
 We can rewrite this as:
 
 ```rust
+#![feature(rust_2018_preview)]
+
 impl Foo<'_, '_> {
     // some methods...
 }
