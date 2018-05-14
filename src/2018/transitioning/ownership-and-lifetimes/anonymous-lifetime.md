@@ -14,6 +14,8 @@ struct StrWrap<'a>(&'a str);
 In edition 2015, you might have written:
 
 ```rust
+use std::fmt;
+
 fn make_wrapper(string: &str) -> StrWrap {
     StrWrap(string)
 }
@@ -29,6 +31,8 @@ In edition 2018, you can instead write:
 
 ```rust
 #![feature(rust_2018_preview)]
+
+use std::fmt;
 
 fn make_wrapper(string: &str) -> StrWrap<'_> {
     StrWrap(string)
