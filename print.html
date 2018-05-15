@@ -367,7 +367,7 @@ used as the type of a let binding or inside a type alias. Some of these
 restrictions will eventually be lifted. For more information, see the
 <a href="https://github.com/rust-lang/rust/issues/34511">tracking issue on <code>impl Trait</code></a>.</p>
 <a class="header" href="print.html#dyn-trait" id="dyn-trait"><h1>dyn Trait</h1></a>
-<p>The <code>dyn Trait</code> feature is a new way of writing trait objects. In short:</p>
+<p>The <code>dyn Trait</code> feature is the new syntax for using trait objects. In short:</p>
 <ul>
 <li><code>Box&lt;Trait&gt;</code> becomes <code>Box&lt;dyn Trait&gt;</code></li>
 <li><code>&amp;Trait</code> and <code>&amp;mut Trait</code> become <code>&amp;dyn Trait</code> and <code>&amp;mut dyn Trait</code></li>
@@ -392,12 +392,14 @@ fn function2() -&gt; Box&lt;dyn Trait&gt; {
 #}</code></pre></pre>
 <p>That's it!</p>
 <a class="header" href="print.html#more-details-1" id="more-details-1"><h2>More details</h2></a>
-<p>Using just the trait name for trait objects has turned out to be a bad decision.
+<p>Using just the trait name for trait objects turned out to be a bad decision.
 The current syntax is often ambiguous and confusing, even to veterans,
 and favors a feature that is not more frequently used than its alternatives,
 is sometimes slower, and often cannot be used at all when its alternatives can.</p>
 <p>Furthermore, with <code>impl Trait</code> arriving, &quot;<code>impl Trait</code> vs <code>dyn Trait</code>&quot; is much
 more symmetric, and therefore a bit nicer, than &quot;<code>impl Trait</code> vs <code>Trait</code>&quot;.</p>
+<p>In the new edition, you should therefore prefer <code>dyn Trait</code> to just <code>Trait</code>
+where you need a trait object.</p>
 <a class="header" href="print.html#module-system" id="module-system"><h1>Module system</h1></a>
 <p>The module system is one of the most confusing aspects of Rust 2015 for many
 Rustaceans. Rust 2018 includes an overhaul of the module system. In the
@@ -423,6 +425,94 @@ concurrently.</p>
 features are for your convenience, some make the borrow checker smarter, and
 others reduce boilerplate.</p>
 <a class="header" href="print.html#a_-the-anonymous-lifetime" id="a_-the-anonymous-lifetime"><h1><code>'_</code>, the anonymous lifetime</h1></a>
+<p>New in edition 2018, the &quot;anonymous lifetime&quot; feature, allows you to explicitly
+mark where a lifetime is elided. To do this, you can use the special lifetime
+<code>'_</code> much like you can explicitly mark that a type is inferred with the syntax
+<code>let x: _ = ..;</code>.</p>
+<p>Let's say, for whatever reason, that we have a simple wrapper around <code>&amp;'a str</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct StrWrap&lt;'a&gt;(&amp;'a str);
+#}</code></pre></pre>
+<p>In edition 2015, you might have written:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use std::fmt;
+
+# struct StrWrap&lt;'a&gt;(&amp;'a str);
+
+fn make_wrapper(string: &amp;str) -&gt; StrWrap {
+    StrWrap(string)
+}
+
+impl&lt;'a&gt; fmt::Debug for StrWrap&lt;'a&gt; {
+    fn fmt(&amp;self, fmt: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        fmt.write_str(self.0)
+    }
+}
+#}</code></pre></pre>
+<p>In edition 2018, you can instead write:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(rust_2018_preview)]
+
+#fn main() {
+# use std::fmt;
+# struct StrWrap&lt;'a&gt;(&amp;'a str);
+
+fn make_wrapper(string: &amp;str) -&gt; StrWrap&lt;'_&gt; {
+    StrWrap(string)
+}
+
+impl fmt::Debug for StrWrap&lt;'_&gt; {
+    fn fmt(&amp;self, fmt: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        fmt.write_str(self.0)
+    }
+}
+#}</code></pre></pre>
+<a class="header" href="print.html#more-details-2" id="more-details-2"><h2>More details</h2></a>
+<p>In the second snippet above, we've used <code>-&gt; StrWrap</code>.
+However, unless you take a look at the definition of <code>StrWrap</code>,
+it is not clear that the returned value is actually borrowing something.
+Therefore, starting with edition 2018, it is deprecated, for non-reference-types
+(types other than <code>&amp;</code> and <code>&amp;mut</code>), to leave of the lifetime parameters.
+Instead, where you previously wrote <code>-&gt; StrWrap</code>,
+you should now, in edition 2018, write <code>-&gt; StrWrap&lt;'_&gt;</code>.</p>
+<p>What exactly does <code>'_</code> mean? It depends on the context!
+In output contexts, as in the return type of <code>make_wrapper</code>,
+it refers to a single lifetime for  all &quot;output&quot; locations.
+In input contexts, a fresh lifetime is generated for each &quot;input location&quot;.
+More concretely, to understand input contexts, consider the following example:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct Foo&lt;'a, 'b: 'a&gt; {
+    field: &amp;'a &amp;'b str,
+}
+
+impl&lt;'a, 'b: 'a&gt; Foo&lt;'a, 'b&gt; {
+    // some methods...
+}
+#}</code></pre></pre>
+<p>We can rewrite this as:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(rust_2018_preview)]
+
+#fn main() {
+# struct Foo&lt;'a, 'b: 'a&gt; {
+#     field: &amp;'a &amp;'b str,
+# }
+
+impl Foo&lt;'_, '_&gt; {
+    // some methods...
+}
+#}</code></pre></pre>
+<p>This is the same, because for each <code>'_</code>, a fresh lifetime is generated.
+Finally, the relationship <code>'a: 'b</code> which the struct requires must be upheld.</p>
+<p>For more details, see the <a href="https://github.com/rust-lang/rust/issues/44524">tracking issue on In-band lifetime bindings</a>.</p>
 <a class="header" href="print.html#in-band-lifetimes" id="in-band-lifetimes"><h1>In-band lifetimes</h1></a>
 <a class="header" href="print.html#default-match-bindings" id="default-match-bindings"><h1>Default match bindings</h1></a>
 <a class="header" href="print.html#lifetime-elision-in-impl" id="lifetime-elision-in-impl"><h1>Lifetime elision in <code>impl</code></h1></a>
@@ -463,7 +553,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Note the <code>r#</code> prefix on both the function name, as well as the call.</p>
-<a class="header" href="print.html#more-details-2" id="more-details-2"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-3" id="more-details-3"><h2>More details</h2></a>
 <p>This feature is useful for a few reasons, but the primary motivation was
 inter-edition situations. For example, <code>try</code> is not a keyword in the 2015
 edition, but is in the 2018 edition. So if you have a library that is written

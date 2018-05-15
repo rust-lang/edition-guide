@@ -134,6 +134,94 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="2018/transitioning/ownership-and-lifetimes/anonymous-lifetime.html#a_-the-anonymous-lifetime" id="a_-the-anonymous-lifetime"><h1><code>'_</code>, the anonymous lifetime</h1></a>
+<p>New in edition 2018, the &quot;anonymous lifetime&quot; feature, allows you to explicitly
+mark where a lifetime is elided. To do this, you can use the special lifetime
+<code>'_</code> much like you can explicitly mark that a type is inferred with the syntax
+<code>let x: _ = ..;</code>.</p>
+<p>Let's say, for whatever reason, that we have a simple wrapper around <code>&amp;'a str</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct StrWrap&lt;'a&gt;(&amp;'a str);
+#}</code></pre></pre>
+<p>In edition 2015, you might have written:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use std::fmt;
+
+# struct StrWrap&lt;'a&gt;(&amp;'a str);
+
+fn make_wrapper(string: &amp;str) -&gt; StrWrap {
+    StrWrap(string)
+}
+
+impl&lt;'a&gt; fmt::Debug for StrWrap&lt;'a&gt; {
+    fn fmt(&amp;self, fmt: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        fmt.write_str(self.0)
+    }
+}
+#}</code></pre></pre>
+<p>In edition 2018, you can instead write:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(rust_2018_preview)]
+
+#fn main() {
+# use std::fmt;
+# struct StrWrap&lt;'a&gt;(&amp;'a str);
+
+fn make_wrapper(string: &amp;str) -&gt; StrWrap&lt;'_&gt; {
+    StrWrap(string)
+}
+
+impl fmt::Debug for StrWrap&lt;'_&gt; {
+    fn fmt(&amp;self, fmt: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        fmt.write_str(self.0)
+    }
+}
+#}</code></pre></pre>
+<a class="header" href="2018/transitioning/ownership-and-lifetimes/anonymous-lifetime.html#more-details" id="more-details"><h2>More details</h2></a>
+<p>In the second snippet above, we've used <code>-&gt; StrWrap</code>.
+However, unless you take a look at the definition of <code>StrWrap</code>,
+it is not clear that the returned value is actually borrowing something.
+Therefore, starting with edition 2018, it is deprecated, for non-reference-types
+(types other than <code>&amp;</code> and <code>&amp;mut</code>), to leave of the lifetime parameters.
+Instead, where you previously wrote <code>-&gt; StrWrap</code>,
+you should now, in edition 2018, write <code>-&gt; StrWrap&lt;'_&gt;</code>.</p>
+<p>What exactly does <code>'_</code> mean? It depends on the context!
+In output contexts, as in the return type of <code>make_wrapper</code>,
+it refers to a single lifetime for  all &quot;output&quot; locations.
+In input contexts, a fresh lifetime is generated for each &quot;input location&quot;.
+More concretely, to understand input contexts, consider the following example:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct Foo&lt;'a, 'b: 'a&gt; {
+    field: &amp;'a &amp;'b str,
+}
+
+impl&lt;'a, 'b: 'a&gt; Foo&lt;'a, 'b&gt; {
+    // some methods...
+}
+#}</code></pre></pre>
+<p>We can rewrite this as:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(rust_2018_preview)]
+
+#fn main() {
+# struct Foo&lt;'a, 'b: 'a&gt; {
+#     field: &amp;'a &amp;'b str,
+# }
+
+impl Foo&lt;'_, '_&gt; {
+    // some methods...
+}
+#}</code></pre></pre>
+<p>This is the same, because for each <code>'_</code>, a fresh lifetime is generated.
+Finally, the relationship <code>'a: 'b</code> which the struct requires must be upheld.</p>
+<p>For more details, see the <a href="https://github.com/rust-lang/rust/issues/44524">tracking issue on In-band lifetime bindings</a>.</p>
 
                     </main>
 
