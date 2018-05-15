@@ -16,6 +16,8 @@ In edition 2015, you might have written:
 ```rust
 use std::fmt;
 
+# struct StrWrap<'a>(&'a str);
+
 fn make_wrapper(string: &str) -> StrWrap {
     StrWrap(string)
 }
@@ -32,7 +34,8 @@ In edition 2018, you can instead write:
 ```rust
 #![feature(rust_2018_preview)]
 
-use std::fmt;
+# use std::fmt;
+# struct StrWrap<'a>(&'a str);
 
 fn make_wrapper(string: &str) -> StrWrap<'_> {
     StrWrap(string)
@@ -76,9 +79,9 @@ We can rewrite this as:
 ```rust
 #![feature(rust_2018_preview)]
 
-struct Foo<'a, 'b: 'a> {
-    field: &'a &'b str,
-}
+# struct Foo<'a, 'b: 'a> {
+#     field: &'a &'b str,
+# }
 
 impl Foo<'_, '_> {
     // some methods...
