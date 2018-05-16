@@ -675,6 +675,9 @@ often requires a lot of boilerplate. In Rust 2018, two new keywords, <code>async
 and <code>await</code>, help you write code that appears sequential, but executes
 concurrently.</p>
 <a class="header" href="print.html#asyncawait" id="asyncawait"><h1>async/await</h1></a>
+<p>Async/await has not been implemented in the compiler yet.</p>
+<a class="header" href="print.html#more-details-4" id="more-details-4"><h2>More details</h2></a>
+<p>Coming soon!</p>
 <a class="header" href="print.html#ownership-and-lifetimes" id="ownership-and-lifetimes"><h1>Ownership and lifetimes</h1></a>
 <p>Some of the largest changes in Rust 2018 are in ownership and lifetimes. Some
 features are for your convenience, some make the borrow checker smarter, and
@@ -727,7 +730,7 @@ impl fmt::Debug for StrWrap&lt;'_&gt; {
     }
 }
 #}</code></pre></pre>
-<a class="header" href="print.html#more-details-4" id="more-details-4"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-5" id="more-details-5"><h2>More details</h2></a>
 <p>In the second snippet above, we've used <code>-&gt; StrWrap</code>.
 However, unless you take a look at the definition of <code>StrWrap</code>,
 it is not clear that the returned value is actually borrowing something.
@@ -808,7 +811,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Note the <code>r#</code> prefix on both the function name, as well as the call.</p>
-<a class="header" href="print.html#more-details-5" id="more-details-5"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-6" id="more-details-6"><h2>More details</h2></a>
 <p>This feature is useful for a few reasons, but the primary motivation was
 inter-edition situations. For example, <code>try</code> is not a keyword in the 2015
 edition, but is in the 2018 edition. So if you have a library that is written
