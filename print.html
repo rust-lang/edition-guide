@@ -414,6 +414,40 @@ together in a much nicer way. We expect these changes to be one of the
 favorites in this edition.</p>
 <a class="header" href="print.html#path-clarity" id="path-clarity"><h1>Path clarity</h1></a>
 <a class="header" href="print.html#macro-changes" id="macro-changes"><h1>Macro changes</h1></a>
+<p>Now that <code>extern crate</code> is gone, there's a problem: to import macros, you
+need to put <code>#[macro_use]</code> on the <code>extern crate</code> declaration.</p>
+<p>To fix this issue, you can use <code>use</code> to import macros from extern crates.</p>
+<p>For example, consider a <code>bar</code> crate that implements a <code>baz!</code> macro. In
+<code>src/lib.rs</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[macro_export]
+macro_rules! baz {
+    () =&gt; ()
+}
+#}</code></pre></pre>
+<p>In your crate, you would have written</p>
+<pre><code class="language-rust ignore">#[macro_use]
+extern crate bar;
+
+fn main() {
+    baz!();
+}
+</code></pre>
+<p>Now, you write:</p>
+<pre><code class="language-rust ignore">#![feature(rust_2018_preview, use_extern_macros)]
+
+use bar::baz;
+
+fn main() {
+    baz!();
+}
+</code></pre>
+<p>This moves <code>macro_rules</code> macros to be a bit closer to other kinds of items.</p>
+<a class="header" href="print.html#more-details-2" id="more-details-2"><h2>More details</h2></a>
+<p>This only works for <code>extern crate</code>; if you write a macro in the same crate,
+nothing changes.</p>
 <a class="header" href="print.html#concurrency-additions" id="concurrency-additions"><h1>Concurrency additions</h1></a>
 <p>While concurrency and parallelism has always been a strong suit of Rust, it
 often requires a lot of boilerplate. In Rust 2018, two new keywords, <code>async</code>
@@ -472,7 +506,7 @@ impl fmt::Debug for StrWrap&lt;'_&gt; {
     }
 }
 #}</code></pre></pre>
-<a class="header" href="print.html#more-details-2" id="more-details-2"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-3" id="more-details-3"><h2>More details</h2></a>
 <p>In the second snippet above, we've used <code>-&gt; StrWrap</code>.
 However, unless you take a look at the definition of <code>StrWrap</code>,
 it is not clear that the returned value is actually borrowing something.
@@ -553,7 +587,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Note the <code>r#</code> prefix on both the function name, as well as the call.</p>
-<a class="header" href="print.html#more-details-3" id="more-details-3"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-4" id="more-details-4"><h2>More details</h2></a>
 <p>This feature is useful for a few reasons, but the primary motivation was
 inter-edition situations. For example, <code>try</code> is not a keyword in the 2015
 edition, but is in the 2018 edition. So if you have a library that is written

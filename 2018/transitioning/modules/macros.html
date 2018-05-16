@@ -134,6 +134,40 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="2018/transitioning/modules/macros.html#macro-changes" id="macro-changes"><h1>Macro changes</h1></a>
+<p>Now that <code>extern crate</code> is gone, there's a problem: to import macros, you
+need to put <code>#[macro_use]</code> on the <code>extern crate</code> declaration.</p>
+<p>To fix this issue, you can use <code>use</code> to import macros from extern crates.</p>
+<p>For example, consider a <code>bar</code> crate that implements a <code>baz!</code> macro. In
+<code>src/lib.rs</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[macro_export]
+macro_rules! baz {
+    () =&gt; ()
+}
+#}</code></pre></pre>
+<p>In your crate, you would have written</p>
+<pre><code class="language-rust ignore">#[macro_use]
+extern crate bar;
+
+fn main() {
+    baz!();
+}
+</code></pre>
+<p>Now, you write:</p>
+<pre><code class="language-rust ignore">#![feature(rust_2018_preview, use_extern_macros)]
+
+use bar::baz;
+
+fn main() {
+    baz!();
+}
+</code></pre>
+<p>This moves <code>macro_rules</code> macros to be a bit closer to other kinds of items.</p>
+<a class="header" href="2018/transitioning/modules/macros.html#more-details" id="more-details"><h2>More details</h2></a>
+<p>This only works for <code>extern crate</code>; if you write a macro in the same crate,
+nothing changes.</p>
 
                     </main>
 
