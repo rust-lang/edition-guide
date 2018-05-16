@@ -1,6 +1,6 @@
 # impl Trait
 
-`impl Trait` is new syntax that currently works in function signatures.
+`impl Trait` is the new way to specify unnamed but concrete types that implement a specific trait.
 There are two places you can put it: argument position, and return position.
 
 ```rust,ignore
