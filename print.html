@@ -193,15 +193,80 @@ The old code will still work, but trigger warnings.</p>
 and so you may experience new warnings, features, and other things.
 This is exactly why nightly is unstable! Something to keep in mind, however.</p>
 <a class="header" href="print.html#transitioning-your-code-to-a-new-edition" id="transitioning-your-code-to-a-new-edition"><h1>Transitioning your code to a new edition</h1></a>
-<p>In general, to update your code to a new edition, the process
-will look like this:</p>
+<p>Transitioning between editions is built around lints. Fundamentally, the
+process works like this:</p>
 <ul>
-<li>Make sure your build is warning-free.</li>
-<li>Update or add the <code>edition</code> key in <code>Cargo.toml</code></li>
-<li>Fix any warnings, possibly by running <code>rustfix</code>.</li>
+<li>Get your code compiling with no warnings.</li>
+<li>Opt in to the new edition.</li>
+<li>Fix any new warnings that may result.</li>
 </ul>
-<p>At this time, the <code>edition</code> key does not yet work, and <code>rustfix</code> is in a
-larval state. This section will update as our story gets better here.</p>
+<p>Luckily, we've been working on a tool to help assist with this process,
+<code>rustfix</code>. It can take suggestions from the compiler and automatically
+re-write your code to comply with new features and idioms.</p>
+<blockquote>
+<p><code>rustfix</code> is still quite young, and very much a work in development. But it works
+for the basics! We're working hard on making it better and more robust, but
+please bear with us for now.</p>
+</blockquote>
+<a class="header" href="print.html#installing-rustfix" id="installing-rustfix"><h2>Installing rustfix</h2></a>
+<p>You can get <code>rustfix</code> from GitHub, and eventually, <code>crates.io</code>. Given that you're probably using Cargo,
+you'll want to run this:</p>
+<pre><code class="language-shell">$ cargo install cargo-fix --git https://github.com/rust-lang-nursery/rustfix
+</code></pre>
+<p>And that's it!</p>
+<a class="header" href="print.html#prepare-for-the-next-edition" id="prepare-for-the-next-edition"><h2>Prepare for the next edition</h2></a>
+<p>Before we talk about how to move to the new edition, a reminder:</p>
+<ul>
+<li>New editions might change the way you write Rust -- they add syntax,
+language, and library features but also remove others. For example,
+<code>async</code>/<code>await</code> is available in Rust 2018, but not Rust 2015.</li>
+<li>It's our intention that the migration to new editions is as smooth an experience
+as possible. It's considered a bug if it's difficult to upgrade your crate to
+a new edition. If you have a difficult time then a bug should be filed
+with either rustfix or Rust itself.</li>
+</ul>
+<p>With that out of the way, let's get into it!</p>
+<a class="header" href="print.html#the-preview-period" id="the-preview-period"><h3>The preview period</h3></a>
+<p>First, editions have a &quot;preview&quot; phase. This lets you try out the new edition
+in nightly Rust. During the preview, there's an extra step you need to take
+to opt in. At the time of writing, Rust 2018 is in its preview phase.</p>
+<p>To do that, add this feature flag to your <code>lib.rs</code> or <code>main.rs</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(rust_2018_preview)]
+#fn main() {
+#}</code></pre></pre>
+<p>This will ensure that you're enabling all of the relevant features. Note that
+during the time the preview is available, we may continue to add/enable new
+features with this flag!</p>
+<a class="header" href="print.html#running-rustfix" id="running-rustfix"><h3>Running rustfix</h3></a>
+<p>There are some lints that can help you prepare for the next edition, but
+they're not currently turned on by default. <code>rustfix</code> has your back though!
+To turn them on and have <code>rustfix</code> fix up your code, run this:</p>
+<pre><code class="language-shell">$ cargo +nightly fix --prepare-for 2018
+</code></pre>
+<p>This would turn on those lints, and fix up the project for the 2018 edition.
+If there's something that <code>rustfix</code> doesn't know how to fix automatically yet,
+the usual compiler warning will be printed; you'll need to fix those
+manually. Do so until you get a run with no warnings.</p>
+<a class="header" href="print.html#commit-to-the-next-edition" id="commit-to-the-next-edition"><h2>Commit to the next edition</h2></a>
+<p>Once you're happy with those changes, it's time to use the new edition.
+Add this to your <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">cargo-features = [&quot;edition&quot;]
+
+[package]
+edition = '2018'
+</code></pre>
+<p>That <code>cargo-features</code> line should go at the very top; and <code>edition</code> goes into
+the <code>[package]</code> section. As mentioned above, right now this is a nightly-only
+feature of Cargo, so you need to enable it for things to work.</p>
+<p>At this point, your project should compile with a regular old <code>cargo +nightly build</code>. However, since you've said you're using the new edition, you may get
+more warnings! Time to bust out <code>rustfix</code> again.</p>
+<a class="header" href="print.html#fix-new-warnings" id="fix-new-warnings"><h2>Fix new warnings</h2></a>
+<p>To fix up these warnings, we can use <code>rustfix</code>:</p>
+<pre><code class="language-shell">$ cargo +nightly fix
+</code></pre>
+<p>This will try to fix up all of the new warnings. Congrats! You're done!</p>
 <a class="header" href="print.html#rust-2015" id="rust-2015"><h1>Rust 2015</h1></a>
 <p>Rust 2015 has a theme of &quot;stability&quot;. It commenced with the release of 1.0,
 and is the &quot;default edition&quot;. The edition system was conceived in late 2017,
