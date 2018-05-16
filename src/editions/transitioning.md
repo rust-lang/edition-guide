@@ -17,7 +17,7 @@ re-write your code to comply with new features and idioms.
 
 ## Installing rustfix
 
-You can get `rustfix` from crates.io. Given that you're probably using Cargo,
+You can get `rustfix` from GitHub, and eventually, `crates.io`. Given that you're probably using Cargo,
 you'll want to run this:
 
 ```shell
@@ -31,8 +31,9 @@ And that's it!
 Before we talk about how to move to the new edition, a reminder:
 
 
-* New editions may have features that are only available in the new edition.
-  For example, `async`/`await` is available in Rust 2018, but not Rust 2015.
+* New editions might change the way you write Rust -- they add syntax,
+  language, and library features but also remove others. For example,
+  `async`/`await` is available in Rust 2018, but not Rust 2015.
 * It's our intention that the migration to new editions is as smooth an experience
   as possible. It's considered a bug if it's difficult to upgrade your crate to
   a new edition. If you have a difficult time then a bug should be filed
@@ -52,7 +53,9 @@ To do that, add this feature flag to your `lib.rs` or `main.rs`:
 #![feature(rust_2018_preview)]
 ```
 
-This will ensure that you're enabling all of the relevant features.
+This will ensure that you're enabling all of the relevant features. Note that
+during the time the preview is available, we may continue to add/enable new
+features with this flag!
 
 ### Running rustfix
 
@@ -66,8 +69,8 @@ $ cargo +nightly fix --prepare-for 2018
 
 This would turn on those lints, and fix up the project for the 2018 edition.
 If there's something that `rustfix` doesn't know how to fix automatically yet,
-the warning will be printed; you'll need to fix those manually. Do so
-until you get a run with no warnings.
+the usual compiler warning will be printed; you'll need to fix those
+manually. Do so until you get a run with no warnings.
 
 ## Commit to the next edition
 
@@ -85,9 +88,9 @@ That `cargo-features` line should go at the very top; and `edition` goes into
 the `[package]` section. As mentioned above, right now this is a nightly-only
 feature of Cargo, so you need to enable it for things to work.
 
-At this point, your project should compile with a regular old `cargo build`.
-However, since you've said you're using the new edition, you may get more
-warnings! Time to bust out `rustfix` again.
+At this point, your project should compile with a regular old `cargo +nightly
+build`. However, since you've said you're using the new edition, you may get
+more warnings! Time to bust out `rustfix` again.
 
 ## Fix new warnings
 
@@ -97,4 +100,4 @@ To fix up these warnings, we can use `rustfix`:
 $ cargo +nightly fix
 ```
 
-This will fix up all of the new warnings. Congrats! You're done!
+This will try to fix up all of the new warnings. Congrats! You're done!
