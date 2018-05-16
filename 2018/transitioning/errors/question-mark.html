@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>? in main and tests - The Rust Edition Guide</title>
+        <title>? in fn main() and #[test]s - The Rust Edition Guide</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,7 +69,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="editions/index.html"><strong aria-hidden="true">1.</strong> What are Editions?</a></li><li><ol class="section"><li><a href="editions/transitioning.html"><strong aria-hidden="true">1.1.</strong> Transitioning your code to a new edition</a></li></ol></li><li><a href="2015/index.html"><strong aria-hidden="true">2.</strong> Rust 2015</a></li><li><a href="2018/index.html"><strong aria-hidden="true">3.</strong> Rust 2018</a></li><li><ol class="section"><li><a href="2018/transitioning/to-rust-2018.html"><strong aria-hidden="true">3.1.</strong> Transitioning to Rust 2018</a></li><li><ol class="section"><li><a href="2018/transitioning/traits/index.html"><strong aria-hidden="true">3.1.1.</strong> Trait system</a></li><li><ol class="section"><li><a href="2018/transitioning/traits/impl-trait.html"><strong aria-hidden="true">3.1.1.1.</strong> impl Trait</a></li><li><a href="2018/transitioning/traits/dyn-trait.html"><strong aria-hidden="true">3.1.1.2.</strong> dyn Trait</a></li></ol></li><li><a href="2018/transitioning/modules/index.html"><strong aria-hidden="true">3.1.2.</strong> Module system</a></li><li><ol class="section"><li><a href="2018/transitioning/modules/path-clarity.html"><strong aria-hidden="true">3.1.2.1.</strong> Path clarity</a></li><li><a href="2018/transitioning/modules/macros.html"><strong aria-hidden="true">3.1.2.2.</strong> Macro changes</a></li></ol></li><li><a href="2018/transitioning/concurrency/index.html"><strong aria-hidden="true">3.1.3.</strong> Concurrency additions</a></li><li><ol class="section"><li><a href="2018/transitioning/concurrency/async-await.html"><strong aria-hidden="true">3.1.3.1.</strong> async/await</a></li></ol></li><li><a href="2018/transitioning/ownership-and-lifetimes/index.html"><strong aria-hidden="true">3.1.4.</strong> Ownership and lifetimes</a></li><li><ol class="section"><li><a href="2018/transitioning/ownership-and-lifetimes/anonymous-lifetime.html"><strong aria-hidden="true">3.1.4.1.</strong> '_, the anonymous lifetime</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.html"><strong aria-hidden="true">3.1.4.2.</strong> In-band lifetimes</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/default-match-bindings.html"><strong aria-hidden="true">3.1.4.3.</strong> Default match bindings</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/lifetime-elision-in-impl.html"><strong aria-hidden="true">3.1.4.4.</strong> Lifetime elision in impl</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/struct-inference.html"><strong aria-hidden="true">3.1.4.5.</strong> T: 'a inference in structs</a></li></ol></li><li><a href="2018/transitioning/errors/index.html"><strong aria-hidden="true">3.1.5.</strong> Error Handling</a></li><li><ol class="section"><li><a href="2018/transitioning/errors/question-mark.html" class="active"><strong aria-hidden="true">3.1.5.1.</strong> ? in main and tests</a></li><li><a href="2018/transitioning/errors/try-throw-fail.html"><strong aria-hidden="true">3.1.5.2.</strong> try, throw, and fail</a></li></ol></li><li><a href="2018/transitioning/raw-identifiers.html"><strong aria-hidden="true">3.1.6.</strong> Raw identifiers</a></li></ol></li></ol></li></ol>
+            <ol class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="editions/index.html"><strong aria-hidden="true">1.</strong> What are Editions?</a></li><li><ol class="section"><li><a href="editions/transitioning.html"><strong aria-hidden="true">1.1.</strong> Transitioning your code to a new edition</a></li></ol></li><li><a href="2015/index.html"><strong aria-hidden="true">2.</strong> Rust 2015</a></li><li><a href="2018/index.html"><strong aria-hidden="true">3.</strong> Rust 2018</a></li><li><ol class="section"><li><a href="2018/transitioning/to-rust-2018.html"><strong aria-hidden="true">3.1.</strong> Transitioning to Rust 2018</a></li><li><ol class="section"><li><a href="2018/transitioning/traits/index.html"><strong aria-hidden="true">3.1.1.</strong> Trait system</a></li><li><ol class="section"><li><a href="2018/transitioning/traits/impl-trait.html"><strong aria-hidden="true">3.1.1.1.</strong> impl Trait</a></li><li><a href="2018/transitioning/traits/dyn-trait.html"><strong aria-hidden="true">3.1.1.2.</strong> dyn Trait</a></li></ol></li><li><a href="2018/transitioning/modules/index.html"><strong aria-hidden="true">3.1.2.</strong> Module system</a></li><li><ol class="section"><li><a href="2018/transitioning/modules/path-clarity.html"><strong aria-hidden="true">3.1.2.1.</strong> Path clarity</a></li><li><a href="2018/transitioning/modules/macros.html"><strong aria-hidden="true">3.1.2.2.</strong> Macro changes</a></li></ol></li><li><a href="2018/transitioning/concurrency/index.html"><strong aria-hidden="true">3.1.3.</strong> Concurrency additions</a></li><li><ol class="section"><li><a href="2018/transitioning/concurrency/async-await.html"><strong aria-hidden="true">3.1.3.1.</strong> async/await</a></li></ol></li><li><a href="2018/transitioning/ownership-and-lifetimes/index.html"><strong aria-hidden="true">3.1.4.</strong> Ownership and lifetimes</a></li><li><ol class="section"><li><a href="2018/transitioning/ownership-and-lifetimes/anonymous-lifetime.html"><strong aria-hidden="true">3.1.4.1.</strong> '_, the anonymous lifetime</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.html"><strong aria-hidden="true">3.1.4.2.</strong> In-band lifetimes</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/default-match-bindings.html"><strong aria-hidden="true">3.1.4.3.</strong> Default match bindings</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/lifetime-elision-in-impl.html"><strong aria-hidden="true">3.1.4.4.</strong> Lifetime elision in impl</a></li><li><a href="2018/transitioning/ownership-and-lifetimes/struct-inference.html"><strong aria-hidden="true">3.1.4.5.</strong> T: 'a inference in structs</a></li></ol></li><li><a href="2018/transitioning/errors/index.html"><strong aria-hidden="true">3.1.5.</strong> Error Handling</a></li><li><ol class="section"><li><a href="2018/transitioning/errors/question-mark.html" class="active"><strong aria-hidden="true">3.1.5.1.</strong> ? in fn main() and #[test]s</a></li><li><a href="2018/transitioning/errors/try-throw-fail.html"><strong aria-hidden="true">3.1.5.2.</strong> try, throw, and fail</a></li></ol></li><li><a href="2018/transitioning/raw-identifiers.html"><strong aria-hidden="true">3.1.6.</strong> Raw identifiers</a></li></ol></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -133,7 +133,110 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="2018/transitioning/errors/question-mark.html#a-in-main-and-tests" id="a-in-main-and-tests"><h1>? in main and tests</h1></a>
+                        <a class="header" href="2018/transitioning/errors/question-mark.html#a-in-fn-main-and-tests" id="a-in-fn-main-and-tests"><h1><code>?</code> in <code>fn main()</code> and <code>#[test]</code>s</h1></a>
+<p>Typically in Rust, error handling revolves around returning <code>Result</code> and using
+<code>?</code> to propagate errors. For those who write many small programs and, hopefully,
+many tests, one common paper cut has been mixing entry points such as <code>main</code>
+and <code>#[test]</code>s with error handling.</p>
+<p>As an example, you might have tried to write:</p>
+<pre><code class="language-rust ignore">use std::fs::File;
+
+fn main() {
+    let f = File::open(&quot;bar.txt&quot;)?;
+}
+</code></pre>
+<p>Since <code>?</code> works by propagating the <code>Result</code> with an early return to the
+enclosing function, the snippet above does not work, and results today
+in the following error:</p>
+<pre><code class="language-rust ignore">error[E0277]: the `?` operator can only be used in a function that returns `Result`
+              or `Option` (or another type that implements `std::ops::Try`)
+ --&gt; src/main.rs:5:13
+  |
+5 |     let f = File::open(&quot;bar.txt&quot;)?;
+  |             ^^^^^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a function that returns `()`
+  |
+  = help: the trait `std::ops::Try` is not implemented for `()`
+  = note: required by `std::ops::Try::from_error`
+</code></pre>
+<p>To solve this in edition 2015, you might have written something like:</p>
+<pre><pre class="playpen"><code class="language-rust"># use std::process;
+# use std::error::Error;
+
+fn run() -&gt; Result&lt;(), Box&lt;Error&gt;&gt; {
+    // real logic..
+    Ok(())
+}
+
+fn main() {
+    if let Err(e) = run() {
+        println!(&quot;Application error: {}&quot;, e);
+        process::exit(1);
+    }
+}
+</code></pre></pre>
+<p>However, in this case, the <code>run</code> function has all the interesting logic and
+<code>main</code> is just boilerplate. When you write many <code>#[test]</code>s, this can become
+a problem.</p>
+<p>In edition 2018, you can instead let your <code>#[test]</code>s and <code>main</code> functions return
+a <code>Result</code>.</p>
+<pre><pre class="playpen"><code class="language-rust no_run">use std::fs::File;
+
+fn main() -&gt; Result&lt;(), std::io::Error&gt; {
+    let f = File::open(&quot;bar.txt&quot;)?;
+
+    Ok(())
+}
+</code></pre></pre>
+<p>In this case, if say the file doesn't exist and there is an <code>Err(err)</code> somewhere,
+then <code>main</code> will exit with an error code (not <code>0</code>) and print out a <code>Debug</code>
+representation of <code>err</code>.</p>
+<a class="header" href="2018/transitioning/errors/question-mark.html#more-details" id="more-details"><h2>More details</h2></a>
+<p>Getting <code>-&gt; Result&lt;..&gt;</code> to work in the context of <code>main</code> and <code>#[test]</code>s is no
+magic. It is all backed up by a <code>Termination</code> trait which all valid return
+types of <code>main</code> and testing functions must implement. The trait is defined as:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub trait Termination {
+    fn report(self) -&gt; i32;
+}
+#}</code></pre></pre>
+<p>When setting up the entry point for your application, the compiler will use this
+trait and call <code>.report()</code> on the <code>Result</code> of the <code>main</code> function you have written.</p>
+<p>Two simplified example implementations of this trait for <code>Result</code> and <code>()</code> are:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+# #![feature(process_exitcode_placeholder, termination_trait_lib)]
+# use std::process::ExitCode;
+# use std::fmt;
+#
+# pub trait Termination { fn report(self) -&gt; i32; }
+
+impl Termination for () {
+    fn report(self) -&gt; i32 {
+        # use std::process::Termination;
+        ExitCode::SUCCESS.report()
+    }
+}
+
+impl&lt;E: fmt::Debug&gt; Termination for Result&lt;(), E&gt; {
+    fn report(self) -&gt; i32 {
+        match self {
+            Ok(()) =&gt; ().report(),
+            Err(err) =&gt; {
+                eprintln!(&quot;Error: {:?}&quot;, err);
+                # use std::process::Termination;
+                ExitCode::FAILURE.report()
+            }
+        }
+    }
+}
+#}</code></pre></pre>
+<p>As you can see in the case of <code>()</code>, a success code is simply returned.
+In the case of <code>Result</code>, the success case delegates to the implementation for
+<code>()</code> but prints out an error message and a failure exit code on <code>Err(..)</code>.</p>
+<p>To learn more about the finer details, consult either <a href="https://github.com/rust-lang/rust/issues/43301">the tracking issue</a> or <a href="https://github.com/rust-lang/rfcs/blob/master/text/1937-ques-in-main.md">the RFC</a>.</p>
 
                     </main>
 
