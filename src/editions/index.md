@@ -1,10 +1,10 @@
 # What are Editions?
 
 Rust usually releases on a six-week cycle. This means that users get a
-constant stream of new features. This is much, much faster than other
-languages update, but also means that each individual update is smaller.
+constant stream of new features. This is much faster than updates for
+other languages, but this also means that each update is smaller.
 
-After a while, all of those tiny changes add up. It can be hard to look back
+After a while, all of those tiny changes add up. But, from release to release, it can be hard to look back
 and say *"Wow, between Rust 1.10 and Rust 1.20, Rust has changed a lot!"*
 Furthermore, since everything must be backwards compatible, we can't make certain
 tiny changes, like adding keywords because it might be already used as an
@@ -51,8 +51,8 @@ flag will enable all of the new 2018 specific features. You can also use:
 ```
 
 This will turn on a series of lints that suggest new idioms.
-The old code will still work, but trigger warnings.
+The old code will still work, but it will trigger warnings.
 
 As new nightly compilers are released, more functionality will be enabled,
-and so you may experience new warnings, features, and other things.
-This is exactly why nightly is unstable! Something to keep in mind, however.
+so you may experience new warnings, features, and other things.
+This is something to keep in mind and is exactly why nightly is unstable!
