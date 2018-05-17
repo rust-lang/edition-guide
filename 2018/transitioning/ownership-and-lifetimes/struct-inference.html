@@ -134,6 +134,63 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="2018/transitioning/ownership-and-lifetimes/struct-inference.html#t-a-inference-in-structs" id="t-a-inference-in-structs"><h1><code>T: 'a</code> inference in structs</h1></a>
+<p>An annotation in the form of <code>T: 'a</code>, where <code>T</code> is either a type or another
+lifetime, is called an <em>&quot;outlives&quot;</em> requirement. Note that <em>&quot;outlives&quot;</em> does
+not imply that <code>'a: 'a</code> does not hold, it does hold.</p>
+<p>One way in which edition 2018 helps you out in maintaining flow when writing
+programs is by removing the need to explicitly annotate these <code>T: 'a</code> outlives
+requirements in <code>struct</code> definitions. Instead, the requirements will be
+inferred from the fields present in the definitions.</p>
+<p>Consider the following <code>struct</code> definitions which you wrote in edition 2015:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct Ref&lt;'a, T: 'a&gt; {
+    field: &amp;'a T
+}
+
+// or written with a `where` clause:
+
+struct WhereRef&lt;'a, T&gt; where T: 'a {
+  data: &amp;'a T
+}
+
+// with nested references:
+
+struct RefRef&lt;'a, 'b: 'a, T: 'b&gt; {
+    field: &amp;'a &amp;'b T,
+}
+
+// using an associated type:
+
+struct ItemRef&lt;'a, T: Iterator&gt;
+where
+    T::Item: 'a
+{
+    field: &amp;'a T::Item
+}
+#}</code></pre></pre>
+<p>In edition 2018, since the requirements are inferred, you can instead write:</p>
+<pre><code class="language-rust ignore">struct Ref&lt;'a, T&gt; {
+    field: &amp;'a T
+}
+
+struct WhereRef&lt;'a, T&gt; {
+  data: &amp;'a T
+}
+
+struct RefRef&lt;'a, 'b, T&gt; {
+    field: &amp;'a &amp;'b T,
+}
+
+struct ItemRef&lt;'a, T: Iterator&gt; {
+    field: &amp;'a T::Item
+}
+</code></pre>
+<p>If you prefer to be more explicit in some cases, that is still possible.</p>
+<a class="header" href="2018/transitioning/ownership-and-lifetimes/struct-inference.html#more-details" id="more-details"><h2>More details</h2></a>
+<p>For more details, see <a href="https://github.com/rust-lang/rust/issues/44493">the tracking issue</a>
+and <a href="https://github.com/rust-lang/rfcs/pull/2093">the RFC</a>.</p>
 
                     </main>
 
