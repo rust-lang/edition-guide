@@ -7,7 +7,8 @@ languages update, but also means that each individual update is smaller.
 After a while, all of those tiny changes add up. It can be hard to look back
 and say *"Wow, between Rust 1.10 and Rust 1.20, Rust has changed a lot!"*
 Furthermore, since everything must be backwards compatible, we can't make certain
-tiny changes, like adding keywords. Finally, various parts of the project,
+tiny changes, like adding keywords because it might be already used as an
+identifier in existing code. Finally, various parts of the project,
 since they update at different paces, may feel like they "lag" in various ways.
 If a new language feature lands in Rust 1.15, and a new chapter of the book
 on it lands in 1.16, and the IDE integration lands in 1.17, this can feel
