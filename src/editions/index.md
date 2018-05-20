@@ -8,12 +8,12 @@ After a while, all of those tiny changes add up. But, from release to release, i
 and say *"Wow, between Rust 1.10 and Rust 1.20, Rust has changed a lot!"*
 Furthermore, since everything must be backwards compatible, we can't make certain
 tiny changes, like adding keywords because it might be already used as an
-identifier in existing code. Finally, various parts of the project,
-since they update at different paces, may feel like they "lag" in various ways.
-If a new language feature lands in Rust 1.15, and a new chapter of the book
-on it lands in 1.16, and the IDE integration lands in 1.17, this can feel
-very disjointed. But if you were to compare Rust 1.15 to Rust 1.17, you'd see
-one cohesive feature being added.
+identifier in existing code. Finally, you may sense that various parts
+of the project lags behind, since they update at different paces.
+If a new language feature lands in Rust 1.15, a new chapter about it may
+land in the book in 1.16, and the IDE integration may land in 1.17. This can feel
+like the pieces are not well coordinated, but if you compare Rust 1.15 to
+Rust 1.17, you'll see one cohesive feature being added.
 
 "Editions" are a concept to help with these kinds of problems. Every two or
 three years, we'll be producing a new edition of Rust. This serves different
