@@ -54,7 +54,7 @@ In the second snippet above, we've used `-> StrWrap`.
 However, unless you take a look at the definition of `StrWrap`,
 it is not clear that the returned value is actually borrowing something.
 Therefore, starting with edition 2018, it is deprecated, for non-reference-types
-(types other than `&` and `&mut`), to leave of the lifetime parameters.
+(types other than `&` and `&mut`), to leave off the lifetime parameters.
 Instead, where you previously wrote `-> StrWrap`,
 you should now, in edition 2018, write `-> StrWrap<'_>`.
 
