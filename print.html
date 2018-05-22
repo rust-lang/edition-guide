@@ -812,6 +812,39 @@ fn two_lifetimes(arg1: &amp;Foo, arg2: &amp;Bar) -&gt; &amp;'arg1 Quux&lt;'arg2&
 and <code>'arg2</code> could relate.</p>
 <a class="header" href="print.html#default-match-bindings" id="default-match-bindings"><h1>Default match bindings</h1></a>
 <a class="header" href="print.html#lifetime-elision-in-impl" id="lifetime-elision-in-impl"><h1>Lifetime elision in <code>impl</code></h1></a>
+<p>When writing an <code>impl</code>, you can mention lifetimes without them being bound in
+the argument list. This is similar to
+<a href="/2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.md">in-band-lifetimes</a>
+but for <code>impl</code>s.</p>
+<p>In Rust 2015:</p>
+<pre><code class="language-rust ignore">impl&lt;'a&gt; Iterator for MyIter&lt;'a&gt; { ... }
+impl&lt;'a, 'b&gt; SomeTrait&lt;'a&gt; for SomeType&lt;'a, 'b&gt; { ... }
+</code></pre>
+<p>In Rust 2018:</p>
+<pre><code class="language-rust ignore">impl Iterator for MyIter&lt;'iter&gt; { ... }
+impl SomeTrait&lt;'tcx, 'gcx&gt; for SomeType&lt;'tcx, 'gcx&gt; { ... }
+</code></pre>
+<a class="header" href="print.html#more-details-7" id="more-details-7"><h2>More details</h2></a>
+<p>To show off how this combines with in-band lifetimes in methods/functions, in Rust 2015:</p>
+<pre><code class="language-rust ignore">impl&lt;'a&gt; MyStruct&lt;'a&gt; {
+    fn foo(&amp;self) -&gt; &amp;'a str
+
+    // we have to use 'b here because it conflicts with the 'a above. If this weren't part
+    // of an `impl`, we'd be using `'a`.
+    fn bar&lt;'b&gt;(&amp;self, arg: &amp;'b str) -&gt; &amp;'b str
+}
+</code></pre>
+<p>in Rust 2018:</p>
+<pre><code class="language-rust ignore">// no need for the repetition of 'a
+impl MyStruct&lt;'a&gt; {
+
+    // this works just like before
+    fn foo(&amp;self) -&gt; &amp;'a str
+
+    // we can refer to 'arg, rather than conflicting with 'a
+    fn bar(&amp;self, arg: &amp;str) -&gt; &amp;'arg str
+}
+</code></pre>
 <a class="header" href="print.html#t-a-inference-in-structs" id="t-a-inference-in-structs"><h1><code>T: 'a</code> inference in structs</h1></a>
 <p>An annotation in the form of <code>T: 'a</code>, where <code>T</code> is either a type or another
 lifetime, is called an <em>&quot;outlives&quot;</em> requirement. Note that <em>&quot;outlives&quot;</em> does
@@ -867,7 +900,7 @@ struct ItemRef&lt;'a, T: Iterator&gt; {
 }
 </code></pre>
 <p>If you prefer to be more explicit in some cases, that is still possible.</p>
-<a class="header" href="print.html#more-details-7" id="more-details-7"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-8" id="more-details-8"><h2>More details</h2></a>
 <p>For more details, see <a href="https://github.com/rust-lang/rust/issues/44493">the tracking issue</a>
 and <a href="https://github.com/rust-lang/rfcs/pull/2093">the RFC</a>.</p>
 <a class="header" href="print.html#error-handling" id="error-handling"><h1>Error Handling</h1></a>
@@ -931,7 +964,7 @@ fn main() -&gt; Result&lt;(), std::io::Error&gt; {
 <p>In this case, if say the file doesn't exist and there is an <code>Err(err)</code> somewhere,
 then <code>main</code> will exit with an error code (not <code>0</code>) and print out a <code>Debug</code>
 representation of <code>err</code>.</p>
-<a class="header" href="print.html#more-details-8" id="more-details-8"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-9" id="more-details-9"><h2>More details</h2></a>
 <p>Getting <code>-&gt; Result&lt;..&gt;</code> to work in the context of <code>main</code> and <code>#[test]</code>s is no
 magic. It is all backed up by a <code>Termination</code> trait which all valid return
 types of <code>main</code> and testing functions must implement. The trait is defined as:</p>
@@ -1009,7 +1042,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Note the <code>r#</code> prefix on both the function name, as well as the call.</p>
-<a class="header" href="print.html#more-details-9" id="more-details-9"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-10" id="more-details-10"><h2>More details</h2></a>
 <p>This feature is useful for a few reasons, but the primary motivation was
 inter-edition situations. For example, <code>try</code> is not a keyword in the 2015
 edition, but is in the 2018 edition. So if you have a library that is written
