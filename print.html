@@ -736,7 +736,7 @@ impl fmt::Debug for StrWrap&lt;'_&gt; {
 However, unless you take a look at the definition of <code>StrWrap</code>,
 it is not clear that the returned value is actually borrowing something.
 Therefore, starting with edition 2018, it is deprecated, for non-reference-types
-(types other than <code>&amp;</code> and <code>&amp;mut</code>), to leave of the lifetime parameters.
+(types other than <code>&amp;</code> and <code>&amp;mut</code>), to leave off the lifetime parameters.
 Instead, where you previously wrote <code>-&gt; StrWrap</code>,
 you should now, in edition 2018, write <code>-&gt; StrWrap&lt;'_&gt;</code>.</p>
 <p>What exactly does <code>'_</code> mean? It depends on the context!
