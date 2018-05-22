@@ -134,6 +134,43 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.html#in-band-lifetimes" id="in-band-lifetimes"><h1>In-band lifetimes</h1></a>
+<p>When writing a fn declaration, if a lifetime appears that is not already in
+scope, it is taken to be a new binding, i.e. treated as a parameter to the
+function.</p>
+<p>So, in Rust 2015, you'd write:</p>
+<pre><code class="language-rust ignore">fn two_args&lt;'b&gt;(arg1: &amp;Foo, arg2: &amp;'b Bar) -&gt; &amp;'b Baz
+</code></pre>
+<p>In Rust 2018, you'd write:</p>
+<pre><code class="language-rust ignore">fn two_args(arg1: &amp;Foo, arg2: &amp;Bar) -&gt; &amp;'arg2 Baz
+</code></pre>
+<p>Here, <code>'arg2</code> was not defined. Rust sees that you have a parameter, <code>arg2</code>, that
+should have a lifetime, and so the lifetime of that reference.</p>
+<p>To put it in words, the former says:</p>
+<blockquote>
+<p><code>two_args</code> is a function with one lifetime, <code>'b</code>. Its first parameter is a
+reference to a <code>Foo</code>, , and its second parameter is a reference to a <code>Bar</code>,
+bound by the lifetime <code>'b</code>, as its second argument. It returns a reference to
+a <code>Baz</code> bound by the lifetime <code>'b</code>.</p>
+</blockquote>
+<p>And the latter says:</p>
+<blockquote>
+<p><code>two_args</code> is a function. Its first parameter is a reference to a <code>Foo</code>,
+and its second parameter is a reference to a <code>Bar</code>. It returns a reference to
+a <code>Baz</code> with the same lifetime as the second parameter.</p>
+</blockquote>
+<p>This says what it means, as opposed to implying it. Instead of defining a
+lifetime, and then connecting things together, you say &quot;this is the lifetime
+of that.&quot;</p>
+<a class="header" href="2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.html#more-details" id="more-details"><h2>More details</h2></a>
+<p>More complicated signatures work too:</p>
+<pre><code class="language-rust ignore">// before
+fn two_lifetimes&lt;'a, 'b: 'a&gt;(arg1: &amp;'a Foo, arg2: &amp;'b Bar) -&gt; &amp;'a Quux&lt;'b&gt;
+
+// after
+fn two_lifetimes(arg1: &amp;Foo, arg2: &amp;Bar) -&gt; &amp;'arg1 Quux&lt;'arg2&gt;
+</code></pre>
+<p>Here, the <code>'b: 'a</code> is inferred, as it's the only possible way that <code>'arg1</code>
+and <code>'arg2</code> could relate.</p>
 
                     </main>
 
