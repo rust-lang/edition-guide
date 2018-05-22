@@ -811,6 +811,34 @@ fn two_lifetimes(arg1: &amp;Foo, arg2: &amp;Bar) -&gt; &amp;'arg1 Quux&lt;'arg2&
 <p>Here, the <code>'b: 'a</code> is inferred, as it's the only possible way that <code>'arg1</code>
 and <code>'arg2</code> could relate.</p>
 <a class="header" href="print.html#default-match-bindings" id="default-match-bindings"><h1>Default match bindings</h1></a>
+<p>Have you ever had a borrowed <code>Option&lt;T&gt;</code> and tried to match on it? You
+probably wrote this:</p>
+<pre><code class="language-rust ignore">let s: &amp;Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
+
+match s {
+    Some(s) =&gt; println!(&quot;s is: {}&quot;, s),
+    _ =&gt; (),
+};
+</code></pre>
+<p>In older Rusts, this would fail to compile, you would have had to write this:</p>
+<pre><code class="language-rust ignore">let s: &amp;Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
+
+match s {
+    &amp;Some(ref s) =&gt; println!(&quot;s is: {}&quot;, s),
+    _ =&gt; (),
+};
+</code></pre>
+<p>Nowadays, Rust will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
+<a class="header" href="print.html#more-details-7" id="more-details-7"><h2>More details</h2></a>
+<p>The mental model of <code>match</code> has shifted a bit with this change; <code>match s</code> now have
+a &quot;default binding mode&quot;. This mode is one of <code>move</code>, <code>ref</code>, or <code>ref mut</code>. Before
+this was implemented, <code>match</code> was always in <code>move</code> mode, that is, by default it would
+assume that anything was moved when referred to, and you added <code>&amp;</code> and <code>ref</code> to
+change that.</p>
+<p>Now, it can default to one of the three modes. So above, since <code>s</code> is a reference,
+the compiler assumes that the names should be bound by reference, rather than by moving.
+Similarly, if it was a mutable reference, it would be assumed that things were bound
+by mutable reference.</p>
 <a class="header" href="print.html#lifetime-elision-in-impl" id="lifetime-elision-in-impl"><h1>Lifetime elision in <code>impl</code></h1></a>
 <p>When writing an <code>impl</code>, you can mention lifetimes without them being bound in
 the argument list. This is similar to
@@ -824,7 +852,7 @@ impl&lt;'a, 'b&gt; SomeTrait&lt;'a&gt; for SomeType&lt;'a, 'b&gt; { ... }
 <pre><code class="language-rust ignore">impl Iterator for MyIter&lt;'iter&gt; { ... }
 impl SomeTrait&lt;'tcx, 'gcx&gt; for SomeType&lt;'tcx, 'gcx&gt; { ... }
 </code></pre>
-<a class="header" href="print.html#more-details-7" id="more-details-7"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-8" id="more-details-8"><h2>More details</h2></a>
 <p>To show off how this combines with in-band lifetimes in methods/functions, in Rust 2015:</p>
 <pre><code class="language-rust ignore">impl&lt;'a&gt; MyStruct&lt;'a&gt; {
     fn foo(&amp;self) -&gt; &amp;'a str
@@ -900,7 +928,7 @@ struct ItemRef&lt;'a, T: Iterator&gt; {
 }
 </code></pre>
 <p>If you prefer to be more explicit in some cases, that is still possible.</p>
-<a class="header" href="print.html#more-details-8" id="more-details-8"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-9" id="more-details-9"><h2>More details</h2></a>
 <p>For more details, see <a href="https://github.com/rust-lang/rust/issues/44493">the tracking issue</a>
 and <a href="https://github.com/rust-lang/rfcs/pull/2093">the RFC</a>.</p>
 <a class="header" href="print.html#error-handling" id="error-handling"><h1>Error Handling</h1></a>
@@ -964,7 +992,7 @@ fn main() -&gt; Result&lt;(), std::io::Error&gt; {
 <p>In this case, if say the file doesn't exist and there is an <code>Err(err)</code> somewhere,
 then <code>main</code> will exit with an error code (not <code>0</code>) and print out a <code>Debug</code>
 representation of <code>err</code>.</p>
-<a class="header" href="print.html#more-details-9" id="more-details-9"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-10" id="more-details-10"><h2>More details</h2></a>
 <p>Getting <code>-&gt; Result&lt;..&gt;</code> to work in the context of <code>main</code> and <code>#[test]</code>s is no
 magic. It is all backed up by a <code>Termination</code> trait which all valid return
 types of <code>main</code> and testing functions must implement. The trait is defined as:</p>
@@ -1042,7 +1070,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Note the <code>r#</code> prefix on both the function name, as well as the call.</p>
-<a class="header" href="print.html#more-details-10" id="more-details-10"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-11" id="more-details-11"><h2>More details</h2></a>
 <p>This feature is useful for a few reasons, but the primary motivation was
 inter-edition situations. For example, <code>try</code> is not a keyword in the 2015
 edition, but is in the 2018 edition. So if you have a library that is written

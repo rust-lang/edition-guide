@@ -134,6 +134,34 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="2018/transitioning/ownership-and-lifetimes/default-match-bindings.html#default-match-bindings" id="default-match-bindings"><h1>Default match bindings</h1></a>
+<p>Have you ever had a borrowed <code>Option&lt;T&gt;</code> and tried to match on it? You
+probably wrote this:</p>
+<pre><code class="language-rust ignore">let s: &amp;Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
+
+match s {
+    Some(s) =&gt; println!(&quot;s is: {}&quot;, s),
+    _ =&gt; (),
+};
+</code></pre>
+<p>In older Rusts, this would fail to compile, you would have had to write this:</p>
+<pre><code class="language-rust ignore">let s: &amp;Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
+
+match s {
+    &amp;Some(ref s) =&gt; println!(&quot;s is: {}&quot;, s),
+    _ =&gt; (),
+};
+</code></pre>
+<p>Nowadays, Rust will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
+<a class="header" href="2018/transitioning/ownership-and-lifetimes/default-match-bindings.html#more-details" id="more-details"><h2>More details</h2></a>
+<p>The mental model of <code>match</code> has shifted a bit with this change; <code>match s</code> now have
+a &quot;default binding mode&quot;. This mode is one of <code>move</code>, <code>ref</code>, or <code>ref mut</code>. Before
+this was implemented, <code>match</code> was always in <code>move</code> mode, that is, by default it would
+assume that anything was moved when referred to, and you added <code>&amp;</code> and <code>ref</code> to
+change that.</p>
+<p>Now, it can default to one of the three modes. So above, since <code>s</code> is a reference,
+the compiler assumes that the names should be bound by reference, rather than by moving.
+Similarly, if it was a mutable reference, it would be assumed that things were bound
+by mutable reference.</p>
 
                     </main>
 
