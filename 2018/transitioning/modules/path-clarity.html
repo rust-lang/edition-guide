@@ -142,7 +142,7 @@ inconsistent, counterintuitive and mysterious.</p>
 <p>As such, the 2018 edition of Rust introduces a few new module system
 features, but they end up <em>simplifying</em> the module system, to make it more
 clear as to what is going on.</p>
-<p>Here's a breif summary:</p>
+<p>Here's a brief summary:</p>
 <ul>
 <li><code>extern crate</code> is no longer needed</li>
 <li>Absolute paths begin with a crate name, where the keyword <code>crate</code>
@@ -152,7 +152,7 @@ refers to the current crate.</li>
 when placing submodules in a subdirectory.</li>
 </ul>
 <p>These may seem like arbitrary new rules when put this way, but the mental
-model is now singificantly simplified overall. Read on for more details!</p>
+model is now significantly simplified overall. Read on for more details!</p>
 <a class="header" href="2018/transitioning/modules/path-clarity.html#more-details" id="more-details"><h2>More details</h2></a>
 <p>Let's talk about each new feature in turn.</p>
 <a class="header" href="2018/transitioning/modules/path-clarity.html#no-more-extern-crate" id="no-more-extern-crate"><h3>No more <code>extern crate</code></h3></a>
@@ -200,7 +200,7 @@ mod foo {
 // 'crate' means the current crate
 use crate::foo::Bar;
 </code></pre>
-<p>Described this way, it seems fairly small. But it creates a much more intiutitive
+<p>Described this way, it seems fairly small. But it creates a much more intuitive
 end result. Consider this code:</p>
 <pre><code class="language-rust ignore">extern crate futures;
 
@@ -254,7 +254,7 @@ mod submodle {
     }
 }
 </code></pre>
-<p>Much more straightfoward.</p>
+<p>Much more straightforward.</p>
 <a class="header" href="2018/transitioning/modules/path-clarity.html#the-crate-visibility-modifier" id="the-crate-visibility-modifier"><h3>The <code>crate</code> visibility modifier</h3></a>
 <p>In Rust 2015, you can use <code>pub(crate)</code> to make something visible
 to your entire crate, but not exported publicly:</p>
