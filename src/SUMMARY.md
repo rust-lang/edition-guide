@@ -25,5 +25,4 @@
             - [`T: 'a` inference in structs](2018/transitioning/ownership-and-lifetimes/struct-inference.md)
         - [Error Handling](2018/transitioning/errors/index.md)
             - [`?` in `fn main()` and `#[test]`s](2018/transitioning/errors/question-mark.md)
-            - [`try`, `throw`, and `fail`](2018/transitioning/errors/try-throw-fail.md)
         - [Raw identifiers](2018/transitioning/raw-identifiers.md)
