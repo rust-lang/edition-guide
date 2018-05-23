@@ -98,7 +98,7 @@ fn returns_closure() -> Box<Fn(i32) -> i32> {
 ```
 
 You couldn't write the type of the closure, only use the `Fn` trait. That means
-that the trait object is neccesary. However, with `impl Trait`:
+that the trait object is necessary. However, with `impl Trait`:
 
 ```rust
 fn returns_closure() -> impl Fn(i32) -> i32 {

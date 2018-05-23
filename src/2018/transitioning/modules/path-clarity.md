@@ -10,7 +10,7 @@ As such, the 2018 edition of Rust introduces a few new module system
 features, but they end up *simplifying* the module system, to make it more
 clear as to what is going on.
 
-Here's a breif summary:
+Here's a brief summary:
 
 * `extern crate` is no longer needed
 * Absolute paths begin with a crate name, where the keyword `crate`
@@ -20,7 +20,7 @@ Here's a breif summary:
   when placing submodules in a subdirectory.
 
 These may seem like arbitrary new rules when put this way, but the mental
-model is now singificantly simplified overall. Read on for more details!
+model is now significantly simplified overall. Read on for more details!
 
 ## More details
 
@@ -87,7 +87,7 @@ mod foo {
 use crate::foo::Bar;
 ```
 
-Described this way, it seems fairly small. But it creates a much more intiutitive
+Described this way, it seems fairly small. But it creates a much more intuitive
 end result. Consider this code:
 
 ```rust,ignore
@@ -148,7 +148,7 @@ mod submodle {
 }
 ```
 
-Much more straightfoward.
+Much more straightforward.
 
 ### The `crate` visibility modifier
 

@@ -5,7 +5,7 @@ These identifiers mean something to the language, and so you cannot use them in
 places like variable names, function names, and other places.
 Raw identifiers let you use keywords where they would not normally be allowed.
 
-For example, `match` is a keyword. if you try to compile this function:
+For example, `match` is a keyword. If you try to compile this function:
 
 ```rust,ignore
 fn match(needle: &str, haystack: &str) -> bool {
