@@ -56,7 +56,7 @@ The new confirmed keywords in edition 2018 are:
 
 [RFC 2394]: https://github.com/rust-lang/rfcs/blob/master/text/2394-async_await.md#final-syntax-for-the-await-expression
 
-Here, `async` is reserved use in `async fn` as well as `async ||` closures and
+Here, `async` is reserved for use in `async fn` as well as in `async ||` closures and
 `async { .. }` blocks. Meanwhile, `await` is reserved to keep our options open
 with respect to `await!(expr)` syntax. See [RFC 2394] for more details.
 
@@ -65,5 +65,5 @@ with respect to `await!(expr)` syntax. See [RFC 2394] for more details.
 [RFC 2388]: https://github.com/rust-lang/rfcs/pull/2388
 
 The `do catch { .. }` blocks have been renamed to `try { .. }` and to support
-that, the keyword `try` will is reserved in edition 2018.
+that, the keyword `try` is reserved in edition 2018.
 See [RFC 2388] for more details.
