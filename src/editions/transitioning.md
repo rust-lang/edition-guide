@@ -21,7 +21,7 @@ You can get `rustfix` from GitHub, and eventually, `crates.io`. Given that you'r
 you'll want to run this:
 
 ```shell
-$ cargo install cargo-fix --git https://github.com/rust-lang-nursery/rustfix
+$ cargo install cargo-fix
 ```
 
 And that's it!
