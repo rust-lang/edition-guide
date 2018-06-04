@@ -23,7 +23,9 @@ match s {
 };
 ```
 
-Nowadays, Rust will infer the `&`s and `ref`s, and your original code will Just Work.
+As of [1.26](nicer-match-bindings), Rust will infer the `&`s and `ref`s, and your original code will Just Work.
+
+[nicer-match-bindings]: https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#nicer-match-bindings
 
 ## More details
 
