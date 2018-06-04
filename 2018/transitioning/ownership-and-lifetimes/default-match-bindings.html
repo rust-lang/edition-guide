@@ -151,7 +151,7 @@ match s {
     _ =&gt; (),
 };
 </code></pre>
-<p>Nowadays, Rust will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
+<p>As of <a href="nicer-match-bindings">1.26</a>, Rust will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
 <a class="header" href="2018/transitioning/ownership-and-lifetimes/default-match-bindings.html#more-details" id="more-details"><h2>More details</h2></a>
 <p>The mental model of <code>match</code> has shifted a bit with this change; <code>match s</code> now have
 a &quot;default binding mode&quot;. This mode is one of <code>move</code>, <code>ref</code>, or <code>ref mut</code>. Before

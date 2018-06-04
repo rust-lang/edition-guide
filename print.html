@@ -684,7 +684,7 @@ concurrently.</p>
 features are for your convenience, some make the borrow checker smarter, and
 others reduce boilerplate.</p>
 <a class="header" href="print.html#a_-the-anonymous-lifetime" id="a_-the-anonymous-lifetime"><h1><code>'_</code>, the anonymous lifetime</h1></a>
-<p>New in edition 2018, the &quot;anonymous lifetime&quot; feature, allows you to explicitly
+<p>As of <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">1.26</a>, the &quot;anonymous lifetime&quot; feature, allows you to explicitly
 mark where a lifetime is elided. To do this, you can use the special lifetime
 <code>'_</code> much like you can explicitly mark that a type is inferred with the syntax
 <code>let x: _ = ..;</code>.</p>
@@ -828,7 +828,7 @@ match s {
     _ =&gt; (),
 };
 </code></pre>
-<p>Nowadays, Rust will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
+<p>As of <a href="nicer-match-bindings">1.26</a>, Rust will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
 <a class="header" href="print.html#more-details-7" id="more-details-7"><h2>More details</h2></a>
 <p>The mental model of <code>match</code> has shifted a bit with this change; <code>match s</code> now have
 a &quot;default binding mode&quot;. This mode is one of <code>move</code>, <code>ref</code>, or <code>ref mut</code>. Before
@@ -979,7 +979,7 @@ fn main() {
 <p>However, in this case, the <code>run</code> function has all the interesting logic and
 <code>main</code> is just boilerplate. When you write many <code>#[test]</code>s, this can become
 a problem.</p>
-<p>In edition 2018, you can instead let your <code>#[test]</code>s and <code>main</code> functions return
+<p>As of <a href="main-can-return-a-result">1.26</a>, you can instead let your <code>#[test]</code>s and <code>main</code> functions return
 a <code>Result</code>.</p>
 <pre><pre class="playpen"><code class="language-rust no_run">use std::fs::File;
 

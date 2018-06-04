@@ -177,7 +177,7 @@ fn main() {
 <p>However, in this case, the <code>run</code> function has all the interesting logic and
 <code>main</code> is just boilerplate. When you write many <code>#[test]</code>s, this can become
 a problem.</p>
-<p>In edition 2018, you can instead let your <code>#[test]</code>s and <code>main</code> functions return
+<p>As of <a href="main-can-return-a-result">1.26</a>, you can instead let your <code>#[test]</code>s and <code>main</code> functions return
 a <code>Result</code>.</p>
 <pre><pre class="playpen"><code class="language-rust no_run">use std::fs::File;
 
