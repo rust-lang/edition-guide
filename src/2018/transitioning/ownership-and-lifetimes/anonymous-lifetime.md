@@ -1,9 +1,11 @@
 # `'_`, the anonymous lifetime
 
-New in edition 2018, the "anonymous lifetime" feature, allows you to explicitly
+As of [1.26][], the "anonymous lifetime" feature, allows you to explicitly
 mark where a lifetime is elided. To do this, you can use the special lifetime
 `'_` much like you can explicitly mark that a type is inferred with the syntax
 `let x: _ = ..;`.
+
+[1.26]: https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10
 
 Let's say, for whatever reason, that we have a simple wrapper around `&'a str`:
 

@@ -54,8 +54,10 @@ However, in this case, the `run` function has all the interesting logic and
 `main` is just boilerplate. When you write many `#[test]`s, this can become
 a problem.
 
-In edition 2018, you can instead let your `#[test]`s and `main` functions return
+As of [1.26](main-can-return-a-result), you can instead let your `#[test]`s and `main` functions return
 a `Result`.
+
+[main-can-return-a-result]: https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#main-can-return-a-result
 
 ```rust,no_run
 use std::fs::File;
