@@ -21,6 +21,7 @@
             - [`'_`, the anonymous lifetime](2018/transitioning/ownership-and-lifetimes/anonymous-lifetime.md)
             - [In-band lifetimes](2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.md)
             - [Default match bindings](2018/transitioning/ownership-and-lifetimes/default-match-bindings.md)
+            - [Slice patterns](2018/transitioning/ownership-and-lifetimes/slice-patterns.md)
             - [Lifetime elision in `impl`](2018/transitioning/ownership-and-lifetimes/lifetime-elision-in-impl.md)
             - [`T: 'a` inference in structs](2018/transitioning/ownership-and-lifetimes/struct-inference.md)
         - [Error Handling](2018/transitioning/errors/index.md)
