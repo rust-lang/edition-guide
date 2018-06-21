@@ -1,7 +1,7 @@
 # Macro changes
 
-In Rust 2018, you can use `use` to import specific macros from extern crates,
-rather than the old `#[macro_use]` attribute.
+In Rust 2018, you can import specific macros from external crates via `use`
+statements, rather than the old `#[macro_use]` attribute.
 
 For example, consider a `bar` crate that implements a `baz!` macro. In
 `src/lib.rs`:
@@ -30,6 +30,7 @@ Now, you write:
 
 ```rust,ignore
 // Rust 2018
+#![feature(rust_2018_preview, use_extern_macros)]
 
 use bar::baz;
 
