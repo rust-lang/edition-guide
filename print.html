@@ -1000,7 +1000,7 @@ and <a href="https://github.com/rust-lang/rfcs/pull/2093">the RFC</a>.</p>
 Rust 2018 continues this evolution, allowing you to use <code>?</code> in more places,
 and adding even more convenient syntactic forms.</p>
 <a class="header" href="print.html#a-in-fn-main-and-tests" id="a-in-fn-main-and-tests"><h1><code>?</code> in <code>fn main()</code> and <code>#[test]</code>s</h1></a>
-<p>Typically in Rust, error handling revolves around returning <code>Result</code> and using
+<p>Rust's error handling revolves around returning <code>Result</code> and using
 <code>?</code> to propagate errors. For those who write many small programs and, hopefully,
 many tests, one common paper cut has been mixing entry points such as <code>main</code>
 and <code>#[test]</code>s with error handling.</p>
@@ -1024,8 +1024,10 @@ in the following error:</p>
   = help: the trait `std::ops::Try` is not implemented for `()`
   = note: required by `std::ops::Try::from_error`
 </code></pre>
-<p>To solve this in edition 2015, you might have written something like:</p>
-<pre><pre class="playpen"><code class="language-rust"># use std::process;
+<p>To solve this problem in Rust 2015, you might have written something like:</p>
+<pre><pre class="playpen"><code class="language-rust">// Rust 2015
+
+# use std::process;
 # use std::error::Error;
 
 fn run() -&gt; Result&lt;(), Box&lt;Error&gt;&gt; {
@@ -1041,11 +1043,13 @@ fn main() {
 }
 </code></pre></pre>
 <p>However, in this case, the <code>run</code> function has all the interesting logic and
-<code>main</code> is just boilerplate. When you write many <code>#[test]</code>s, this can become
-a problem.</p>
-<p>As of <a href="main-can-return-a-result">1.26</a>, you can instead let your <code>#[test]</code>s and <code>main</code> functions return
-a <code>Result</code>.</p>
-<pre><pre class="playpen"><code class="language-rust no_run">use std::fs::File;
+<code>main</code> is just boilerplate. The problem is even worse for <code>#[test]</code>s, since
+there tend to be a lot more of them.</p>
+<p>In Rust 2018 you can instead let your <code>#[test]</code>s and <code>main</code> functions return
+a <code>Result</code>:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">// Rust 2018
+
+use std::fs::File;
 
 fn main() -&gt; Result&lt;(), std::io::Error&gt; {
     let f = File::open(&quot;bar.txt&quot;)?;
@@ -1057,7 +1061,7 @@ fn main() -&gt; Result&lt;(), std::io::Error&gt; {
 then <code>main</code> will exit with an error code (not <code>0</code>) and print out a <code>Debug</code>
 representation of <code>err</code>.</p>
 <a class="header" href="print.html#more-details-11" id="more-details-11"><h2>More details</h2></a>
-<p>Getting <code>-&gt; Result&lt;..&gt;</code> to work in the context of <code>main</code> and <code>#[test]</code>s is no
+<p>Getting <code>-&gt; Result&lt;..&gt;</code> to work in the context of <code>main</code> and <code>#[test]</code>s is not
 magic. It is all backed up by a <code>Termination</code> trait which all valid return
 types of <code>main</code> and testing functions must implement. The trait is defined as:</p>
 <pre><pre class="playpen"><code class="language-rust">
