@@ -1,6 +1,6 @@
 # `?` in `fn main()` and `#[test]`s
 
-Typically in Rust, error handling revolves around returning `Result` and using
+Rust's error handling revolves around returning `Result` and using
 `?` to propagate errors. For those who write many small programs and, hopefully,
 many tests, one common paper cut has been mixing entry points such as `main`
 and `#[test]`s with error handling.
@@ -31,9 +31,11 @@ error[E0277]: the `?` operator can only be used in a function that returns `Resu
   = note: required by `std::ops::Try::from_error`
 ```
 
-To solve this in edition 2015, you might have written something like:
+To solve this problem in Rust 2015, you might have written something like:
 
 ```rust
+// Rust 2015
+
 # use std::process;
 # use std::error::Error;
 
@@ -51,15 +53,15 @@ fn main() {
 ```
 
 However, in this case, the `run` function has all the interesting logic and
-`main` is just boilerplate. When you write many `#[test]`s, this can become
-a problem.
+`main` is just boilerplate. The problem is even worse for `#[test]`s, since
+there tend to be a lot more of them.
 
-As of [1.26](main-can-return-a-result), you can instead let your `#[test]`s and `main` functions return
-a `Result`.
-
-[main-can-return-a-result]: https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#main-can-return-a-result
+In Rust 2018 you can instead let your `#[test]`s and `main` functions return
+a `Result`:
 
 ```rust,no_run
+// Rust 2018
+
 use std::fs::File;
 
 fn main() -> Result<(), std::io::Error> {
@@ -75,7 +77,7 @@ representation of `err`.
 
 ## More details
 
-Getting `-> Result<..>` to work in the context of `main` and `#[test]`s is no
+Getting `-> Result<..>` to work in the context of `main` and `#[test]`s is not
 magic. It is all backed up by a `Termination` trait which all valid return
 types of `main` and testing functions must implement. The trait is defined as:
 
