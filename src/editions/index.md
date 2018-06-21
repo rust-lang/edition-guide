@@ -19,15 +19,15 @@ This serves different purposes for different people:
 - For non-users, it signals that some major advancements have landed, which
   might make Rust worth another look.
 
-- For those working *on* Rust, it provides a rallying point for the project as a
+- For those developing Rust itself, it provides a rallying point for the project as a
   whole.
 
 ## Compatibility
 
 When a new edition becomes available in the compiler, crates must explicitly opt
-in to it to take full advantage. This opt in makes it possible to make
-incompatible changes, like adding a new keyword (which might conflict with
-identifiers in code), or turning warnings into errors.  The Rust compiler can
+in to it to take full advantage. This opt in enables editions to contain
+incompatible changes, like adding a new keyword that might conflict with
+identifiers in code, or turning warnings into errors. The Rust compiler can
 link crates of any editions together. Therefore, if you're using Rust 2015, and
 one of your dependencies uses Rust 2018, it all works just fine. The opposite
 situation works as well.
@@ -56,6 +56,6 @@ edition = '2018'
 ```
 
 Like all `#![feature(..)]` flags, this will only work on nightly Rust.
-As new nightly compilers are released, more functionality will be enabled,
+When nightly compilers are released, more functionality is enabled,
 so you may experience new warnings, features, and other things.
 This is something to keep in mind and is exactly why nightly is unstable!
