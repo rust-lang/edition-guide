@@ -1,9 +1,9 @@
 # `'_`, the anonymous lifetime
 
-As of [1.26][], the "anonymous lifetime" feature, allows you to explicitly
-mark where a lifetime is elided. To do this, you can use the special lifetime
-`'_` much like you can explicitly mark that a type is inferred with the syntax
-`let x: _ = ..;`.
+Rust 2018 allows you to explicitly mark where a lifetime is elided, for types
+where this elision might otherwise be unclar. To do this, you can use the
+special lifetime `'_` much like you can explicitly mark that a type is inferred
+with the syntax `let x: _ = ..;`.
 
 [1.26]: https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10
 
@@ -13,9 +13,11 @@ Let's say, for whatever reason, that we have a simple wrapper around `&'a str`:
 struct StrWrap<'a>(&'a str);
 ```
 
-In edition 2015, you might have written:
+In Rust 2015, you might have written:
 
 ```rust
+// Rust 2015
+
 use std::fmt;
 
 # struct StrWrap<'a>(&'a str);
@@ -31,9 +33,11 @@ impl<'a> fmt::Debug for StrWrap<'a> {
 }
 ```
 
-In edition 2018, you can instead write:
+In Rust 2018, you can instead write:
 
 ```rust
+// Rust 2018
+
 #![feature(rust_2018_preview)]
 
 # use std::fmt;
@@ -52,13 +56,12 @@ impl fmt::Debug for StrWrap<'_> {
 
 ## More details
 
-In the second snippet above, we've used `-> StrWrap`.
-However, unless you take a look at the definition of `StrWrap`,
-it is not clear that the returned value is actually borrowing something.
-Therefore, starting with edition 2018, it is deprecated, for non-reference-types
-(types other than `&` and `&mut`), to leave off the lifetime parameters.
-Instead, where you previously wrote `-> StrWrap`,
-you should now, in edition 2018, write `-> StrWrap<'_>`.
+In the Rust 2015 snippet above, we've used `-> StrWrap`. However, unless you take
+a look at the definition of `StrWrap`, it is not clear that the returned value
+is actually borrowing something. Therefore, starting with Rust 2018, it is
+deprecated to leave off the lifetime parameters for non-reference-types (types
+other than `&` and `&mut`). Instead, where you previously wrote `-> StrWrap`,
+you should now write `-> StrWrap<'_>`, making clear that borrowing is occurring.
 
 What exactly does `'_` mean? It depends on the context!
 In output contexts, as in the return type of `make_wrapper`,
@@ -67,6 +70,8 @@ In input contexts, a fresh lifetime is generated for each "input location".
 More concretely, to understand input contexts, consider the following example:
 
 ```rust
+// Rust 2015
+
 struct Foo<'a, 'b: 'a> {
     field: &'a &'b str,
 }
@@ -79,6 +84,8 @@ impl<'a, 'b: 'a> Foo<'a, 'b> {
 We can rewrite this as:
 
 ```rust
+// Rust 2018
+
 #![feature(rust_2018_preview)]
 
 # struct Foo<'a, 'b: 'a> {
