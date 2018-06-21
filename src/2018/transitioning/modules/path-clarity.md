@@ -32,6 +32,8 @@ This one is quite straightforward: you no longer need to write `extern crate` to
 import a crate into your project. Before:
 
 ```rust,ignore
+// Rust 2015
+
 extern crate futures;
 
 mod submodule {
@@ -42,6 +44,8 @@ mod submodule {
 After:
 
 ```rust,ignore
+// Rust 2018
+
 mod submodule {
     use futures::Future;
 }
@@ -57,11 +61,18 @@ Check [the macro section](2018/transitioning/modules/macros.html) for more.
 
 ### Absolute paths begin with `crate` or the crate name
 
-Paths that begin with a crate name or `crate` are now considered absolute
-paths, rather than relative ones. `crate` is the current crate's crate root.
+In Rust 2018, paths in `use` statements *must* begin with one of:
+
+- A crate name
+- `crate` for the current crate's root
+- `self` for the current module's root
+- `super` for the current module's parent
+
 Code that looked like this:
 
 ```rust,ignore
+// Rust 2015
+
 extern crate futures;
 
 use futures::Future;
@@ -76,6 +87,8 @@ use foo::Bar;
 Now looks like this:
 
 ```rust,ignore
+// Rust 2018
+
 // 'futures' is the name of a crate
 use futures::Future;
 
@@ -87,10 +100,13 @@ mod foo {
 use crate::foo::Bar;
 ```
 
-Described this way, it seems fairly small. But it creates a much more intuitive
-end result. Consider this code:
+In addition, all of these path forms are available outside of `use` statements
+as well, which eliminates many sources of confusion. Consider this code in Rust
+2015:
 
 ```rust,ignore
+// Rust 2015
+
 extern crate futures;
 
 mod submodule {
@@ -125,6 +141,8 @@ it's fine in `main`, but it doesn't exist in the submodule at all.
 Let's look at how this change affects things:
 
 ```rust,ignore
+// Rust 2018
+
 // no more `extern crate futures;`
 
 mod submodule {
