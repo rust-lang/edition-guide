@@ -24,6 +24,8 @@ impl SomeTrait<'tcx, 'gcx> for SomeType<'tcx, 'gcx> { ... }
 To show off how this combines with in-band lifetimes in methods/functions, in Rust 2015:
 
 ```rust,ignore
+// Rust 2015
+
 impl<'a> MyStruct<'a> {
     fn foo(&self) -> &'a str
 
@@ -36,6 +38,8 @@ impl<'a> MyStruct<'a> {
 in Rust 2018:
 
 ```rust,ignore
+// Rust 2018
+
 // no need for the repetition of 'a
 impl MyStruct<'a> {
 

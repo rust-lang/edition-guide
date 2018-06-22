@@ -9,9 +9,11 @@ programs is by removing the need to explicitly annotate these `T: 'a` outlives
 requirements in `struct` definitions. Instead, the requirements will be
 inferred from the fields present in the definitions.
 
-Consider the following `struct` definitions which you wrote in edition 2015:
+Consider the following `struct` definitions in Rust 2015:
 
 ```rust
+// Rust 2015
+
 struct Ref<'a, T: 'a> {
     field: &'a T
 }
@@ -38,9 +40,11 @@ where
 }
 ```
 
-In edition 2018, since the requirements are inferred, you can instead write:
+In Rust 2018, since the requirements are inferred, you can instead write:
 
 ```rust,ignore
+// Rust 2018
+
 struct Ref<'a, T> {
     field: &'a T
 }
