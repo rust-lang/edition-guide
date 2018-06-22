@@ -1,9 +1,7 @@
 # Basic slice patterns
 
 Have you ever tried to pattern match on the contents and structure of a slice?
-As of [1.26](basic-slice-patterns), Rust will let you do just that.
-
-[basic-slice-patterns]: https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#basic-slice-patterns
+Rust 2018 will let you do just that.
 
 For example, say we want to accept a list of names and respond to that with a
 greeting. With slice patterns, we can do that easy as pie with:
