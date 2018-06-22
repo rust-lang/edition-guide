@@ -1,6 +1,6 @@
 language: rust
 cache: cargo
-rust: nightly
+rust: nightly-2018-06-20
 before_script:
   - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
   - (test -x $HOME/.cargo/bin/mdbook || cargo install mdbook)
