@@ -27,8 +27,6 @@ match s {
 
 Rust 2018, by contrast, will infer the `&`s and `ref`s, and your original code will Just Work.
 
-[nicer-match-bindings]: https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#nicer-match-bindings
-
 ## More details
 
 The mental model of `match` has shifted a bit with this change, to bring it into

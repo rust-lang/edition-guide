@@ -7,13 +7,13 @@ function.
 So, in Rust 2015, you'd write:
 
 ```rust,ignore
-fn two_args<'b>(arg1: &Foo, arg2: &'b Bar) -> &'b Baz
+fn two_args<'bar>(foo: &Foo, bar: &'bar Bar) -> &'bar Baz
 ```
 
 In Rust 2018, you'd write:
 
 ```rust,ignore
-fn two_args(arg1: &Foo, arg2: &'b Bar) -> &'b Baz
+fn two_args(foo: &Foo, bar: &'bar Bar) -> &'bar Baz
 ```
 
 In other words, you can drop the explicit lifetime parameter declaration, and

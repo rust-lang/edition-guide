@@ -1,11 +1,9 @@
 # `'_`, the anonymous lifetime
 
 Rust 2018 allows you to explicitly mark where a lifetime is elided, for types
-where this elision might otherwise be unclar. To do this, you can use the
+where this elision might otherwise be unclear. To do this, you can use the
 special lifetime `'_` much like you can explicitly mark that a type is inferred
 with the syntax `let x: _ = ..;`.
-
-[1.26]: https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10
 
 Let's say, for whatever reason, that we have a simple wrapper around `&'a str`:
 
@@ -36,12 +34,12 @@ impl<'a> fmt::Debug for StrWrap<'a> {
 In Rust 2018, you can instead write:
 
 ```rust
-// Rust 2018
-
 #![feature(rust_2018_preview)]
 
 # use std::fmt;
 # struct StrWrap<'a>(&'a str);
+
+// Rust 2018
 
 fn make_wrapper(string: &str) -> StrWrap<'_> {
     StrWrap(string)
@@ -84,13 +82,13 @@ impl<'a, 'b: 'a> Foo<'a, 'b> {
 We can rewrite this as:
 
 ```rust
-// Rust 2018
-
 #![feature(rust_2018_preview)]
 
 # struct Foo<'a, 'b: 'a> {
 #     field: &'a &'b str,
 # }
+
+// Rust 2018
 
 impl Foo<'_, '_> {
     // some methods...
