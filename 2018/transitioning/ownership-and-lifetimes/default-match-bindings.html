@@ -143,25 +143,36 @@ match s {
     _ =&gt; (),
 };
 </code></pre>
-<p>In older Rusts, this would fail to compile, you would have had to write this:</p>
-<pre><code class="language-rust ignore">let s: &amp;Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
+<p>In Rust 2015, this would fail to compile, you would have had to write this:</p>
+<pre><code class="language-rust ignore">// Rust 2015
+
+let s: &amp;Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
 
 match s {
     &amp;Some(ref s) =&gt; println!(&quot;s is: {}&quot;, s),
     _ =&gt; (),
 };
 </code></pre>
-<p>As of <a href="nicer-match-bindings">1.26</a>, Rust will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
+<p>Rust 2018, by contrast, will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
 <a class="header" href="2018/transitioning/ownership-and-lifetimes/default-match-bindings.html#more-details" id="more-details"><h2>More details</h2></a>
-<p>The mental model of <code>match</code> has shifted a bit with this change; <code>match s</code> now have
-a &quot;default binding mode&quot;. This mode is one of <code>move</code>, <code>ref</code>, or <code>ref mut</code>. Before
-this was implemented, <code>match</code> was always in <code>move</code> mode, that is, by default it would
-assume that anything was moved when referred to, and you added <code>&amp;</code> and <code>ref</code> to
-change that.</p>
-<p>Now, it can default to one of the three modes. So above, since <code>s</code> is a reference,
-the compiler assumes that the names should be bound by reference, rather than by moving.
-Similarly, if it was a mutable reference, it would be assumed that things were bound
-by mutable reference.</p>
+<p>The mental model of <code>match</code> has shifted a bit with this change, to bring it into
+line with other aspects of the language. For example, when writing a <code>for</code> loop,
+you can iterate over borrowed contents of a collection by borrowing the collection
+itself:</p>
+<pre><code class="language-rust ignore">let my_vec: Vec&lt;i32&gt; = vec![0, 1, 2];
+
+for x in &amp;my_vec { ... }
+</code></pre>
+<p>The idea is that an <code>&amp;T</code> can be understood as a <em>borrowed view of <code>T</code></em>, and so
+when you iterate, match, or otherwise destructure a <code>&amp;T</code> you get a borrowed view
+of its internals as well.</p>
+<p>More formally, <code>match</code> has a &quot;binding mode&quot;, which is one of <code>move</code>, <code>ref</code>, or
+<code>ref mut</code>. In Rust 2015, <code>match</code> always started in <code>move</code> mode, and required you
+to explicitly write <code>ref</code> or <code>ref mut</code> in patterns to switched to a borrowing
+mode. In Rust 2018, the type of the value being matched informs the binding
+mode, so that if you match against an <code>&amp;Option&lt;&amp;str&gt;</code> with a <code>Some</code> variant, you
+are put into <code>ref</code> mode automatically, giving you a borrowed view of the
+internal data. Similarly, <code>&amp;mut Option&lt;&amp;str&gt;</code> would give you a <code>ref mut</code> view.</p>
 
                     </main>
 

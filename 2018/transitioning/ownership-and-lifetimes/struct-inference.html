@@ -141,10 +141,12 @@ not imply that <code>'a: 'a</code> does not hold, it does hold.</p>
 programs is by removing the need to explicitly annotate these <code>T: 'a</code> outlives
 requirements in <code>struct</code> definitions. Instead, the requirements will be
 inferred from the fields present in the definitions.</p>
-<p>Consider the following <code>struct</code> definitions which you wrote in edition 2015:</p>
+<p>Consider the following <code>struct</code> definitions in Rust 2015:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
+// Rust 2015
+
 struct Ref&lt;'a, T: 'a&gt; {
     field: &amp;'a T
 }
@@ -170,8 +172,10 @@ where
     field: &amp;'a T::Item
 }
 #}</code></pre></pre>
-<p>In edition 2018, since the requirements are inferred, you can instead write:</p>
-<pre><code class="language-rust ignore">struct Ref&lt;'a, T&gt; {
+<p>In Rust 2018, since the requirements are inferred, you can instead write:</p>
+<pre><code class="language-rust ignore">// Rust 2018
+
+struct Ref&lt;'a, T&gt; {
     field: &amp;'a T
 }
 

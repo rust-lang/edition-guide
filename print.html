@@ -710,20 +710,22 @@ concurrently.</p>
 features are for your convenience, some make the borrow checker smarter, and
 others reduce boilerplate.</p>
 <a class="header" href="print.html#a_-the-anonymous-lifetime" id="a_-the-anonymous-lifetime"><h1><code>'_</code>, the anonymous lifetime</h1></a>
-<p>As of <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">1.26</a>, the &quot;anonymous lifetime&quot; feature, allows you to explicitly
-mark where a lifetime is elided. To do this, you can use the special lifetime
-<code>'_</code> much like you can explicitly mark that a type is inferred with the syntax
-<code>let x: _ = ..;</code>.</p>
+<p>Rust 2018 allows you to explicitly mark where a lifetime is elided, for types
+where this elision might otherwise be unclear. To do this, you can use the
+special lifetime <code>'_</code> much like you can explicitly mark that a type is inferred
+with the syntax <code>let x: _ = ..;</code>.</p>
 <p>Let's say, for whatever reason, that we have a simple wrapper around <code>&amp;'a str</code>:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
 struct StrWrap&lt;'a&gt;(&amp;'a str);
 #}</code></pre></pre>
-<p>In edition 2015, you might have written:</p>
+<p>In Rust 2015, you might have written:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
+// Rust 2015
+
 use std::fmt;
 
 # struct StrWrap&lt;'a&gt;(&amp;'a str);
@@ -738,7 +740,7 @@ impl&lt;'a&gt; fmt::Debug for StrWrap&lt;'a&gt; {
     }
 }
 #}</code></pre></pre>
-<p>In edition 2018, you can instead write:</p>
+<p>In Rust 2018, you can instead write:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #![feature(rust_2018_preview)]
@@ -746,6 +748,8 @@ impl&lt;'a&gt; fmt::Debug for StrWrap&lt;'a&gt; {
 #fn main() {
 # use std::fmt;
 # struct StrWrap&lt;'a&gt;(&amp;'a str);
+
+// Rust 2018
 
 fn make_wrapper(string: &amp;str) -&gt; StrWrap&lt;'_&gt; {
     StrWrap(string)
@@ -758,13 +762,12 @@ impl fmt::Debug for StrWrap&lt;'_&gt; {
 }
 #}</code></pre></pre>
 <a class="header" href="print.html#more-details-5" id="more-details-5"><h2>More details</h2></a>
-<p>In the second snippet above, we've used <code>-&gt; StrWrap</code>.
-However, unless you take a look at the definition of <code>StrWrap</code>,
-it is not clear that the returned value is actually borrowing something.
-Therefore, starting with edition 2018, it is deprecated, for non-reference-types
-(types other than <code>&amp;</code> and <code>&amp;mut</code>), to leave off the lifetime parameters.
-Instead, where you previously wrote <code>-&gt; StrWrap</code>,
-you should now, in edition 2018, write <code>-&gt; StrWrap&lt;'_&gt;</code>.</p>
+<p>In the Rust 2015 snippet above, we've used <code>-&gt; StrWrap</code>. However, unless you take
+a look at the definition of <code>StrWrap</code>, it is not clear that the returned value
+is actually borrowing something. Therefore, starting with Rust 2018, it is
+deprecated to leave off the lifetime parameters for non-reference-types (types
+other than <code>&amp;</code> and <code>&amp;mut</code>). Instead, where you previously wrote <code>-&gt; StrWrap</code>,
+you should now write <code>-&gt; StrWrap&lt;'_&gt;</code>, making clear that borrowing is occurring.</p>
 <p>What exactly does <code>'_</code> mean? It depends on the context!
 In output contexts, as in the return type of <code>make_wrapper</code>,
 it refers to a single lifetime for  all &quot;output&quot; locations.
@@ -773,6 +776,8 @@ More concretely, to understand input contexts, consider the following example:</
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
+// Rust 2015
+
 struct Foo&lt;'a, 'b: 'a&gt; {
     field: &amp;'a &amp;'b str,
 }
@@ -791,6 +796,8 @@ impl&lt;'a, 'b: 'a&gt; Foo&lt;'a, 'b&gt; {
 #     field: &amp;'a &amp;'b str,
 # }
 
+// Rust 2018
+
 impl Foo&lt;'_, '_&gt; {
     // some methods...
 }
@@ -799,43 +806,17 @@ impl Foo&lt;'_, '_&gt; {
 Finally, the relationship <code>'a: 'b</code> which the struct requires must be upheld.</p>
 <p>For more details, see the <a href="https://github.com/rust-lang/rust/issues/44524">tracking issue on In-band lifetime bindings</a>.</p>
 <a class="header" href="print.html#in-band-lifetimes" id="in-band-lifetimes"><h1>In-band lifetimes</h1></a>
-<p>When writing a fn declaration, if a lifetime appears that is not already in
+<p>When writing an <code>fn</code> declaration, if a lifetime appears that is not already in
 scope, it is taken to be a new binding, i.e. treated as a parameter to the
 function.</p>
 <p>So, in Rust 2015, you'd write:</p>
-<pre><code class="language-rust ignore">fn two_args&lt;'b&gt;(arg1: &amp;Foo, arg2: &amp;'b Bar) -&gt; &amp;'b Baz
+<pre><code class="language-rust ignore">fn two_args&lt;'bar&gt;(foo: &amp;Foo, bar: &amp;'bar Bar) -&gt; &amp;'bar Baz
 </code></pre>
 <p>In Rust 2018, you'd write:</p>
-<pre><code class="language-rust ignore">fn two_args(arg1: &amp;Foo, arg2: &amp;Bar) -&gt; &amp;'arg2 Baz
+<pre><code class="language-rust ignore">fn two_args(foo: &amp;Foo, bar: &amp;'bar Bar) -&gt; &amp;'bar Baz
 </code></pre>
-<p>Here, <code>'arg2</code> was not defined. Rust sees that you have a parameter, <code>arg2</code>, that
-should have a lifetime, and so the lifetime of that reference.</p>
-<p>To put it in words, the former says:</p>
-<blockquote>
-<p><code>two_args</code> is a function with one lifetime, <code>'b</code>. Its first parameter is a
-reference to a <code>Foo</code>, , and its second parameter is a reference to a <code>Bar</code>,
-bound by the lifetime <code>'b</code>, as its second argument. It returns a reference to
-a <code>Baz</code> bound by the lifetime <code>'b</code>.</p>
-</blockquote>
-<p>And the latter says:</p>
-<blockquote>
-<p><code>two_args</code> is a function. Its first parameter is a reference to a <code>Foo</code>,
-and its second parameter is a reference to a <code>Bar</code>. It returns a reference to
-a <code>Baz</code> with the same lifetime as the second parameter.</p>
-</blockquote>
-<p>This says what it means, as opposed to implying it. Instead of defining a
-lifetime, and then connecting things together, you say &quot;this is the lifetime
-of that.&quot;</p>
-<a class="header" href="print.html#more-details-6" id="more-details-6"><h2>More details</h2></a>
-<p>More complicated signatures work too:</p>
-<pre><code class="language-rust ignore">// before
-fn two_lifetimes&lt;'a, 'b: 'a&gt;(arg1: &amp;'a Foo, arg2: &amp;'b Bar) -&gt; &amp;'a Quux&lt;'b&gt;
-
-// after
-fn two_lifetimes(arg1: &amp;Foo, arg2: &amp;Bar) -&gt; &amp;'arg1 Quux&lt;'arg2&gt;
-</code></pre>
-<p>Here, the <code>'b: 'a</code> is inferred, as it's the only possible way that <code>'arg1</code>
-and <code>'arg2</code> could relate.</p>
+<p>In other words, you can drop the explicit lifetime parameter declaration, and
+instead simply start using a new lifetime name to connect lifetimes together.</p>
 <a class="header" href="print.html#default-match-bindings" id="default-match-bindings"><h1>Default match bindings</h1></a>
 <p>Have you ever had a borrowed <code>Option&lt;T&gt;</code> and tried to match on it? You
 probably wrote this:</p>
@@ -846,25 +827,36 @@ match s {
     _ =&gt; (),
 };
 </code></pre>
-<p>In older Rusts, this would fail to compile, you would have had to write this:</p>
-<pre><code class="language-rust ignore">let s: &amp;Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
+<p>In Rust 2015, this would fail to compile, you would have had to write this:</p>
+<pre><code class="language-rust ignore">// Rust 2015
+
+let s: &amp;Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
 
 match s {
     &amp;Some(ref s) =&gt; println!(&quot;s is: {}&quot;, s),
     _ =&gt; (),
 };
 </code></pre>
-<p>As of <a href="nicer-match-bindings">1.26</a>, Rust will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
-<a class="header" href="print.html#more-details-7" id="more-details-7"><h2>More details</h2></a>
-<p>The mental model of <code>match</code> has shifted a bit with this change; <code>match s</code> now have
-a &quot;default binding mode&quot;. This mode is one of <code>move</code>, <code>ref</code>, or <code>ref mut</code>. Before
-this was implemented, <code>match</code> was always in <code>move</code> mode, that is, by default it would
-assume that anything was moved when referred to, and you added <code>&amp;</code> and <code>ref</code> to
-change that.</p>
-<p>Now, it can default to one of the three modes. So above, since <code>s</code> is a reference,
-the compiler assumes that the names should be bound by reference, rather than by moving.
-Similarly, if it was a mutable reference, it would be assumed that things were bound
-by mutable reference.</p>
+<p>Rust 2018, by contrast, will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
+<a class="header" href="print.html#more-details-6" id="more-details-6"><h2>More details</h2></a>
+<p>The mental model of <code>match</code> has shifted a bit with this change, to bring it into
+line with other aspects of the language. For example, when writing a <code>for</code> loop,
+you can iterate over borrowed contents of a collection by borrowing the collection
+itself:</p>
+<pre><code class="language-rust ignore">let my_vec: Vec&lt;i32&gt; = vec![0, 1, 2];
+
+for x in &amp;my_vec { ... }
+</code></pre>
+<p>The idea is that an <code>&amp;T</code> can be understood as a <em>borrowed view of <code>T</code></em>, and so
+when you iterate, match, or otherwise destructure a <code>&amp;T</code> you get a borrowed view
+of its internals as well.</p>
+<p>More formally, <code>match</code> has a &quot;binding mode&quot;, which is one of <code>move</code>, <code>ref</code>, or
+<code>ref mut</code>. In Rust 2015, <code>match</code> always started in <code>move</code> mode, and required you
+to explicitly write <code>ref</code> or <code>ref mut</code> in patterns to switched to a borrowing
+mode. In Rust 2018, the type of the value being matched informs the binding
+mode, so that if you match against an <code>&amp;Option&lt;&amp;str&gt;</code> with a <code>Some</code> variant, you
+are put into <code>ref</code> mode automatically, giving you a borrowed view of the
+internal data. Similarly, <code>&amp;mut Option&lt;&amp;str&gt;</code> would give you a <code>ref mut</code> view.</p>
 <a class="header" href="print.html#basic-slice-patterns" id="basic-slice-patterns"><h1>Basic slice patterns</h1></a>
 <p>Have you ever tried to pattern match on the contents and structure of a slice?
 As of <a href="basic-slice-patterns">1.26</a>, Rust will let you do just that.</p>
@@ -905,7 +897,7 @@ assert_eq!(&quot;ends with 3&quot;, match arr {
     [a, b, c] =&gt; &quot;ends with something else&quot;,
 });
 #}</code></pre></pre>
-<a class="header" href="print.html#more-details-8" id="more-details-8"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-7" id="more-details-7"><h2>More details</h2></a>
 <a class="header" href="print.html#exhaustive-patterns" id="exhaustive-patterns"><h3>Exhaustive patterns</h3></a>
 <p>In the first example, note in particular the <code>_ =&gt; ...</code> pattern.
 Since we are matching on a slice, it could be of any length, so we need a
@@ -942,9 +934,11 @@ impl&lt;'a, 'b&gt; SomeTrait&lt;'a&gt; for SomeType&lt;'a, 'b&gt; { ... }
 <pre><code class="language-rust ignore">impl Iterator for MyIter&lt;'iter&gt; { ... }
 impl SomeTrait&lt;'tcx, 'gcx&gt; for SomeType&lt;'tcx, 'gcx&gt; { ... }
 </code></pre>
-<a class="header" href="print.html#more-details-9" id="more-details-9"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-8" id="more-details-8"><h2>More details</h2></a>
 <p>To show off how this combines with in-band lifetimes in methods/functions, in Rust 2015:</p>
-<pre><code class="language-rust ignore">impl&lt;'a&gt; MyStruct&lt;'a&gt; {
+<pre><code class="language-rust ignore">// Rust 2015
+
+impl&lt;'a&gt; MyStruct&lt;'a&gt; {
     fn foo(&amp;self) -&gt; &amp;'a str
 
     // we have to use 'b here because it conflicts with the 'a above. If this weren't part
@@ -953,7 +947,9 @@ impl SomeTrait&lt;'tcx, 'gcx&gt; for SomeType&lt;'tcx, 'gcx&gt; { ... }
 }
 </code></pre>
 <p>in Rust 2018:</p>
-<pre><code class="language-rust ignore">// no need for the repetition of 'a
+<pre><code class="language-rust ignore">// Rust 2018
+
+// no need for the repetition of 'a
 impl MyStruct&lt;'a&gt; {
 
     // this works just like before
@@ -971,10 +967,12 @@ not imply that <code>'a: 'a</code> does not hold, it does hold.</p>
 programs is by removing the need to explicitly annotate these <code>T: 'a</code> outlives
 requirements in <code>struct</code> definitions. Instead, the requirements will be
 inferred from the fields present in the definitions.</p>
-<p>Consider the following <code>struct</code> definitions which you wrote in edition 2015:</p>
+<p>Consider the following <code>struct</code> definitions in Rust 2015:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
+// Rust 2015
+
 struct Ref&lt;'a, T: 'a&gt; {
     field: &amp;'a T
 }
@@ -1000,8 +998,10 @@ where
     field: &amp;'a T::Item
 }
 #}</code></pre></pre>
-<p>In edition 2018, since the requirements are inferred, you can instead write:</p>
-<pre><code class="language-rust ignore">struct Ref&lt;'a, T&gt; {
+<p>In Rust 2018, since the requirements are inferred, you can instead write:</p>
+<pre><code class="language-rust ignore">// Rust 2018
+
+struct Ref&lt;'a, T&gt; {
     field: &amp;'a T
 }
 
@@ -1018,7 +1018,7 @@ struct ItemRef&lt;'a, T: Iterator&gt; {
 }
 </code></pre>
 <p>If you prefer to be more explicit in some cases, that is still possible.</p>
-<a class="header" href="print.html#more-details-10" id="more-details-10"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-9" id="more-details-9"><h2>More details</h2></a>
 <p>For more details, see <a href="https://github.com/rust-lang/rust/issues/44493">the tracking issue</a>
 and <a href="https://github.com/rust-lang/rfcs/pull/2093">the RFC</a>.</p>
 <a class="header" href="print.html#error-handling" id="error-handling"><h1>Error Handling</h1></a>
@@ -1086,7 +1086,7 @@ fn main() -&gt; Result&lt;(), std::io::Error&gt; {
 <p>In this case, if say the file doesn't exist and there is an <code>Err(err)</code> somewhere,
 then <code>main</code> will exit with an error code (not <code>0</code>) and print out a <code>Debug</code>
 representation of <code>err</code>.</p>
-<a class="header" href="print.html#more-details-11" id="more-details-11"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-10" id="more-details-10"><h2>More details</h2></a>
 <p>Getting <code>-&gt; Result&lt;..&gt;</code> to work in the context of <code>main</code> and <code>#[test]</code>s is not
 magic. It is all backed up by a <code>Termination</code> trait which all valid return
 types of <code>main</code> and testing functions must implement. The trait is defined as:</p>
@@ -1163,7 +1163,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Note the <code>r#</code> prefix on both the function name, as well as the call.</p>
-<a class="header" href="print.html#more-details-12" id="more-details-12"><h2>More details</h2></a>
+<a class="header" href="print.html#more-details-11" id="more-details-11"><h2>More details</h2></a>
 <p>This feature is useful for a few reasons, but the primary motivation was
 inter-edition situations. For example, <code>try</code> is not a keyword in the 2015
 edition, but is in the 2018 edition. So if you have a library that is written

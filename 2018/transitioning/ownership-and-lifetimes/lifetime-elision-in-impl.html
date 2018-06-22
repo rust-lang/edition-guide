@@ -148,7 +148,9 @@ impl SomeTrait&lt;'tcx, 'gcx&gt; for SomeType&lt;'tcx, 'gcx&gt; { ... }
 </code></pre>
 <a class="header" href="2018/transitioning/ownership-and-lifetimes/lifetime-elision-in-impl.html#more-details" id="more-details"><h2>More details</h2></a>
 <p>To show off how this combines with in-band lifetimes in methods/functions, in Rust 2015:</p>
-<pre><code class="language-rust ignore">impl&lt;'a&gt; MyStruct&lt;'a&gt; {
+<pre><code class="language-rust ignore">// Rust 2015
+
+impl&lt;'a&gt; MyStruct&lt;'a&gt; {
     fn foo(&amp;self) -&gt; &amp;'a str
 
     // we have to use 'b here because it conflicts with the 'a above. If this weren't part
@@ -157,7 +159,9 @@ impl SomeTrait&lt;'tcx, 'gcx&gt; for SomeType&lt;'tcx, 'gcx&gt; { ... }
 }
 </code></pre>
 <p>in Rust 2018:</p>
-<pre><code class="language-rust ignore">// no need for the repetition of 'a
+<pre><code class="language-rust ignore">// Rust 2018
+
+// no need for the repetition of 'a
 impl MyStruct&lt;'a&gt; {
 
     // this works just like before
