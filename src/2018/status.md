@@ -11,7 +11,7 @@ The table below shows the major *language* features that are possible for Rust 2
 | [`dyn Trait`](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/traits/dyn-trait.html)| [Shipped, 1.27](https://blog.rust-lang.org/2018/06/21/Rust-1.27.html) |
 | [`?` in `main`/tests](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/errors/question-mark.html)| [Shipping, 1.26](https://blog.rust-lang.org/2018/05/10/Rust-1.26.html) and 1.28 |
 | [Module system path changes](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/modules/path-clarity.html) | Unstable; [tracking issue](https://github.com/rust-lang/rust/issues/44660)|
-| [Import macros via `use`](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/modules/macros.html)`| Unstable; [tracking issue](https://github.com/rust-lang/rust/issues/35896)|
+| [Import macros via `use`](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/modules/macros.html)| Unstable; [tracking issue](https://github.com/rust-lang/rust/issues/35896)|
 | [In-band lifetimes](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.html) | Unstable; [tracking issue](https://github.com/rust-lang/rust/issues/44524)|
 | [Lifetime elision in `impl`s](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/ownership-and-lifetimes/lifetime-elision-in-impl.html)| Unstable; [tracking issue](https://github.com/rust-lang/rust/issues/44524)|
 | [Raw identifiers](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/raw-identifiers.html) | Unstable; [tracking issue](https://github.com/rust-lang/rust/issues/48589)|
