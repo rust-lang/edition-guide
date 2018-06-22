@@ -5,7 +5,7 @@ The table below shows the major *language* features that are possible for Rust 2
 | **Feature** | **Status** |
 | ----------- | ---------- |
 | [`impl Trait`](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/traits/impl-trait.html) | [Shipped, 1.26](https://blog.rust-lang.org/2018/05/10/Rust-1.26.html) |
-| Basic slice patterns | [Shipped, 1.26](https://blog.rust-lang.org/2018/05/10/Rust-1.26.html) |
+| [Basic slice patterns](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/slice-patterns.html) | [Shipped, 1.26](https://blog.rust-lang.org/2018/05/10/Rust-1.26.html) |
 | [Default match bindings](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/ownership-and-lifetimes/default-match-bindings.html) | [Shipped, 1.26](https://blog.rust-lang.org/2018/05/10/Rust-1.26.html) |
 | [Anonymous lifetimes](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/ownership-and-lifetimes/anonymous-lifetime.html)| [Shipped, 1.26](https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10) |
 | [`dyn Trait`](https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/traits/dyn-trait.html)| [Shipped, 1.27](https://blog.rust-lang.org/2018/06/21/Rust-1.27.html) |
