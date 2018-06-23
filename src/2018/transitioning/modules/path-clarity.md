@@ -122,7 +122,7 @@ fn main() {
     let five = std::sync::Arc::new(5);
 }
 
-mod submodle {
+mod submodule {
     fn function() {
         // ... so why doesn't this work
         let five = std::sync::Arc::new(5);
@@ -158,7 +158,7 @@ fn main() {
     let five = std::sync::Arc::new(5);
 }
 
-mod submodle {
+mod submodule {
     fn function() {
         // 'std' is the name of a crate, so this is absolute and works
         let five = std::sync::Arc::new(5);
