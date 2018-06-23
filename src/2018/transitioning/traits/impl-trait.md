@@ -23,10 +23,10 @@ are almost the same:
 ```rust,ignore
 trait Trait {}
 
-fn foo(arg: impl Trait) {
+fn foo<T: Trait>(arg: T) {
 }
 
-fn foo<T: Trait>(arg: T) {
+fn foo(arg: impl Trait) {
 }
 ```
 
@@ -112,7 +112,8 @@ We can now return closures by value, just like any other type!
 
 The above is all you need to know to get going with `impl Trait`, but for
 some more nitty-gritty details: type parameters and `impl Trait` in argument
-position are universals (universally quantified types). Meanwhile, `impl Trait` in return position are existentials (existentially quantified types).
+position are universals (universally quantified types). Meanwhile, `impl Trait`
+in return position are existentials (existentially quantified types).
 Okay, maybe that's a bit too jargon-heavy. Let's step back.
 
 Consider this function:
