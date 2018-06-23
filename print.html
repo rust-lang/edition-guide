@@ -358,10 +358,10 @@ fn foo() -&gt; impl Trait {
 are almost the same:</p>
 <pre><code class="language-rust ignore">trait Trait {}
 
-fn foo(arg: impl Trait) {
+fn foo&lt;T: Trait&gt;(arg: T) {
 }
 
-fn foo&lt;T: Trait&gt;(arg: T) {
+fn foo(arg: impl Trait) {
 }
 </code></pre>
 <p>That is, it's a slightly shorter syntax for a generic type parameter. It
@@ -438,7 +438,8 @@ fn returns_closure() -&gt; impl Fn(i32) -&gt; i32 {
 <a class="header" href="print.html#more-details" id="more-details"><h2>More details</h2></a>
 <p>The above is all you need to know to get going with <code>impl Trait</code>, but for
 some more nitty-gritty details: type parameters and <code>impl Trait</code> in argument
-position are universals (universally quantified types). Meanwhile, <code>impl Trait</code> in return position are existentials (existentially quantified types).
+position are universals (universally quantified types). Meanwhile, <code>impl Trait</code>
+in return position are existentials (existentially quantified types).
 Okay, maybe that's a bit too jargon-heavy. Let's step back.</p>
 <p>Consider this function:</p>
 <pre><code class="language-rust ignore">fn foo&lt;T: Trait&gt;(x: T) {
