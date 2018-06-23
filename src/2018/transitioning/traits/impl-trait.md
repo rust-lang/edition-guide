@@ -54,15 +54,16 @@ trait Trait {}
 
 impl Trait for i32 {}
 
-fn returns_a_trait_object() -> Box<Trait> {
+fn returns_a_trait_object() -> Box<dyn Trait> {
     Box::new(5)
 }
 ```
 
 However, this has some overhead: the `Box<T>` means that there's a heap
-allocation here, and this will use dynamic dispatch. But we only ever
-return one possible thing here, the `Box<i32>`. This means that we're
-paying for dynamic dispatch, even though we don't use it!
+allocation here, and this will use dynamic dispatch. See the [`dyn Trait`] section
+for an explanation of this syntax. But we only ever return one possible thing
+here, the `Box<i32>`. This means that we're paying for dynamic dispatch, even
+though we don't use it!
 
 With `impl Trait`, the code above could be written like this:
 
@@ -82,6 +83,8 @@ we still can obscure the `i32` return type.
 With `i32`, this isn't super useful. But there's one major place in Rust
 where this is much more useful: closures.
 
+[`dyn Trait`]: /2018/transitioning/traits/dyn-trait.html
+
 ### `impl Trait` and closures
 
 > If you need to catch up on closures, check out [their chapter in the
@@ -92,7 +95,7 @@ family of traits, however. This means that previously, the only way to return
 a closure from a function was to use a trait object:
 
 ```rust
-fn returns_closure() -> Box<Fn(i32) -> i32> {
+fn returns_closure() -> Box<dyn Fn(i32) -> i32> {
     Box::new(|x| x + 1)
 }
 ```
