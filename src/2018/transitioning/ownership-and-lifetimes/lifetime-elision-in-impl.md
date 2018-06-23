@@ -29,8 +29,8 @@ To show off how this combines with in-band lifetimes in methods/functions, in Ru
 impl<'a> MyStruct<'a> {
     fn foo(&self) -> &'a str
 
-    // we have to use 'b here because it conflicts with the 'a above. If this weren't part
-    // of an `impl`, we'd be using `'a`.
+    // we have to use 'b here because it conflicts with the 'a above.
+    // If this weren't part of an `impl`, we'd be using `'a`.
     fn bar<'b>(&self, arg: &'b str) -> &'b str
 }
 ```
