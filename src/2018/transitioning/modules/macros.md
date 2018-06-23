@@ -43,5 +43,5 @@ This moves `macro_rules` macros to be a bit closer to other kinds of items.
 
 ## More details
 
-This only works for `extern crate`; if you write a macro in the same crate,
-nothing changes from Rust 2015.
+This only works for macros defined in external crates.
+For macros defined locally, `#[macro_use] mod foo;` is still required, as it was in Rust 2015.
