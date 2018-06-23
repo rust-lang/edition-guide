@@ -153,8 +153,8 @@ impl SomeTrait&lt;'tcx, 'gcx&gt; for SomeType&lt;'tcx, 'gcx&gt; { ... }
 impl&lt;'a&gt; MyStruct&lt;'a&gt; {
     fn foo(&amp;self) -&gt; &amp;'a str
 
-    // we have to use 'b here because it conflicts with the 'a above. If this weren't part
-    // of an `impl`, we'd be using `'a`.
+    // we have to use 'b here because it conflicts with the 'a above.
+    // If this weren't part of an `impl`, we'd be using `'a`.
     fn bar&lt;'b&gt;(&amp;self, arg: &amp;'b str) -&gt; &amp;'b str
 }
 </code></pre>
