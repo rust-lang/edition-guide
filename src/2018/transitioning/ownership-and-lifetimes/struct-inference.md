@@ -21,7 +21,7 @@ struct Ref<'a, T: 'a> {
 // or written with a `where` clause:
 
 struct WhereRef<'a, T> where T: 'a {
-  data: &'a T
+    data: &'a T
 }
 
 // with nested references:
@@ -50,7 +50,7 @@ struct Ref<'a, T> {
 }
 
 struct WhereRef<'a, T> {
-  data: &'a T
+    data: &'a T
 }
 
 struct RefRef<'a, 'b, T> {
