@@ -953,7 +953,7 @@ struct Ref&lt;'a, T: 'a&gt; {
 // or written with a `where` clause:
 
 struct WhereRef&lt;'a, T&gt; where T: 'a {
-  data: &amp;'a T
+    data: &amp;'a T
 }
 
 // with nested references:
@@ -979,7 +979,7 @@ struct Ref&lt;'a, T&gt; {
 }
 
 struct WhereRef&lt;'a, T&gt; {
-  data: &amp;'a T
+    data: &amp;'a T
 }
 
 struct RefRef&lt;'a, 'b, T&gt; {
