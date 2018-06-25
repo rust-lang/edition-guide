@@ -168,8 +168,8 @@ fn main() {
 </code></pre>
 <p>This moves <code>macro_rules</code> macros to be a bit closer to other kinds of items.</p>
 <a class="header" href="2018/transitioning/modules/macros.html#more-details" id="more-details"><h2>More details</h2></a>
-<p>This only works for <code>extern crate</code>; if you write a macro in the same crate,
-nothing changes from Rust 2015.</p>
+<p>This only works for macros defined in external crates.
+For macros defined locally, <code>#[macro_use] mod foo;</code> is still required, as it was in Rust 2015.</p>
 
                     </main>
 

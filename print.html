@@ -731,8 +731,8 @@ fn main() {
 </code></pre>
 <p>This moves <code>macro_rules</code> macros to be a bit closer to other kinds of items.</p>
 <a class="header" href="print.html#more-details-3" id="more-details-3"><h2>More details</h2></a>
-<p>This only works for <code>extern crate</code>; if you write a macro in the same crate,
-nothing changes from Rust 2015.</p>
+<p>This only works for macros defined in external crates.
+For macros defined locally, <code>#[macro_use] mod foo;</code> is still required, as it was in Rust 2015.</p>
 <a class="header" href="print.html#concurrency-additions" id="concurrency-additions"><h1>Concurrency additions</h1></a>
 <p>While concurrency and parallelism has always been a strong suit of Rust, it
 often requires a lot of boilerplate. In Rust 2018, two new keywords, <code>async</code>
