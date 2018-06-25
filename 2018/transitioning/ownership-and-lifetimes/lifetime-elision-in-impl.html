@@ -167,8 +167,8 @@ impl MyStruct&lt;'a&gt; {
     // this works just like before
     fn foo(&amp;self) -&gt; &amp;'a str
 
-    // we can refer to 'arg, rather than conflicting with 'a
-    fn bar(&amp;self, arg: &amp;str) -&gt; &amp;'arg str
+    // we can declare 'b inline here
+    fn bar(&amp;self, arg: &amp;'b str) -&gt; &amp;'b str
 }
 </code></pre>
 
