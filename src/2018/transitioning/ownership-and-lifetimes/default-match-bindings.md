@@ -4,12 +4,12 @@ Have you ever had a borrowed `Option<T>` and tried to match on it? You
 probably wrote this:
 
 ```rust,ignore
-let s: &Option<String> = &Some("hello".into());
+let s: &Option<String> = &Some("hello".to_string());
 
 match s {
     Some(s) => println!("s is: {}", s),
     _ => (),
-}
+};
 ```
 
 In Rust 2015, this would fail to compile, and you would have to write the following instead:
@@ -17,12 +17,12 @@ In Rust 2015, this would fail to compile, and you would have to write the follow
 ```rust,ignore
 // Rust 2015
 
-let s: &Option<String> = &Some("hello".into());
+let s: &Option<String> = &Some("hello".to_string());
 
 match s {
     &Some(ref s) => println!("s is: {}", s),
     _ => (),
-}
+};
 ```
 
 Rust 2018, by contrast, will infer the `&`s and `ref`s, and your original code will Just Work.
