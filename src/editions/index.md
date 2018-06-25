@@ -33,11 +33,11 @@ compiler initially parses the code. Therefore, if you're using Rust 2015, and
 one of your dependencies uses Rust 2018, it all works just fine. The opposite
 situation works as well.
 
-Just to be clear: as many features as possible of the Rust language will
-work in all editions of Rust. People using Rust 2015 will continue to see
-improvements as new stable releases come out every six weeks. The only time you
-need to opt into a new edition is if you want an edition exclusive feature, such
-as one that relies on new keywords.
+Just to be clear: most features will be available on all editions.
+People using Rust 2015 will continue to see improvements as new stable releases are made.
+In some cases however, mainly when new keywords are added, but sometimes for other reasons,
+there may be new features that are only available in later editions.
+You only need to upgrade if you want to take advantage of such features.
 
 ## Trying out the 2018 edition
 
