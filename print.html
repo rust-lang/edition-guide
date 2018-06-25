@@ -857,17 +857,17 @@ instead simply start using a new lifetime name to connect lifetimes together.</p
 <a class="header" href="print.html#default-match-bindings" id="default-match-bindings"><h1>Default match bindings</h1></a>
 <p>Have you ever had a borrowed <code>Option&lt;T&gt;</code> and tried to match on it? You
 probably wrote this:</p>
-<pre><code class="language-rust ignore">let s: &amp;Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
+<pre><code class="language-rust ignore">let s: &amp;Option&lt;String&gt; = &amp;Some(&quot;hello&quot;.to_string());
 
 match s {
     Some(s) =&gt; println!(&quot;s is: {}&quot;, s),
     _ =&gt; (),
 };
 </code></pre>
-<p>In Rust 2015, this would fail to compile, you would have had to write this:</p>
+<p>In Rust 2015, this would fail to compile, and you would have to write the following instead:</p>
 <pre><code class="language-rust ignore">// Rust 2015
 
-let s: &amp;Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
+let s: &amp;Option&lt;String&gt; = &amp;Some(&quot;hello&quot;.to_string());
 
 match s {
     &amp;Some(ref s) =&gt; println!(&quot;s is: {}&quot;, s),
@@ -875,8 +875,10 @@ match s {
 };
 </code></pre>
 <p>Rust 2018, by contrast, will infer the <code>&amp;</code>s and <code>ref</code>s, and your original code will Just Work.</p>
+<p>This affects not just <code>match</code>, but patterns everywhere, such as in <code>let</code> statements,
+closure arguments, and <code>for</code> loops.</p>
 <a class="header" href="print.html#more-details-6" id="more-details-6"><h2>More details</h2></a>
-<p>The mental model of <code>match</code> has shifted a bit with this change, to bring it into
+<p>The mental model of patterns has shifted a bit with this change, to bring it into
 line with other aspects of the language. For example, when writing a <code>for</code> loop,
 you can iterate over borrowed contents of a collection by borrowing the collection
 itself:</p>
@@ -887,13 +889,14 @@ for x in &amp;my_vec { ... }
 <p>The idea is that an <code>&amp;T</code> can be understood as a <em>borrowed view of <code>T</code></em>, and so
 when you iterate, match, or otherwise destructure a <code>&amp;T</code> you get a borrowed view
 of its internals as well.</p>
-<p>More formally, <code>match</code> has a &quot;binding mode&quot;, which is one of <code>move</code>, <code>ref</code>, or
-<code>ref mut</code>. In Rust 2015, <code>match</code> always started in <code>move</code> mode, and required you
-to explicitly write <code>ref</code> or <code>ref mut</code> in patterns to switched to a borrowing
+<p>More formally, patterns have a &quot;binding mode,&quot; which is either by value (<code>x</code>),
+by reference (<code>ref x</code>), or by mutable reference (<code>ref mut x</code>).
+In Rust 2015, <code>match</code> always started in by-value mode, and required you
+to explicitly write <code>ref</code> or <code>ref mut</code> in patterns to switch to a borrowing
 mode. In Rust 2018, the type of the value being matched informs the binding
-mode, so that if you match against an <code>&amp;Option&lt;&amp;str&gt;</code> with a <code>Some</code> variant, you
+mode, so that if you match against an <code>&amp;Option&lt;String&gt;</code> with a <code>Some</code> variant, you
 are put into <code>ref</code> mode automatically, giving you a borrowed view of the
-internal data. Similarly, <code>&amp;mut Option&lt;&amp;str&gt;</code> would give you a <code>ref mut</code> view.</p>
+internal data. Similarly, <code>&amp;mut Option&lt;String&gt;</code> would give you a <code>ref mut</code> view.</p>
 <a class="header" href="print.html#lifetime-elision-in-impl" id="lifetime-elision-in-impl"><h1>Lifetime elision in <code>impl</code></h1></a>
 <p>When writing an <code>impl</code>, you can mention lifetimes without them being bound in
 the argument list. This is similar to
