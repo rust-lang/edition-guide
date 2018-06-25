@@ -47,6 +47,6 @@ impl MyStruct<'a> {
     fn foo(&self) -> &'a str
 
     // we can refer to 'arg, rather than conflicting with 'a
-    fn bar(&self, arg: &str) -> &'arg str
+    fn bar(&self, arg: &'arg str) -> &'arg str
 }
 ```
