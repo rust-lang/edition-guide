@@ -273,6 +273,7 @@ mod submodule {
 }
 </code></pre>
 <p>Much more straightforward.</p>
+<p><strong>Note</strong>: an alternative syntax is also under consideration: writing <code>::some::Local</code> rather than <code>crate::some::Local</code>. If you have thoughts about this alternative, please leave a comment on <a href="https://github.com/rust-lang/rust/issues/44660">the tracking issue</a> or start a thread on the <a href="https://internals.rust-lang.org/c/edition-2018-feedback">edition feedback category</a>.</p>
 <a class="header" href="2018/transitioning/modules/path-clarity.html#the-crate-visibility-modifier" id="the-crate-visibility-modifier"><h3>The <code>crate</code> visibility modifier</h3></a>
 <p>In Rust 2015, you can use <code>pub(crate)</code> to make something visible
 to your entire crate, but not exported publicly:</p>
