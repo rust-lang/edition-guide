@@ -168,6 +168,8 @@ mod submodule {
 
 Much more straightforward.
 
+**Note**: an alternative syntax is also under consideration: writing `::some::Local` rather than `crate::some::Local`. If you have thoughts about this alternative, please leave a comment on [the tracking issue](https://github.com/rust-lang/rust/issues/44660) or start a thread on the [edition feedback category](https://internals.rust-lang.org/c/edition-2018-feedback).
+
 ### The `crate` visibility modifier
 
 In Rust 2015, you can use `pub(crate)` to make something visible
