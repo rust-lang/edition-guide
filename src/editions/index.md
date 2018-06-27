@@ -50,7 +50,7 @@ add this feature to your crate root:
 #![feature(rust_2018_preview)]
 
 // Opt in to warnings about new 2018 idioms
-#![feature(rust_2018_idioms)]
+#![warn(rust_2018_idioms)]
 ```
 
 and opt in to the new edition in your `Cargo.toml`:
