@@ -65,7 +65,7 @@
 | **Tool** | **Status** |
 | ----------- | ---------- |
 | [RLS] 1.0 | Feature-complete; see [1.0 milestone] |
-| [rustfmt] 1.0 | Finalizing spec; [1.0 milestone], [style guide RFC], [stability RFC] |
+| [rustfmt] 1.0 | Finalizing spec; [1.0 milestone](https://github.com/rust-lang-nursery/rustfmt/milestone/2), [style guide RFC], [stability RFC] |
 | [Clippy] 1.0 | [RFC][RFC#2476] |
 
 ## Documentation
