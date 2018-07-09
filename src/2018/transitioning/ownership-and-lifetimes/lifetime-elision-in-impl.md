@@ -16,7 +16,7 @@ In Rust 2018:
 
 ```rust,ignore
 impl Iterator for MyIter<'iter> { ... }
-impl SomeTrait<'tcx, 'gcx> for SomeType<'tcx, 'gcx> { ... }
+impl SomeTrait<'tcx> for SomeType<'tcx, 'gcx> { ... }
 ```
 
 ## More details
