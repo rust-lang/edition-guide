@@ -1,8 +1,8 @@
 # `T: 'a` inference in structs
 
 An annotation in the form of `T: 'a`, where `T` is either a type or another
-lifetime, is called an *"outlives"* requirement. Note that *"outlives"* does
-not imply that `'a: 'a` does not hold, it does hold.
+lifetime, is called an *"outlives"* requirement. Note that *"outlives"* also
+implies `'a: 'a`.
 
 One way in which edition 2018 helps you out in maintaining flow when writing
 programs is by removing the need to explicitly annotate these `T: 'a` outlives
