@@ -23,6 +23,7 @@
 [issue#48589]: https://github.com/rust-lang/rust/issues/48589
 [nll_status]: http://smallcultfollowing.com/babysteps/blog/2018/06/15/mir-based-borrow-check-nll-status-update/
 [`T: 'a` inference in `struct`s]: https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/ownership-and-lifetimes/struct-inference.html
+[issue#44493]: https://github.com/rust-lang/rust/issues/44493
 [`async`/`await`]: https://rust-lang-nursery.github.io/edition-guide/2018/transitioning/concurrency/async-await.html
 [issue#50547]: https://github.com/rust-lang/rust/issues/50547
 
@@ -38,7 +39,7 @@
 | [In-band lifetimes] | Unstable; [tracking issue][issue#44524] | 2015 |
 | [Lifetime elision in `impl`s] | Unstable; [tracking issue][issue#44524] | 2015 |
 | Non-lexical lifetimes | [Implemented but not ready for preview][nll_status] | 2015 |
-| [`T: 'a` inference in `struct`s] | Not fully implemented | 2015 |
+| [`T: 'a` inference in `struct`s] | Unstable; [tracking issue][issue#44493] | 2015 |
 | [Raw identifiers] | Unstable; [tracking issue][issue#48589] | ? |
 | [Import macros via `use`] | Unstable; [tracking issue][issue#35896] | ? |
 | [Module system path changes] | Unstable; [tracking issue][issue#44660] | 2018 |
