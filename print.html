@@ -917,7 +917,7 @@ impl&lt;'a, 'b&gt; SomeTrait&lt;'a&gt; for SomeType&lt;'a, 'b&gt; { ... }
 </code></pre>
 <p>In Rust 2018:</p>
 <pre><code class="language-rust ignore">impl Iterator for MyIter&lt;'iter&gt; { ... }
-impl SomeTrait&lt;'tcx, 'gcx&gt; for SomeType&lt;'tcx, 'gcx&gt; { ... }
+impl SomeTrait&lt;'tcx&gt; for SomeType&lt;'tcx, 'gcx&gt; { ... }
 </code></pre>
 <a class="header" href="print.html#more-details-7" id="more-details-7"><h2>More details</h2></a>
 <p>To show off how this combines with in-band lifetimes in methods/functions, in Rust 2015:</p>
