@@ -946,8 +946,8 @@ impl MyStruct&lt;'a&gt; {
 </code></pre>
 <a class="header" href="print.html#t-a-inference-in-structs" id="t-a-inference-in-structs"><h1><code>T: 'a</code> inference in structs</h1></a>
 <p>An annotation in the form of <code>T: 'a</code>, where <code>T</code> is either a type or another
-lifetime, is called an <em>&quot;outlives&quot;</em> requirement. Note that <em>&quot;outlives&quot;</em> does
-not imply that <code>'a: 'a</code> does not hold, it does hold.</p>
+lifetime, is called an <em>&quot;outlives&quot;</em> requirement. Note that <em>&quot;outlives&quot;</em> also
+implies <code>'a: 'a</code>.</p>
 <p>One way in which edition 2018 helps you out in maintaining flow when writing
 programs is by removing the need to explicitly annotate these <code>T: 'a</code> outlives
 requirements in <code>struct</code> definitions. Instead, the requirements will be
