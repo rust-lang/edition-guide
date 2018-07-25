@@ -27,9 +27,11 @@ This serves different purposes for different people:
 When a new edition becomes available in the compiler, crates must explicitly opt
 in to it to take full advantage. This opt in enables editions to contain
 incompatible changes, like adding a new keyword that might conflict with
-identifiers in code, or turning warnings into errors. The Rust compiler can link
-crates of any editions together. Edition changes only affect the way the
-compiler initially parses the code. Therefore, if you're using Rust 2015, and
+identifiers in code, or turning warnings into errors. A Rust compiler will
+support all editions that existed prior to the compiler's release, and can link
+crates of any supported editions together.
+Edition changes only affect the way the compiler initially parses the code.
+Therefore, if you're using Rust 2015, and
 one of your dependencies uses Rust 2018, it all works just fine. The opposite
 situation works as well.
 
