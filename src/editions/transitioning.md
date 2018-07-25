@@ -37,12 +37,13 @@ take to opt in.  Add this feature flag to your `lib.rs` or `main.rs`:
 #![feature(rust_2018_preview)]
 ```
 
-This will ensure that you're enabling all of the relevant features. Note that
-during the time the preview is available, we may continue to add/enable new
-features with this flag!
+This will enable the unstable features listed in the [feature status][status]
+page. Note that some features require a miniumum of Rust 2018 and these features will
+require a Cargo.toml change to enable (described in the sections below). Also
+note that during the time the preview is available, we may continue to add/enable
+new features with this flag!
 
-Note that you can't yet use Rust 2018 features until you enable them in your
-`Cargo.toml` file (described in the sections below).
+[status]: 2018/status.html
 
 ## Fix edition compatibility warnings
 
