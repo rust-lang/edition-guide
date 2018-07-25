@@ -28,11 +28,10 @@ manually!
 
 ## The preview period
 
-First, editions have a "preview" phase. This lets you try out the new edition
-in nightly Rust. During the preview, there's an extra step you need to take
-to opt in. At the time of writing, Rust 2018 is in its preview phase.
-
-To do that, add this feature flag to your `lib.rs` or `main.rs`:
+Before an edition is released, it will have a "preview" phase which lets you
+try out the new edition in nightly Rust before its release. Currently Rust 2018
+is in its preview phase and because of this, there's an extra step you need to
+take to opt in.  Add this feature flag to your `lib.rs` or `main.rs`:
 
 ```rust
 #![feature(rust_2018_preview)]
@@ -41,6 +40,9 @@ To do that, add this feature flag to your `lib.rs` or `main.rs`:
 This will ensure that you're enabling all of the relevant features. Note that
 during the time the preview is available, we may continue to add/enable new
 features with this flag!
+
+Note that you can't yet use Rust 2018 features until you enable them in your
+`Cargo.toml` file (described in the sections below).
 
 ## Fix edition compatibility warnings
 
@@ -55,7 +57,8 @@ $ cargo +nightly fix --prepare-for 2018 --all-targets --all-features
 This will instruct Cargo to compile all targets in your project (libraries,
 binaries, tests, etc.) while enabling all Cargo features and prepare them for
 the 2018 edition. Cargo will likely automatically fix a number of files,
-informing you as it goes along.
+informing you as it goes along.  Note that this does not enable any new Rust
+2018 features; it only makes sure your code is compatible with Rust 2018.
 
 If Cargo can't automatically fix everything it'll print out the remaining
 warnings. Continue to run the above command until all warnings have been solved.
@@ -66,7 +69,7 @@ You can explore more about the `cargo fix` command with:
 $ cargo +nightly fix --help
 ```
 
-## Commit to the next edition
+## Switch to the next edition
 
 Once you're happy with those changes, it's time to use the new edition.
 Add this to your `Cargo.toml`:
