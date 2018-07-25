@@ -2,7 +2,7 @@
 
 When writing an `impl`, you can mention lifetimes without them being bound in
 the argument list. This is similar to
-[in-band-lifetimes](/2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.md)
+[in-band-lifetimes](2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.html)
 but for `impl`s.
 
 In Rust 2015:
