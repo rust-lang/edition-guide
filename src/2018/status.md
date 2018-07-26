@@ -45,6 +45,11 @@
 | [Module system path changes] | Unstable; [tracking issue][issue#44660] | 2018 |
 | [`async`/`await`] | [Not fully implemented][issue#50547] | 2018 |
 
+While some of these features are already available in Rust 2015, they are tracked here
+because they are being promoted as part of the Rust 2018 edition.  Accordingly, they
+will be discussed in subsequent sections of this guide book. The features marked as
+"Shipped" are all available today in stable Rust, so you can start using them right now!
+
 ## Standard library
 
 [issue#49668]: https://github.com/rust-lang/rust/issues/49668
