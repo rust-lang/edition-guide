@@ -160,18 +160,20 @@ works for the basics! We're working hard on making it better and more robust,
 but please bear with us for now.</p>
 </blockquote>
 <a class="header" href="editions/transitioning.html#the-preview-period" id="the-preview-period"><h2>The preview period</h2></a>
-<p>First, editions have a &quot;preview&quot; phase. This lets you try out the new edition
-in nightly Rust. During the preview, there's an extra step you need to take
-to opt in. At the time of writing, Rust 2018 is in its preview phase.</p>
-<p>To do that, add this feature flag to your <code>lib.rs</code> or <code>main.rs</code>:</p>
+<p>Before an edition is released, it will have a &quot;preview&quot; phase which lets you
+try out the new edition in nightly Rust before its release. Currently Rust 2018
+is in its preview phase and because of this, there's an extra step you need to
+take to opt in.  Add this feature flag to your <code>lib.rs</code> or <code>main.rs</code>:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #![feature(rust_2018_preview)]
 #fn main() {
 #}</code></pre></pre>
-<p>This will ensure that you're enabling all of the relevant features. Note that
-during the time the preview is available, we may continue to add/enable new
-features with this flag!</p>
+<p>This will enable the unstable features listed in the <a href="2018/status.html">feature status</a>
+page. Note that some features require a miniumum of Rust 2018 and these features will
+require a Cargo.toml change to enable (described in the sections below). Also
+note that during the time the preview is available, we may continue to add/enable
+new features with this flag!</p>
 <a class="header" href="editions/transitioning.html#fix-edition-compatibility-warnings" id="fix-edition-compatibility-warnings"><h2>Fix edition compatibility warnings</h2></a>
 <p>Next up is to enable compiler warnings about code which is incompatible with the
 new 2018 edition. This is where the handy <code>cargo fix</code> tool comes into the
@@ -181,13 +183,14 @@ picture. To enable the compatibility lints for your project you run:</p>
 <p>This will instruct Cargo to compile all targets in your project (libraries,
 binaries, tests, etc.) while enabling all Cargo features and prepare them for
 the 2018 edition. Cargo will likely automatically fix a number of files,
-informing you as it goes along.</p>
+informing you as it goes along.  Note that this does not enable any new Rust
+2018 features; it only makes sure your code is compatible with Rust 2018.</p>
 <p>If Cargo can't automatically fix everything it'll print out the remaining
 warnings. Continue to run the above command until all warnings have been solved.</p>
 <p>You can explore more about the <code>cargo fix</code> command with:</p>
 <pre><code class="language-shell">$ cargo +nightly fix --help
 </code></pre>
-<a class="header" href="editions/transitioning.html#commit-to-the-next-edition" id="commit-to-the-next-edition"><h2>Commit to the next edition</h2></a>
+<a class="header" href="editions/transitioning.html#switch-to-the-next-edition" id="switch-to-the-next-edition"><h2>Switch to the next edition</h2></a>
 <p>Once you're happy with those changes, it's time to use the new edition.
 Add this to your <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">cargo-features = [&quot;edition&quot;]
