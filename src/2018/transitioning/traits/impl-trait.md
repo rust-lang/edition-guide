@@ -83,7 +83,7 @@ we still can obscure the `i32` return type.
 With `i32`, this isn't super useful. But there's one major place in Rust
 where this is much more useful: closures.
 
-[`dyn Trait`]: /2018/transitioning/traits/dyn-trait.html
+[`dyn Trait`]: 2018/transitioning/traits/dyn-trait.html
 
 ### `impl Trait` and closures
 
