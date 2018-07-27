@@ -41,6 +41,34 @@ fn main() {
 
 This moves `macro_rules` macros to be a bit closer to other kinds of items.
 
+
+## Procedural macros
+
+When using procedural macros to derive traits, you could have written:
+
+```rust,ignore
+// Rust 2015
+extern crate serde;
+#[macro_use] extern crate serde_derive;
+
+#[derive(Serialize, Deserialize)]
+struct Bar;
+```
+
+Now, you write instead:
+
+```rust,ignore
+// Rust 2018
+#![feature(rust_2018_preview, use_extern_macros)]
+use serde_derive::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize)]
+struct Bar;
+```
+
+Note that the macros you have to import have the same name as the traits you want to derive.
+
+
 ## More details
 
 This only works for macros defined in external crates.
