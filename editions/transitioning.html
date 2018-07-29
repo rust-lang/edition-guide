@@ -212,7 +212,9 @@ these lints add this to your <code>lib.rs</code> or <code>main.rs</code>:</p>
 #![warn(rust_2018_idioms)]
 #fn main() {
 #}</code></pre></pre>
-<p>and then execute:</p>
+<p>Note that since you already switched to the new edition in the previous section,
+you should no longer pass the <code>--prepare-for 2018</code> flag to <code>cargo fix</code> because
+you are now already on the next edition! Execute:</p>
 <pre><code class="language-shell">$ cargo +nightly fix
 </code></pre>
 <p>As before Cargo will automatically fix as much as it can, but you may also need
