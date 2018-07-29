@@ -91,10 +91,6 @@ build`. If it does not, this is a bug! Please [file an issue][issue].
 
 [issue]: https://github.com/rust-lang/rust/issues/new
 
-Now that you've switched to the new edition, you should no longer pass the
-`--prepare-for 2018` flag to `cargo fix` because you are now already on
-the next edition!
-
 ## Writing idiomatic code in a new edition
 
 Your crate has now entered the 2018 edition of Rust, congrats! Recall though
@@ -109,7 +105,9 @@ these lints add this to your `lib.rs` or `main.rs`:
 #![warn(rust_2018_idioms)]
 ```
 
-and then execute:
+Note that since you already switched to the new edition in the previous section,
+you should no longer pass the `--prepare-for 2018` flag to `cargo fix` because
+you are now already on the next edition! Execute:
 
 ```shell
 $ cargo +nightly fix
