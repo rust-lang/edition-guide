@@ -105,7 +105,9 @@ these lints add this to your `lib.rs` or `main.rs`:
 #![warn(rust_2018_idioms)]
 ```
 
-and then execute:
+Note that since you already switched to the new edition in the previous section,
+you should no longer pass the `--prepare-for 2018` flag to `cargo fix` because
+you are now already on the next edition! Execute:
 
 ```shell
 $ cargo +nightly fix
