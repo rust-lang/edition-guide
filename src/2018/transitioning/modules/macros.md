@@ -30,7 +30,7 @@ Now, you write:
 
 ```rust,ignore
 // Rust 2018
-#![feature(rust_2018_preview, use_extern_macros)]
+#![feature(rust_2018_preview)]
 
 use bar::baz;
 
@@ -40,6 +40,36 @@ fn main() {
 ```
 
 This moves `macro_rules` macros to be a bit closer to other kinds of items.
+
+
+## Procedural macros
+
+When using procedural macros to derive traits, you will have to name the macro
+that provides the custom derive. This generally matches the name of the trait,
+but check with the documentation of the crate providing the derives to be sure.
+
+For example, with Serde you would have written
+
+```rust,ignore
+// Rust 2015
+extern crate serde;
+#[macro_use] extern crate serde_derive;
+
+#[derive(Serialize, Deserialize)]
+struct Bar;
+```
+
+Now, you write instead:
+
+```rust,ignore
+// Rust 2018
+#![feature(rust_2018_preview)]
+use serde_derive::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize)]
+struct Bar;
+```
+
 
 ## More details
 
