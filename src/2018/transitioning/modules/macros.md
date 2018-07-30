@@ -30,7 +30,7 @@ Now, you write:
 
 ```rust,ignore
 // Rust 2018
-#![feature(rust_2018_preview, use_extern_macros)]
+#![feature(rust_2018_preview)]
 
 use bar::baz;
 
@@ -59,7 +59,7 @@ Now, you write instead:
 
 ```rust,ignore
 // Rust 2018
-#![feature(rust_2018_preview, use_extern_macros)]
+#![feature(rust_2018_preview)]
 use serde_derive::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize)]
