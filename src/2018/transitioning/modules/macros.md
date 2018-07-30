@@ -44,7 +44,11 @@ This moves `macro_rules` macros to be a bit closer to other kinds of items.
 
 ## Procedural macros
 
-When using procedural macros to derive traits, you could have written:
+When using procedural macros to derive traits, you will have to name the macro
+that provides the custom derive. This generally matches the name of the trait,
+but check with the documentation of the crate providing the derives to be sure.
+
+For example, with Serde you would have written
 
 ```rust,ignore
 // Rust 2015
@@ -65,8 +69,6 @@ use serde_derive::{Serialize, Deserialize};
 #[derive(Serialize, Deserialize)]
 struct Bar;
 ```
-
-Note that the macros you have to import have the same name as the traits you want to derive.
 
 
 ## More details
