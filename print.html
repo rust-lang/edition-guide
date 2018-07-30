@@ -732,7 +732,7 @@ fn main() {
 </code></pre>
 <p>Now, you write:</p>
 <pre><code class="language-rust ignore">// Rust 2018
-#![feature(rust_2018_preview, use_extern_macros)]
+#![feature(rust_2018_preview)]
 
 use bar::baz;
 
@@ -741,6 +741,26 @@ fn main() {
 }
 </code></pre>
 <p>This moves <code>macro_rules</code> macros to be a bit closer to other kinds of items.</p>
+<a class="header" href="#procedural-macros" id="procedural-macros"><h2>Procedural macros</h2></a>
+<p>When using procedural macros to derive traits, you will have to name the macro
+that provides the custom derive. This generally matches the name of the trait,
+but check with the documentation of the crate providing the derives to be sure.</p>
+<p>For example, with Serde you would have written</p>
+<pre><code class="language-rust ignore">// Rust 2015
+extern crate serde;
+#[macro_use] extern crate serde_derive;
+
+#[derive(Serialize, Deserialize)]
+struct Bar;
+</code></pre>
+<p>Now, you write instead:</p>
+<pre><code class="language-rust ignore">// Rust 2018
+#![feature(rust_2018_preview)]
+use serde_derive::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize)]
+struct Bar;
+</code></pre>
 <a class="header" href="#more-details-3" id="more-details-3"><h2>More details</h2></a>
 <p>This only works for macros defined in external crates.
 For macros defined locally, <code>#[macro_use] mod foo;</code> is still required, as it was in Rust 2015.</p>
