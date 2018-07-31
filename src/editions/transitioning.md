@@ -52,7 +52,7 @@ new 2018 edition. This is where the handy `cargo fix` tool comes into the
 picture. To enable the compatibility lints for your project you run:
 
 ```shell
-$ cargo +nightly fix --prepare-for 2018 --all-targets --all-features
+$ cargo fix --edition
 ```
 
 This will instruct Cargo to compile all targets in your project (libraries,
@@ -67,7 +67,7 @@ warnings. Continue to run the above command until all warnings have been solved.
 You can explore more about the `cargo fix` command with:
 
 ```shell
-$ cargo +nightly fix --help
+$ cargo fix --help
 ```
 
 ## Switch to the next edition
@@ -86,7 +86,7 @@ That `cargo-features` line should go at the very top; and `edition` goes into
 the `[package]` section. As mentioned above, right now this is a nightly-only
 feature of Cargo, so you need to enable it for things to work.
 
-At this point, your project should compile with a regular old `cargo +nightly
+At this point, your project should compile with a regular old `cargo
 build`. If it does not, this is a bug! Please [file an issue][issue].
 
 [issue]: https://github.com/rust-lang/rust/issues/new
@@ -98,22 +98,17 @@ that Editions in Rust signify a shift in idioms over time. While much old
 code will continue to compile it might be written with different idioms today.
 
 An optional next step you can take is to update your code to be idiomatic within
-the new edition. This is done with a different set of "idiom lints". To enable
-these lints add this to your `lib.rs` or `main.rs`:
-
-```rust
-#![warn(rust_2018_idioms)]
-```
-
-Note that since you already switched to the new edition in the previous section,
-you should no longer pass the `--prepare-for 2018` flag to `cargo fix` because
-you are now already on the next edition! Execute:
+the new edition. This is done with a different set of "idiom lints". Like before
+we'll be using `cargo fix` to drive this process:
 
 ```shell
-$ cargo +nightly fix
+$ cargo fix --edition-idioms
 ```
 
-As before Cargo will automatically fix as much as it can, but you may also need
-to fix some warnings manually. Once all warnings have been solved you're not
-only compiling with the 2018 edition but you're also already writing idiomatic
-2018 code!
+Additionally like before, this is intended to be an *easy* step. Here `cargo
+fix` will automatically fix any lints it can, so you'll only get warnings for
+things that `cargo fix` couldn't fix. If you find it difficult to work through
+the warnings, that's a bug!
+
+Once you're warning-free with this command you're good to go. Enjoy the new
+edition!
