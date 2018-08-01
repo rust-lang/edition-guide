@@ -5,26 +5,26 @@
 [Shipped, 1.26]: https://blog.rust-lang.org/2018/05/10/Rust-1.26.html
 [Shipped, 1.27]: https://blog.rust-lang.org/2018/06/21/Rust-1.27.html
 
-[`impl Trait`]: 2018/transitioning/traits/impl-trait.html
-[Basic slice patterns]: 2018/transitioning/slice-patterns.html
-[Default match bindings]: 2018/transitioning/ownership-and-lifetimes/default-match-bindings.html
-[Anonymous lifetimes]: 2018/transitioning/ownership-and-lifetimes/anonymous-lifetime.html
+[`impl Trait`]: transitioning/traits/impl-trait.html
+[Basic slice patterns]: transitioning/slice-patterns.html
+[Default match bindings]: transitioning/ownership-and-lifetimes/default-match-bindings.html
+[Anonymous lifetimes]: transitioning/ownership-and-lifetimes/anonymous-lifetime.html
 [relnotes_1.26]: https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10
-[`dyn Trait`]: 2018/transitioning/traits/dyn-trait.html
-[`?` in `main`/tests]: 2018/transitioning/errors/question-mark.html
-[Module system path changes]: 2018/transitioning/modules/path-clarity.html
+[`dyn Trait`]: transitioning/traits/dyn-trait.html
+[`?` in `main`/tests]: transitioning/errors/question-mark.html
+[Module system path changes]: transitioning/modules/path-clarity.html
 [issue#44660]: https://github.com/rust-lang/rust/issues/44660
-[Import macros via `use`]: 2018/transitioning/modules/macros.html
+[Import macros via `use`]: transitioning/modules/macros.html
 [issue#35896]: https://github.com/rust-lang/rust/issues/35896
-[In-band lifetimes]: 2018/transitioning/ownership-and-lifetimes/in-band-lifetimes.html
+[In-band lifetimes]: transitioning/ownership-and-lifetimes/in-band-lifetimes.html
 [issue#44524]: https://github.com/rust-lang/rust/issues/44524
-[Lifetime elision in `impl`s]: 2018/transitioning/ownership-and-lifetimes/lifetime-elision-in-impl.html
-[Raw identifiers]: 2018/transitioning/raw-identifiers.html
+[Lifetime elision in `impl`s]: transitioning/ownership-and-lifetimes/lifetime-elision-in-impl.html
+[Raw identifiers]: transitioning/raw-identifiers.html
 [issue#48589]: https://github.com/rust-lang/rust/issues/48589
 [nll_status]: http://smallcultfollowing.com/babysteps/blog/2018/06/15/mir-based-borrow-check-nll-status-update/
-[`T: 'a` inference in `struct`s]: 2018/transitioning/ownership-and-lifetimes/struct-inference.html
+[`T: 'a` inference in `struct`s]: transitioning/ownership-and-lifetimes/struct-inference.html
 [issue#44493]: https://github.com/rust-lang/rust/issues/44493
-[`async`/`await`]: 2018/transitioning/concurrency/async-await.html
+[`async`/`await`]: transitioning/concurrency/async-await.html
 [issue#50547]: https://github.com/rust-lang/rust/issues/50547
 
 | **Feature** | **Status** | **Minimum Edition** |
