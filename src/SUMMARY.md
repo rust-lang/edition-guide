@@ -22,6 +22,7 @@
     - [`cargo install` for easy installation of tools](rust-2018/cargo-install-for-easy-installation-of-tools.md)
     - [`libcore` for low-level Rust](rust-2018/libcore-for-low-level-rust.md) -->
     - [Crates.io disallows wildcard dependencies](rust-2018/crates-io-disallows-wildcard-dependencies.md)
+    - ["Operator-equals" are now implementable](rust-2018/operator-equals-are-now-implementable.md) -->
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
