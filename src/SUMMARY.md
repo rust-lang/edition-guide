@@ -19,6 +19,7 @@
     - [MSVC toolchain support](rust-2018/msvc-toolchain-support.md)
     - [Better support for trait objects](rust-2018/better-support-for-trait-objects.md)
     - [The Rustonomicon](rust-2018/the-rustonomicon.md)
+    - [`cargo install` for easy installation of tools](rust-2018/cargo-install-for-easy-installation-of-tools.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
