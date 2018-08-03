@@ -14,7 +14,9 @@
 ## Rust 2018
 
 - [Rust 2018](rust-2018/index.md)
-    <!-- - [Installation](ch01-01-installation.md) -->
+    - [MUSL support for fully static binaries](rust-2018/musl-support-for-fully-static-binaries.md)
+    - [`cargo rustc` for passing arbitrary flags to `rustc`](rust-2018/cargo-rustc-for-passing-arbitrary-flags-to-rustc.md)
+    <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
 
