@@ -1,6 +1,6 @@
 # The Rustonomicon
 
-![Minimum Rust version: 1.3](https://img.shields.io/badge/Minimum%20Rust%20Version-1.2-brightgreen.svg)
+![Minimum Rust version: 1.3](https://img.shields.io/badge/Minimum%20Rust%20Version-1.y-brightgreen.svg)
 
 We now have a draft book, [The Rustonomicon: the Dark Arts of Advanced and
 Unsafe Rust Programming](https://doc.rust-lang.org/stable/nomicon/).
