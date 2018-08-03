@@ -17,7 +17,7 @@ system under consideration, the "uniform paths" variant and the "anchored use
 paths" variant. Most of these changes apply to both variants; the two variant
 sections call out the differences between the two. We encourage testing of the
 new "uniform paths" variant introduced in edition preview 2. The release of
-the 2018 edition will use one of these two variants.
+Rust 2018 will stabilize one of these two variants and drop the other.
 
 Here's a brief summary:
 
