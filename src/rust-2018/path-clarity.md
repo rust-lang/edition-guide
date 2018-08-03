@@ -23,12 +23,12 @@ Here's a brief summary:
 
 * `extern crate` is no longer needed
 * The `crate` keyword refers to the current crate.
-* Relative paths variant: Paths work uniformly in both `use` statements and in
-  other code, both in the top-level module and in submodules, and may use
+* Relative paths variant: Paths work uniformly in both `use` declarations and
+  in other code, both in the top-level module and in submodules, and may use
   either absolute paths or local names relative to the current module.
-* Absolute use paths variant: Paths in `use` statements are always absolute and
-  begin with a crate name (or `crate`); paths in other code may use absolute
-  paths or local names relative to the current module.
+* Absolute use paths variant: Paths in `use` declarations are always absolute
+  and begin with a crate name (or `crate`); paths in other code may use
+  absolute paths or local names relative to the current module.
 * A `foo.rs` and `foo/` subdirectory may coexist; `mod.rs` is no longer needed
   when placing submodules in a subdirectory.
 
@@ -74,10 +74,10 @@ Check [the macro section](2018/transitioning/modules/macros.html) for more.
 
 ### The `crate` keyword refers to the current crate.
 
-In `use` statements and in other code, you can refer to the root of the current
-crate with the `crate::` prefix. For instance, `crate::foo::bar` will always
-refer to the name `bar` inside the module `foo`, from anywhere else in the same
-crate.
+In `use` declarations and in other code, you can refer to the root of the
+current crate with the `crate::` prefix. For instance, `crate::foo::bar` will
+always refer to the name `bar` inside the module `foo`, from anywhere else in
+the same crate.
 
 The prefix `::` previously referred to either the crate root or an external
 crate; it now unambiguously refers to an external crate. For instance,
@@ -86,14 +86,14 @@ crate; it now unambiguously refers to an external crate. For instance,
 ### Relative paths variant
 
 The relative paths variant of Rust 2018 simplifies and unifies path handling
-compared to Rust 2015. In Rust 2015, paths work differently in use statements
-than they do elsewhere. In particular, paths in `use` statements would always
-start from the crate root, while paths in other code implicitly started from
-the current module. Those differences didn't have any effect in the top-level
-module, which meant that everything would seem straightforward until working on
-a project large enough to have submodules.
+compared to Rust 2015. In Rust 2015, paths work differently in `use`
+declarations than they do elsewhere. In particular, paths in `use`
+declarations would always start from the crate root, while paths in other code
+implicitly started from the current module. Those differences didn't have any
+effect in the top-level module, which meant that everything would seem
+straightforward until working on a project large enough to have submodules.
 
-In the relative paths variant of Rust 2018, paths in `use` statements and in
+In the relative paths variant of Rust 2018, paths in `use` declarations and in
 other code always work the same way, both in the top-level module and in any
 submodule. You can either use a relative path from the current module, an
 absolute path from the top of the current crate (starting with `crate::`), or
@@ -206,7 +206,7 @@ To explicitly disambiguate a path, use `::name` for an external crate name, or
 
 ### Absolute use paths variant
 
-In the absolute use paths variant of Rust 2018, paths in `use` statements
+In the absolute use paths variant of Rust 2018, paths in `use` declarations
 *must* begin with one of:
 
 - A crate name
@@ -246,9 +246,9 @@ mod foo {
 use crate::foo::Bar;
 ```
 
-In addition, all of these path forms are available outside of `use` statements
-as well, which eliminates many sources of confusion. Consider this code in Rust
-2015:
+In addition, all of these path forms are available outside of `use`
+declarations as well, which eliminates many sources of confusion. Consider this
+code in Rust 2015:
 
 ```rust,ignore
 // Rust 2015
