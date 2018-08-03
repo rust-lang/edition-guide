@@ -1,8 +1,11 @@
 # The Edition Guide
 
 [Introduction](introduction.md)
-[What are editions?](what-are-editions.md)
-[Transitioning your code to a new edition](transitioning-your-code-to-a-new-edition.md)
+
+## What are editions?
+
+- [What are editions?](editions/index.md)
+  - [Transitioning your code to a new edition](editions/transitioning-your-code-to-a-new-edition.md)
 
 ## Rust 2015
 
