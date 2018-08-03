@@ -25,6 +25,8 @@
     - ["Operator-equals" are now implementable](rust-2018/operator-equals-are-now-implementable.md)
     - [Controlling panics with `std::panic`](rust-2018/controlling-panics-with-std-panic.md)
     - [An attribute for deprecation](rust-2018/an-attribute-for-deprecation.md)
+    - [Aborting on panic](rust-2018/aborting-on-panic.md)
+    - [`cdylib` crates for C interoperability](rust-2018/cdylib-crates-for-c-interoperability.md) -->
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
