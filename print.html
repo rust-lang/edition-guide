@@ -233,7 +233,7 @@ new features with this flag!</p>
 <p>Next up is to enable compiler warnings about code which is incompatible with the
 new 2018 edition. This is where the handy <code>cargo fix</code> tool comes into the
 picture. To enable the compatibility lints for your project you run:</p>
-<pre><code class="language-shell">$ cargo +nightly fix --prepare-for 2018 --all-targets --all-features
+<pre><code class="language-shell">$ cargo fix --edition
 </code></pre>
 <p>This will instruct Cargo to compile all targets in your project (libraries,
 binaries, tests, etc.) while enabling all Cargo features and prepare them for
@@ -243,7 +243,7 @@ informing you as it goes along.  Note that this does not enable any new Rust
 <p>If Cargo can't automatically fix everything it'll print out the remaining
 warnings. Continue to run the above command until all warnings have been solved.</p>
 <p>You can explore more about the <code>cargo fix</code> command with:</p>
-<pre><code class="language-shell">$ cargo +nightly fix --help
+<pre><code class="language-shell">$ cargo fix --help
 </code></pre>
 <a class="header" href="#switch-to-the-next-edition" id="switch-to-the-next-edition"><h2>Switch to the next edition</h2></a>
 <p>Once you're happy with those changes, it's time to use the new edition.
@@ -256,28 +256,21 @@ edition = '2018'
 <p>That <code>cargo-features</code> line should go at the very top; and <code>edition</code> goes into
 the <code>[package]</code> section. As mentioned above, right now this is a nightly-only
 feature of Cargo, so you need to enable it for things to work.</p>
-<p>At this point, your project should compile with a regular old <code>cargo +nightly build</code>. If it does not, this is a bug! Please <a href="https://github.com/rust-lang/rust/issues/new">file an issue</a>.</p>
+<p>At this point, your project should compile with a regular old <code>cargo build</code>. If it does not, this is a bug! Please <a href="https://github.com/rust-lang/rust/issues/new">file an issue</a>.</p>
 <a class="header" href="#writing-idiomatic-code-in-a-new-edition" id="writing-idiomatic-code-in-a-new-edition"><h2>Writing idiomatic code in a new edition</h2></a>
 <p>Your crate has now entered the 2018 edition of Rust, congrats! Recall though
 that Editions in Rust signify a shift in idioms over time. While much old
 code will continue to compile it might be written with different idioms today.</p>
 <p>An optional next step you can take is to update your code to be idiomatic within
-the new edition. This is done with a different set of &quot;idiom lints&quot;. To enable
-these lints add this to your <code>lib.rs</code> or <code>main.rs</code>:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#![warn(rust_2018_idioms)]
-#fn main() {
-#}</code></pre></pre>
-<p>Note that since you already switched to the new edition in the previous section,
-you should no longer pass the <code>--prepare-for 2018</code> flag to <code>cargo fix</code> because
-you are now already on the next edition! Execute:</p>
-<pre><code class="language-shell">$ cargo +nightly fix
+the new edition. This is done with a different set of &quot;idiom lints&quot;. Like before
+we'll be using <code>cargo fix</code> to drive this process:</p>
+<pre><code class="language-shell">$ cargo fix --edition-idioms
 </code></pre>
-<p>As before Cargo will automatically fix as much as it can, but you may also need
-to fix some warnings manually. Once all warnings have been solved you're not
-only compiling with the 2018 edition but you're also already writing idiomatic
-2018 code!</p>
+<p>Additionally like before, this is intended to be an <em>easy</em> step. Here <code>cargo fix</code> will automatically fix any lints it can, so you'll only get warnings for
+things that <code>cargo fix</code> couldn't fix. If you find it difficult to work through
+the warnings, that's a bug!</p>
+<p>Once you're warning-free with this command you're good to go. Enjoy the new
+edition!</p>
 <a class="header" href="#rust-2015" id="rust-2015"><h1>Rust 2015</h1></a>
 <p>Rust 2015 has a theme of &quot;stability&quot;. It commenced with the release of 1.0,
 and is the &quot;default edition&quot;. The edition system was conceived in late 2017,
