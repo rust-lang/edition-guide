@@ -191,11 +191,11 @@ guide</a>.</p>
 <a class="header" href="#transitioning-your-code-to-a-new-edition" id="transitioning-your-code-to-a-new-edition"><h1>Transitioning your code to a new edition</h1></a>
 <p>New editions might change the way you write Rust -- they add new syntax,
 language, and library features but also remove features. For example,
-<code>async</code>/<code>await</code> are keywords in Rust 2018, but not Rust 2015. Despite this
-it's our intention that the migration to new editions is as smooth an experience
-as possible. It's considered a bug if it's difficult to upgrade your crate to a
-new edition. If you have a difficult time then a bug should be filed with Rust
-itself.</p>
+<code>try</code>, <code>async</code>, and <code>await</code> are keywords in Rust 2018, but not Rust 2015.
+Despite this it's our intention that the migration to new editions is as
+smooth an experience as possible. It's considered a bug if it's difficult to
+upgrade your crate to a new edition. If you have a difficult time then a bug
+should be filed with Rust itself.</p>
 <p>Transitioning between editions is built around compiler lints. Fundamentally,
 the process works like this:</p>
 <ul>
@@ -310,7 +310,6 @@ and removes some inconsistencies.</p>
 <tr><td> <a href="transitioning/raw-identifiers.html">Raw identifiers</a> </td><td> Unstable; <a href="https://github.com/rust-lang/rust/issues/48589">tracking issue</a> </td><td> ? </td></tr>
 <tr><td> <a href="transitioning/modules/macros.html">Import macros via <code>use</code></a> </td><td> Unstable; <a href="https://github.com/rust-lang/rust/issues/35896">tracking issue</a> </td><td> ? </td></tr>
 <tr><td> <a href="transitioning/modules/path-clarity.html">Module system path changes</a> </td><td> Unstable; <a href="https://github.com/rust-lang/rust/issues/44660">tracking issue</a> </td><td> 2018 </td></tr>
-<tr><td> <a href="transitioning/concurrency/async-await.html"><code>async</code>/<code>await</code></a> </td><td> <a href="https://github.com/rust-lang/rust/issues/50547">Not fully implemented</a> </td><td> 2018 </td></tr>
 </tbody></table>
 <p>While some of these features are already available in Rust 2015, they are tracked here
 because they are being promoted as part of the Rust 2018 edition.  Accordingly, they
@@ -758,14 +757,25 @@ struct Bar;
 <p>This only works for macros defined in external crates.
 For macros defined locally, <code>#[macro_use] mod foo;</code> is still required, as it was in Rust 2015.</p>
 <a class="header" href="#concurrency-additions" id="concurrency-additions"><h1>Concurrency additions</h1></a>
-<p>While concurrency and parallelism has always been a strong suit of Rust, it
-often requires a lot of boilerplate. In Rust 2018, two new keywords, <code>async</code>
-and <code>await</code>, help you write code that appears sequential, but executes
-concurrently.</p>
-<a class="header" href="#asyncawait" id="asyncawait"><h1>async/await</h1></a>
-<p>Async/await has not been implemented in the compiler yet.</p>
+<p>While concurrency and parallelism has always been a strong suit of Rust,
+it often requires a lot of boilerplate. In Rust 2018, two new keywords,
+<code>async</code> and <code>await</code>, help you write code that appears sequential,
+but executes concurrently.</p>
+<p>Note that <code>async</code> and <code>await</code> will not be stable in the initial release of
+Rust 2018. See the <a href="https://github.com/rust-lang/rust/issues/50547">tracking issue</a>
+for more information.</p>
+<a class="header" href="#async-and-await" id="async-and-await"><h1><code>async</code> and <code>await</code></h1></a>
+<p>You can try out the <code>async</code> / <code>await</code> feature on a nightly compiler:</p>
+<pre><code class="language-rust ignore">#![feature(async_await, futures_api)]
+
+async fn foo(x: &amp;usize) -&gt; usize {
+    x + 1
+}
+</code></pre>
 <a class="header" href="#more-details-4" id="more-details-4"><h2>More details</h2></a>
-<p>Coming soon!</p>
+<p>Note that <code>async</code> and <code>await</code> will not be stable in the initial release of
+Rust 2018. See the <a href="https://github.com/rust-lang/rust/issues/50547">tracking issue</a>
+for more information.</p>
 <a class="header" href="#ownership-and-lifetimes" id="ownership-and-lifetimes"><h1>Ownership and lifetimes</h1></a>
 <p>Some of the largest changes in Rust 2018 are in ownership and lifetimes. Some
 features are for your convenience, some make the borrow checker smarter, and
@@ -1235,7 +1245,7 @@ in Rust 2015 and has a <code>try</code> function, to call it in Rust 2018, you'l
 to use the raw identifier.</p>
 <a class="header" href="#new-keywords" id="new-keywords"><h2>New keywords</h2></a>
 <p>The new confirmed keywords in edition 2018 are:</p>
-<a class="header" href="#async-and-await" id="async-and-await"><h3><code>async</code> and <code>await</code></h3></a>
+<a class="header" href="#async-and-await-1" id="async-and-await-1"><h3><code>async</code> and <code>await</code></h3></a>
 <p>Here, <code>async</code> is reserved for use in <code>async fn</code> as well as in <code>async ||</code> closures and
 <code>async { .. }</code> blocks. Meanwhile, <code>await</code> is reserved to keep our options open
 with respect to <code>await!(expr)</code> syntax. See <a href="https://github.com/rust-lang/rfcs/blob/master/text/2394-async_await.md#final-syntax-for-the-await-expression">RFC 2394</a> for more details.</p>

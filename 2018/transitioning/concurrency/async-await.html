@@ -131,10 +131,18 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#asyncawait" id="asyncawait"><h1>async/await</h1></a>
-<p>Async/await has not been implemented in the compiler yet.</p>
+                        <a class="header" href="#async-and-await" id="async-and-await"><h1><code>async</code> and <code>await</code></h1></a>
+<p>You can try out the <code>async</code> / <code>await</code> feature on a nightly compiler:</p>
+<pre><code class="language-rust ignore">#![feature(async_await, futures_api)]
+
+async fn foo(x: &amp;usize) -&gt; usize {
+    x + 1
+}
+</code></pre>
 <a class="header" href="#more-details" id="more-details"><h2>More details</h2></a>
-<p>Coming soon!</p>
+<p>Note that <code>async</code> and <code>await</code> will not be stable in the initial release of
+Rust 2018. See the <a href="https://github.com/rust-lang/rust/issues/50547">tracking issue</a>
+for more information.</p>
 
                     </main>
 
