@@ -13,22 +13,23 @@ features, but they end up *simplifying* the module system, to make it more
 clear as to what is going on.
 
 Note: During the 2018 edition preview, there are two variants of the module
-system under consideration, the "absolute use paths" variant and the "relative
+system under consideration, the "uniform paths" variant and the "anchored use
 paths" variant. Most of these changes apply to both variants; the two variant
 sections call out the differences between the two. We encourage testing of the
-new "relative paths" variant introduced in edition preview 2. The release of
+new "uniform paths" variant introduced in edition preview 2. The release of
 the 2018 edition will use one of these two variants.
 
 Here's a brief summary:
 
 * `extern crate` is no longer needed
 * The `crate` keyword refers to the current crate.
-* Relative paths variant: Paths work uniformly in both `use` declarations and
-  in other code, both in the top-level module and in submodules, and may use
-  either absolute paths or local names relative to the current module.
-* Absolute use paths variant: Paths in `use` declarations are always absolute
-  and begin with a crate name (or `crate`); paths in other code may use
-  absolute paths or local names relative to the current module.
+* Uniform paths variant: Paths work uniformly in both `use` declarations and in
+  other code. Paths work uniformly both in the top-level module and in
+  submodules. Any path may start with a crate, with `crate`, `super`, or
+  `self`, or with a local name relative to the current module.
+* Anchored use paths variant: Paths in `use` declarations always start with a
+  crate name, or with `crate`, `super`, or `self`. Paths in code other than
+  `use` declarations may also start with names relative to the current module.
 * A `foo.rs` and `foo/` subdirectory may coexist; `mod.rs` is no longer needed
   when placing submodules in a subdirectory.
 
@@ -83,9 +84,9 @@ The prefix `::` previously referred to either the crate root or an external
 crate; it now unambiguously refers to an external crate. For instance,
 `::foo::bar` always refers to the name `bar` inside the external crate `foo`.
 
-### Relative paths variant
+### Uniform paths variant
 
-The relative paths variant of Rust 2018 simplifies and unifies path handling
+The uniform paths variant of Rust 2018 simplifies and unifies path handling
 compared to Rust 2015. In Rust 2015, paths work differently in `use`
 declarations than they do elsewhere. In particular, paths in `use`
 declarations would always start from the crate root, while paths in other code
@@ -93,11 +94,11 @@ implicitly started from the current module. Those differences didn't have any
 effect in the top-level module, which meant that everything would seem
 straightforward until working on a project large enough to have submodules.
 
-In the relative paths variant of Rust 2018, paths in `use` declarations and in
+In the uniform paths variant of Rust 2018, paths in `use` declarations and in
 other code always work the same way, both in the top-level module and in any
-submodule. You can either use a relative path from the current module, an
-absolute path from the top of the current crate (starting with `crate::`), or
-an absolute path starting from an external crate name.
+submodule. You can always use a relative path from the current module, a path
+starting from an external crate name, or a path starting with `crate`, `super`,
+or `self`.
 
 Code that looked like this:
 
@@ -135,7 +136,7 @@ will look exactly the same in Rust 2018, except that you can delete the `extern
 crate` line:
 
 ```rust,ignore
-// Rust 2018 (relative paths variant)
+// Rust 2018 (uniform paths variant)
 
 use futures::Future;
 
@@ -166,7 +167,7 @@ With Rust 2018, however, the same code will also work completely unmodified in
 a submodule:
 
 ```rust,ignore
-// Rust 2018 (relative paths variant)
+// Rust 2018 (uniform paths variant)
 
 mod submodule {
     use futures::Future;
@@ -204,15 +205,10 @@ either rename one of the conflicting names or explicitly disambiguate the path.
 To explicitly disambiguate a path, use `::name` for an external crate name, or
 `self::name` for a local module or item.
 
-### Absolute use paths variant
+### Anchored use paths variant
 
-In the absolute use paths variant of Rust 2018, paths in `use` declarations
-*must* begin with one of:
-
-- A crate name
-- `crate` for the current crate's root
-- `self` for the current module's root
-- `super` for the current module's parent
+In the anchored use paths variant of Rust 2018, paths in `use` declarations
+*must* begin with a crate name, `crate`, `self`, or `super`.
 
 Code that looked like this:
 
@@ -233,7 +229,7 @@ use foo::Bar;
 Now looks like this:
 
 ```rust,ignore
-// Rust 2018 (absolute use paths variant)
+// Rust 2018 (anchored use paths variant)
 
 // 'futures' is the name of a crate
 use futures::Future;
@@ -278,7 +274,7 @@ mod submodule {
 
 In the `futures` example, the `my_poll` function signature is incorrect, because `submodule`
 contains no items named `futures`; that is, this path is considered relative. But because
-`use` is absolute, `use futures::` works even though a lone `futures::` doesn't! With `std`
+`use` is anchored, `use futures::` works even though a lone `futures::` doesn't! With `std`
 it can be even more confusing, as you never wrote the `extern crate std;` line at all. So
 why does it work in `main` but not in a submodule? Same thing: it's a relative path because
 it's not in a `use` declaration. `extern crate std;` is inserted at the crate root, so
@@ -287,26 +283,26 @@ it's fine in `main`, but it doesn't exist in the submodule at all.
 Let's look at how this change affects things:
 
 ```rust,ignore
-// Rust 2018 (absolute use paths variant)
+// Rust 2018 (anchored use paths variant)
 
 // no more `extern crate futures;`
 
 mod submodule {
-    // 'futures' is the name of a crate, so this is absolute and works
+    // 'futures' is the name of a crate, so this is anchored and works
     use futures::Future;
 
-    // 'futures' is the name of a crate, so this is absolute and works
+    // 'futures' is the name of a crate, so this is anchored and works
     fn my_poll() -> futures::Poll { ... }
 }
 
 fn main() {
-    // 'std' is the name of a crate, so this is absolute and works
+    // 'std' is the name of a crate, so this is anchored and works
     let five = std::sync::Arc::new(5);
 }
 
 mod submodule {
     fn function() {
-        // 'std' is the name of a crate, so this is absolute and works
+        // 'std' is the name of a crate, so this is anchored and works
         let five = std::sync::Arc::new(5);
     }
 }
