@@ -12,11 +12,23 @@ As such, the 2018 edition of Rust introduces a few new module system
 features, but they end up *simplifying* the module system, to make it more
 clear as to what is going on.
 
+Note: During the 2018 edition preview, there are two variants of the module
+system under consideration, the "absolute use paths" variant and the "relative
+paths" variant. Most of these changes apply to both variants; the two variant
+sections call out the differences between the two. We encourage testing of the
+new "relative paths" variant introduced in edition preview 2. The release of
+the 2018 edition will use one of these two variants.
+
 Here's a brief summary:
 
 * `extern crate` is no longer needed
-* Absolute paths begin with a crate name, where the keyword `crate`
-  refers to the current crate.
+* The `crate` keyword refers to the current crate.
+* Relative paths variant: Paths work uniformly in both `use` statements and in
+  other code, both in the top-level module and in submodules, and may use
+  either absolute paths or local names relative to the current module.
+* Absolute use paths variant: Paths in `use` statements are always absolute and
+  begin with a crate name (or `crate`); paths in other code may use absolute
+  paths or local names relative to the current module.
 * A `foo.rs` and `foo/` subdirectory may coexist; `mod.rs` is no longer needed
   when placing submodules in a subdirectory.
 
@@ -60,9 +72,142 @@ keep doing what you were doing there as well.
 One other use for `extern crate` was to import macros; that's no longer needed.
 Check [the macro section](2018/transitioning/modules/macros.html) for more.
 
-### Absolute paths begin with `crate` or the crate name
+### The `crate` keyword refers to the current crate.
 
-In Rust 2018, paths in `use` statements *must* begin with one of:
+In `use` statements and in other code, you can refer to the root of the current
+crate with the `crate::` prefix. For instance, `crate::foo::bar` will always
+refer to the name `bar` inside the module `foo`, from anywhere else in the same
+crate.
+
+The prefix `::` previously referred to either the crate root or an external
+crate; it now unambiguously refers to an external crate. For instance,
+`::foo::bar` always refers to the name `bar` inside the external crate `foo`.
+
+### Relative paths variant
+
+The relative paths variant of Rust 2018 simplifies and unifies path handling
+compared to Rust 2015. In Rust 2015, paths work differently in use statements
+than they do elsewhere. In particular, paths in `use` statements would always
+start from the crate root, while paths in other code implicitly started from
+the current module. Those differences didn't have any effect in the top-level
+module, which meant that everything would seem straightforward until working on
+a project large enough to have submodules.
+
+In the relative paths variant of Rust 2018, paths in `use` statements and in
+other code always work the same way, both in the top-level module and in any
+submodule. You can either use a relative path from the current module, an
+absolute path from the top of the current crate (starting with `crate::`), or
+an absolute path starting from an external crate name.
+
+Code that looked like this:
+
+```rust,ignore
+// Rust 2015
+
+extern crate futures;
+
+use futures::Future;
+
+mod foo {
+    struct Bar;
+}
+
+use foo::Bar;
+
+fn my_poll() -> futures::Poll { ... }
+
+enum SomeEnum {
+    V1(usize),
+    V2(String),
+}
+
+fn func() {
+    let five = std::sync::Arc::new(5);
+    use SomeEnum::*;
+    match ... {
+        V1(i) => { ... }
+        V2(s) => { ... }
+    }
+}
+```
+
+will look exactly the same in Rust 2018, except that you can delete the `extern
+crate` line:
+
+```rust,ignore
+// Rust 2018 (relative paths variant)
+
+use futures::Future;
+
+mod foo {
+    struct Bar;
+}
+
+use foo::Bar;
+
+fn my_poll() -> futures::Poll { ... }
+
+enum SomeEnum {
+    V1(usize),
+    V2(String),
+}
+
+fn func() {
+    let five = std::sync::Arc::new(5);
+    use SomeEnum::*;
+    match ... {
+        V1(i) => { ... }
+        V2(s) => { ... }
+    }
+}
+```
+
+With Rust 2018, however, the same code will also work completely unmodified in
+a submodule:
+
+```rust,ignore
+// Rust 2018 (relative paths variant)
+
+mod submodule {
+    use futures::Future;
+
+    mod foo {
+        struct Bar;
+    }
+
+    use foo::Bar;
+
+    fn my_poll() -> futures::Poll { ... }
+
+    enum SomeEnum {
+        V1(usize),
+        V2(String),
+    }
+
+    fn func() {
+        let five = std::sync::Arc::new(5);
+        use SomeEnum::*;
+        match ... {
+            V1(i) => { ... }
+            V2(s) => { ... }
+        }
+    }
+}
+```
+
+This makes it easy to move code around in a project, and avoids introducing
+additional complexity to multi-module projects.
+
+If a path is ambiguous, such as if you have an external crate and a local
+module or item with the same name, you'll get an error, and you'll need to
+either rename one of the conflicting names or explicitly disambiguate the path.
+To explicitly disambiguate a path, use `::name` for an external crate name, or
+`self::name` for a local module or item.
+
+### Absolute use paths variant
+
+In the absolute use paths variant of Rust 2018, paths in `use` statements
+*must* begin with one of:
 
 - A crate name
 - `crate` for the current crate's root
@@ -88,7 +233,7 @@ use foo::Bar;
 Now looks like this:
 
 ```rust,ignore
-// Rust 2018
+// Rust 2018 (absolute use paths variant)
 
 // 'futures' is the name of a crate
 use futures::Future;
@@ -142,7 +287,7 @@ it's fine in `main`, but it doesn't exist in the submodule at all.
 Let's look at how this change affects things:
 
 ```rust,ignore
-// Rust 2018
+// Rust 2018 (absolute use paths variant)
 
 // no more `extern crate futures;`
 
@@ -169,7 +314,6 @@ mod submodule {
 
 Much more straightforward.
 
-**Note**: an alternative syntax is also under consideration: writing `::some::Local` rather than `crate::some::Local`. If you have thoughts about this alternative, please leave a comment on [the tracking issue](https://github.com/rust-lang/rust/issues/44660) or start a thread on the [edition feedback category](https://internals.rust-lang.org/c/edition-2018-feedback).
 
 ### No more `mod.rs`
 
