@@ -109,7 +109,7 @@ extern crate futures;
 use futures::Future;
 
 mod foo {
-    struct Bar;
+    pub struct Bar;
 }
 
 use foo::Bar;
@@ -140,7 +140,7 @@ crate` line:
 use futures::Future;
 
 mod foo {
-    struct Bar;
+    pub struct Bar;
 }
 
 use foo::Bar;
@@ -172,7 +172,7 @@ mod submodule {
     use futures::Future;
 
     mod foo {
-        struct Bar;
+        pub struct Bar;
     }
 
     use foo::Bar;
@@ -224,7 +224,7 @@ extern crate futures;
 use futures::Future;
 
 mod foo {
-    struct Bar;
+    pub struct Bar;
 }
 
 use foo::Bar;
@@ -239,7 +239,7 @@ Now looks like this:
 use futures::Future;
 
 mod foo {
-    struct Bar;
+    pub struct Bar;
 }
 
 // 'crate' means the current crate
