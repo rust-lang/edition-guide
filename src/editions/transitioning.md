@@ -2,11 +2,11 @@
 
 New editions might change the way you write Rust -- they add new syntax,
 language, and library features but also remove features. For example,
-`async`/`await` are keywords in Rust 2018, but not Rust 2015. Despite this
-it's our intention that the migration to new editions is as smooth an experience
-as possible. It's considered a bug if it's difficult to upgrade your crate to a
-new edition. If you have a difficult time then a bug should be filed with Rust
-itself.
+`try`, `async`, and `await` are keywords in Rust 2018, but not Rust 2015.
+Despite this it's our intention that the migration to new editions is as
+smooth an experience as possible. It's considered a bug if it's difficult to
+upgrade your crate to a new edition. If you have a difficult time then a bug
+should be filed with Rust itself.
 
 Transitioning between editions is built around compiler lints. Fundamentally,
 the process works like this:

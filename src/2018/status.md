@@ -24,8 +24,6 @@
 [nll_status]: http://smallcultfollowing.com/babysteps/blog/2018/06/15/mir-based-borrow-check-nll-status-update/
 [`T: 'a` inference in `struct`s]: transitioning/ownership-and-lifetimes/struct-inference.html
 [issue#44493]: https://github.com/rust-lang/rust/issues/44493
-[`async`/`await`]: transitioning/concurrency/async-await.html
-[issue#50547]: https://github.com/rust-lang/rust/issues/50547
 
 | **Feature** | **Status** | **Minimum Edition** |
 | ----------- | ---------- | -------------------------- |
@@ -43,7 +41,6 @@
 | [Raw identifiers] | Unstable; [tracking issue][issue#48589] | ? |
 | [Import macros via `use`] | Unstable; [tracking issue][issue#35896] | ? |
 | [Module system path changes] | Unstable; [tracking issue][issue#44660] | 2018 |
-| [`async`/`await`] | [Not fully implemented][issue#50547] | 2018 |
 
 While some of these features are already available in Rust 2015, they are tracked here
 because they are being promoted as part of the Rust 2018 edition.  Accordingly, they
