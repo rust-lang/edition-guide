@@ -28,8 +28,9 @@
     - [Aborting on panic](rust-2018/aborting-on-panic.md)
     - [`cdylib` crates for C interoperability](rust-2018/cdylib-crates-for-c-interoperability.md)
     - [Improved error messages](rust-2018/improved-error-messages.md)
-    - [Cargo workspaces for multi-package projects](rust-2018/cargo-workspaces-for-multi-package-projects.md) -->
-    - [Cargo can use a local registry replacement](rust-2018/cargo-can-use-a-local-registry-replacement.md) -->
+    - [Cargo workspaces for multi-package projects](rust-2018/cargo-workspaces-for-multi-package-projects.md)
+    - [Cargo can use a local registry replacement](rust-2018/cargo-can-use-a-local-registry-replacement.md)
+    - [The 'try' operator, `?` for easier error handling](rust-2018/the-try-operator-for-easier-error-handling.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
