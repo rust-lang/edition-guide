@@ -61,6 +61,7 @@
     - [128 bit integers](rust-2018/128-bit-integers.md)
     - [SIMD for faster computing](rust-2018/simd-for-faster-computing.md)
     - [`dyn Trait` for trait objects](rust-2018/dyn-trait-for-trait-objects.md)
+    - [Gobal allocators](rust-2018/global-allocators.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
