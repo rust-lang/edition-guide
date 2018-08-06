@@ -1,7 +1,9 @@
 # New editions of the "the book"
 
 ![Minimum Rust version: 1.18](https://img.shields.io/badge/Minimum%20Rust%20Version-1.18-red.svg) for drafts of the second edition
+
 ![Minimum Rust version: 1.26](https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg) for the final version of the second edition
+
 ![Minimum Rust version: 1.28](https://img.shields.io/badge/Minimum%20Rust%20Version-1.28-red.svg) for drafts of the 2018 edition
 
 We've distributed a copy of "The Rust Programming Language," affectionatly
