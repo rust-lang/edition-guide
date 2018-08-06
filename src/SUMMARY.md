@@ -59,6 +59,8 @@
     - [`..=` for inclusive ranges](rust-2018/inclusive-ranges.md)
     - [Slice patterns](rust-2018/slice-patterns.md)
     - [128 bit integers](rust-2018/128-bit-integers.md)
+    - [SIMD for faster computing](rust-2018/simd-for-faster-computing.md)
+    - [`dyn Trait` for trait objects](rust-2018/dyn-trait-for-trait-objects.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
