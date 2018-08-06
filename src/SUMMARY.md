@@ -31,6 +31,8 @@
     - [Cargo workspaces for multi-package projects](rust-2018/cargo-workspaces-for-multi-package-projects.md)
     - [Cargo can use a local registry replacement](rust-2018/cargo-can-use-a-local-registry-replacement.md)
     - [The 'try' operator, `?` for easier error handling](rust-2018/the-try-operator-for-easier-error-handling.md)
+    - [Rustup for managing Rust versions](rust-2018/rustup-for-managing-rust-versions.md)
+    - [WebAssembly support](rust-2018/webassembly-support.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
