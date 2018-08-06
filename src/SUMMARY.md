@@ -39,6 +39,8 @@
     - [Field init shorthand](rust-2018/field-init-shorthand.md)
     - [New editions of the "the book"](rust-2018/new-editions-of-the-book.md)
     - [`pub` learns some new tricks](rust-2018/pub-learns-some-new-tricks.md)
+    - [`union` for an unsafe form of `enum`](rust-2018/union-for-an-unsafe-form-of-enum.md)
+    - [Loops can `break` with a value](rust-2018/loops-can-break-with-a-value.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
