@@ -42,6 +42,9 @@
     - [`union` for an unsafe form of `enum`](rust-2018/union-for-an-unsafe-form-of-enum.md)
     - [Loops can `break` with a value](rust-2018/loops-can-break-with-a-value.md)
     - [Associated constants](rust-2018/associated-constants.md)
+    - [`std::os` has documentation for all platforms](rust-2018/std-os-has-documentation-for-all-platforms.md)
+    - [The Rust Bookshelf](rust-2018/the-rust-bookshelf.md)
+    - [Replacing dependencies with `patch`](rust-2018/replacing-dependencies-with-patch.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list

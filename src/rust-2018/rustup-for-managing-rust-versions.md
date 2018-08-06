@@ -168,6 +168,8 @@ will reformat your entire Cargo project.
 
 #### `rls-preview` for IDE integration
 
+![Minimum Rust version: 1.21](https://img.shields.io/badge/Minimum%20Rust%20Version-1.21-brightgreen.svg)
+
 Many IDE features are built off of the [`langserver`
 protocol](http://langserver.org/). To gain support for Rust with these IDEs,
 you'll need to install the Rust language sever, aka the "RLS":
