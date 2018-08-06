@@ -41,6 +41,7 @@
     - [`pub` learns some new tricks](rust-2018/pub-learns-some-new-tricks.md)
     - [`union` for an unsafe form of `enum`](rust-2018/union-for-an-unsafe-form-of-enum.md)
     - [Loops can `break` with a value](rust-2018/loops-can-break-with-a-value.md)
+    - [Associated constants](rust-2018/associated-constants.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
