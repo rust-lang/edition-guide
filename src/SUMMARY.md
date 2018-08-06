@@ -69,7 +69,3 @@
     - [Macro changes](rust-2018/macro-changes.md)
     - [Path clarity](rust-2018/path-clarity.md)
     - [`async`/`await` for easier concurrency](rust-2018/async-await-for-easier-concurrency.md)
-
-## The full feature list
-
-[The full feature list](full-feature-list.md)
