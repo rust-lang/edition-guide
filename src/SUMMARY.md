@@ -47,6 +47,7 @@
     - [Replacing dependencies with `patch`](rust-2018/replacing-dependencies-with-patch.md)
     - [Documentation tests can now `compile-fail`](rust-2018/documentation-tests-can-now-compile-fail.md)
     - [Multi-file `examples`](rust-2018/multi-file-examples.md)
+    - [Incremental Compilation for faster compiles](rust-2018/incremental-compilation-for-faster-compiles.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list

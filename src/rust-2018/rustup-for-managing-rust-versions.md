@@ -150,6 +150,8 @@ actively changing, possibly in backwards-incompatible ways.
 
 #### `rustfmt-preview` for automatic code formatting
 
+![Minimum Rust version: 1.24](https://img.shields.io/badge/Minimum%20Rust%20Version-1.24-brightgreen.svg)
+
 If you'd like to have your code automatically formatted, you can
 install this component:
 
