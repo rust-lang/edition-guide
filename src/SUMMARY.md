@@ -33,7 +33,8 @@
     - [The 'try' operator, `?` for easier error handling](rust-2018/the-try-operator-for-easier-error-handling.md)
     - [Rustup for managing Rust versions](rust-2018/rustup-for-managing-rust-versions.md)
     - [WebAssembly support](rust-2018/webassembly-support.md)
-    - [Custom Derive](rust-2018/custom-derive.md) -->
+    - [Custom Derive](rust-2018/custom-derive.md)
+    - [`cargo check` for faster checking](rust-2018/cargo-check-for-faster-checking.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
