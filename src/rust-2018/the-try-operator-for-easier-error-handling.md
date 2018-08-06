@@ -1,6 +1,7 @@
 # The 'try' operator, ? for easier error handling
 
-![Minimum Rust version: 1.13](https://img.shields.io/badge/Minimum%20Rust%20Version-1.13-brightgreen.svg)
+![Minimum Rust version: 1.13](https://img.shields.io/badge/Minimum%20Rust%20Version-1.13-brightgreen.svg) for `Result<T, E>`
+![Minimum Rust version: 1.22](https://img.shields.io/badge/Minimum%20Rust%20Version-1.22-brightgreen.svg) for `Option<T>`
 
 Rust has gained a new operator, `?`, that makes error handling more pleasant
 by reducing the visual noise involved. It does this by solving one simple
