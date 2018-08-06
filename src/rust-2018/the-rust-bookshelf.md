@@ -23,3 +23,11 @@ of Cargo’s docs, and <http://doc.crates.io> now redirects there.
 ![Minimum Rust version: 1.21](https://img.shields.io/badge/Minimum%20Rust%20Version-1.21-brightgreen.svg)
 
 Rustdoc, our documentation tool, now has a guide at <https://doc.rust-lang.org/rustdoc>.
+
+## Rust By Example
+
+![Minimum Rust version: 1.25](https://img.shields.io/badge/Minimum%20Rust%20Version-1.25-brightgreen.svg)
+
+Rust by Example used to live at <https://rustbyexample.com>, but now is part of the Bookshelf!
+It can be found at <https://doc.rust-lang.org/rust-by-example/>. RBE lets you learn Rust through
+short code examples and exercises, as opposed to the lengthy prose of The Book.

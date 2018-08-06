@@ -48,6 +48,11 @@
     - [Documentation tests can now `compile-fail`](rust-2018/documentation-tests-can-now-compile-fail.md)
     - [Multi-file `examples`](rust-2018/multi-file-examples.md)
     - [Incremental Compilation for faster compiles](rust-2018/incremental-compilation-for-faster-compiles.md)
+    - [Nested imports with `use`](rust-2018/nested-imports-with-use.md)
+    - [Rustdoc uses CommonMark](rust-2018/rustdoc-uses-commonmark.md)
+    - [Choosing alignment with the `repr` attribute](rust-2018/choosing-alignment-with-the-repr-attribute.md)
+    - [A non-null raw pointer](rust-2018/a-non-null-raw-pointer.md)
+    - [`cargo new` defaults to a binary project](rust-2018/cargo-new-defaults-to-a-binary-project.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
