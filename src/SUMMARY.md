@@ -53,6 +53,12 @@
     - [Choosing alignment with the `repr` attribute](rust-2018/choosing-alignment-with-the-repr-attribute.md)
     - [A non-null raw pointer](rust-2018/a-non-null-raw-pointer.md)
     - [`cargo new` defaults to a binary project](rust-2018/cargo-new-defaults-to-a-binary-project.md)
+    - [`impl Trait` for returning complex types with ease](rust-2018/impl-trait-for-returning-complex-types-with-ease.md)
+    - [Default `match` bindings](rust-2018/default-match-bindings.md)
+    - [`?` in `main` and tests](rust-2018/question-mark-in-main-and-tests.md)
+    - [`..=` for inclusive ranges](rust-2018/inclusive-ranges.md)
+    - [Slice patterns](rust-2018/slice-patterns.md)
+    - [128 bit integers](rust-2018/128-bit-integers.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
