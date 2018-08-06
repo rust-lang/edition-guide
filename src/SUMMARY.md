@@ -62,7 +62,13 @@
     - [SIMD for faster computing](rust-2018/simd-for-faster-computing.md)
     - [`dyn Trait` for trait objects](rust-2018/dyn-trait-for-trait-objects.md)
     - [Gobal allocators](rust-2018/global-allocators.md)
-    <!-- - [](rust-2018/.md) -->
+    - [Raw identifiers](rust-2018/raw-identifiers.md)
+    - [`'_`, the anonymous lifetime](rust-2018/the-anonymous-lifetime.md)
+    - [Lifetime elision in `impl`](rust-2018/lifetime-elision-in-impl.md)
+    - [`T: 'a` inference in structs](rust-2018/inference-in-structs.md)
+    - [Macro changes](rust-2018/macro-changes.md)
+    - [Path clarity](rust-2018/path-clarity.md)
+    - [`async`/`await` for easier concurrency](rust-2018/async-await-for-easier-concurrency.md)
 
 ## The full feature list
 
