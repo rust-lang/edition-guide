@@ -35,6 +35,8 @@
     - [WebAssembly support](rust-2018/webassembly-support.md)
     - [Custom Derive](rust-2018/custom-derive.md)
     - [`cargo check` for faster checking](rust-2018/cargo-check-for-faster-checking.md)
+    - [Simpler lifetimes in `static` and `const`](rust-2018/simpler-lifetimes-in-static-and-const.md)
+    - [Field init shorthand](rust-2018/field-init-shorthand.md)
     <!-- - [](rust-2018/.md) -->
 
 ## The full feature list
