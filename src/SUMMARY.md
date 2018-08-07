@@ -61,7 +61,7 @@
     - [128 bit integers](rust-2018/128-bit-integers.md)
     - [SIMD for faster computing](rust-2018/simd-for-faster-computing.md)
     - [`dyn Trait` for trait objects](rust-2018/dyn-trait-for-trait-objects.md)
-    - [Gobal allocators](rust-2018/global-allocators.md)
+    - [Global allocators](rust-2018/global-allocators.md)
     - [Raw identifiers](rust-2018/raw-identifiers.md)
     - [`'_`, the anonymous lifetime](rust-2018/the-anonymous-lifetime.md)
     - [Lifetime elision in `impl`](rust-2018/lifetime-elision-in-impl.md)

@@ -30,3 +30,6 @@ warning: use of deprecated item 'foo': Please use the bar function instead
 ```
 
 Both `since` and `note` are optional.
+
+`since` can be in the future; you can put whatever you'd like, and what's put in
+there isn't checked.

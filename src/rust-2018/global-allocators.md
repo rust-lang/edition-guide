@@ -1,4 +1,4 @@
-# Gobal allocators
+# Global allocators
 
 ![Minimum Rust version: 1.28](https://img.shields.io/badge/Minimum%20Rust%20Version-1.28-brightgreen.svg)
 

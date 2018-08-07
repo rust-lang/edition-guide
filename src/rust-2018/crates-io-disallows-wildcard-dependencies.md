@@ -2,7 +2,8 @@
 
 ![Minimum Rust version: 1.6](https://img.shields.io/badge/Minimum%20Rust%20Version-1.6-brightgreen.svg)
 
-Crates.io will not allow you to create a package with a wildcard dependency. In other words, these:
+Crates.io will not allow you to upload a package with a wildcard dependency.
+In other words, these:
 
 ```toml
 [dependencies]

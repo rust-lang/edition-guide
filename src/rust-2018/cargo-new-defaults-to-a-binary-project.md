@@ -10,9 +10,9 @@ For some background, cargo new accepts two flags: `--lib`, for creating
 libraries, and `--bin`, for creating binaries, or executables. If you don’t
 pass one of these flags, it used to default to `--lib`. At the time, we made
 this decision because each binary (often) depends on many libraries, and so
-the library case is more common. However, this is incorrect; each library is
-depended upon by many binaries. Furthermore, when getting started, what you
-often want is a program you can run and play around with. It’s not just new
-Rustaceans though; even very long-time community members have said that they
-find this default surprising. As such, we’ve changed it, and it now defualts
-to `--bin`.
+we thought the library case would be more common. However, this is incorrect;
+each library is depended upon by many binaries. Furthermore, when getting
+started, what you often want is a program you can run and play around with.
+It’s not just new Rustaceans though; even very long-time community members
+have said that they find this default surprising. As such, we’ve changed it,
+and it now defualts to `--bin`.

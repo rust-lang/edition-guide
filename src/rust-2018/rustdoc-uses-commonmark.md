@@ -12,4 +12,5 @@ has attempted to define a more strict version of Markdown, and so now, Rustdoc
 uses it by default.
 
 As of Rust 1.23, we still defaulted to `hoedown`, but you could enable
-Commonmark via a flag, `--enable-commonmark`.
+Commonmark via a flag, `--enable-commonmark`. Today, we only support
+CommonMark.

@@ -33,6 +33,6 @@ verifiably reproducible builds!
 This has enabled tools like
 [`cargo-vendor`](https://github.com/alexcrichton/cargo-vendor) and
 [`cargo-local-registry`](https://github.com/alexcrichton/cargo-local-registry),
-which are often useful for "offline builds." They preparing the list of all
+which are often useful for "offline builds." They prepare the list of all
 Rust dependencies ahead of time, which lets you ship them to a build machine
 with ease.
