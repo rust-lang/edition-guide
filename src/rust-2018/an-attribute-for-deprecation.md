@@ -17,7 +17,7 @@ pub fn foo() {
 
 This will give your users a warning if they use the deprecated functionality:
 
-```rust
+```text
    Compiling playground v0.0.1 (file:///playground)
 warning: use of deprecated item 'foo': Please use the bar function instead
   --> src/main.rs:10:5

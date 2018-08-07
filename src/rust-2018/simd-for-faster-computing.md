@@ -33,7 +33,7 @@ instructions directly, which means we don’t need to rely on a smart compiler.
 Additionally, it includes some features that allow us to choose a particular
 implementation based on various criteria. For example:
 
-```rust
+```rust,ignore
 #[cfg(all(any(target_arch = "x86", target_arch = "x86_64"),
       target_feature = "avx2"))]
 fn foo() {
@@ -52,7 +52,7 @@ Here, we use cfg flags to choose the correct version based on the machine
 we’re targetting; on x86 we use that version, and on x86_64 we use its
 version. We can also choose at runtime:
 
-```rust
+```rust,ignore
 fn foo() {
     #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
     {
@@ -81,7 +81,7 @@ level libraries starting today. For example, check out the
 [faster](https://github.com/AdamNiederer/faster) crate. Here’s a code snippet
 with no SIMD:
 
-```rust
+```rust,ignore
 let lots_of_3s = (&[-123.456f32; 128][..]).iter()
     .map(|v| {
         9.0 * v.abs().sqrt().sqrt().recip().ceil().sqrt() - 4.0 - 2.0

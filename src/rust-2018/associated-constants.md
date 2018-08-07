@@ -76,7 +76,7 @@ they cannot be used in constant expressions, even though they only return a
 constant. Because of this, a design for `Float` would also have to include
 constants as well:
 
-```rust
+```rust,ignore
 mod f32 {
     const NAN: f32 = 0.0f32 / 0.0f32;
     const INFINITY: f32 = 1.0f32 / 0.0f32;

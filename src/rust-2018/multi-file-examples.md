@@ -10,7 +10,7 @@ But what if your example is too big for a single file? Cargo supports adding
 sub-directories inside of `examples`, and looks for a `main.rs` inside of
 them to build the example. It looks like this:
 
-```rust
+```text
 my-package
  └──src
      └── lib.rs // code here

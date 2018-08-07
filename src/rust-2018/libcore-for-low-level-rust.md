@@ -15,14 +15,14 @@ today, building full applications is not yet stable.
 
 To use `libcore`, add this flag to your crate root:
 
-```rust
+```rust,ignore
 #![no_std]
 ```
 
 This will remove the standard library, and bring the `core` crate into your
 namespace for use:
 
-```rust
+```rust,ignore
 #![no_std]
 
 use core::cell::Cell;

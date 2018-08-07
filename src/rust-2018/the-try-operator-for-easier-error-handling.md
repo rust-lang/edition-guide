@@ -9,6 +9,7 @@ problem. To illustrate, imagine we had some code to read some data from a
 file:
 
 ```rust
+# use std::{io::{self, prelude::*}, fs::File};
 fn read_username_from_file() -> Result<String, io::Error> {
     let f = File::open("username.txt");
 
@@ -42,6 +43,7 @@ reader with a great deal of useful information.
 With `?`, the above code looks like this:
 
 ```rust
+# use std::{io::{self, prelude::*}, fs::File};
 fn read_username_from_file() -> Result<String, io::Error> {
     let mut f = File::open("username.txt")?;
     let mut s = String::new();
@@ -65,6 +67,7 @@ that's been available since Rust `1.0`. And indeed, they are the same.
 Previously, `read_username_from_file` could have been implemented like this:
 
 ```rust
+# use std::{io::{self, prelude::*}, fs::File};
 fn read_username_from_file() -> Result<String, io::Error> {
     let mut f = try!(File::open("username.txt"));
     let mut s = String::new();
@@ -88,13 +91,13 @@ One of the reasons `try!` needs a sweeter syntax is that it is quite
 unattractive when multiple invocations of `try!` are used in succession.
 Consider:
 
-```rust
+```rust,ignore
 try!(try!(try!(foo()).bar()).baz())
 ```
 
 as opposed to
 
-```rust
+```rust,ignore
 foo()?.bar()?.baz()?
 ```
 

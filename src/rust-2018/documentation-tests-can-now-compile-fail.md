@@ -9,6 +9,7 @@ You can now create `compile-fail` tests in Rustdoc, like this:
 /// let x = 5;
 /// x += 2; // shouldn't compile!
 /// ```
+# fn foo() {}
 ```
 
 Please note that these kinds of tests can be more fragile than others, as

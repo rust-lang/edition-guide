@@ -14,9 +14,12 @@ use std::path::{Path, PathBuf};
 You can now write this:
 
 ```rust
+# mod foo {
 // on one line
 use std::{fs::File, io::Read, path::{Path, PathBuf}};
+# }
 
+# mod bar {
 // with some more breathing room
 use std::{
     fs::File,
@@ -26,6 +29,7 @@ use std::{
         PathBuf
     }
 };
+# }
 ```
 
 This can reduce some repetition, and make things a bit more clear.

@@ -20,7 +20,11 @@ Rust can’t check this for us, that means reading or writing a union’s field
 is unsafe:
 
 ```rust
-let u = MyUnion { f1: 1 };
+# union MyUnion {
+#     f1: u32,
+#     f2: f32,
+# }
+let mut u = MyUnion { f1: 1 };
 
 unsafe { u.f1 = 5 };
 
@@ -34,7 +38,6 @@ Pattern matching works too:
 #     f1: u32,
 #     f2: f32,
 # }
-#
 fn f(u: MyUnion) {
     unsafe {
         match u {
