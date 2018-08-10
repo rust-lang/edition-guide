@@ -2,7 +2,7 @@
 
 ![Minimum Rust version: 1.12](https://img.shields.io/badge/Minimum%20Rust%20Version-1.12-brightgreen.svg)
 
-We're always working on erorr improvements, and there are little improvements
+We're always working on error improvements, and there are little improvements
 in almost every Rust version, but in Rust 1.12, a significant overhaul of the
 error message system was created.
 
