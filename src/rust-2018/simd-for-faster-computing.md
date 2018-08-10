@@ -2,8 +2,9 @@
 
 ![Minimum Rust version: 1.27](https://img.shields.io/badge/Minimum%20Rust%20Version-1.27-brightgreen.svg)
 
-The basics of SIMD are now available! SIMD stands for “single instruction,
-multiple data.” Consider a function like this:
+The basics of [SIMD](https://en.wikipedia.org/wiki/SIMD) are now available!
+SIMD stands for “single instruction, multiple data.” Consider a function like
+this:
 
 ```rust
 pub fn foo(a: &[u8], b: &[u8], c: &mut [u8]) {
@@ -17,7 +18,7 @@ Here, we’re taking two slices, and adding the numbers together, placing the
 result in a third slice. The simplest possible way to do this would be to do
 exactly what the code does, and loop through each set of elements, add them
 together, and store it in the result. However, compilers can often do better.
-LLVM will often “autovectorize” code like this, which is a fancy term for
+LLVM will usually “autovectorize” code like this, which is a fancy term for
 “use SIMD.” Imagine that `a` and `b` were both 16 elements long. Each element
 is a `u8`, and so that means that each slice would be 128 bits of data. Using
 SIMD, we could put both `a` and `b` into 128 bit registers, add them together

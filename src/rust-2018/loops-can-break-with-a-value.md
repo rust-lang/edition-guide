@@ -1,4 +1,4 @@
-# Loops can break with a value
+# `loop`s can break with a value
 
 ![Minimum Rust version: 1.19](https://img.shields.io/badge/Minimum%20Rust%20Version-1.19-brightgreen.svg)
 

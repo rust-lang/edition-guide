@@ -1,4 +1,4 @@
-# dyn Trait for trait objects
+# `dyn Trait` for trait objects
 
 ![Minimum Rust version: 1.27](https://img.shields.io/badge/Minimum%20Rust%20Version-1.27-brightgreen.svg)
 

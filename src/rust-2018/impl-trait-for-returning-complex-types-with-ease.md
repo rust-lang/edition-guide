@@ -1,4 +1,4 @@
-# impl Trait for returning complex types with ease
+# `impl Trait` for returning complex types with ease
 
 ![Minimum Rust version: 1.26](https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg)
 

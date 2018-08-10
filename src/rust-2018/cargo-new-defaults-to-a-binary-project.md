@@ -1,4 +1,4 @@
-# cargo new defaults to a binary project
+# `cargo new` defaults to a binary project
 
 ![Minimum Rust version: 1.25](https://img.shields.io/badge/Minimum%20Rust%20Version-1.25-brightgreen.svg)
 

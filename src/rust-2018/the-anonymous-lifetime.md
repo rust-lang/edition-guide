@@ -1,4 +1,4 @@
-# '_, the anonymous lifetime
+# `'_`, the anonymous lifetime
 
 ![Minimum Rust version: nightly](https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg)
 

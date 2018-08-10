@@ -40,7 +40,7 @@ situations tend to necessitate or be much easier with a custom alignment:
   this can typically be manually calculated and managed, it's often also useful
   to express this as a property of a type to get the compiler to do a little
   extra work instead.
-* C compilers like gcc and clang offer the ability to specify a custom
+* C compilers like `gcc` and `clang` offer the ability to specify a custom
   alignment for structures, and Rust can much more easily interoperate with
   these types if Rust can also mirror the request for a custom alignment (e.g.
   passing a structure to C correctly is much easier).

@@ -1,4 +1,4 @@
-# Controlling panics with std::panic
+# Controlling panics with `std::panic`
 
 ![Minimum Rust version: 1.9](https://img.shields.io/badge/Minimum%20Rust%20Version-1.9-brightgreen.svg)
 
@@ -63,6 +63,7 @@ The `catch_unwind` API offers a way to introduce new isolation boundaries
 
 * Embedding Rust in other languages
 * Abstractions that manage threads
+* Test frameworks, because tests may panic and you don't want that to kill the test runner
 
 For the first case, unwinding across a language boundary is undefined behavior,
 and often leads to segfaults in practice. Allowing panics to be caught means

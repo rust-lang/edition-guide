@@ -1,4 +1,4 @@
-# cargo check for faster checking
+# `cargo check` for faster checking
 
 ![Minimum Rust version: 1.16](https://img.shields.io/badge/Minimum%20Rust%20Version-1.16-brightgreen.svg)
 

@@ -1,4 +1,4 @@
-# Simpler lifetimes in static and const
+# Simpler lifetimes in `static` and `const`
 
 ![Minimum Rust version: 1.17](https://img.shields.io/badge/Minimum%20Rust%20Version-1.17-brightgreen.svg)
 

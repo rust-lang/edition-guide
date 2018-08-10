@@ -6,7 +6,7 @@
 
 ![Minimum Rust version: 1.28](https://img.shields.io/badge/Minimum%20Rust%20Version-1.28-red.svg) for drafts of the 2018 edition
 
-We've distributed a copy of "The Rust Programming Language," affectionatly
+We've distributed a copy of "The Rust Programming Language," affectionately
 nicknamed "the book", with every version of Rust since Rust 1.0.
 
 However, because it was written before Rust 1.0, it started showing its age.

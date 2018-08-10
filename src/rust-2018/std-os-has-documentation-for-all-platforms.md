@@ -1,4 +1,4 @@
-# std::os has documentation for all platforms
+# `std::os` has documentation for all platforms
 
 ![Minimum Rust version: 1.21](https://img.shields.io/badge/Minimum%20Rust%20Version-1.21-brightgreen.svg)
 

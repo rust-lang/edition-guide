@@ -1,4 +1,4 @@
-# cargo install for easy installation of tools
+# `cargo install` for easy installation of tools
 
 ![Minimum Rust version: 1.5](https://img.shields.io/badge/Minimum%20Rust%20Version-1.5-brightgreen.svg)
 
