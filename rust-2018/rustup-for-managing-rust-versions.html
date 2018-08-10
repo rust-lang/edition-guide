@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rustup for managing Rust versions - The Edition Guide</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="stylesheet" href="../book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+
+    </head>
+    <body class="light">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li class="affix"><a href="../introduction.html">Introduction</a></li><li><a href="../editions/index.html"><strong aria-hidden="true">1.</strong> What are editions?</a></li><li><ol class="section"><li><a href="../editions/transitioning-your-code-to-a-new-edition.html"><strong aria-hidden="true">1.1.</strong> Transitioning your code to a new edition</a></li></ol></li><li><a href="../rust-2015/index.html"><strong aria-hidden="true">2.</strong> Rust 2015</a></li><li><a href="../rust-2018/index.html"><strong aria-hidden="true">3.</strong> Rust 2018</a></li><li><ol class="section"><li><a href="../rust-2018/musl-support-for-fully-static-binaries.html"><strong aria-hidden="true">3.1.</strong> MUSL support for fully static binaries</a></li><li><a href="../rust-2018/cargo-rustc-for-passing-arbitrary-flags-to-rustc.html"><strong aria-hidden="true">3.2.</strong> cargo rustc for passing arbitrary flags to rustc</a></li><li><a href="../rust-2018/msvc-toolchain-support.html"><strong aria-hidden="true">3.3.</strong> MSVC toolchain support</a></li><li><a href="../rust-2018/better-support-for-trait-objects.html"><strong aria-hidden="true">3.4.</strong> Better support for trait objects</a></li><li><a href="../rust-2018/the-rustonomicon.html"><strong aria-hidden="true">3.5.</strong> The Rustonomicon</a></li><li><a href="../rust-2018/cargo-install-for-easy-installation-of-tools.html"><strong aria-hidden="true">3.6.</strong> cargo install for easy installation of tools</a></li><li><a href="../rust-2018/libcore-for-low-level-rust.html"><strong aria-hidden="true">3.7.</strong> libcore for low-level Rust</a></li><li><a href="../rust-2018/crates-io-disallows-wildcard-dependencies.html"><strong aria-hidden="true">3.8.</strong> Crates.io disallows wildcard dependencies</a></li><li><a href="../rust-2018/operator-equals-are-now-implementable.html"><strong aria-hidden="true">3.9.</strong> &quot;Operator-equals&quot; are now implementable</a></li><li><a href="../rust-2018/controlling-panics-with-std-panic.html"><strong aria-hidden="true">3.10.</strong> Controlling panics with std::panic</a></li><li><a href="../rust-2018/an-attribute-for-deprecation.html"><strong aria-hidden="true">3.11.</strong> An attribute for deprecation</a></li><li><a href="../rust-2018/aborting-on-panic.html"><strong aria-hidden="true">3.12.</strong> Aborting on panic</a></li><li><a href="../rust-2018/cdylib-crates-for-c-interoperability.html"><strong aria-hidden="true">3.13.</strong> cdylib crates for C interoperability</a></li><li><a href="../rust-2018/improved-error-messages.html"><strong aria-hidden="true">3.14.</strong> Improved error messages</a></li><li><a href="../rust-2018/cargo-workspaces-for-multi-package-projects.html"><strong aria-hidden="true">3.15.</strong> Cargo workspaces for multi-package projects</a></li><li><a href="../rust-2018/cargo-can-use-a-local-registry-replacement.html"><strong aria-hidden="true">3.16.</strong> Cargo can use a local registry replacement</a></li><li><a href="../rust-2018/the-question-mark-operator-for-easier-error-handling.html"><strong aria-hidden="true">3.17.</strong> The question mark operator for easier error handling</a></li><li><a href="../rust-2018/rustup-for-managing-rust-versions.html" class="active"><strong aria-hidden="true">3.18.</strong> Rustup for managing Rust versions</a></li><li><a href="../rust-2018/webassembly-support.html"><strong aria-hidden="true">3.19.</strong> WebAssembly support</a></li><li><a href="../rust-2018/custom-derive.html"><strong aria-hidden="true">3.20.</strong> Custom Derive</a></li><li><a href="../rust-2018/cargo-check-for-faster-checking.html"><strong aria-hidden="true">3.21.</strong> cargo check for faster checking</a></li><li><a href="../rust-2018/simpler-lifetimes-in-static-and-const.html"><strong aria-hidden="true">3.22.</strong> Simpler lifetimes in static and const</a></li><li><a href="../rust-2018/field-init-shorthand.html"><strong aria-hidden="true">3.23.</strong> Field init shorthand</a></li><li><a href="../rust-2018/new-editions-of-the-book.html"><strong aria-hidden="true">3.24.</strong> New editions of the &quot;the book&quot;</a></li><li><a href="../rust-2018/pub-learns-some-new-tricks.html"><strong aria-hidden="true">3.25.</strong> pub learns some new tricks</a></li><li><a href="../rust-2018/union-for-an-unsafe-form-of-enum.html"><strong aria-hidden="true">3.26.</strong> union for an unsafe form of enum</a></li><li><a href="../rust-2018/loops-can-break-with-a-value.html"><strong aria-hidden="true">3.27.</strong> Loops can break with a value</a></li><li><a href="../rust-2018/associated-constants.html"><strong aria-hidden="true">3.28.</strong> Associated constants</a></li><li><a href="../rust-2018/std-os-has-documentation-for-all-platforms.html"><strong aria-hidden="true">3.29.</strong> std::os has documentation for all platforms</a></li><li><a href="../rust-2018/the-rust-bookshelf.html"><strong aria-hidden="true">3.30.</strong> The Rust Bookshelf</a></li><li><a href="../rust-2018/replacing-dependencies-with-patch.html"><strong aria-hidden="true">3.31.</strong> Replacing dependencies with patch</a></li><li><a href="../rust-2018/documentation-tests-can-now-compile-fail.html"><strong aria-hidden="true">3.32.</strong> Documentation tests can now compile-fail</a></li><li><a href="../rust-2018/multi-file-examples.html"><strong aria-hidden="true">3.33.</strong> Multi-file examples</a></li><li><a href="../rust-2018/incremental-compilation-for-faster-compiles.html"><strong aria-hidden="true">3.34.</strong> Incremental Compilation for faster compiles</a></li><li><a href="../rust-2018/nested-imports-with-use.html"><strong aria-hidden="true">3.35.</strong> Nested imports with use</a></li><li><a href="../rust-2018/rustdoc-uses-commonmark.html"><strong aria-hidden="true">3.36.</strong> Rustdoc uses CommonMark</a></li><li><a href="../rust-2018/choosing-alignment-with-the-repr-attribute.html"><strong aria-hidden="true">3.37.</strong> Choosing alignment with the repr attribute</a></li><li><a href="../rust-2018/cargo-new-defaults-to-a-binary-project.html"><strong aria-hidden="true">3.38.</strong> cargo new defaults to a binary project</a></li><li><a href="../rust-2018/impl-trait-for-returning-complex-types-with-ease.html"><strong aria-hidden="true">3.39.</strong> impl Trait for returning complex types with ease</a></li><li><a href="../rust-2018/default-match-bindings.html"><strong aria-hidden="true">3.40.</strong> Default match bindings</a></li><li><a href="../rust-2018/inclusive-ranges.html"><strong aria-hidden="true">3.41.</strong> ..= for inclusive ranges</a></li><li><a href="../rust-2018/slice-patterns.html"><strong aria-hidden="true">3.42.</strong> Slice patterns</a></li><li><a href="../rust-2018/128-bit-integers.html"><strong aria-hidden="true">3.43.</strong> 128 bit integers</a></li><li><a href="../rust-2018/simd-for-faster-computing.html"><strong aria-hidden="true">3.44.</strong> SIMD for faster computing</a></li><li><a href="../rust-2018/dyn-trait-for-trait-objects.html"><strong aria-hidden="true">3.45.</strong> dyn Trait for trait objects</a></li><li><a href="../rust-2018/global-allocators.html"><strong aria-hidden="true">3.46.</strong> Global allocators</a></li><li><a href="../rust-2018/raw-identifiers.html"><strong aria-hidden="true">3.47.</strong> Raw identifiers</a></li><li><a href="../rust-2018/the-anonymous-lifetime.html"><strong aria-hidden="true">3.48.</strong> '_, the anonymous lifetime</a></li><li><a href="../rust-2018/lifetime-elision-in-impl.html"><strong aria-hidden="true">3.49.</strong> Lifetime elision in impl</a></li><li><a href="../rust-2018/inference-in-structs.html"><strong aria-hidden="true">3.50.</strong> T: 'a inference in structs</a></li><li><a href="../rust-2018/macro-changes.html"><strong aria-hidden="true">3.51.</strong> Macro changes</a></li><li><a href="../rust-2018/path-clarity.html"><strong aria-hidden="true">3.52.</strong> Path clarity</a></li><li><a href="../rust-2018/async-await-for-easier-concurrency.html"><strong aria-hidden="true">3.53.</strong> async/await for easier concurrency</a></li></ol></li><li><a href="../unstable-feature-status.html"><strong aria-hidden="true">4.</strong> Unstable feature status</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">The Edition Guide</h1> 
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#rustup-for-managing-rust-versions" id="rustup-for-managing-rust-versions"><h1>Rustup for managing Rust versions</h1></a>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-various-brightgreen.svg" alt="Minimum Rust version: various" /> (this tool has its own versioning scheme and works with all Rust versions)</p>
+<p>The <a href="https://rustup.rs/">Rustup</a> tool has become <em>the</em> recommended way to
+install Rust, and is advertised on our website. Its powers go further than
+that though, allowing you to manage various versions, components, and
+platforms.</p>
+<a class="header" href="#for-installing-rust" id="for-installing-rust"><h2>For installing Rust</h2></a>
+<p>To install Rust through Rustup, you can go to
+<a href="https://www.rust-lang.org/install.html">https://www.rust-lang.org/install.html</a>, which will let you know how to do
+so on your platform. This will install both <code>rustup</code> itself and the <code>stable</code>
+version of <code>rustc</code> and <code>cargo</code>.</p>
+<p>To install a specific Rust version, you can use <code>rustup install</code>:</p>
+<pre><code class="language-console">$ rustup install 1.30.0
+</code></pre>
+<p>This works for a specific nightly, as well:</p>
+<pre><code class="language-console">$ rustup install nightly-2018-08-01
+</code></pre>
+<p>As well as any of our release channels:</p>
+<pre><code class="language-console">$ rustup install stable
+$ rustup install beta
+$ rustup install nightly
+</code></pre>
+<a class="header" href="#for-updating-your-installation" id="for-updating-your-installation"><h2>For updating your installation</h2></a>
+<p>To update all of the various channels you may have installed:</p>
+<pre><code class="language-console">$ rustup update
+</code></pre>
+<p>This will look at everything you've installed, and if there are new releases,
+will update anything that has one.</p>
+<a class="header" href="#managing-versions" id="managing-versions"><h2>Managing versions</h2></a>
+<p>To set the default toolchain to something other than <code>stable</code>:</p>
+<pre><code class="language-console">$ rustup toolchain default nightly
+</code></pre>
+<p>To use a toolchain other than the default, use <code>rustup run</code>:</p>
+<pre><code class="language-console">$ rustup run nightly cargo build
+</code></pre>
+<p>There's also an alias for this that's a little shorter:</p>
+<pre><code class="language-console">$ cargo +nightly build
+</code></pre>
+<p>If you'd like to have a different default per-directory, that's easy too!
+If you run this inside of a project:</p>
+<pre><code class="language-console">$ rustup override set nightly
+</code></pre>
+<p>Then when you're in that directory, any invocations of <code>rustc</code> or <code>cargo</code>
+will use that toolchain. To share this with others, you can create a
+<code>rust-toolchain</code> file with the contents of a toolchain, and check it into
+source control. Now, when someone clones your project, they'll get the
+right version without needing to <code>override set</code> themselves.</p>
+<a class="header" href="#installing-other-targets" id="installing-other-targets"><h2>Installing other targets</h2></a>
+<p>Rust supports cross-compiling to other targets, and Rustup can help you
+manage them. For example, to use MUSL:</p>
+<pre><code class="language-console">$ rustup target add x86_64-unknown-linux-musl
+</code></pre>
+<p>And then you can</p>
+<pre><code class="language-console">$ cargo build --target=x86_64-unknown-linux-musl
+</code></pre>
+<p>To see the full list of targets you can install:</p>
+<pre><code class="language-console">$ rustup target list
+</code></pre>
+<a class="header" href="#installing-components" id="installing-components"><h2>Installing components</h2></a>
+<p>Components are used to install certain kinds of tools. While <code>cargo-install</code>
+has you covered for most tools, some tools need deep integration into the
+compiler. Rustup knows exactly what version of the compiler you're using, and
+so it's got just the information that these tools need.</p>
+<p>Components are per-toolchain, so if you want them to be available to more
+than one toolchain, you'll need to install them multiple times. In the
+following examples, add a <code>--toolchain</code> flag, set to the toolchain you
+want to install for, <code>nightly</code> for example. Without this flag, it will
+install the component for the default toolchain.</p>
+<p>To see the full list of components you can install:</p>
+<pre><code class="language-console">$ rustup component list
+</code></pre>
+<p>Next, let's talk about some popular components and when you might want to
+install them.</p>
+<a class="header" href="#rust-docs-for-local-documentation" id="rust-docs-for-local-documentation"><h3><code>rust-docs</code>, for local documentation</h3></a>
+<p>This first component is installed by default when you install a toolchain. It
+contains a copy of Rust's documentation, so that you can read it offline.</p>
+<p>This component cannot be removed for now; if that's of interest, please
+comment on <a href="https://github.com/rust-lang-nursery/rustup.rs/issues/998">this
+issue</a>.</p>
+<a class="header" href="#rust-src-for-a-copy-of-rusts-source-code" id="rust-src-for-a-copy-of-rusts-source-code"><h3><code>rust-src</code> for a copy of Rust's source code</h3></a>
+<p>The <code>rust-src</code> component can give you a local copy of Rust's source code. Why
+might you need this? Well, autocompletion tools like Racer use this
+information to know more about the functions you're trying to call.</p>
+<pre><code class="language-console">$ rustup component add rust-src
+</code></pre>
+<a class="header" href="#the-preview-components" id="the-preview-components"><h3>The &quot;preview&quot; components</h3></a>
+<p>There are several components in a &quot;preview&quot; stage. These components currently
+have <code>-preview</code> in their name, and this indicates that they're not quite 100%
+ready for general consumption yet. Please try them out and give us feedback,
+but know that they do not follow Rust's stability guarantees, and are still
+actively changing, possibly in backwards-incompatible ways.</p>
+<a class="header" href="#rustfmt-preview-for-automatic-code-formatting" id="rustfmt-preview-for-automatic-code-formatting"><h4><code>rustfmt-preview</code> for automatic code formatting</h4></a>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.24-brightgreen.svg" alt="Minimum Rust version: 1.24" /></p>
+<p>If you'd like to have your code automatically formatted, you can
+install this component:</p>
+<pre><code class="language-console">$ rustup component add rustfmt-preview
+</code></pre>
+<p>This will install two tools, <code>rustfmt</code> and <code>cargo-fmt</code>, that will reformat your
+code for you! For example:</p>
+<pre><code class="language-console">$ cargo fmt
+</code></pre>
+<p>will reformat your entire Cargo project.</p>
+<a class="header" href="#rls-preview-for-ide-integration" id="rls-preview-for-ide-integration"><h4><code>rls-preview</code> for IDE integration</h4></a>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.21-brightgreen.svg" alt="Minimum Rust version: 1.21" /></p>
+<p>Many IDE features are built off of the <a href="http://langserver.org/"><code>langserver</code>
+protocol</a>. To gain support for Rust with these IDEs,
+you'll need to install the Rust language sever, aka the &quot;RLS&quot;:</p>
+<pre><code class="language-console">$ rustup component add rls-preview
+</code></pre>
+<p>Your IDE should take it from there.</p>
+<a class="header" href="#clippy-preview-for-more-lints" id="clippy-preview-for-more-lints"><h4><code>clippy-preview</code> for more lints</h4></a>
+<p>For even more lints to help you write Rust code, you can install <code>clippy</code>:</p>
+<pre><code class="language-console">$ rustup component add clippy-preview
+</code></pre>
+<p>This will install <code>cargo-clippy</code> for you:</p>
+<pre><code class="language-console">$ cargo clippy
+</code></pre>
+<p>For more, check out <a href="https://github.com/rust-lang-nursery/rust-clippy">clippy's
+documentation</a>.</p>
+<a class="header" href="#llvm-tools-preview-for-using-extra-llvm-tools" id="llvm-tools-preview-for-using-extra-llvm-tools"><h4><code>llvm-tools-preview</code> for using extra LLVM tools</h4></a>
+<p>If you'd like to use the <code>lld</code> linker, or other tools like <code>llvm-objdump</code> or
+<code>llvm-objcopy</code>, you can install this component:</p>
+<pre><code class="language-console">$ rustup component add llvm-tools-preview
+</code></pre>
+<p>This is the newest component, and so doesn't have good documentation at the
+moment.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../rust-2018/the-question-mark-operator-for-easier-error-handling.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../rust-2018/webassembly-support.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../rust-2018/the-question-mark-operator-for-easier-error-handling.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../rust-2018/webassembly-support.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../searchindex.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var path_to_root = "../";
+        </script>
+        
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Unstable feature status - The Edition Guide</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+
+    </head>
+    <body class="light">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="editions/index.html"><strong aria-hidden="true">1.</strong> What are editions?</a></li><li><ol class="section"><li><a href="editions/transitioning-your-code-to-a-new-edition.html"><strong aria-hidden="true">1.1.</strong> Transitioning your code to a new edition</a></li></ol></li><li><a href="rust-2015/index.html"><strong aria-hidden="true">2.</strong> Rust 2015</a></li><li><a href="rust-2018/index.html"><strong aria-hidden="true">3.</strong> Rust 2018</a></li><li><ol class="section"><li><a href="rust-2018/musl-support-for-fully-static-binaries.html"><strong aria-hidden="true">3.1.</strong> MUSL support for fully static binaries</a></li><li><a href="rust-2018/cargo-rustc-for-passing-arbitrary-flags-to-rustc.html"><strong aria-hidden="true">3.2.</strong> cargo rustc for passing arbitrary flags to rustc</a></li><li><a href="rust-2018/msvc-toolchain-support.html"><strong aria-hidden="true">3.3.</strong> MSVC toolchain support</a></li><li><a href="rust-2018/better-support-for-trait-objects.html"><strong aria-hidden="true">3.4.</strong> Better support for trait objects</a></li><li><a href="rust-2018/the-rustonomicon.html"><strong aria-hidden="true">3.5.</strong> The Rustonomicon</a></li><li><a href="rust-2018/cargo-install-for-easy-installation-of-tools.html"><strong aria-hidden="true">3.6.</strong> cargo install for easy installation of tools</a></li><li><a href="rust-2018/libcore-for-low-level-rust.html"><strong aria-hidden="true">3.7.</strong> libcore for low-level Rust</a></li><li><a href="rust-2018/crates-io-disallows-wildcard-dependencies.html"><strong aria-hidden="true">3.8.</strong> Crates.io disallows wildcard dependencies</a></li><li><a href="rust-2018/operator-equals-are-now-implementable.html"><strong aria-hidden="true">3.9.</strong> &quot;Operator-equals&quot; are now implementable</a></li><li><a href="rust-2018/controlling-panics-with-std-panic.html"><strong aria-hidden="true">3.10.</strong> Controlling panics with std::panic</a></li><li><a href="rust-2018/an-attribute-for-deprecation.html"><strong aria-hidden="true">3.11.</strong> An attribute for deprecation</a></li><li><a href="rust-2018/aborting-on-panic.html"><strong aria-hidden="true">3.12.</strong> Aborting on panic</a></li><li><a href="rust-2018/cdylib-crates-for-c-interoperability.html"><strong aria-hidden="true">3.13.</strong> cdylib crates for C interoperability</a></li><li><a href="rust-2018/improved-error-messages.html"><strong aria-hidden="true">3.14.</strong> Improved error messages</a></li><li><a href="rust-2018/cargo-workspaces-for-multi-package-projects.html"><strong aria-hidden="true">3.15.</strong> Cargo workspaces for multi-package projects</a></li><li><a href="rust-2018/cargo-can-use-a-local-registry-replacement.html"><strong aria-hidden="true">3.16.</strong> Cargo can use a local registry replacement</a></li><li><a href="rust-2018/the-question-mark-operator-for-easier-error-handling.html"><strong aria-hidden="true">3.17.</strong> The question mark operator for easier error handling</a></li><li><a href="rust-2018/rustup-for-managing-rust-versions.html"><strong aria-hidden="true">3.18.</strong> Rustup for managing Rust versions</a></li><li><a href="rust-2018/webassembly-support.html"><strong aria-hidden="true">3.19.</strong> WebAssembly support</a></li><li><a href="rust-2018/custom-derive.html"><strong aria-hidden="true">3.20.</strong> Custom Derive</a></li><li><a href="rust-2018/cargo-check-for-faster-checking.html"><strong aria-hidden="true">3.21.</strong> cargo check for faster checking</a></li><li><a href="rust-2018/simpler-lifetimes-in-static-and-const.html"><strong aria-hidden="true">3.22.</strong> Simpler lifetimes in static and const</a></li><li><a href="rust-2018/field-init-shorthand.html"><strong aria-hidden="true">3.23.</strong> Field init shorthand</a></li><li><a href="rust-2018/new-editions-of-the-book.html"><strong aria-hidden="true">3.24.</strong> New editions of the &quot;the book&quot;</a></li><li><a href="rust-2018/pub-learns-some-new-tricks.html"><strong aria-hidden="true">3.25.</strong> pub learns some new tricks</a></li><li><a href="rust-2018/union-for-an-unsafe-form-of-enum.html"><strong aria-hidden="true">3.26.</strong> union for an unsafe form of enum</a></li><li><a href="rust-2018/loops-can-break-with-a-value.html"><strong aria-hidden="true">3.27.</strong> Loops can break with a value</a></li><li><a href="rust-2018/associated-constants.html"><strong aria-hidden="true">3.28.</strong> Associated constants</a></li><li><a href="rust-2018/std-os-has-documentation-for-all-platforms.html"><strong aria-hidden="true">3.29.</strong> std::os has documentation for all platforms</a></li><li><a href="rust-2018/the-rust-bookshelf.html"><strong aria-hidden="true">3.30.</strong> The Rust Bookshelf</a></li><li><a href="rust-2018/replacing-dependencies-with-patch.html"><strong aria-hidden="true">3.31.</strong> Replacing dependencies with patch</a></li><li><a href="rust-2018/documentation-tests-can-now-compile-fail.html"><strong aria-hidden="true">3.32.</strong> Documentation tests can now compile-fail</a></li><li><a href="rust-2018/multi-file-examples.html"><strong aria-hidden="true">3.33.</strong> Multi-file examples</a></li><li><a href="rust-2018/incremental-compilation-for-faster-compiles.html"><strong aria-hidden="true">3.34.</strong> Incremental Compilation for faster compiles</a></li><li><a href="rust-2018/nested-imports-with-use.html"><strong aria-hidden="true">3.35.</strong> Nested imports with use</a></li><li><a href="rust-2018/rustdoc-uses-commonmark.html"><strong aria-hidden="true">3.36.</strong> Rustdoc uses CommonMark</a></li><li><a href="rust-2018/choosing-alignment-with-the-repr-attribute.html"><strong aria-hidden="true">3.37.</strong> Choosing alignment with the repr attribute</a></li><li><a href="rust-2018/cargo-new-defaults-to-a-binary-project.html"><strong aria-hidden="true">3.38.</strong> cargo new defaults to a binary project</a></li><li><a href="rust-2018/impl-trait-for-returning-complex-types-with-ease.html"><strong aria-hidden="true">3.39.</strong> impl Trait for returning complex types with ease</a></li><li><a href="rust-2018/default-match-bindings.html"><strong aria-hidden="true">3.40.</strong> Default match bindings</a></li><li><a href="rust-2018/inclusive-ranges.html"><strong aria-hidden="true">3.41.</strong> ..= for inclusive ranges</a></li><li><a href="rust-2018/slice-patterns.html"><strong aria-hidden="true">3.42.</strong> Slice patterns</a></li><li><a href="rust-2018/128-bit-integers.html"><strong aria-hidden="true">3.43.</strong> 128 bit integers</a></li><li><a href="rust-2018/simd-for-faster-computing.html"><strong aria-hidden="true">3.44.</strong> SIMD for faster computing</a></li><li><a href="rust-2018/dyn-trait-for-trait-objects.html"><strong aria-hidden="true">3.45.</strong> dyn Trait for trait objects</a></li><li><a href="rust-2018/global-allocators.html"><strong aria-hidden="true">3.46.</strong> Global allocators</a></li><li><a href="rust-2018/raw-identifiers.html"><strong aria-hidden="true">3.47.</strong> Raw identifiers</a></li><li><a href="rust-2018/the-anonymous-lifetime.html"><strong aria-hidden="true">3.48.</strong> '_, the anonymous lifetime</a></li><li><a href="rust-2018/lifetime-elision-in-impl.html"><strong aria-hidden="true">3.49.</strong> Lifetime elision in impl</a></li><li><a href="rust-2018/inference-in-structs.html"><strong aria-hidden="true">3.50.</strong> T: 'a inference in structs</a></li><li><a href="rust-2018/macro-changes.html"><strong aria-hidden="true">3.51.</strong> Macro changes</a></li><li><a href="rust-2018/path-clarity.html"><strong aria-hidden="true">3.52.</strong> Path clarity</a></li><li><a href="rust-2018/async-await-for-easier-concurrency.html"><strong aria-hidden="true">3.53.</strong> async/await for easier concurrency</a></li></ol></li><li><a href="unstable-feature-status.html" class="active"><strong aria-hidden="true">4.</strong> Unstable feature status</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">The Edition Guide</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#unstable-feature-status" id="unstable-feature-status"><h1>Unstable feature status</h1></a>
+<a class="header" href="#language" id="language"><h2>Language</h2></a>
+<table><thead><tr><th> <strong>Feature</strong> </th><th> <strong>Status</strong> </th><th> <strong>Minimum Edition</strong> </th></tr></thead><tbody>
+<tr><td> <a href="transitioning/traits/impl-trait.html"><code>impl Trait</code></a> </td><td> <a href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html">Shipped, 1.26</a> </td><td> 2015 </td></tr>
+<tr><td> <a href="transitioning/slice-patterns.html">Basic slice patterns</a> </td><td> <a href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html">Shipped, 1.26</a> </td><td> 2015 </td></tr>
+<tr><td> <a href="transitioning/ownership-and-lifetimes/default-match-bindings.html">Default match bindings</a> </td><td> <a href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html">Shipped, 1.26</a> </td><td> 2015 </td></tr>
+<tr><td> <a href="transitioning/ownership-and-lifetimes/anonymous-lifetime.html">Anonymous lifetimes</a> </td><td> <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">Shipped, 1.26</a> </td><td> 2015 </td></tr>
+<tr><td> <a href="transitioning/traits/dyn-trait.html"><code>dyn Trait</code></a> </td><td> <a href="https://blog.rust-lang.org/2018/06/21/Rust-1.27.html">Shipped, 1.27</a> </td><td> 2015 </td></tr>
+<tr><td> SIMD support </td><td> <a href="https://blog.rust-lang.org/2018/06/21/Rust-1.27.html">Shipped, 1.27</a> </td><td> 2015 </td></tr>
+<tr><td> <a href="transitioning/errors/question-mark.html"><code>?</code> in <code>main</code>/tests</a> </td><td> <a href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html">Shipping, 1.26</a> and 1.28 </td><td> 2015 </td></tr>
+<tr><td> <a href="transitioning/ownership-and-lifetimes/in-band-lifetimes.html">In-band lifetimes</a> </td><td> Unstable; <a href="https://github.com/rust-lang/rust/issues/44524">tracking issue</a> </td><td> 2015 </td></tr>
+<tr><td> <a href="transitioning/ownership-and-lifetimes/lifetime-elision-in-impl.html">Lifetime elision in <code>impl</code>s</a> </td><td> Unstable; <a href="https://github.com/rust-lang/rust/issues/44524">tracking issue</a> </td><td> 2015 </td></tr>
+<tr><td> Non-lexical lifetimes </td><td> <a href="http://smallcultfollowing.com/babysteps/blog/2018/06/15/mir-based-borrow-check-nll-status-update/">Implemented but not ready for preview</a> </td><td> 2015 </td></tr>
+<tr><td> <a href="transitioning/ownership-and-lifetimes/struct-inference.html"><code>T: 'a</code> inference in <code>struct</code>s</a> </td><td> Unstable; <a href="https://github.com/rust-lang/rust/issues/44493">tracking issue</a> </td><td> 2015 </td></tr>
+<tr><td> <a href="transitioning/raw-identifiers.html">Raw identifiers</a> </td><td> Unstable; <a href="https://github.com/rust-lang/rust/issues/48589">tracking issue</a> </td><td> ? </td></tr>
+<tr><td> <a href="transitioning/modules/macros.html">Import macros via <code>use</code></a> </td><td> Unstable; <a href="https://github.com/rust-lang/rust/issues/35896">tracking issue</a> </td><td> ? </td></tr>
+<tr><td> <a href="transitioning/modules/path-clarity.html">Module system path changes</a> </td><td> Unstable; <a href="https://github.com/rust-lang/rust/issues/44660">tracking issue</a> </td><td> 2018 </td></tr>
+</tbody></table>
+<p>While some of these features are already available in Rust 2015, they are tracked here
+because they are being promoted as part of the Rust 2018 edition.  Accordingly, they
+will be discussed in subsequent sections of this guide book. The features marked as
+&quot;Shipped&quot; are all available today in stable Rust, so you can start using them right now!</p>
+<a class="header" href="#standard-library" id="standard-library"><h2>Standard library</h2></a>
+<table><thead><tr><th> <strong>Feature</strong> </th><th> <strong>Status</strong> </th></tr></thead><tbody>
+<tr><td> <a href="https://github.com/rust-lang/rust/issues/49668">Custom global allocators</a> </td><td> Will ship in 1.28 </td></tr>
+</tbody></table>
+<a class="header" href="#tooling" id="tooling"><h2>Tooling</h2></a>
+<table><thead><tr><th> <strong>Tool</strong> </th><th> <strong>Status</strong> </th></tr></thead><tbody>
+<tr><td> <a href="https://github.com/rust-lang-nursery/rls">RLS</a> 1.0 </td><td> Feature-complete; see <a href="https://github.com/rust-lang-nursery/rls/milestone/7">1.0 milestone</a> </td></tr>
+<tr><td> <a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a> 1.0 </td><td> Finalizing spec; <a href="https://github.com/rust-lang-nursery/rustfmt/milestone/2">1.0 milestone</a>, <a href="https://github.com/rust-lang/rfcs/pull/2436">style guide RFC</a>, <a href="https://github.com/rust-lang/rfcs/pull/2437">stability RFC</a> </td></tr>
+<tr><td> <a href="https://github.com/rust-lang-nursery/rust-clippy">Clippy</a> 1.0 </td><td> <a href="https://github.com/rust-lang/rfcs/pull/2476">RFC</a> </td></tr>
+</tbody></table>
+<a class="header" href="#documentation" id="documentation"><h2>Documentation</h2></a>
+<table><thead><tr><th> <strong>Tool</strong> </th><th> <strong>Status</strong> </th></tr></thead><tbody>
+<tr><td> <a href="https://rust-lang-nursery.github.io/edition-guide/">Edition Guide</a> </td><td> Initial draft complete </td></tr>
+<tr><td> <a href="https://github.com/rust-lang/book/">TRPL</a> </td><td> Updated as features stabilize </td></tr>
+</tbody></table>
+<a class="header" href="#web-site" id="web-site"><h2>Web site</h2></a>
+<p>The visual design is being finalized, and early rounds of content brainstorming are complete.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="rust-2018/async-await-for-easier-concurrency.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="rust-2018/async-await-for-easier-concurrency.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="searchindex.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var path_to_root = "";
+        </script>
+        
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
