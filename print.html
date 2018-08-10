@@ -1519,7 +1519,24 @@ them to build the example. It looks like this:</p>
         └── helper.rs
         └── main.rs // a more complex example that also uses `helper` as a submodule
 </code></pre>
-<a class="header" href="#incremental-compilation-for-faster-compiles" id="incremental-compilation-for-faster-compiles"><h1>Incremental Compilation for faster compiles</h1></a>
+<a class="header" href="#incremental-compilation" id="incremental-compilation"><h1>Incremental Compilation</h1></a>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.24-brightgreen.svg" alt="Minimum Rust version: 1.24" /></p>
+<p>Back in September of 2016, we <a href="https://blog.rust-lang.org/2016/09/08/incremental.html">blogged about Incremental
+Compilation</a>. While
+that post goes into the details, the idea is basically this: when you’re
+working on a project, you often compile it, then change something small, then
+compile again. Historically, the compiler has compiled your entire project,
+no matter how little you’ve changed the code. The idea with incremental
+compilation is that you only need to compile the code you’ve actually
+changed, which means that that second build is faster.</p>
+<p>This is now turned on by default. This means that your builds should be
+faster! Don’t forget about cargo check when trying to get the lowest possible
+build times.</p>
+<p>This is still not the end story for compiler performance generally, nor
+incremental compilation specifically. We have a lot more work planned in the
+future.</p>
+<p>One small note about this change: it makes builds faster, but makes the final
+binary a bit slower. For this reason, it's not turned on in release builds.</p>
 <a class="header" href="#nested-imports-with-use" id="nested-imports-with-use"><h1>Nested imports with <code>use</code></h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.25-brightgreen.svg" alt="Minimum Rust version: 1.25" /></p>
 <p>A new way to write <code>use</code> statements has been added to Rust: nested import
