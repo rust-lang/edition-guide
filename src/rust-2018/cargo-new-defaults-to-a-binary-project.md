@@ -15,4 +15,4 @@ each library is depended upon by many binaries. Furthermore, when getting
 started, what you often want is a program you can run and play around with.
 It’s not just new Rustaceans though; even very long-time community members
 have said that they find this default surprising. As such, we’ve changed it,
-and it now defualts to `--bin`.
+and it now defaults to `--bin`.
