@@ -47,4 +47,4 @@ advantage of such features.
 At the time of writing, there are two editions: 2015 and 2018. 2015 is today's
 Rust; Rust 2018 will ship later this year. To transition to the 2018 edition
 from the 2015 edition, you'll want to get started with the [transition
-section](editions/transitioning-your-code-to-a-new-edition.html).
+section](transitioning-your-code-to-a-new-edition.html).
