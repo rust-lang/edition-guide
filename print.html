@@ -273,8 +273,15 @@ we'll be using <code>cargo fix</code> to drive this process:</p>
 <p>Additionally like before, this is intended to be an <em>easy</em> step. Here <code>cargo fix</code> will automatically fix any lints it can, so you'll only get warnings for
 things that <code>cargo fix</code> couldn't fix. If you find it difficult to work through
 the warnings, that's a bug!</p>
-<p>Once you're warning-free with this command you're good to go. Enjoy the new
-edition!</p>
+<p>Once you're warning-free with this command you're good to go.</p>
+<blockquote>
+<p>The <code>--edition-idioms</code> flag applies only to the &quot;current crate&quot; if you want
+to run it against a workspace is necessary to use a workaround with
+<code>RUSTFLAGS</code> in order to execute it in all the workspace members.</p>
+<pre><code class="language-shell">$ RUSTFLAGS='-Wrust_2018_idioms' cargo fix --all
+</code></pre>
+</blockquote>
+<p>Enjoy the new edition!</p>
 <a class="header" href="#rust-2015" id="rust-2015"><h1>Rust 2015</h1></a>
 <p>Rust 2015 has a theme of &quot;stability&quot;. It commenced with the release of 1.0,
 and is the &quot;default edition&quot;. The edition system was conceived in late 2017,
