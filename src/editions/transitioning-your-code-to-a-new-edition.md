@@ -110,5 +110,14 @@ fix` will automatically fix any lints it can, so you'll only get warnings for
 things that `cargo fix` couldn't fix. If you find it difficult to work through
 the warnings, that's a bug!
 
-Once you're warning-free with this command you're good to go. Enjoy the new
-edition!
+Once you're warning-free with this command you're good to go.
+
+> The `--edition-idioms` flag applies only to the "current crate" if you want
+> to run it against a workspace is necessary to use a workaround with
+> `RUSTFLAGS` in order to execute it in all the workspace members.
+>
+> ```shell
+> $ RUSTFLAGS='-Wrust_2018_idioms' cargo fix --all
+> ```
+
+Enjoy the new edition!
