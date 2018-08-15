@@ -69,6 +69,7 @@
       - [New editions of the "the book"](rust-2018/documentation/new-editions-of-the-book.md)
       - [The Rust Bookshelf](rust-2018/documentation/the-rust-bookshelf.md)
       - [The Rustonomicon](rust-2018/documentation/the-rustonomicon.md)
+      - [Full documentation for `std::os`](rust-2018/documentation/std-os-has-documentation-for-all-platforms.md)
     - [`rustdoc`](rust-2018/rustdoc/index.md)
       - [Documentation tests can now `compile-fail`](rust-2018/rustdoc/documentation-tests-can-now-compile-fail.md)
       - [Rustdoc uses CommonMark](rust-2018/rustdoc/rustdoc-uses-commonmark.md)
