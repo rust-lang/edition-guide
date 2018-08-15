@@ -19,6 +19,10 @@ sections call out the differences between the two. We encourage testing of the
 new "uniform paths" variant introduced in edition preview 2. The release of
 Rust 2018 will stabilize one of these two variants and drop the other.
 
+To test Rust 2018 with the new "uniform paths" variant, put
+`#![feature(rust_2018_preview,uniform_paths)]` at the top of your `lib.rs` or
+`main.rs`.
+
 Here's a brief summary:
 
 * `extern crate` is no longer needed

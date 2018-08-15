@@ -43,6 +43,18 @@ require a Cargo.toml change to enable (described in the sections below). Also
 note that during the time the preview is available, we may continue to add/enable
 new features with this flag!
 
+For Rust 2018 edition preview 2, we're also testing a [new module path
+variant](rust-2018/path-clarity.html), "uniform paths", which we'd like to get
+further testing and feedback on. Please try it out, by adding the following to
+your `lib.rs` or `main.rs`:
+
+```rust
+#![feature(rust_2018_preview,uniform_paths)]
+```
+
+The release of Rust 2018 will stabilize one of the two module path variants and
+drop the other.
+
 [status]: 2018/status.html
 
 ## Fix edition compatibility warnings
