@@ -55,7 +55,7 @@ your `lib.rs` or `main.rs`:
 The release of Rust 2018 will stabilize one of the two module path variants and
 drop the other.
 
-[status]: 2018/status.html
+[status]: ../unstable-feature-status.html
 
 ## Fix edition compatibility warnings
 
