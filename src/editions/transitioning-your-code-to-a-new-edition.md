@@ -49,7 +49,7 @@ which we'd like to get further testing and feedback on.
 Please try it out, by adding the following to your `lib.rs` or `main.rs`:
 
 ```rust
-#![feature(rust_2018_preview,uniform_paths)]
+#![feature(rust_2018_preview, uniform_paths)]
 ```
 
 The release of Rust 2018 will stabilize one of the two module path variants and
