@@ -1,4 +1,4 @@
-# The question mark operator for easier error handling
+# The `?` operator for easier error handling
 
 ![Minimum Rust version: 1.13](https://img.shields.io/badge/Minimum%20Rust%20Version-1.13-brightgreen.svg) for `Result<T, E>`
 

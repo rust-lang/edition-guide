@@ -50,7 +50,7 @@ fn foo() {
 ```
 
 Here, we use cfg flags to choose the correct version based on the machine
-we’re targetting; on x86 we use that version, and on x86_64 we use its
+we’re targeting; on x86 we use that version, and on x86_64 we use its
 version. We can also choose at runtime:
 
 ```rust,ignore
