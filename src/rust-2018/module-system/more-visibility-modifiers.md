@@ -1,4 +1,4 @@
-# `pub` learns some new tricks
+# More visibility modifiers
 
 ![Minimum Rust version: 1.18](https://img.shields.io/badge/Minimum%20Rust%20Version-1.18-brightgreen.svg)
 

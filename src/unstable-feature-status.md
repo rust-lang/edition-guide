@@ -5,23 +5,23 @@
 [Shipped, 1.26]: https://blog.rust-lang.org/2018/05/10/Rust-1.26.html
 [Shipped, 1.27]: https://blog.rust-lang.org/2018/06/21/Rust-1.27.html
 
-[`impl Trait`]: rust-2018/impl-trait-for-returning-complex-types-with-ease.html
+[`impl Trait`]: rust-2018/trait-system/impl-trait-for-returning-complex-types-with-ease.html
 [Basic slice patterns]: rust-2018/slice-patterns.html
-[Default match bindings]: rust-2018/default-match-bindings.html
-[Anonymous lifetimes]: rust-2018/the-anonymous-lifetime.html
+[Default match bindings]: rust-2018/ownership-and-lifetimes/default-match-bindings.html
+[Anonymous lifetimes]: rust-2018/ownership-and-lifetimes/the-anonymous-lifetime.html
 [relnotes_1.26]: https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10
-[`dyn Trait`]: rust-2018/dyn-trait-for-trait-objects.html
-[`?` in `main`/tests]: rust-2018/question-mark-in-main-and-tests.html
-[Module system path changes]: rust-2018/path-clarity.html
+[`dyn Trait`]: rust-2018/trait-system/dyn-trait-for-trait-objects.html
+[`?` in `main`/tests]: rust-2018/error-handling-and-panics/question-mark-in-main-and-tests.html
+[Module system path changes]: rust-2018/module-system/path-clarity.html
 [issue#44660]: https://github.com/rust-lang/rust/issues/44660
-[Import macros via `use`]: rust-2018/macro-changes.html
+[Import macros via `use`]: rust-2018/macros/macro-changes.html
 [issue#35896]: https://github.com/rust-lang/rust/issues/35896
 [issue#44524]: https://github.com/rust-lang/rust/issues/44524
-[Lifetime elision in `impl`s]: rust-2018/lifetime-elision-in-impl.html
-[Raw identifiers]: rust-2018/raw-identifiers.html
+[Lifetime elision in `impl`s]: rust-2018/ownership-and-lifetimes/lifetime-elision-in-impl.html
+[Raw identifiers]: rust-2018/module-system/raw-identifiers.html
 [issue#48589]: https://github.com/rust-lang/rust/issues/48589
 [nll_status]: http://smallcultfollowing.com/babysteps/blog/2018/06/15/mir-based-borrow-check-nll-status-update/
-[`T: 'a` inference in `struct`s]: rust-2018/inference-in-structs.html
+[`T: 'a` inference in `struct`s]: rust-2018/ownership-and-lifetimes/inference-in-structs.html
 [issue#44493]: https://github.com/rust-lang/rust/issues/44493
 
 | **Feature** | **Status** | **Minimum Edition** |

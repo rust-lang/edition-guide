@@ -30,7 +30,7 @@ the second edition is frozen.
 The names are a bit confusing though, because the "second edition" of the
 book is the first printed edition of the book. As such, we decided that newer
 editions of the book will correspond with newer editions of Rust itself, and
-so starting with 1.28, we've been shiping drafts of the next version, [the
+so starting with 1.28, we've been shipping drafts of the next version, [the
 2018 Edition](https://doc.rust-lang.org/book/2018-edition/index.html). It's
 still pretty close to the second edition, but contains information about
 newer features since the book's content was frozen. We'll be continuing to
