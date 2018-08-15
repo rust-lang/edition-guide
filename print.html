@@ -233,6 +233,17 @@ page. Note that some features require a miniumum of Rust 2018 and these features
 require a Cargo.toml change to enable (described in the sections below). Also
 note that during the time the preview is available, we may continue to add/enable
 new features with this flag!</p>
+<p>For Rust 2018 edition preview 2, we're also testing a <a href="rust-2018/path-clarity.html">new module path
+variant</a>, &quot;uniform paths&quot;, which we'd like to get
+further testing and feedback on. Please try it out, by adding the following to
+your <code>lib.rs</code> or <code>main.rs</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#![feature(rust_2018_preview,uniform_paths)]
+#fn main() {
+#}</code></pre></pre>
+<p>The release of Rust 2018 will stabilize one of the two module path variants and
+drop the other.</p>
 <a class="header" href="#fix-edition-compatibility-warnings" id="fix-edition-compatibility-warnings"><h2>Fix edition compatibility warnings</h2></a>
 <p>Next up is to enable compiler warnings about code which is incompatible with the
 new 2018 edition. This is where the handy <code>cargo fix</code> tool comes into the
@@ -2425,6 +2436,9 @@ paths&quot; variant. Most of these changes apply to both variants; the two varia
 sections call out the differences between the two. We encourage testing of the
 new &quot;uniform paths&quot; variant introduced in edition preview 2. The release of
 Rust 2018 will stabilize one of these two variants and drop the other.</p>
+<p>To test Rust 2018 with the new &quot;uniform paths&quot; variant, put
+<code>#![feature(rust_2018_preview,uniform_paths)]</code> at the top of your <code>lib.rs</code> or
+<code>main.rs</code>.</p>
 <p>Here's a brief summary:</p>
 <ul>
 <li><code>extern crate</code> is no longer needed</li>
