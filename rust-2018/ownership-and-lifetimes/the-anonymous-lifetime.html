@@ -179,7 +179,7 @@ fn make_wrapper(string: &amp;str) -&gt; StrWrap&lt;'_&gt; {
 }
 
 impl fmt::Debug for StrWrap&lt;'_&gt; {
-    fn fmt(&amp;self, fmt: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+    fn fmt(&amp;self, fmt: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
         fmt.write_str(self.0)
     }
 }
