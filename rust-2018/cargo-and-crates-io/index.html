@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Cargo and crates.io - The Edition Guide</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="stylesheet" href="../../book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+
+    </head>
+    <body class="light">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li class="affix"><a href="../../introduction.html">Introduction</a></li><li><a href="../../editions/index.html"><strong aria-hidden="true">1.</strong> What are editions?</a></li><li><ol class="section"><li><a href="../../editions/transitioning-your-code-to-a-new-edition.html"><strong aria-hidden="true">1.1.</strong> Transitioning your code to a new edition</a></li></ol></li><li><a href="../../rust-2015/index.html"><strong aria-hidden="true">2.</strong> Rust 2015</a></li><li><a href="../../rust-2018/index.html"><strong aria-hidden="true">3.</strong> Rust 2018</a></li><li><ol class="section"><li><a href="../../rust-2018/module-system/index.html"><strong aria-hidden="true">3.1.</strong> Module system</a></li><li><ol class="section"><li><a href="../../rust-2018/module-system/raw-identifiers.html"><strong aria-hidden="true">3.1.1.</strong> Raw identifiers</a></li><li><a href="../../rust-2018/module-system/path-clarity.html"><strong aria-hidden="true">3.1.2.</strong> Path clarity</a></li><li><a href="../../rust-2018/module-system/more-visibility-modifiers.html"><strong aria-hidden="true">3.1.3.</strong> More visibility modifiers</a></li><li><a href="../../rust-2018/module-system/nested-imports-with-use.html"><strong aria-hidden="true">3.1.4.</strong> Nested imports with use</a></li></ol></li><li><a href="../../rust-2018/error-handling-and-panics/index.html"><strong aria-hidden="true">3.2.</strong> Error handling and panics</a></li><li><ol class="section"><li><a href="../../rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html"><strong aria-hidden="true">3.2.1.</strong> The ? operator for easier error handling</a></li><li><a href="../../rust-2018/error-handling-and-panics/question-mark-in-main-and-tests.html"><strong aria-hidden="true">3.2.2.</strong> ? in main and tests</a></li><li><a href="../../rust-2018/error-handling-and-panics/controlling-panics-with-std-panic.html"><strong aria-hidden="true">3.2.3.</strong> Controlling panics with std::panic</a></li><li><a href="../../rust-2018/error-handling-and-panics/aborting-on-panic.html"><strong aria-hidden="true">3.2.4.</strong> Aborting on panic</a></li></ol></li><li><a href="../../rust-2018/control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Control flow</a></li><li><ol class="section"><li><a href="../../rust-2018/control-flow/loops-can-break-with-a-value.html"><strong aria-hidden="true">3.3.1.</strong> Loops can break with a value</a></li><li><a href="../../rust-2018/control-flow/async-await-for-easier-concurrency.html"><strong aria-hidden="true">3.3.2.</strong> async/await for easier concurrency</a></li></ol></li><li><a href="../../rust-2018/trait-system/index.html"><strong aria-hidden="true">3.4.</strong> Trait system</a></li><li><ol class="section"><li><a href="../../rust-2018/trait-system/impl-trait-for-returning-complex-types-with-ease.html"><strong aria-hidden="true">3.4.1.</strong> impl Trait for returning complex types with ease</a></li><li><a href="../../rust-2018/trait-system/dyn-trait-for-trait-objects.html"><strong aria-hidden="true">3.4.2.</strong> dyn Trait for trait objects</a></li><li><a href="../../rust-2018/trait-system/more-container-types-support-trait-objects.html"><strong aria-hidden="true">3.4.3.</strong> More container types support trait objects</a></li><li><a href="../../rust-2018/trait-system/associated-constants.html"><strong aria-hidden="true">3.4.4.</strong> Associated constants</a></li></ol></li><li><a href="../../rust-2018/slice-patterns.html"><strong aria-hidden="true">3.5.</strong> Slice patterns</a></li><li><a href="../../rust-2018/ownership-and-lifetimes/index.html"><strong aria-hidden="true">3.6.</strong> Ownership and lifetimes</a></li><li><ol class="section"><li><a href="../../rust-2018/ownership-and-lifetimes/default-match-bindings.html"><strong aria-hidden="true">3.6.1.</strong> Default match bindings</a></li><li><a href="../../rust-2018/ownership-and-lifetimes/the-anonymous-lifetime.html"><strong aria-hidden="true">3.6.2.</strong> '_, the anonymous lifetime</a></li><li><a href="../../rust-2018/ownership-and-lifetimes/lifetime-elision-in-impl.html"><strong aria-hidden="true">3.6.3.</strong> Lifetime elision in impl</a></li><li><a href="../../rust-2018/ownership-and-lifetimes/inference-in-structs.html"><strong aria-hidden="true">3.6.4.</strong> T: 'a inference in structs</a></li><li><a href="../../rust-2018/ownership-and-lifetimes/simpler-lifetimes-in-static-and-const.html"><strong aria-hidden="true">3.6.5.</strong> Simpler lifetimes in static and const</a></li></ol></li><li><a href="../../rust-2018/data-types/index.html"><strong aria-hidden="true">3.7.</strong> Data types</a></li><li><ol class="section"><li><a href="../../rust-2018/data-types/field-init-shorthand.html"><strong aria-hidden="true">3.7.1.</strong> Field init shorthand</a></li><li><a href="../../rust-2018/data-types/inclusive-ranges.html"><strong aria-hidden="true">3.7.2.</strong> ..= for inclusive ranges</a></li><li><a href="../../rust-2018/data-types/128-bit-integers.html"><strong aria-hidden="true">3.7.3.</strong> 128 bit integers</a></li><li><a href="../../rust-2018/data-types/operator-equals-are-now-implementable.html"><strong aria-hidden="true">3.7.4.</strong> &quot;Operator-equals&quot; are now implementable</a></li><li><a href="../../rust-2018/data-types/union-for-an-unsafe-form-of-enum.html"><strong aria-hidden="true">3.7.5.</strong> union for an unsafe form of enum</a></li><li><a href="../../rust-2018/data-types/choosing-alignment-with-the-repr-attribute.html"><strong aria-hidden="true">3.7.6.</strong> Choosing alignment with the repr attribute</a></li></ol></li><li><a href="../../rust-2018/simd-for-faster-computing.html"><strong aria-hidden="true">3.8.</strong> SIMD for faster computing</a></li><li><a href="../../rust-2018/macros/index.html"><strong aria-hidden="true">3.9.</strong> Macros</a></li><li><ol class="section"><li><a href="../../rust-2018/macros/custom-derive.html"><strong aria-hidden="true">3.9.1.</strong> Custom Derive</a></li><li><a href="../../rust-2018/macros/macro-changes.html"><strong aria-hidden="true">3.9.2.</strong> Macro changes</a></li></ol></li><li><a href="../../rust-2018/the-compiler/index.html"><strong aria-hidden="true">3.10.</strong> The compiler</a></li><li><ol class="section"><li><a href="../../rust-2018/the-compiler/improved-error-messages.html"><strong aria-hidden="true">3.10.1.</strong> Improved error messages</a></li><li><a href="../../rust-2018/the-compiler/incremental-compilation-for-faster-compiles.html"><strong aria-hidden="true">3.10.2.</strong> Incremental Compilation for faster compiles</a></li><li><a href="../../rust-2018/the-compiler/an-attribute-for-deprecation.html"><strong aria-hidden="true">3.10.3.</strong> An attribute for deprecation</a></li></ol></li><li><a href="../../rust-2018/rustup-for-managing-rust-versions.html"><strong aria-hidden="true">3.11.</strong> Rustup for managing Rust versions</a></li><li><a href="../../rust-2018/cargo-and-crates-io/index.html" class="active"><strong aria-hidden="true">3.12.</strong> Cargo and crates.io</a></li><li><ol class="section"><li><a href="../../rust-2018/cargo-and-crates-io/cargo-check-for-faster-checking.html"><strong aria-hidden="true">3.12.1.</strong> cargo check for faster checking</a></li><li><a href="../../rust-2018/cargo-and-crates-io/cargo-install-for-easy-installation-of-tools.html"><strong aria-hidden="true">3.12.2.</strong> cargo install for easy installation of tools</a></li><li><a href="../../rust-2018/cargo-and-crates-io/cargo-new-defaults-to-a-binary-project.html"><strong aria-hidden="true">3.12.3.</strong> cargo new defaults to a binary project</a></li><li><a href="../../rust-2018/cargo-and-crates-io/cargo-rustc-for-passing-arbitrary-flags-to-rustc.html"><strong aria-hidden="true">3.12.4.</strong> cargo rustc for passing arbitrary flags to rustc</a></li><li><a href="../../rust-2018/cargo-and-crates-io/cargo-workspaces-for-multi-package-projects.html"><strong aria-hidden="true">3.12.5.</strong> Cargo workspaces for multi-package projects</a></li><li><a href="../../rust-2018/cargo-and-crates-io/multi-file-examples.html"><strong aria-hidden="true">3.12.6.</strong> Multi-file examples</a></li><li><a href="../../rust-2018/cargo-and-crates-io/replacing-dependencies-with-patch.html"><strong aria-hidden="true">3.12.7.</strong> Replacing dependencies with patch</a></li><li><a href="../../rust-2018/cargo-and-crates-io/cargo-can-use-a-local-registry-replacement.html"><strong aria-hidden="true">3.12.8.</strong> Cargo can use a local registry replacement</a></li><li><a href="../../rust-2018/cargo-and-crates-io/crates-io-disallows-wildcard-dependencies.html"><strong aria-hidden="true">3.12.9.</strong> Crates.io disallows wildcard dependencies</a></li></ol></li><li><a href="../../rust-2018/documentation/index.html"><strong aria-hidden="true">3.13.</strong> Documentation</a></li><li><ol class="section"><li><a href="../../rust-2018/documentation/new-editions-of-the-book.html"><strong aria-hidden="true">3.13.1.</strong> New editions of the &quot;the book&quot;</a></li><li><a href="../../rust-2018/documentation/the-rust-bookshelf.html"><strong aria-hidden="true">3.13.2.</strong> The Rust Bookshelf</a></li><li><a href="../../rust-2018/documentation/the-rustonomicon.html"><strong aria-hidden="true">3.13.3.</strong> The Rustonomicon</a></li><li><a href="../../rust-2018/std-os-has-documentation-for-all-platforms.html"><strong aria-hidden="true">3.13.4.</strong> std::os has documentation for all platforms</a></li></ol></li><li><a href="../../rust-2018/rustdoc/index.html"><strong aria-hidden="true">3.14.</strong> rustdoc</a></li><li><ol class="section"><li><a href="../../rust-2018/rustdoc/documentation-tests-can-now-compile-fail.html"><strong aria-hidden="true">3.14.1.</strong> Documentation tests can now compile-fail</a></li><li><a href="../../rust-2018/rustdoc/rustdoc-uses-commonmark.html"><strong aria-hidden="true">3.14.2.</strong> Rustdoc uses CommonMark</a></li></ol></li><li><a href="../../rust-2018/platform-and-target-support/index.html"><strong aria-hidden="true">3.15.</strong> Platform and target support</a></li><li><ol class="section"><li><a href="../../rust-2018/platform-and-target-support/libcore-for-low-level-rust.html"><strong aria-hidden="true">3.15.1.</strong> libcore for low-level Rust</a></li><li><a href="../../rust-2018/platform-and-target-support/webassembly-support.html"><strong aria-hidden="true">3.15.2.</strong> WebAssembly support</a></li><li><a href="../../rust-2018/platform-and-target-support/global-allocators.html"><strong aria-hidden="true">3.15.3.</strong> Global allocators</a></li><li><a href="../../rust-2018/platform-and-target-support/msvc-toolchain-support.html"><strong aria-hidden="true">3.15.4.</strong> MSVC toolchain support</a></li><li><a href="../../rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html"><strong aria-hidden="true">3.15.5.</strong> MUSL support for fully static binaries</a></li><li><a href="../../rust-2018/platform-and-target-support/cdylib-crates-for-c-interoperability.html"><strong aria-hidden="true">3.15.6.</strong> cdylib crates for C interoperability</a></li></ol></li></ol></li><li><a href="../../unstable-feature-status.html"><strong aria-hidden="true">4.</strong> Unstable feature status</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">The Edition Guide</h1> 
+
+                        <div class="right-buttons">
+                            <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#cargo-and-cratesio" id="cargo-and-cratesio"><h1>Cargo and crates.io</h1></a>
+<p>In this chapter of the guide, we discuss a few improvements to <code>cargo</code> and crates.io.
+A notable addition here is the new <a href="improved-error-messages.html"><code>cargo check</code></a> command.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../rust-2018/rustup-for-managing-rust-versions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../rust-2018/cargo-and-crates-io/cargo-check-for-faster-checking.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../../rust-2018/rustup-for-managing-rust-versions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../../rust-2018/cargo-and-crates-io/cargo-check-for-faster-checking.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../../searchindex.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var path_to_root = "../../";
+        </script>
+        
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

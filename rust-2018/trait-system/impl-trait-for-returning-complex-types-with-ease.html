@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>impl Trait for returning complex types with ease - The Edition Guide</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="stylesheet" href="../../book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+
+    </head>
+    <body class="light">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li class="affix"><a href="../../introduction.html">Introduction</a></li><li><a href="../../editions/index.html"><strong aria-hidden="true">1.</strong> What are editions?</a></li><li><ol class="section"><li><a href="../../editions/transitioning-your-code-to-a-new-edition.html"><strong aria-hidden="true">1.1.</strong> Transitioning your code to a new edition</a></li></ol></li><li><a href="../../rust-2015/index.html"><strong aria-hidden="true">2.</strong> Rust 2015</a></li><li><a href="../../rust-2018/index.html"><strong aria-hidden="true">3.</strong> Rust 2018</a></li><li><ol class="section"><li><a href="../../rust-2018/module-system/index.html"><strong aria-hidden="true">3.1.</strong> Module system</a></li><li><ol class="section"><li><a href="../../rust-2018/module-system/raw-identifiers.html"><strong aria-hidden="true">3.1.1.</strong> Raw identifiers</a></li><li><a href="../../rust-2018/module-system/path-clarity.html"><strong aria-hidden="true">3.1.2.</strong> Path clarity</a></li><li><a href="../../rust-2018/module-system/more-visibility-modifiers.html"><strong aria-hidden="true">3.1.3.</strong> More visibility modifiers</a></li><li><a href="../../rust-2018/module-system/nested-imports-with-use.html"><strong aria-hidden="true">3.1.4.</strong> Nested imports with use</a></li></ol></li><li><a href="../../rust-2018/error-handling-and-panics/index.html"><strong aria-hidden="true">3.2.</strong> Error handling and panics</a></li><li><ol class="section"><li><a href="../../rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html"><strong aria-hidden="true">3.2.1.</strong> The ? operator for easier error handling</a></li><li><a href="../../rust-2018/error-handling-and-panics/question-mark-in-main-and-tests.html"><strong aria-hidden="true">3.2.2.</strong> ? in main and tests</a></li><li><a href="../../rust-2018/error-handling-and-panics/controlling-panics-with-std-panic.html"><strong aria-hidden="true">3.2.3.</strong> Controlling panics with std::panic</a></li><li><a href="../../rust-2018/error-handling-and-panics/aborting-on-panic.html"><strong aria-hidden="true">3.2.4.</strong> Aborting on panic</a></li></ol></li><li><a href="../../rust-2018/control-flow/index.html"><strong aria-hidden="true">3.3.</strong> Control flow</a></li><li><ol class="section"><li><a href="../../rust-2018/control-flow/loops-can-break-with-a-value.html"><strong aria-hidden="true">3.3.1.</strong> Loops can break with a value</a></li><li><a href="../../rust-2018/control-flow/async-await-for-easier-concurrency.html"><strong aria-hidden="true">3.3.2.</strong> async/await for easier concurrency</a></li></ol></li><li><a href="../../rust-2018/trait-system/index.html"><strong aria-hidden="true">3.4.</strong> Trait system</a></li><li><ol class="section"><li><a href="../../rust-2018/trait-system/impl-trait-for-returning-complex-types-with-ease.html" class="active"><strong aria-hidden="true">3.4.1.</strong> impl Trait for returning complex types with ease</a></li><li><a href="../../rust-2018/trait-system/dyn-trait-for-trait-objects.html"><strong aria-hidden="true">3.4.2.</strong> dyn Trait for trait objects</a></li><li><a href="../../rust-2018/trait-system/more-container-types-support-trait-objects.html"><strong aria-hidden="true">3.4.3.</strong> More container types support trait objects</a></li><li><a href="../../rust-2018/trait-system/associated-constants.html"><strong aria-hidden="true">3.4.4.</strong> Associated constants</a></li></ol></li><li><a href="../../rust-2018/slice-patterns.html"><strong aria-hidden="true">3.5.</strong> Slice patterns</a></li><li><a href="../../rust-2018/ownership-and-lifetimes/index.html"><strong aria-hidden="true">3.6.</strong> Ownership and lifetimes</a></li><li><ol class="section"><li><a href="../../rust-2018/ownership-and-lifetimes/default-match-bindings.html"><strong aria-hidden="true">3.6.1.</strong> Default match bindings</a></li><li><a href="../../rust-2018/ownership-and-lifetimes/the-anonymous-lifetime.html"><strong aria-hidden="true">3.6.2.</strong> '_, the anonymous lifetime</a></li><li><a href="../../rust-2018/ownership-and-lifetimes/lifetime-elision-in-impl.html"><strong aria-hidden="true">3.6.3.</strong> Lifetime elision in impl</a></li><li><a href="../../rust-2018/ownership-and-lifetimes/inference-in-structs.html"><strong aria-hidden="true">3.6.4.</strong> T: 'a inference in structs</a></li><li><a href="../../rust-2018/ownership-and-lifetimes/simpler-lifetimes-in-static-and-const.html"><strong aria-hidden="true">3.6.5.</strong> Simpler lifetimes in static and const</a></li></ol></li><li><a href="../../rust-2018/data-types/index.html"><strong aria-hidden="true">3.7.</strong> Data types</a></li><li><ol class="section"><li><a href="../../rust-2018/data-types/field-init-shorthand.html"><strong aria-hidden="true">3.7.1.</strong> Field init shorthand</a></li><li><a href="../../rust-2018/data-types/inclusive-ranges.html"><strong aria-hidden="true">3.7.2.</strong> ..= for inclusive ranges</a></li><li><a href="../../rust-2018/data-types/128-bit-integers.html"><strong aria-hidden="true">3.7.3.</strong> 128 bit integers</a></li><li><a href="../../rust-2018/data-types/operator-equals-are-now-implementable.html"><strong aria-hidden="true">3.7.4.</strong> &quot;Operator-equals&quot; are now implementable</a></li><li><a href="../../rust-2018/data-types/union-for-an-unsafe-form-of-enum.html"><strong aria-hidden="true">3.7.5.</strong> union for an unsafe form of enum</a></li><li><a href="../../rust-2018/data-types/choosing-alignment-with-the-repr-attribute.html"><strong aria-hidden="true">3.7.6.</strong> Choosing alignment with the repr attribute</a></li></ol></li><li><a href="../../rust-2018/simd-for-faster-computing.html"><strong aria-hidden="true">3.8.</strong> SIMD for faster computing</a></li><li><a href="../../rust-2018/macros/index.html"><strong aria-hidden="true">3.9.</strong> Macros</a></li><li><ol class="section"><li><a href="../../rust-2018/macros/custom-derive.html"><strong aria-hidden="true">3.9.1.</strong> Custom Derive</a></li><li><a href="../../rust-2018/macros/macro-changes.html"><strong aria-hidden="true">3.9.2.</strong> Macro changes</a></li></ol></li><li><a href="../../rust-2018/the-compiler/index.html"><strong aria-hidden="true">3.10.</strong> The compiler</a></li><li><ol class="section"><li><a href="../../rust-2018/the-compiler/improved-error-messages.html"><strong aria-hidden="true">3.10.1.</strong> Improved error messages</a></li><li><a href="../../rust-2018/the-compiler/incremental-compilation-for-faster-compiles.html"><strong aria-hidden="true">3.10.2.</strong> Incremental Compilation for faster compiles</a></li><li><a href="../../rust-2018/the-compiler/an-attribute-for-deprecation.html"><strong aria-hidden="true">3.10.3.</strong> An attribute for deprecation</a></li></ol></li><li><a href="../../rust-2018/rustup-for-managing-rust-versions.html"><strong aria-hidden="true">3.11.</strong> Rustup for managing Rust versions</a></li><li><a href="../../rust-2018/cargo-and-crates-io/index.html"><strong aria-hidden="true">3.12.</strong> Cargo and crates.io</a></li><li><ol class="section"><li><a href="../../rust-2018/cargo-and-crates-io/cargo-check-for-faster-checking.html"><strong aria-hidden="true">3.12.1.</strong> cargo check for faster checking</a></li><li><a href="../../rust-2018/cargo-and-crates-io/cargo-install-for-easy-installation-of-tools.html"><strong aria-hidden="true">3.12.2.</strong> cargo install for easy installation of tools</a></li><li><a href="../../rust-2018/cargo-and-crates-io/cargo-new-defaults-to-a-binary-project.html"><strong aria-hidden="true">3.12.3.</strong> cargo new defaults to a binary project</a></li><li><a href="../../rust-2018/cargo-and-crates-io/cargo-rustc-for-passing-arbitrary-flags-to-rustc.html"><strong aria-hidden="true">3.12.4.</strong> cargo rustc for passing arbitrary flags to rustc</a></li><li><a href="../../rust-2018/cargo-and-crates-io/cargo-workspaces-for-multi-package-projects.html"><strong aria-hidden="true">3.12.5.</strong> Cargo workspaces for multi-package projects</a></li><li><a href="../../rust-2018/cargo-and-crates-io/multi-file-examples.html"><strong aria-hidden="true">3.12.6.</strong> Multi-file examples</a></li><li><a href="../../rust-2018/cargo-and-crates-io/replacing-dependencies-with-patch.html"><strong aria-hidden="true">3.12.7.</strong> Replacing dependencies with patch</a></li><li><a href="../../rust-2018/cargo-and-crates-io/cargo-can-use-a-local-registry-replacement.html"><strong aria-hidden="true">3.12.8.</strong> Cargo can use a local registry replacement</a></li><li><a href="../../rust-2018/cargo-and-crates-io/crates-io-disallows-wildcard-dependencies.html"><strong aria-hidden="true">3.12.9.</strong> Crates.io disallows wildcard dependencies</a></li></ol></li><li><a href="../../rust-2018/documentation/index.html"><strong aria-hidden="true">3.13.</strong> Documentation</a></li><li><ol class="section"><li><a href="../../rust-2018/documentation/new-editions-of-the-book.html"><strong aria-hidden="true">3.13.1.</strong> New editions of the &quot;the book&quot;</a></li><li><a href="../../rust-2018/documentation/the-rust-bookshelf.html"><strong aria-hidden="true">3.13.2.</strong> The Rust Bookshelf</a></li><li><a href="../../rust-2018/documentation/the-rustonomicon.html"><strong aria-hidden="true">3.13.3.</strong> The Rustonomicon</a></li><li><a href="../../rust-2018/std-os-has-documentation-for-all-platforms.html"><strong aria-hidden="true">3.13.4.</strong> std::os has documentation for all platforms</a></li></ol></li><li><a href="../../rust-2018/rustdoc/index.html"><strong aria-hidden="true">3.14.</strong> rustdoc</a></li><li><ol class="section"><li><a href="../../rust-2018/rustdoc/documentation-tests-can-now-compile-fail.html"><strong aria-hidden="true">3.14.1.</strong> Documentation tests can now compile-fail</a></li><li><a href="../../rust-2018/rustdoc/rustdoc-uses-commonmark.html"><strong aria-hidden="true">3.14.2.</strong> Rustdoc uses CommonMark</a></li></ol></li><li><a href="../../rust-2018/platform-and-target-support/index.html"><strong aria-hidden="true">3.15.</strong> Platform and target support</a></li><li><ol class="section"><li><a href="../../rust-2018/platform-and-target-support/libcore-for-low-level-rust.html"><strong aria-hidden="true">3.15.1.</strong> libcore for low-level Rust</a></li><li><a href="../../rust-2018/platform-and-target-support/webassembly-support.html"><strong aria-hidden="true">3.15.2.</strong> WebAssembly support</a></li><li><a href="../../rust-2018/platform-and-target-support/global-allocators.html"><strong aria-hidden="true">3.15.3.</strong> Global allocators</a></li><li><a href="../../rust-2018/platform-and-target-support/msvc-toolchain-support.html"><strong aria-hidden="true">3.15.4.</strong> MSVC toolchain support</a></li><li><a href="../../rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html"><strong aria-hidden="true">3.15.5.</strong> MUSL support for fully static binaries</a></li><li><a href="../../rust-2018/platform-and-target-support/cdylib-crates-for-c-interoperability.html"><strong aria-hidden="true">3.15.6.</strong> cdylib crates for C interoperability</a></li></ol></li></ol></li><li><a href="../../unstable-feature-status.html"><strong aria-hidden="true">4.</strong> Unstable feature status</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">The Edition Guide</h1> 
+
+                        <div class="right-buttons">
+                            <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#impl-trait-for-returning-complex-types-with-ease" id="impl-trait-for-returning-complex-types-with-ease"><h1><code>impl Trait</code> for returning complex types with ease</h1></a>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg" alt="Minimum Rust version: 1.26" /></p>
+<p><code>impl Trait</code> is the new way to specify unnamed but concrete types that
+implement a specific trait. There are two places you can put it: argument
+position, and return position.</p>
+<pre><code class="language-rust ignore">trait Trait {}
+
+// argument position
+fn foo(arg: impl Trait) {
+}
+
+// return position
+fn foo() -&gt; impl Trait {
+}
+</code></pre>
+<a class="header" href="#argument-position" id="argument-position"><h2>Argument Position</h2></a>
+<p>In argument position, this feature is quite simple. These two forms are
+almost the same:</p>
+<pre><code class="language-rust ignore">trait Trait {}
+
+fn foo&lt;T: Trait&gt;(arg: T) {
+}
+
+fn foo(arg: impl Trait) {
+}
+</code></pre>
+<p>That is, it's a slightly shorter syntax for a generic type parameter. It
+means, &quot;<code>arg</code> is an argument that takes any type that implements the <code>Trait</code>
+trait.&quot;</p>
+<p>However, there's also an important technical difference between <code>T: Trait</code>
+and <code>impl Trait</code> here. When you write the former, you can specify the type of
+<code>T</code> at the call site with turbo-fish syntax as with <code>foo::&lt;usize&gt;(1)</code>. In the
+case of <code>impl Trait</code>, if it is used anywhere in the function definition, then
+you can't use turbo-fish at all. Therefore, you should be mindful that
+changing both from and to <code>impl Trait</code> can constitute a breaking change for
+the users of your code.</p>
+<a class="header" href="#return-position" id="return-position"><h2>Return Position</h2></a>
+<p>In return position, this feature is more interesting. It means &quot;I am
+returning some type that implements the <code>Trait</code> trait, but I'm not going to
+tell you exactly what the type is.&quot; Before <code>impl Trait</code>, you could do this
+with trait objects:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait Trait {}
+
+impl Trait for i32 {}
+
+fn returns_a_trait_object() -&gt; Box&lt;dyn Trait&gt; {
+    Box::new(5)
+}
+#}</code></pre></pre>
+<p>However, this has some overhead: the <code>Box&lt;T&gt;</code> means that there's a heap
+allocation here, and this will use dynamic dispatch. See the <code>dyn Trait</code>
+section for an explanation of this syntax. But we only ever return one
+possible thing here, the <code>Box&lt;i32&gt;</code>. This means that we're paying for dynamic
+dispatch, even though we don't use it!</p>
+<p>With <code>impl Trait</code>, the code above could be written like this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait Trait {}
+
+impl Trait for i32 {}
+
+fn returns_a_trait_object() -&gt; impl Trait {
+    5
+}
+#}</code></pre></pre>
+<p>Here, we have no <code>Box&lt;T&gt;</code>, no trait object, and no dynamic dispatch. But we
+still can obscure the <code>i32</code> return type.</p>
+<p>With <code>i32</code>, this isn't super useful. But there's one major place in Rust
+where this is much more useful: closures.</p>
+<a class="header" href="#impl-trait-and-closures" id="impl-trait-and-closures"><h3><code>impl Trait</code> and closures</h3></a>
+<blockquote>
+<p>If you need to catch up on closures, check out <a href="https://doc.rust-lang.org/book/second-edition/ch13-01-closures.html">their chapter in the
+book</a>.</p>
+</blockquote>
+<p>In Rust, closures have a unique, un-writable type. They do implement the <code>Fn</code>
+family of traits, however. This means that previously, the only way to return
+a closure from a function was to use a trait object:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn returns_closure() -&gt; Box&lt;dyn Fn(i32) -&gt; i32&gt; {
+    Box::new(|x| x + 1)
+}
+#}</code></pre></pre>
+<p>You couldn't write the type of the closure, only use the <code>Fn</code> trait. That means
+that the trait object is necessary. However, with <code>impl Trait</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn returns_closure() -&gt; impl Fn(i32) -&gt; i32 {
+    |x| x + 1
+}
+#}</code></pre></pre>
+<p>We can now return closures by value, just like any other type!</p>
+<a class="header" href="#more-details" id="more-details"><h2>More details</h2></a>
+<p>The above is all you need to know to get going with <code>impl Trait</code>, but for
+some more nitty-gritty details: type parameters and <code>impl Trait</code> in argument
+position are universals (universally quantified types). Meanwhile, <code>impl Trait</code> in return position are existentials (existentially quantified types).
+Okay, maybe that's a bit too jargon-heavy. Let's step back.</p>
+<p>Consider this function:</p>
+<pre><code class="language-rust ignore">fn foo&lt;T: Trait&gt;(x: T) {
+</code></pre>
+<p>When you call it, you set the type, <code>T</code>. &quot;you&quot; being the caller here. This
+signature says &quot;I accept any type that implements Trait.&quot; (&quot;any type&quot; ==
+universal in the jargon)</p>
+<p>This version:</p>
+<pre><code class="language-rust ignore">fn foo&lt;T: Trait&gt;() -&gt; T {
+</code></pre>
+<p>is similar, but also different. You, the caller, provide the type you want,
+<code>T</code>, and then the function returns it. You can see this in Rust today with
+things like parse or collect:</p>
+<pre><code class="language-rust ignore">let x: i32 = &quot;5&quot;.parse()?;
+let x: u64 = &quot;5&quot;.parse()?;
+</code></pre>
+<p>Here, <code>.parse</code> has this signature:</p>
+<pre><code class="language-rust ignore">pub fn parse&lt;F&gt;(&amp;self) -&gt; Result&lt;F, &lt;F as FromStr&gt;::Err&gt; where
+    F: FromStr,
+</code></pre>
+<p>Same general idea, though with a result type and <code>FromStr</code> has an associated
+type... anyway, you can see how <code>F</code> is in the return position here. So you
+have the ability to choose.</p>
+<p>With <code>impl Trait</code>, you're saying &quot;hey, some type exists that implements this
+trait, but I'm not gonna tell you what it is.&quot; (&quot;existential&quot; in the jargon,
+&quot;some type exists&quot;). So now, the caller can't choose, and the function itself
+gets to choose. If we tried to define parse with <code>Result&lt;impl F,...</code> as the
+return type, it wouldn't work.</p>
+<a class="header" href="#using-impl-trait-in-more-places" id="using-impl-trait-in-more-places"><h3>Using <code>impl Trait</code> in more places</h3></a>
+<p>As previously mentioned, as a start, you will only be able to use <code>impl Trait</code>
+as the argument or return type of a free or inherent function. However,
+<code>impl Trait</code> can't be used inside implementations of traits, nor can it be
+used as the type of a let binding or inside a type alias. Some of these
+restrictions will eventually be lifted. For more information, see the
+<a href="https://github.com/rust-lang/rust/issues/34511">tracking issue on <code>impl Trait</code></a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../rust-2018/trait-system/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../rust-2018/trait-system/dyn-trait-for-trait-objects.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../../rust-2018/trait-system/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../../rust-2018/trait-system/dyn-trait-for-trait-objects.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../../searchindex.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var path_to_root = "../../";
+        </script>
+        
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
