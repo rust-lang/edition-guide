@@ -48,7 +48,7 @@ fn make_wrapper(string: &str) -> StrWrap<'_> {
 }
 
 impl fmt::Debug for StrWrap<'_> {
-    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt.write_str(self.0)
     }
 }
