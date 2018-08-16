@@ -222,7 +222,8 @@ but please bear with us for now.</p>
 <p>Before an edition is released, it will have a &quot;preview&quot; phase which lets you
 try out the new edition in nightly Rust before its release. Currently Rust 2018
 is in its preview phase and because of this, there's an extra step you need to
-take to opt in.  Add this feature flag to your <code>lib.rs</code> or <code>main.rs</code>:</p>
+take to opt in.  Add this feature flag to your <code>lib.rs</code> or <code>main.rs</code> as well as
+to any examples in the <code>examples</code> directory of your project if you have one:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #![feature(rust_2018_preview)]
@@ -249,6 +250,10 @@ drop the other.</p>
 new 2018 edition. This is where the handy <code>cargo fix</code> tool comes into the
 picture. To enable the compatibility lints for your project you run:</p>
 <pre><code class="language-shell">$ cargo fix --edition
+</code></pre>
+<p>If the nightly toolchain is not your default, you may need to run this command
+instead:</p>
+<pre><code class="language-shell">$ cargo +nightly fix --edition
 </code></pre>
 <p>This will instruct Cargo to compile all targets in your project (libraries,
 binaries, tests, etc.) while enabling all Cargo features and prepare them for
