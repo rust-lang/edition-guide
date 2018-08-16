@@ -75,7 +75,7 @@ and then there is no step two. If you're not using Cargo, you already had to pas
 keep doing what you were doing there as well.
 
 One other use for `extern crate` was to import macros; that's no longer needed.
-Check [the macro section](rust-2018/macros/macro-changes.html) for more.
+Check [the macro section](../macros/macro-changes.html) for more.
 
 ### The `crate` keyword refers to the current crate.
 
