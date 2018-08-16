@@ -31,7 +31,8 @@ manually!
 Before an edition is released, it will have a "preview" phase which lets you
 try out the new edition in nightly Rust before its release. Currently Rust 2018
 is in its preview phase and because of this, there's an extra step you need to
-take to opt in.  Add this feature flag to your `lib.rs` or `main.rs`:
+take to opt in.  Add this feature flag to your `lib.rs` or `main.rs` as well as
+to any examples in the `examples` directory of your project if you have one:
 
 ```rust
 #![feature(rust_2018_preview)]
@@ -65,6 +66,13 @@ picture. To enable the compatibility lints for your project you run:
 
 ```shell
 $ cargo fix --edition
+```
+
+If the nightly toolchain is not your default, you may need to run this command
+instead:
+
+```shell
+$ cargo +nightly fix --edition
 ```
 
 This will instruct Cargo to compile all targets in your project (libraries,
