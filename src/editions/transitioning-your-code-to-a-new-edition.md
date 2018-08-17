@@ -45,7 +45,7 @@ note that during the time the preview is available, we may continue to add/enabl
 new features with this flag!
 
 For Rust 2018 edition preview 2, we're also testing a [new module path
-variant](rust-2018/module-system/path-clarity.html), "uniform paths",
+variant](../rust-2018/module-system/path-clarity.html), "uniform paths",
 which we'd like to get further testing and feedback on.
 Please try it out, by adding the following to your `lib.rs` or `main.rs`:
 
