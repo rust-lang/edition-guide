@@ -16,8 +16,7 @@ that stores which variant is the correct one at runtime; unions don't have
 this tag.
 
 Since we can interpret the data held in the union using the wrong variant and
-Rust can’t check this for us, that means reading or writing a union’s field
-is unsafe:
+Rust can’t check this for us, that means reading a union’s field is unsafe:
 
 ```rust
 # union MyUnion {
@@ -26,7 +25,7 @@ is unsafe:
 # }
 let mut u = MyUnion { f1: 1 };
 
-unsafe { u.f1 = 5 };
+u.f1 = 5;
 
 let value = unsafe { u.f1 };
 ```
