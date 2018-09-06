@@ -155,10 +155,7 @@ Raw identifiers let you use keywords where they would not normally be allowed.</
   |    ^^^^^ expected identifier, found keyword
 </code></pre>
 <p>You can write this with a raw identifier:</p>
-<pre><pre class="playpen"><code class="language-rust">#![feature(rust_2018_preview)]
-#![feature(raw_identifiers)]
-
-fn r#match(needle: &amp;str, haystack: &amp;str) -&gt; bool {
+<pre><pre class="playpen"><code class="language-rust">fn r#match(needle: &amp;str, haystack: &amp;str) -&gt; bool {
     haystack.contains(needle)
 }
 
@@ -166,8 +163,8 @@ fn main() {
     assert!(r#match(&quot;foo&quot;, &quot;foobar&quot;));
 }
 </code></pre></pre>
-<p>Note the <code>r#</code> prefix on both the function name, as well as the call.</p>
-<a class="header" href="#more-details" id="more-details"><h2>More details</h2></a>
+<p>Note the <code>r#</code> prefix on both the function name as well as the call.</p>
+<a class="header" href="#motivation" id="motivation"><h2>Motivation</h2></a>
 <p>This feature is useful for a few reasons, but the primary motivation was
 inter-edition situations. For example, <code>try</code> is not a keyword in the 2015
 edition, but is in the 2018 edition. So if you have a library that is written
