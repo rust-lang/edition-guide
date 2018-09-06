@@ -28,9 +28,6 @@ error: expected identifier, found keyword `match`
 You can write this with a raw identifier:
 
 ```rust
-#![feature(rust_2018_preview)]
-#![feature(raw_identifiers)]
-
 fn r#match(needle: &str, haystack: &str) -> bool {
     haystack.contains(needle)
 }
@@ -40,9 +37,9 @@ fn main() {
 }
 ```
 
-Note the `r#` prefix on both the function name, as well as the call.
+Note the `r#` prefix on both the function name as well as the call.
 
-## More details
+## Motivation
 
 This feature is useful for a few reasons, but the primary motivation was
 inter-edition situations. For example, `try` is not a keyword in the 2015
