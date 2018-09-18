@@ -3,7 +3,7 @@
 When you create a new project with Cargo, it will automatically add
 configuration for the latest edition:
 
-```rust
+```console
 > cargo +nightly new foo
      Created binary (application) `foo` project
 > cat .\foo\Cargo.toml
@@ -22,7 +22,7 @@ No more configuration needed!
 If you'd prefer to use an older edition, you can change the value in that
 key, for example:
 
-```rust
+```toml
 [package]
 name = "foo"
 version = "0.1.0"
