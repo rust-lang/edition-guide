@@ -195,12 +195,23 @@ mod submodule {
 and then there is no step two. If you're not using Cargo, you already had to pass
 <code>--extern</code> flags to give <code>rustc</code> the location of external crates, so you'd just
 keep doing what you were doing there as well.</p>
-<p>One other use for <code>extern crate</code> was to import macros; that's no longer needed.
-Check <a href="../macros/macro-changes.html">the macro section</a> for more.</p>
 <blockquote>
 <p>One small note here: <code>cargo fix</code> will not currently automate this change. We may
 have it do this for you in the future.</p>
 </blockquote>
+<p>One other use for <code>extern crate</code> was to import macros; that's no longer needed.
+Check <a href="../macros/macro-changes.html">the macro section</a> for more.</p>
+<p>If you've been using <code>as</code> to rename your crate like this:</p>
+<pre><code class="language-rust ignore">extern crate futures as f;
+
+use f::Future;
+</code></pre>
+<p>then removing the <code>extern crate</code> line on its own won't work. You'll need to do this:</p>
+<pre><code class="language-rust ignore">use futures as f;
+
+use f::Future;
+</code></pre>
+<p>This change will need to happen in any module that uses <code>f</code>.</p>
 <a class="header" href="#the-crate-keyword-refers-to-the-current-crate" id="the-crate-keyword-refers-to-the-current-crate"><h3>The <code>crate</code> keyword refers to the current crate.</h3></a>
 <p>In <code>use</code> declarations and in other code, you can refer to the root of the
 current crate with the <code>crate::</code> prefix. For instance, <code>crate::foo::bar</code> will
