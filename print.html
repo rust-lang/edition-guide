@@ -349,7 +349,7 @@ and removes some inconsistencies.</p>
 <p>In this chapter of the guide, we discuss a few changes to the module system.
 The most notable of these are the <a href="path-clarity.html">path clarity changes</a>.</p>
 <a class="header" href="#raw-identifiers" id="raw-identifiers"><h1>Raw identifiers</h1></a>
-<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg" alt="Minimum Rust version: nightly" /></p>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" /></p>
 <p>Rust, like many programming languages, has the concept of &quot;keywords&quot;.
 These identifiers mean something to the language, and so you cannot use them in
 places like variable names, function names, and other places.
@@ -393,7 +393,7 @@ with respect to <code>await!(expr)</code> syntax. See <a href="https://github.co
 that, the keyword <code>try</code> is reserved in edition 2018.
 See <a href="https://github.com/rust-lang/rfcs/pull/2388">RFC 2388</a> for more details.</p>
 <a class="header" href="#path-clarity" id="path-clarity"><h1>Path clarity</h1></a>
-<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg" alt="Minimum Rust version: nightly" />
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" />
 <img src="https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg" alt="Minimum Rust version: nightly" /> for &quot;uniform paths&quot;</p>
 <p>The module system is often one of the hardest things for people new to Rust. Everyone
 has their own things that take time to master, of course, but there's a root
@@ -1353,6 +1353,7 @@ trait Float {
 </code></pre>
 <p>much cleaner, and more versatile.</p>
 <a class="header" href="#no-more-anonymous-trait-parameters" id="no-more-anonymous-trait-parameters"><h1>No more anonymous trait parameters</h1></a>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" /></p>
 <p>In accordance with RFC <a href="https://github.com/rust-lang/rfcs/pull/1685">#1685</a>,
 parameters in trait method declarations are no longer allowed to be anonymous.</p>
 <p>For example, in the 2015 edition, this was allowed:</p>
@@ -1584,7 +1585,7 @@ impl Foo&lt;'_, '_&gt; {
 Finally, the relationship <code>'a: 'b</code> which the struct requires must be upheld.</p>
 <p>For more details, see the <a href="https://github.com/rust-lang/rust/issues/44524">tracking issue on In-band lifetime bindings</a>.</p>
 <a class="header" href="#lifetime-elision-in-impl" id="lifetime-elision-in-impl"><h1>Lifetime elision in impl</h1></a>
-<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg" alt="Minimum Rust version: nightly" /></p>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" /></p>
 <p>When writing <code>impl</code> blocks, you can now elide lifetime annotations in some
 situations.</p>
 <p>Consider a trait like <code>MyIterator</code>:</p>
@@ -1637,7 +1638,7 @@ write this instead.</p>
 }
 </code></pre>
 <a class="header" href="#t-a-inference-in-structs" id="t-a-inference-in-structs"><h1><code>T: 'a</code> inference in structs</h1></a>
-<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg" alt="Minimum Rust version: nightly" /></p>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" /></p>
 <p>An annotation in the form of <code>T: 'a</code>, where <code>T</code> is either a type or another
 lifetime, is called an <em>&quot;outlives&quot;</em> requirement. Note that <em>&quot;outlives&quot;</em> also
 implies <code>'a: 'a</code>.</p>
@@ -2135,7 +2136,7 @@ like <a href="https://serde.rs/">serde</a> and <a href="http://diesel.rs/">Diese
 Rust Programming
 Language</a>.</p>
 <a class="header" href="#macro-changes" id="macro-changes"><h1>Macro changes</h1></a>
-<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg" alt="Minimum Rust version: nightly" /></p>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" /></p>
 <p>In Rust 2018, you can import specific macros from external crates via <code>use</code>
 statements, rather than the old <code>#[macro_use]</code> attribute.</p>
 <p>For example, consider a <code>bar</code> crate that implements a <code>baz!</code> macro. In
