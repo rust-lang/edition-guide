@@ -115,12 +115,9 @@ We can now return closures by value, just like any other type!
 ## More details
 
 The above is all you need to know to get going with `impl Trait`, but for
-some more nitty-gritty details: type parameters and `impl Trait` in argument
-position are universals (universally quantified types). Meanwhile, `impl
-Trait` in return position are existentials (existentially quantified types).
-Okay, maybe that's a bit too jargon-heavy. Let's step back.
-
-Consider this function:
+some more nitty-gritty details: type parameters and `impl Trait` work
+slightly differently when they're in argument position versus return
+position. Consider this function:
 
 ```rust,ignore
 fn foo<T: Trait>(x: T) {
@@ -157,10 +154,9 @@ type... anyway, you can see how `F` is in the return position here. So you
 have the ability to choose.
 
 With `impl Trait`, you're saying "hey, some type exists that implements this
-trait, but I'm not gonna tell you what it is." ("existential" in the jargon,
-"some type exists"). So now, the caller can't choose, and the function itself
-gets to choose. If we tried to define parse with `Result<impl F,...` as the
-return type, it wouldn't work.
+trait, but I'm not gonna tell you what it is.". So now, the caller can't
+choose, and the function itself gets to choose. If we tried to define parse
+with `Result<impl F,...` as the return type, it wouldn't work.
 
 ### Using `impl Trait` in more places
 
