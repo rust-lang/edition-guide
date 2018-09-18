@@ -236,10 +236,9 @@ fn returns_closure() -&gt; impl Fn(i32) -&gt; i32 {
 <p>We can now return closures by value, just like any other type!</p>
 <a class="header" href="#more-details" id="more-details"><h2>More details</h2></a>
 <p>The above is all you need to know to get going with <code>impl Trait</code>, but for
-some more nitty-gritty details: type parameters and <code>impl Trait</code> in argument
-position are universals (universally quantified types). Meanwhile, <code>impl Trait</code> in return position are existentials (existentially quantified types).
-Okay, maybe that's a bit too jargon-heavy. Let's step back.</p>
-<p>Consider this function:</p>
+some more nitty-gritty details: type parameters and <code>impl Trait</code> work
+slightly differently when they're in argument position versus return
+position. Consider this function:</p>
 <pre><code class="language-rust ignore">fn foo&lt;T: Trait&gt;(x: T) {
 </code></pre>
 <p>When you call it, you set the type, <code>T</code>. &quot;you&quot; being the caller here. This
@@ -262,10 +261,9 @@ let x: u64 = &quot;5&quot;.parse()?;
 type... anyway, you can see how <code>F</code> is in the return position here. So you
 have the ability to choose.</p>
 <p>With <code>impl Trait</code>, you're saying &quot;hey, some type exists that implements this
-trait, but I'm not gonna tell you what it is.&quot; (&quot;existential&quot; in the jargon,
-&quot;some type exists&quot;). So now, the caller can't choose, and the function itself
-gets to choose. If we tried to define parse with <code>Result&lt;impl F,...</code> as the
-return type, it wouldn't work.</p>
+trait, but I'm not gonna tell you what it is.&quot;. So now, the caller can't
+choose, and the function itself gets to choose. If we tried to define parse
+with <code>Result&lt;impl F,...</code> as the return type, it wouldn't work.</p>
 <a class="header" href="#using-impl-trait-in-more-places" id="using-impl-trait-in-more-places"><h3>Using <code>impl Trait</code> in more places</h3></a>
 <p>As previously mentioned, as a start, you will only be able to use <code>impl Trait</code>
 as the argument or return type of a free or inherent function. However,
