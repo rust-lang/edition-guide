@@ -137,7 +137,8 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="#path-clarity" id="path-clarity"><h1>Path clarity</h1></a>
-<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg" alt="Minimum Rust version: nightly" /></p>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg" alt="Minimum Rust version: nightly" />
+<img src="https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg" alt="Minimum Rust version: nightly" /> for &quot;uniform paths&quot;</p>
 <p>The module system is often one of the hardest things for people new to Rust. Everyone
 has their own things that take time to master, of course, but there's a root
 cause for why it's so confusing to many: while there are simple and
@@ -146,31 +147,22 @@ inconsistent, counterintuitive and mysterious.</p>
 <p>As such, the 2018 edition of Rust introduces a few new module system
 features, but they end up <em>simplifying</em> the module system, to make it more
 clear as to what is going on.</p>
-<p>Note: During the 2018 edition preview, there are two variants of the module
-system under consideration, the &quot;uniform paths&quot; variant and the &quot;anchored use
-paths&quot; variant. Most of these changes apply to both variants; the two variant
-sections call out the differences between the two. We encourage testing of the
-new &quot;uniform paths&quot; variant introduced in edition preview 2. The release of
-Rust 2018 will stabilize one of these two variants and drop the other.</p>
-<p>To test Rust 2018 with the new &quot;uniform paths&quot; variant, put
-<code>#![feature(uniform_paths)]</code> at the top of your <code>lib.rs</code> or
-<code>main.rs</code>.</p>
 <p>Here's a brief summary:</p>
 <ul>
 <li><code>extern crate</code> is no longer needed</li>
 <li>The <code>crate</code> keyword refers to the current crate.</li>
-<li>Uniform paths variant: Paths work uniformly in both <code>use</code> declarations and in
-other code. Paths work uniformly both in the top-level module and in
-submodules. Any path may start with a crate, with <code>crate</code>, <code>super</code>, or
-<code>self</code>, or with a local name relative to the current module.</li>
-<li>Anchored use paths variant: Paths in <code>use</code> declarations always start with a
-crate name, or with <code>crate</code>, <code>super</code>, or <code>self</code>. Paths in code other than
-<code>use</code> declarations may also start with names relative to the current module.</li>
+<li>Absolute paths begin with a crate name, where the keyword <code>crate</code>
+refers to the current crate.</li>
 <li>A <code>foo.rs</code> and <code>foo/</code> subdirectory may coexist; <code>mod.rs</code> is no longer needed
 when placing submodules in a subdirectory.</li>
 </ul>
 <p>These may seem like arbitrary new rules when put this way, but the mental
 model is now significantly simplified overall. Read on for more details!</p>
+<blockquote>
+<p>Additionally, in nightly, there's an additional possible tweak to paths
+called &quot;Uniform paths&quot;. This is backwards compatible with the new path
+changes. Uniform paths have a dedicated section at the end of this guide.</p>
+</blockquote>
 <a class="header" href="#more-details" id="more-details"><h2>More details</h2></a>
 <p>Let's talk about each new feature in turn.</p>
 <a class="header" href="#no-more-extern-crate" id="no-more-extern-crate"><h3>No more <code>extern crate</code></h3></a>
@@ -220,7 +212,115 @@ the same crate.</p>
 <p>The prefix <code>::</code> previously referred to either the crate root or an external
 crate; it now unambiguously refers to an external crate. For instance,
 <code>::foo::bar</code> always refers to the name <code>bar</code> inside the external crate <code>foo</code>.</p>
-<a class="header" href="#uniform-paths-variant" id="uniform-paths-variant"><h3>Uniform paths variant</h3></a>
+<a class="header" href="#changes-to-paths" id="changes-to-paths"><h3>Changes to paths</h3></a>
+<p>In Rust 2018, paths in <code>use</code> declarations <em>must</em> begin with a crate name,
+<code>crate</code>, <code>self</code>, or <code>super</code>.</p>
+<p>Code that looked like this:</p>
+<pre><code class="language-rust ignore">// Rust 2015
+
+extern crate futures;
+
+use futures::Future;
+
+mod foo {
+    pub struct Bar;
+}
+
+use foo::Bar;
+</code></pre>
+<p>Now looks like this:</p>
+<pre><code class="language-rust ignore">// Rust 2018
+
+// 'futures' is the name of a crate
+use futures::Future;
+
+mod foo {
+    pub struct Bar;
+}
+
+// 'crate' means the current crate
+use crate::foo::Bar;
+</code></pre>
+<p>In addition, all of these path forms are available outside of <code>use</code>
+declarations as well, which eliminates many sources of confusion. Consider
+this code in Rust 2015:</p>
+<pre><code class="language-rust ignore">// Rust 2015
+
+extern crate futures;
+
+mod submodule {
+    // this works!
+    use futures::Future;
+
+    // so why doesn't this work?
+    fn my_poll() -&gt; futures::Poll { ... }
+}
+
+fn main() {
+    // this works
+    let five = std::sync::Arc::new(5);
+}
+
+mod submodule {
+    fn function() {
+        // ... so why doesn't this work
+        let five = std::sync::Arc::new(5);
+    }
+}
+</code></pre>
+<blockquote>
+<p>In real code, you couldn't repeat <code>mod submodule</code>, and <code>function</code> would be defined
+in the first <code>mod</code> block.</p>
+</blockquote>
+<p>In the <code>futures</code> example, the <code>my_poll</code> function signature is incorrect,
+because <code>submodule</code> contains no items named <code>futures</code>; that is, this path is
+considered relative. <code>use futures::</code> works even though a lone <code>futures::</code>
+doesn't! With <code>std</code> it can be even more confusing, as you never wrote the
+<code>extern crate std;</code> line at all. So why does it work in <code>main</code> but not in a
+submodule? Same thing: it's a relative path because it's not in a <code>use</code>
+declaration. <code>extern crate std;</code> is inserted at the crate root, so it's fine
+in <code>main</code>, but it doesn't exist in the submodule at all.</p>
+<p>Let's look at how this change affects things:</p>
+<pre><code class="language-rust ignore">// Rust 2018
+
+// no more `extern crate futures;`
+
+mod submodule {
+    // 'futures' is the name of a crate, so this works
+    use futures::Future;
+
+    // 'futures' is the name of a crate, so this works
+    fn my_poll&lt;T, E&gt;() -&gt; futures::Poll {
+        unimplemented!()
+    }
+
+    fn function() {
+        // 'std' is the name of a crate, so this works
+        let five = std::sync::Arc::new(5);
+    }
+}
+
+fn main() {
+    // 'std' is the name of a crate, so this works
+    let five = std::sync::Arc::new(5);
+}
+</code></pre>
+<p>Much more straightforward.</p>
+<a class="header" href="#no-more-modrs" id="no-more-modrs"><h3>No more <code>mod.rs</code></h3></a>
+<p>In Rust 2015, if you have a submodule:</p>
+<pre><code class="language-rust ignore">mod foo;
+</code></pre>
+<p>It can live in <code>foo.rs</code> or <code>foo/mod.rs</code>. If it has submodules of its own, it
+<em>must</em> be <code>foo/mod.rs</code>. So a <code>bar</code> submodule of <code>foo</code> would live at
+<code>foo/bar.rs</code>.</p>
+<p>In Rust 2018, <code>mod.rs</code> is no longer needed. <code>foo.rs</code> can just be <code>foo.rs</code>,
+and the submodule is still <code>foo/bar.rs</code>. This eliminates the special
+name, and if you have a bunch of files open in your editor, you can clearly
+see their names, instead of having a bunch of tabs named <code>mod.rs</code>.</p>
+<a class="header" href="#uniform-paths" id="uniform-paths"><h1>Uniform paths</h1></a>
+<blockquote>
+<p>Uniform paths are a nightly-only feature.</p>
+</blockquote>
 <p>The uniform paths variant of Rust 2018 simplifies and unifies path handling
 compared to Rust 2015. In Rust 2015, paths work differently in <code>use</code>
 declarations than they do elsewhere. In particular, paths in <code>use</code>
@@ -326,106 +426,6 @@ module or item with the same name, you'll get an error, and you'll need to
 either rename one of the conflicting names or explicitly disambiguate the path.
 To explicitly disambiguate a path, use <code>::name</code> for an external crate name, or
 <code>self::name</code> for a local module or item.</p>
-<a class="header" href="#anchored-use-paths-variant" id="anchored-use-paths-variant"><h3>Anchored use paths variant</h3></a>
-<p>In the anchored use paths variant of Rust 2018, paths in <code>use</code> declarations
-<em>must</em> begin with a crate name, <code>crate</code>, <code>self</code>, or <code>super</code>.</p>
-<p>Code that looked like this:</p>
-<pre><code class="language-rust ignore">// Rust 2015
-
-extern crate futures;
-
-use futures::Future;
-
-mod foo {
-    pub struct Bar;
-}
-
-use foo::Bar;
-</code></pre>
-<p>Now looks like this:</p>
-<pre><code class="language-rust ignore">// Rust 2018 (anchored use paths variant)
-
-// 'futures' is the name of a crate
-use futures::Future;
-
-mod foo {
-    pub struct Bar;
-}
-
-// 'crate' means the current crate
-use crate::foo::Bar;
-</code></pre>
-<p>In addition, all of these path forms are available outside of <code>use</code>
-declarations as well, which eliminates many sources of confusion. Consider this
-code in Rust 2015:</p>
-<pre><code class="language-rust ignore">// Rust 2015
-
-extern crate futures;
-
-mod submodule {
-    // this works!
-    use futures::Future;
-
-    // so why doesn't this work?
-    fn my_poll() -&gt; futures::Poll { ... }
-}
-
-fn main() {
-    // this works
-    let five = std::sync::Arc::new(5);
-}
-
-mod submodule {
-    fn function() {
-        // ... so why doesn't this work
-        let five = std::sync::Arc::new(5);
-    }
-}
-</code></pre>
-<p>In the <code>futures</code> example, the <code>my_poll</code> function signature is incorrect, because <code>submodule</code>
-contains no items named <code>futures</code>; that is, this path is considered relative. But because
-<code>use</code> is anchored, <code>use futures::</code> works even though a lone <code>futures::</code> doesn't! With <code>std</code>
-it can be even more confusing, as you never wrote the <code>extern crate std;</code> line at all. So
-why does it work in <code>main</code> but not in a submodule? Same thing: it's a relative path because
-it's not in a <code>use</code> declaration. <code>extern crate std;</code> is inserted at the crate root, so
-it's fine in <code>main</code>, but it doesn't exist in the submodule at all.</p>
-<p>Let's look at how this change affects things:</p>
-<pre><code class="language-rust ignore">// Rust 2018 (anchored use paths variant)
-
-// no more `extern crate futures;`
-
-mod submodule {
-    // 'futures' is the name of a crate, so this is anchored and works
-    use futures::Future;
-
-    // 'futures' is the name of a crate, so this is anchored and works
-    fn my_poll() -&gt; futures::Poll { ... }
-}
-
-fn main() {
-    // 'std' is the name of a crate, so this is anchored and works
-    let five = std::sync::Arc::new(5);
-}
-
-mod submodule {
-    fn function() {
-        // 'std' is the name of a crate, so this is anchored and works
-        let five = std::sync::Arc::new(5);
-    }
-}
-</code></pre>
-<p>Much more straightforward.</p>
-<a class="header" href="#no-more-modrs" id="no-more-modrs"><h3>No more <code>mod.rs</code></h3></a>
-<p>In Rust 2015, if you have a submodule:</p>
-<pre><code class="language-rust ignore">mod foo;
-</code></pre>
-<p>It can live in <code>foo.rs</code> or <code>foo/mod.rs</code>. If it has submodules of its own, it
-<em>must</em> be <code>foo/mod.rs</code>. So a <code>bar</code> submodule of <code>foo</code> would live at
-<code>foo/bar.rs</code>.</p>
-<p>In Rust 2018, <code>mod.rs</code> is no longer needed. <code>foo.rs</code> can just be <code>foo.rs</code>,
-and the submodule is still <code>foo/bar.rs</code>. This eliminates the special
-name, and if you have a bunch of files open in your editor, you can clearly
-see their names, instead of having a bunch of tabs named <code>mod.rs</code>.</p>
 
                     </main>
 
