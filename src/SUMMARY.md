@@ -32,6 +32,7 @@
       - [`dyn Trait` for trait objects](rust-2018/trait-system/dyn-trait-for-trait-objects.md)
       - [More container types support trait objects](rust-2018/trait-system/more-container-types-support-trait-objects.md)
       - [Associated constants](rust-2018/trait-system/associated-constants.md)
+      - [No more anonymous parameters](rust-2018/trait-system/no-anon-params.md)
     - [Slice patterns](rust-2018/slice-patterns.md)
     - [Ownership and lifetimes](rust-2018/ownership-and-lifetimes/index.md)
       - [Default `match` bindings](rust-2018/ownership-and-lifetimes/default-match-bindings.md)
