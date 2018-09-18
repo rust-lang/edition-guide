@@ -10,7 +10,7 @@ trait Foo {
 }
 ```
 
-In the 2018 edition, all parameters must be given a variable (even if it's just
+In the 2018 edition, all parameters must be given an argument name  (even if it's just
 `_`):
 
 ```rust
