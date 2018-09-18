@@ -6,7 +6,7 @@
 
 - [What are editions?](editions/index.md)
   - [Creating a new project](editions/creating-a-new-project.md)
-  - [Transitioning your code to a new edition](editions/transitioning-your-code-to-a-new-edition.md)
+  - [Transitioning an existing project to a new edition](editions/transitioning-an-existing-project-to-a-new-edition.md)
 
 ## Rust 2015
 
