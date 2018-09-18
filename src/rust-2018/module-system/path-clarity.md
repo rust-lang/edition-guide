@@ -74,11 +74,29 @@ and then there is no step two. If you're not using Cargo, you already had to pas
 `--extern` flags to give `rustc` the location of external crates, so you'd just
 keep doing what you were doing there as well.
 
+> One small note here: `cargo fix` will not currently automate this change. We may
+> have it do this for you in the future.
+
 One other use for `extern crate` was to import macros; that's no longer needed.
 Check [the macro section](../macros/macro-changes.html) for more.
 
-> One small note here: `cargo fix` will not currently automate this change. We may
-> have it do this for you in the future.
+If you've been using `as` to rename your crate like this:
+
+```rust,ignore
+extern crate futures as f;
+
+use f::Future;
+```
+
+then removing the `extern crate` line on its own won't work. You'll need to do this:
+
+```rust,ignore
+use futures as f;
+
+use f::Future;
+```
+
+This change will need to happen in any module that uses `f`.
 
 ### The `crate` keyword refers to the current crate.
 
