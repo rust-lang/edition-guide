@@ -171,6 +171,9 @@ fn main() {
 }
 </code></pre>
 <p>This moves <code>macro_rules</code> macros to be a bit closer to other kinds of items.</p>
+<p>Note that you'll still need <code>#[macro_rules]</code> to use macros you've defined
+in your own crate; this feature only works for importing macros from
+external crates.</p>
 <a class="header" href="#procedural-macros" id="procedural-macros"><h2>Procedural macros</h2></a>
 <p>When using procedural macros to derive traits, you will have to name the macro
 that provides the custom derive. This generally matches the name of the trait,
