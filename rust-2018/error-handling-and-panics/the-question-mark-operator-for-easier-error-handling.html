@@ -139,7 +139,6 @@
                         <a class="header" href="#the--operator-for-easier-error-handling" id="the--operator-for-easier-error-handling"><h1>The <code>?</code> operator for easier error handling</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.13-brightgreen.svg" alt="Minimum Rust version: 1.13" /> for <code>Result&lt;T, E&gt;</code></p>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.22-brightgreen.svg" alt="Minimum Rust version: 1.22" /> for <code>Option&lt;T&gt;</code></p>
-<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg" alt="Minimum Rust version: 1.26" /> for using <code>?</code> in <code>main</code> and tests</p>
 <p>Rust has gained a new operator, <code>?</code>, that makes error handling more pleasant
 by reducing the visual noise involved. It does this by solving one simple
 problem. To illustrate, imagine we had some code to read some data from a
@@ -244,114 +243,6 @@ case, <code>?</code> will return a value for <code>Some(T)</code> and return <co
 current restriction is that you cannot use <code>?</code> for both in the same function,
 as the return type needs to match the type you use <code>?</code> on. In the future,
 this restriction will be lifed.</p>
-<a class="header" href="#a-in-main-and-tests" id="a-in-main-and-tests"><h2><code>?</code> in <code>main</code> and tests</h2></a>
-<p>Rust's error handling revolves around returning <code>Result&lt;T, E&gt;</code> and using <code>?</code>
-to propagate errors. For those who write many small programs and, hopefully,
-many tests, one common paper cut has been mixing entry points such as <code>main</code>
-and <code>#[test]</code>s with error handling.</p>
-<p>As an example, you might have tried to write:</p>
-<pre><code class="language-rust ignore">use std::fs::File;
-
-fn main() {
-    let f = File::open(&quot;bar.txt&quot;)?;
-}
-</code></pre>
-<p>Since <code>?</code> works by propagating the <code>Result</code> with an early return to the
-enclosing function, the snippet above does not work, and results today
-in the following error:</p>
-<pre><code class="language-rust ignore">error[E0277]: the `?` operator can only be used in a function that returns `Result`
-              or `Option` (or another type that implements `std::ops::Try`)
- --&gt; src/main.rs:5:13
-  |
-5 |     let f = File::open(&quot;bar.txt&quot;)?;
-  |             ^^^^^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a function that returns `()`
-  |
-  = help: the trait `std::ops::Try` is not implemented for `()`
-  = note: required by `std::ops::Try::from_error`
-</code></pre>
-<p>To solve this problem in Rust 2015, you might have written something like:</p>
-<pre><pre class="playpen"><code class="language-rust">// Rust 2015
-
-# use std::process;
-# use std::error::Error;
-
-fn run() -&gt; Result&lt;(), Box&lt;Error&gt;&gt; {
-    // real logic..
-    Ok(())
-}
-
-fn main() {
-    if let Err(e) = run() {
-        println!(&quot;Application error: {}&quot;, e);
-        process::exit(1);
-    }
-}
-</code></pre></pre>
-<p>However, in this case, the <code>run</code> function has all the interesting logic and
-<code>main</code> is just boilerplate. The problem is even worse for <code>#[test]</code>s, since
-there tend to be a lot more of them.</p>
-<p>In Rust 2018 you can instead let your <code>#[test]</code>s and <code>main</code> functions return
-a <code>Result</code>:</p>
-<pre><pre class="playpen"><code class="language-rust no_run">// Rust 2018
-
-use std::fs::File;
-
-fn main() -&gt; Result&lt;(), std::io::Error&gt; {
-    let f = File::open(&quot;bar.txt&quot;)?;
-
-    Ok(())
-}
-</code></pre></pre>
-<p>In this case, if say the file doesn't exist and there is an <code>Err(err)</code> somewhere,
-then <code>main</code> will exit with an error code (not <code>0</code>) and print out a <code>Debug</code>
-representation of <code>err</code>.</p>
-<a class="header" href="#more-details" id="more-details"><h2>More details</h2></a>
-<p>Getting <code>-&gt; Result&lt;..&gt;</code> to work in the context of <code>main</code> and <code>#[test]</code>s is not
-magic. It is all backed up by a <code>Termination</code> trait which all valid return
-types of <code>main</code> and testing functions must implement. The trait is defined as:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-pub trait Termination {
-    fn report(self) -&gt; i32;
-}
-#}</code></pre></pre>
-<p>When setting up the entry point for your application, the compiler will use this
-trait and call <code>.report()</code> on the <code>Result</code> of the <code>main</code> function you have written.</p>
-<p>Two simplified example implementations of this trait for <code>Result</code> and <code>()</code> are:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-# #![feature(process_exitcode_placeholder, termination_trait_lib)]
-# use std::process::ExitCode;
-# use std::fmt;
-#
-# pub trait Termination { fn report(self) -&gt; i32; }
-
-impl Termination for () {
-    fn report(self) -&gt; i32 {
-        # use std::process::Termination;
-        ExitCode::SUCCESS.report()
-    }
-}
-
-impl&lt;E: fmt::Debug&gt; Termination for Result&lt;(), E&gt; {
-    fn report(self) -&gt; i32 {
-        match self {
-            Ok(()) =&gt; ().report(),
-            Err(err) =&gt; {
-                eprintln!(&quot;Error: {:?}&quot;, err);
-                # use std::process::Termination;
-                ExitCode::FAILURE.report()
-            }
-        }
-    }
-}
-#}</code></pre></pre>
-<p>As you can see in the case of <code>()</code>, a success code is simply returned.
-In the case of <code>Result</code>, the success case delegates to the implementation for
-<code>()</code> but prints out an error message and a failure exit code on <code>Err(..)</code>.</p>
-<p>To learn more about the finer details, consult either <a href="https://github.com/rust-lang/rust/issues/43301">the tracking issue</a> or <a href="https://github.com/rust-lang/rfcs/blob/master/text/1937-ques-in-main.md">the RFC</a>.</p>
 
                     </main>
 

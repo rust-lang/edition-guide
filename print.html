@@ -697,7 +697,6 @@ in Rust. The most notable of these is <a href="the-question-mark-operator-for-ea
 <a class="header" href="#the--operator-for-easier-error-handling" id="the--operator-for-easier-error-handling"><h1>The <code>?</code> operator for easier error handling</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.13-brightgreen.svg" alt="Minimum Rust version: 1.13" /> for <code>Result&lt;T, E&gt;</code></p>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.22-brightgreen.svg" alt="Minimum Rust version: 1.22" /> for <code>Option&lt;T&gt;</code></p>
-<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg" alt="Minimum Rust version: 1.26" /> for using <code>?</code> in <code>main</code> and tests</p>
 <p>Rust has gained a new operator, <code>?</code>, that makes error handling more pleasant
 by reducing the visual noise involved. It does this by solving one simple
 problem. To illustrate, imagine we had some code to read some data from a
@@ -802,115 +801,7 @@ case, <code>?</code> will return a value for <code>Some(T)</code> and return <co
 current restriction is that you cannot use <code>?</code> for both in the same function,
 as the return type needs to match the type you use <code>?</code> on. In the future,
 this restriction will be lifed.</p>
-<a class="header" href="#a-in-main-and-tests" id="a-in-main-and-tests"><h2><code>?</code> in <code>main</code> and tests</h2></a>
-<p>Rust's error handling revolves around returning <code>Result&lt;T, E&gt;</code> and using <code>?</code>
-to propagate errors. For those who write many small programs and, hopefully,
-many tests, one common paper cut has been mixing entry points such as <code>main</code>
-and <code>#[test]</code>s with error handling.</p>
-<p>As an example, you might have tried to write:</p>
-<pre><code class="language-rust ignore">use std::fs::File;
-
-fn main() {
-    let f = File::open(&quot;bar.txt&quot;)?;
-}
-</code></pre>
-<p>Since <code>?</code> works by propagating the <code>Result</code> with an early return to the
-enclosing function, the snippet above does not work, and results today
-in the following error:</p>
-<pre><code class="language-rust ignore">error[E0277]: the `?` operator can only be used in a function that returns `Result`
-              or `Option` (or another type that implements `std::ops::Try`)
- --&gt; src/main.rs:5:13
-  |
-5 |     let f = File::open(&quot;bar.txt&quot;)?;
-  |             ^^^^^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a function that returns `()`
-  |
-  = help: the trait `std::ops::Try` is not implemented for `()`
-  = note: required by `std::ops::Try::from_error`
-</code></pre>
-<p>To solve this problem in Rust 2015, you might have written something like:</p>
-<pre><pre class="playpen"><code class="language-rust">// Rust 2015
-
-# use std::process;
-# use std::error::Error;
-
-fn run() -&gt; Result&lt;(), Box&lt;Error&gt;&gt; {
-    // real logic..
-    Ok(())
-}
-
-fn main() {
-    if let Err(e) = run() {
-        println!(&quot;Application error: {}&quot;, e);
-        process::exit(1);
-    }
-}
-</code></pre></pre>
-<p>However, in this case, the <code>run</code> function has all the interesting logic and
-<code>main</code> is just boilerplate. The problem is even worse for <code>#[test]</code>s, since
-there tend to be a lot more of them.</p>
-<p>In Rust 2018 you can instead let your <code>#[test]</code>s and <code>main</code> functions return
-a <code>Result</code>:</p>
-<pre><pre class="playpen"><code class="language-rust no_run">// Rust 2018
-
-use std::fs::File;
-
-fn main() -&gt; Result&lt;(), std::io::Error&gt; {
-    let f = File::open(&quot;bar.txt&quot;)?;
-
-    Ok(())
-}
-</code></pre></pre>
-<p>In this case, if say the file doesn't exist and there is an <code>Err(err)</code> somewhere,
-then <code>main</code> will exit with an error code (not <code>0</code>) and print out a <code>Debug</code>
-representation of <code>err</code>.</p>
-<a class="header" href="#more-details-1" id="more-details-1"><h2>More details</h2></a>
-<p>Getting <code>-&gt; Result&lt;..&gt;</code> to work in the context of <code>main</code> and <code>#[test]</code>s is not
-magic. It is all backed up by a <code>Termination</code> trait which all valid return
-types of <code>main</code> and testing functions must implement. The trait is defined as:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-pub trait Termination {
-    fn report(self) -&gt; i32;
-}
-#}</code></pre></pre>
-<p>When setting up the entry point for your application, the compiler will use this
-trait and call <code>.report()</code> on the <code>Result</code> of the <code>main</code> function you have written.</p>
-<p>Two simplified example implementations of this trait for <code>Result</code> and <code>()</code> are:</p>
-<pre><pre class="playpen"><code class="language-rust">
-# #![allow(unused_variables)]
-#fn main() {
-# #![feature(process_exitcode_placeholder, termination_trait_lib)]
-# use std::process::ExitCode;
-# use std::fmt;
-#
-# pub trait Termination { fn report(self) -&gt; i32; }
-
-impl Termination for () {
-    fn report(self) -&gt; i32 {
-        # use std::process::Termination;
-        ExitCode::SUCCESS.report()
-    }
-}
-
-impl&lt;E: fmt::Debug&gt; Termination for Result&lt;(), E&gt; {
-    fn report(self) -&gt; i32 {
-        match self {
-            Ok(()) =&gt; ().report(),
-            Err(err) =&gt; {
-                eprintln!(&quot;Error: {:?}&quot;, err);
-                # use std::process::Termination;
-                ExitCode::FAILURE.report()
-            }
-        }
-    }
-}
-#}</code></pre></pre>
-<p>As you can see in the case of <code>()</code>, a success code is simply returned.
-In the case of <code>Result</code>, the success case delegates to the implementation for
-<code>()</code> but prints out an error message and a failure exit code on <code>Err(..)</code>.</p>
-<p>To learn more about the finer details, consult either <a href="https://github.com/rust-lang/rust/issues/43301">the tracking issue</a> or <a href="https://github.com/rust-lang/rfcs/blob/master/text/1937-ques-in-main.md">the RFC</a>.</p>
-<a class="header" href="#a-in-main-and-tests-1" id="a-in-main-and-tests-1"><h1><code>?</code> in <code>main</code> and tests</h1></a>
+<a class="header" href="#a-in-main-and-tests" id="a-in-main-and-tests"><h1><code>?</code> in <code>main</code> and tests</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg" alt="Minimum Rust version: 1.26" /></p>
 <p>Rust's error handling revolves around returning <code>Result&lt;T, E&gt;</code> and using <code>?</code>
 to propagate errors. For those who write many small programs and, hopefully,
@@ -972,7 +863,7 @@ fn main() -&gt; Result&lt;(), std::io::Error&gt; {
 <p>In this case, if say the file doesn't exist and there is an <code>Err(err)</code> somewhere,
 then <code>main</code> will exit with an error code (not <code>0</code>) and print out a <code>Debug</code>
 representation of <code>err</code>.</p>
-<a class="header" href="#more-details-2" id="more-details-2"><h2>More details</h2></a>
+<a class="header" href="#more-details-1" id="more-details-1"><h2>More details</h2></a>
 <p>Getting <code>-&gt; Result&lt;..&gt;</code> to work in the context of <code>main</code> and <code>#[test]</code>s is not
 magic. It is all backed up by a <code>Termination</code> trait which all valid return
 types of <code>main</code> and testing functions must implement. The trait is defined as:</p>
@@ -1232,7 +1123,7 @@ fn returns_closure() -&gt; impl Fn(i32) -&gt; i32 {
 }
 #}</code></pre></pre>
 <p>We can now return closures by value, just like any other type!</p>
-<a class="header" href="#more-details-3" id="more-details-3"><h2>More details</h2></a>
+<a class="header" href="#more-details-2" id="more-details-2"><h2>More details</h2></a>
 <p>The above is all you need to know to get going with <code>impl Trait</code>, but for
 some more nitty-gritty details: type parameters and <code>impl Trait</code> in argument
 position are universals (universally quantified types). Meanwhile, <code>impl Trait</code> in return position are existentials (existentially quantified types).
@@ -1297,7 +1188,7 @@ fn function2() -&gt; Box&lt;dyn Trait&gt; {
 }
 #}</code></pre></pre>
 <p>That's it!</p>
-<a class="header" href="#more-details-4" id="more-details-4"><h2>More details</h2></a>
+<a class="header" href="#more-details-3" id="more-details-3"><h2>More details</h2></a>
 <p>Using just the trait name for trait objects turned out to be a bad decision.
 The current syntax is often ambiguous and confusing, even to veterans,
 and favors a feature that is not more frequently used than its alternatives,
@@ -1489,7 +1380,7 @@ assert_eq!(&quot;ends with 3&quot;, match arr {
     [a, b, c] =&gt; &quot;ends with something else&quot;,
 });
 #}</code></pre></pre>
-<a class="header" href="#more-details-5" id="more-details-5"><h2>More details</h2></a>
+<a class="header" href="#more-details-4" id="more-details-4"><h2>More details</h2></a>
 <a class="header" href="#exhaustive-patterns" id="exhaustive-patterns"><h3>Exhaustive patterns</h3></a>
 <p>In the first example, note in particular the <code>_ =&gt; ...</code> pattern.
 Since we are matching on a slice, it could be of any length, so we need a
@@ -1515,7 +1406,7 @@ If we try to match on 2 or 4 elements,we get the errors:</p>
 have not been stabilized yet. To learn more, follow <a href="https://github.com/rust-lang/rust/issues/23121">the tracking issue</a>.</p>
 <a class="header" href="#ownership-and-lifetimes" id="ownership-and-lifetimes"><h1>Ownership and lifetimes</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to ownership and lifetimes.
-One of the most notable of these is <a href="default-match-binding.html">default match binding modes</a>.</p>
+One of the most notable of these is <a href="default-match-bindings.html">default match binding modes</a>.</p>
 <a class="header" href="#default-match-bindings" id="default-match-bindings"><h1>Default match bindings</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg" alt="Minimum Rust version: 1.26" /></p>
 <p>Have you ever had a borrowed <code>Option&lt;T&gt;</code> and tried to match on it? You
@@ -1542,7 +1433,7 @@ match s {
 code will Just Work.</p>
 <p>This affects not just <code>match</code>, but patterns everywhere, such as in <code>let</code>
 statements, closure arguments, and <code>for</code> loops.</p>
-<a class="header" href="#more-details-6" id="more-details-6"><h2>More details</h2></a>
+<a class="header" href="#more-details-5" id="more-details-5"><h2>More details</h2></a>
 <p>The mental model of patterns has shifted a bit with this change, to bring it
 into line with other aspects of the language. For example, when writing a
 <code>for</code> loop, you can iterate over borrowed contents of a collection by
@@ -1615,7 +1506,7 @@ impl fmt::Debug for StrWrap&lt;'_&gt; {
     }
 }
 #}</code></pre></pre>
-<a class="header" href="#more-details-7" id="more-details-7"><h2>More details</h2></a>
+<a class="header" href="#more-details-6" id="more-details-6"><h2>More details</h2></a>
 <p>In the Rust 2015 snippet above, we've used <code>-&gt; StrWrap</code>. However, unless you take
 a look at the definition of <code>StrWrap</code>, it is not clear that the returned value
 is actually borrowing something. Therefore, starting with Rust 2018, it is
@@ -1731,7 +1622,7 @@ struct ItemRef&lt;'a, T: Iterator&gt; {
 }
 </code></pre>
 <p>If you prefer to be more explicit in some cases, that is still possible.</p>
-<a class="header" href="#more-details-8" id="more-details-8"><h2>More details</h2></a>
+<a class="header" href="#more-details-7" id="more-details-7"><h2>More details</h2></a>
 <p>For more details, see <a href="https://github.com/rust-lang/rust/issues/44493">the tracking issue</a>
 and <a href="https://github.com/rust-lang/rfcs/pull/2093">the RFC</a>.</p>
 <a class="header" href="#simpler-lifetimes-in-static-and-const" id="simpler-lifetimes-in-static-and-const"><h1>Simpler lifetimes in <code>static</code> and <code>const</code></h1></a>
@@ -2224,7 +2115,7 @@ use serde_derive::{Serialize, Deserialize};
 #[derive(Serialize, Deserialize)]
 struct Bar;
 </code></pre>
-<a class="header" href="#more-details-9" id="more-details-9"><h2>More details</h2></a>
+<a class="header" href="#more-details-8" id="more-details-8"><h2>More details</h2></a>
 <p>This only works for macros defined in external crates.
 For macros defined locally, <code>#[macro_use] mod foo;</code> is still required, as it was in Rust 2015.</p>
 <a class="header" href="#the-compiler" id="the-compiler"><h1>The compiler</h1></a>
@@ -2442,7 +2333,7 @@ documentation</a>.</p>
 moment.</p>
 <a class="header" href="#cargo-and-cratesio" id="cargo-and-cratesio"><h1>Cargo and crates.io</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to <code>cargo</code> and crates.io.
-A notable addition here is the new <a href="improved-error-messages.html"><code>cargo check</code></a> command.</p>
+A notable addition here is the new <a href="cargo-check-for-faster-checking.html"><code>cargo check</code></a> command.</p>
 <a class="header" href="#cargo-check-for-faster-checking" id="cargo-check-for-faster-checking"><h1><code>cargo check</code> for faster checking</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.16-brightgreen.svg" alt="Minimum Rust version: 1.16" /></p>
 <p><code>cargo check</code> is a new subcommand should speed up the development
@@ -2547,8 +2438,8 @@ invocations used to build dependencies. If you'd like to do that, see <code>$RUS
 <ul>
 <li>A <em>workspace</em> contains one or more packages</li>
 </ul>
-<p>This can be useful for larger projects. For example, [the <code>futures</code>
-respository] is a <em>workspace</em> that contains many related packages:</p>
+<p>This can be useful for larger projects. For example, <a href="https://github.com/rust-lang-nursery/futures-rs">the <code>futures</code> package</a>
+is a <em>workspace</em> that contains many related packages:</p>
 <ul>
 <li>futures</li>
 <li>futures-util</li>
