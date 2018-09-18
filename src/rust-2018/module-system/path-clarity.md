@@ -1,6 +1,6 @@
 # Path clarity
 
-![Minimum Rust version: nightly](https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg)
+![Minimum Rust version: beta](https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg)
 ![Minimum Rust version: nightly](https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg) for "uniform paths"
 
 The module system is often one of the hardest things for people new to Rust. Everyone
@@ -223,7 +223,6 @@ In Rust 2018, `mod.rs` is no longer needed. `foo.rs` can just be `foo.rs`,
 and the submodule is still `foo/bar.rs`. This eliminates the special
 name, and if you have a bunch of files open in your editor, you can clearly
 see their names, instead of having a bunch of tabs named `mod.rs`.
-
 
 # Uniform paths
 

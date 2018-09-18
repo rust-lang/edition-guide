@@ -1,6 +1,6 @@
 # Raw identifiers
 
-![Minimum Rust version: nightly](https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg)
+![Minimum Rust version: beta](https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg)
 
 Rust, like many programming languages, has the concept of "keywords".
 These identifiers mean something to the language, and so you cannot use them in

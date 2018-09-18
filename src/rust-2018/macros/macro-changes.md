@@ -1,6 +1,6 @@
 # Macro changes
 
-![Minimum Rust version: nightly](https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg)
+![Minimum Rust version: beta](https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg)
 
 In Rust 2018, you can import specific macros from external crates via `use`
 statements, rather than the old `#[macro_use]` attribute.
