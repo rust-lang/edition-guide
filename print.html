@@ -409,7 +409,7 @@ sections call out the differences between the two. We encourage testing of the
 new &quot;uniform paths&quot; variant introduced in edition preview 2. The release of
 Rust 2018 will stabilize one of these two variants and drop the other.</p>
 <p>To test Rust 2018 with the new &quot;uniform paths&quot; variant, put
-<code>#![feature(rust_2018_preview, uniform_paths)]</code> at the top of your <code>lib.rs</code> or
+<code>#![feature(uniform_paths)]</code> at the top of your <code>lib.rs</code> or
 <code>main.rs</code>.</p>
 <p>Here's a brief summary:</p>
 <ul>
@@ -2160,7 +2160,6 @@ fn main() {
 </code></pre>
 <p>Now, you write:</p>
 <pre><code class="language-rust ignore">// Rust 2018
-#![feature(rust_2018_preview)]
 
 use bar::baz;
 
@@ -2186,7 +2185,6 @@ struct Bar;
 </code></pre>
 <p>Now, you write instead:</p>
 <pre><code class="language-rust ignore">// Rust 2018
-#![feature(rust_2018_preview)]
 use serde_derive::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize)]
