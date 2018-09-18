@@ -72,12 +72,11 @@ will be discussed in subsequent sections of this guide book. The features marked
 
 ## Documentation
 
-[Edition Guide]: https://rust-lang-nursery.github.io/edition-guide/
 [TRPL]: https://github.com/rust-lang/book/
 
 | **Tool** | **Status** |
 | ----------- | ---------- |
-| [Edition Guide] | Initial draft complete |
+| Edition Guide | Initial draft complete |
 | [TRPL] | Updated as features stabilize |
 
 ## Web site
