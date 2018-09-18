@@ -77,6 +77,9 @@ keep doing what you were doing there as well.
 One other use for `extern crate` was to import macros; that's no longer needed.
 Check [the macro section](../macros/macro-changes.html) for more.
 
+> One small note here: `cargo fix` will not currently automate this change. We may
+> have it do this for you in the future.
+
 ### The `crate` keyword refers to the current crate.
 
 In `use` declarations and in other code, you can refer to the root of the
