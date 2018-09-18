@@ -11,8 +11,8 @@ Cargo now has an additional level:
 
 * A *workspace* contains one or more packages
 
-This can be useful for larger projects. For example, [the `futures`
-respository] is a *workspace* that contains many related packages:
+This can be useful for larger projects. For example, [the `futures` package]
+is a *workspace* that contains many related packages:
 
 * futures
 * futures-util
