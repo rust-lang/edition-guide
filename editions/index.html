@@ -180,9 +180,18 @@ available in later editions.  You only need to upgrade if you want to take
 advantage of such features.</p>
 <a class="header" href="#trying-out-the-2018-edition" id="trying-out-the-2018-edition"><h2>Trying out the 2018 edition</h2></a>
 <p>At the time of writing, there are two editions: 2015 and 2018. 2015 is today's
-Rust; Rust 2018 will ship later this year. To transition to the 2018 edition
-from the 2015 edition, you'll want to get started with the <a href="transitioning-an-existing-project-to-a-new-edition.html">transition
-section</a>.</p>
+Rust; Rust 2018 is currently in beta, and will land in stable in Rust 1.31, on December 6, 2018.</p>
+<p>To give the 2018 edition a try, install the beta toolchain:</p>
+<pre><code class="language-console">&gt; rustup install beta
+</code></pre>
+<p>If you want the really bleeding edge, you can try nightly:</p>
+<pre><code class="language-console">&gt; rustup install nightly
+</code></pre>
+<p>When you see commands like <code>cargo fix</code> elsewhere in this guide, you may
+need to preface them with the toolchain:</p>
+<pre><code class="language-console">&gt; cargo +beta fix --edition
+&gt; cargo +nightly fix --edition
+</code></pre>
 
                     </main>
 

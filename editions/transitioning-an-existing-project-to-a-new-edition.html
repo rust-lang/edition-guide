@@ -183,6 +183,12 @@ If <code>cargo fix</code> can't fix something, it will print the warning that it
 to the console. If you see one of these warnings, you'll have to update your code
 manually. See the corresponding section of this guide for help, and if you have
 problems, please seek help at the <a href="https://users.rust-lang.org/">user's forums</a>.</p>
+<blockquote>
+<p>In the current release candidate, one notable thing that <code>rustfix</code> cannot
+automatically fix is <a href="../rust-2018/module-system/path-clarity.html">path clarity</a>.
+You may have no warnings after <code>cargo fix</code>, and will get errors in the next
+step, <code>cargo build</code>. We're working on it!</p>
+</blockquote>
 <p>Keep running <code>cargo fix --edition</code> until you have no more warnings.</p>
 <p>Congrats! Your code is now valid in both Rust 2015 and Rust 2018!</p>
 <a class="header" href="#enabling-the-new-edition-to-use-new-features" id="enabling-the-new-edition-to-use-new-features"><h2>Enabling the new edition to use new features</h2></a>
