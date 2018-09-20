@@ -36,6 +36,7 @@
       - [No more anonymous parameters](rust-2018/trait-system/no-anon-params.md)
     - [Slice patterns](rust-2018/slice-patterns.md)
     - [Ownership and lifetimes](rust-2018/ownership-and-lifetimes/index.md)
+      - [Non-lexical lifetimes](rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.md)
       - [Default `match` bindings](rust-2018/ownership-and-lifetimes/default-match-bindings.md)
       - [`'_`, the anonymous lifetime](rust-2018/ownership-and-lifetimes/the-anonymous-lifetime.md)
       - [Lifetime elision in `impl`](rust-2018/ownership-and-lifetimes/lifetime-elision-in-impl.md)
