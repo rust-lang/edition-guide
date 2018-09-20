@@ -53,6 +53,11 @@ to the console. If you see one of these warnings, you'll have to update your cod
 manually. See the corresponding section of this guide for help, and if you have
 problems, please seek help at the [user's forums](https://users.rust-lang.org/).
 
+> In the current release candidate, one notable thing that `rustfix` cannot
+> automatically fix is [path clarity](../rust-2018/module-system/path-clarity.html).
+> You may have no warnings after `cargo fix`, and will get errors in the next
+> step, `cargo build`. We're working on it!
+
 Keep running `cargo fix --edition` until you have no more warnings.
 
 Congrats! Your code is now valid in both Rust 2015 and Rust 2018!
