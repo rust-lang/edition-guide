@@ -42,7 +42,7 @@ fn main() {
 
 This moves `macro_rules` macros to be a bit closer to other kinds of items.
 
-Note that you'll still need `#[macro_rules]` to use macros you've defined
+Note that you'll still need `#[macro_use]` to use macros you've defined
 in your own crate; this feature only works for importing macros from
 external crates.
 
