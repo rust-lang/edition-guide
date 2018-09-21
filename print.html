@@ -1459,7 +1459,7 @@ One of the most notable of these is <a href="default-match-bindings.html">defaul
 <a class="header" href="#non-lexical-lifetimes" id="non-lexical-lifetimes"><h1>Non-lexical lifetimes</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" /></p>
 <p>The borrow checker has been enhanced to accept more code, via a mechanism
-called &quot;non-lexial lifetimes.&quot; Consider this example:</p>
+called &quot;non-lexical lifetimes.&quot; Consider this example:</p>
 <pre><code class="language-rust ignore">fn main() {
     let mut x = 5;
 
@@ -1505,7 +1505,7 @@ we never use <code>y</code> again. This code is fine, but the borrow checker cou
 8 | }
   | - immutable borrow ends here
 </code></pre>
-<p>With non-lexial lifetime, the error changes slightly:</p>
+<p>With non-lexical lifetimes, the error changes slightly:</p>
 <pre><code class="language-text">error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
  --&gt; src/main.rs:5:13
   |
@@ -1517,7 +1517,7 @@ we never use <code>y</code> again. This code is fine, but the borrow checker cou
 7 |     println!(&quot;y: {}&quot;, y);
   |                       - borrow later used here
 </code></pre>
-<p>instead of pointing to where <code>y</code> goes out of scope, it insteads shows you where
+<p>Instead of pointing to where <code>y</code> goes out of scope, it shows you where
 the conflicting borrow occurs. This makes these sorts of errors <em>far</em> easier to debug.</p>
 <a class="header" href="#default-match-bindings" id="default-match-bindings"><h1>Default match bindings</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg" alt="Minimum Rust version: 1.26" /></p>
@@ -2247,7 +2247,7 @@ fn main() {
 }
 </code></pre>
 <p>This moves <code>macro_rules</code> macros to be a bit closer to other kinds of items.</p>
-<p>Note that you'll still need <code>#[macro_rules]</code> to use macros you've defined
+<p>Note that you'll still need <code>#[macro_use]</code> to use macros you've defined
 in your own crate; this feature only works for importing macros from
 external crates.</p>
 <a class="header" href="#procedural-macros" id="procedural-macros"><h2>Procedural macros</h2></a>
