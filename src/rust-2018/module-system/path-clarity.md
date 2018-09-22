@@ -223,7 +223,6 @@ It can live in `foo.rs` or `foo/mod.rs`. If it has submodules of its own, it
 *must* be `foo/mod.rs`. So a `bar` submodule of `foo` would live at
 `foo/bar.rs`.
 
-
 In Rust 2018, `mod.rs` is no longer needed. 
 
 ```rust,ignore
@@ -240,8 +239,6 @@ mod bar;
 and the submodule is still `foo/bar.rs`. This eliminates the special
 name, and if you have a bunch of files open in your editor, you can clearly
 see their names, instead of having a bunch of tabs named `mod.rs`.
-
-
 
 # Uniform paths
 
