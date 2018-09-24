@@ -212,6 +212,10 @@ Much more straightforward.
 In Rust 2015, if you have a submodule:
 
 ```rust,ignore
+///  foo.rs 
+///  or 
+///  foo/mod.rs
+
 mod foo;
 ```
 
@@ -219,7 +223,19 @@ It can live in `foo.rs` or `foo/mod.rs`. If it has submodules of its own, it
 *must* be `foo/mod.rs`. So a `bar` submodule of `foo` would live at
 `foo/bar.rs`.
 
-In Rust 2018, `mod.rs` is no longer needed. `foo.rs` can just be `foo.rs`,
+In Rust 2018, `mod.rs` is no longer needed. 
+
+```rust,ignore
+///  foo.rs 
+///  foo/bar.rs
+
+mod foo;
+
+/// in foo.rs
+mod bar;
+```
+
+`foo.rs` can just be `foo.rs`,
 and the submodule is still `foo/bar.rs`. This eliminates the special
 name, and if you have a bunch of files open in your editor, you can clearly
 see their names, instead of having a bunch of tabs named `mod.rs`.
