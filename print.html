@@ -280,12 +280,6 @@ If <code>cargo fix</code> can't fix something, it will print the warning that it
 to the console. If you see one of these warnings, you'll have to update your code
 manually. See the corresponding section of this guide for help, and if you have
 problems, please seek help at the <a href="https://users.rust-lang.org/">user's forums</a>.</p>
-<blockquote>
-<p>In the current release candidate, one notable thing that <code>rustfix</code> cannot
-automatically fix is <a href="../rust-2018/module-system/path-clarity.html">path clarity</a>.
-You may have no warnings after <code>cargo fix</code>, and will get errors in the next
-step, <code>cargo build</code>. We're working on it!</p>
-</blockquote>
 <p>Keep running <code>cargo fix --edition</code> until you have no more warnings.</p>
 <p>Congrats! Your code is now valid in both Rust 2015 and Rust 2018!</p>
 <a class="header" href="#enabling-the-new-edition-to-use-new-features" id="enabling-the-new-edition-to-use-new-features"><h2>Enabling the new edition to use new features</h2></a>
@@ -579,12 +573,25 @@ fn main() {
 <p>Much more straightforward.</p>
 <a class="header" href="#no-more-modrs" id="no-more-modrs"><h3>No more <code>mod.rs</code></h3></a>
 <p>In Rust 2015, if you have a submodule:</p>
-<pre><code class="language-rust ignore">mod foo;
+<pre><code class="language-rust ignore">///  foo.rs 
+///  or 
+///  foo/mod.rs
+
+mod foo;
 </code></pre>
 <p>It can live in <code>foo.rs</code> or <code>foo/mod.rs</code>. If it has submodules of its own, it
 <em>must</em> be <code>foo/mod.rs</code>. So a <code>bar</code> submodule of <code>foo</code> would live at
 <code>foo/bar.rs</code>.</p>
-<p>In Rust 2018, <code>mod.rs</code> is no longer needed. <code>foo.rs</code> can just be <code>foo.rs</code>,
+<p>In Rust 2018, <code>mod.rs</code> is no longer needed.</p>
+<pre><code class="language-rust ignore">///  foo.rs 
+///  foo/bar.rs
+
+mod foo;
+
+/// in foo.rs
+mod bar;
+</code></pre>
+<p><code>foo.rs</code> can just be <code>foo.rs</code>,
 and the submodule is still <code>foo/bar.rs</code>. This eliminates the special
 name, and if you have a bunch of files open in your editor, you can clearly
 see their names, instead of having a bunch of tabs named <code>mod.rs</code>.</p>
