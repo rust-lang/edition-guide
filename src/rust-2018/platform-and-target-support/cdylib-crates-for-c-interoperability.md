@@ -14,5 +14,5 @@ the `cdylib` crate type in your `Cargo.toml`:
 crate-type = ["cdylib"]
 ```
 
-This will produce a smaller binary, with no Rust-specific information insde
+This will produce a smaller binary, with no Rust-specific information inside
 of it.
