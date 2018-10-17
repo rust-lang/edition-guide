@@ -117,4 +117,4 @@ You can use `?` with `Result<T, E>`s, but also with `Option<T>`. In that
 case, `?` will return a value for `Some(T)` and return `None` for `None`. One
 current restriction is that you cannot use `?` for both in the same function,
 as the return type needs to match the type you use `?` on. In the future,
-this restriction will be lifed.
+this restriction will be lifted.
