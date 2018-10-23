@@ -1,6 +1,6 @@
 # Lifetime elision in impl
 
-![Minimum Rust version: beta](https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg)
+![Minimum Rust version: 1.31](https://img.shields.io/badge/Minimum%20Rust%20Version-1.31-brightgreen.svg)
 
 When writing `impl` blocks, you can now elide lifetime annotations in some
 situations.
