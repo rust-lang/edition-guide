@@ -155,7 +155,7 @@ macro_rules! warn {
 // ...
 ```
 
-However, this will not work for older versions of the compiler, that don't understand the
+However, this will not work for older versions of the compiler that don't understand the
 `$crate::` prefix for macros.
 
 #### Macros using `local_inner_macros`
