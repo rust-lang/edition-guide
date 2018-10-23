@@ -2,6 +2,8 @@
 
 ![Minimum Rust version: beta](https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg)
 
+## `macro_rules!` style macros
+
 In Rust 2018, you can import specific macros from external crates via `use`
 statements, rather than the old `#[macro_use]` attribute.
 
@@ -78,3 +80,158 @@ struct Bar;
 
 This only works for macros defined in external crates.
 For macros defined locally, `#[macro_use] mod foo;` is still required, as it was in Rust 2015.
+
+### Local helper macros
+
+Sometimes it is helpful or necessary to have helper macros inside your module. This can make
+supporting both versions of rust more complicated.
+
+For example, let's make a simplified (and slightly contrived) version of the `log` crate in 2015
+edition style:
+
+```rust,ignore
+pub struct LogLevel {
+    Warn,
+    Error
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! log {
+    ($level:expr, $msg:expr) => {
+        println!("{}: {}", $level, $msg)
+    }
+}
+
+#[macro_export]
+macro_rules! warn {
+    ($msg:expr) => {
+        log!(stringify!($crate::LogLevel::Warn), $msg)
+    }
+}
+
+#[macro_export]
+macro_rules! error {
+    ($msg:expr) => {
+        log!(stringify!($crate::LogLevel::Error), $msg)
+    }
+}
+```
+
+Our `log!` macro is private to our module, but needs to be exported as it is called by other
+macros, and in 2015 edition all used macros must be exported.
+
+Now, in 2018 this example will not compile:
+
+```rust,ignore
+use log::error;
+
+fn main() {
+    error!("error message");
+}
+```
+
+will give an error message about not finding the `log!` macro. This is because unlike in the 2015
+edition, macros are namespaced and we must import them. We could do
+
+```rust,ignore
+use log::{log, error};
+```
+
+which would make our code compile, but `log` is meant to be an implementation detail!
+
+#### Macros with `$crate::` prefix.
+
+The cleanest way to handle this situation is to use the `$crate::` prefix for macros, the same as
+you would for any other path. Versions of the compiler >= 1.30 will handle this in both editions:
+
+```rust,ignore
+macro_rules! warn {
+    ($msg:expr) => {
+        $crate::log!(stringify!($crate::LogLevel::Warn), $msg)
+    }
+}
+
+// ...
+```
+
+However, this will not work for older versions of the compiler, that don't understand the
+`$crate::` prefix for macros.
+
+#### Macros using `local_inner_macros`
+
+We also have the `local_inner_macros` modifier that we can add to our `#[macro_export]` attribute.
+This has the advantage of working with older rustc versions (older versions just ignore the extra
+modifier). The downside is that it's a bit messier:
+
+```rust,ignore
+#[macro_export(local_inner_macros)]
+macro_rules! warn {
+    ($msg:expr) => {
+        log!(stringify!($crate::LogLevel::Warn), $msg)
+    }
+}
+```
+
+So the code knows to look for any macros used locally. But wait - this won't compile, because we
+use the `stringify!` macro that isn't in our local crate (hence the convoluted example). The
+solution is to add a level of indirection: we crate a macro that wraps stringify, but is local to
+our crate. That way everything works in both editions (sadly we have to pollute the global
+namespace a bit, but that's ok).
+
+```rust,ignore
+#[doc(hidden)]
+#[macro_export]
+macro_rules! my_special_stringify {
+    ($($inner:tt)*) => {
+        stringify!($($inner)*)
+    }
+}
+```
+
+Here we're using the most general macro pattern possible, a list of token trees. We just pass
+whatever tokens we get to the inner macro, and rely on it to report errors.
+
+So the full 2015/2018 working example would be:
+
+```rust,ignore
+pub struct LogLevel {
+    Warn,
+    Error
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! log {
+    ($level:expr, $msg:expr) => {
+        println!("{}: {}", $level, $msg)
+    }
+}
+
+#[macro_export(local_inner_macros)]
+macro_rules! warn {
+    ($msg:expr) => {
+        log!(my_special_stringify!($crate::LogLevel::Warn), $msg)
+    }
+}
+
+#[macro_export(local_inner_macros)]
+macro_rules! error {
+    ($msg:expr) => {
+        log!(my_special_stringify!($crate::LogLevel::Error), $msg)
+    }
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! my_special_stringify {
+    ($($args:tt)*) => {
+        stringify!($($args)*)
+    }
+}
+```
+
+Once everyone is using a rustc version >= 1.30, we can all just use the `$crate::` method (2015
+crates are guaranteed to carry on compiling fine with later versions of the compiler). We need to
+wait for package managers and larger organisations to update their compilers before this happens,
+so in the mean time we can use the `local_inner_macros` method to support everybody. :)
