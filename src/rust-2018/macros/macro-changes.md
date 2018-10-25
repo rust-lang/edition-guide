@@ -90,35 +90,49 @@ For example, let's make a simplified (and slightly contrived) version of the `lo
 edition style:
 
 ```rust,ignore
+/// How important/severe the log message is.
+#[derive(Copy, Clone)]
 pub struct LogLevel {
     Warn,
     Error
 }
 
+impl fmt::Display for LogLevel {
+    pub fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            LogLevel::Warn => write!(f, "warning"),
+            LogLevel::Error => write!(f, "error"),
+        }
+    }
+}
+
+// A helper macro to log the message.
 #[doc(hidden)]
 #[macro_export]
-macro_rules! log {
-    ($level:expr, $msg:expr) => {
+macro_rules! __impl_log {
+    ($level:expr, $msg:expr) => {{
         println!("{}: {}", $level, $msg)
-    }
+    }}
 }
 
+/// Warn level log message
 #[macro_export]
 macro_rules! warn {
-    ($msg:expr) => {
-        log!(stringify!($crate::LogLevel::Warn), $msg)
+    ($($args:tt)*) => {
+        __impl_log!($crate::LogLevel::Warn, format_args!($($args)*))
     }
 }
 
+/// Error level log message
 #[macro_export]
 macro_rules! error {
-    ($msg:expr) => {
-        log!(stringify!($crate::LogLevel::Error), $msg)
+    ($($args:tt)*) => {
+        __impl_log!($crate::LogLevel::Error, format_args!($($args)*))
     }
 }
 ```
 
-Our `log!` macro is private to our module, but needs to be exported as it is called by other
+Our `__impl_log!` macro is private to our module, but needs to be exported as it is called by other
 macros, and in 2015 edition all used macros must be exported.
 
 Now, in 2018 this example will not compile:
@@ -131,14 +145,14 @@ fn main() {
 }
 ```
 
-will give an error message about not finding the `log!` macro. This is because unlike in the 2015
-edition, macros are namespaced and we must import them. We could do
+will give an error message about not finding the `__impl_log!` macro. This is because unlike in 
+the 2015 edition, macros are namespaced and we must import them. We could do
 
 ```rust,ignore
-use log::{log, error};
+use log::{__impl_log, error};
 ```
 
-which would make our code compile, but `log` is meant to be an implementation detail!
+which would make our code compile, but `__impl_log` is meant to be an implementation detail!
 
 #### Macros with `$crate::` prefix.
 
@@ -147,8 +161,8 @@ you would for any other path. Versions of the compiler >= 1.30 will handle this 
 
 ```rust,ignore
 macro_rules! warn {
-    ($msg:expr) => {
-        $crate::log!(stringify!($crate::LogLevel::Warn), $msg)
+    ($($args:tt)*) => {
+        $crate::__impl_log!($crate::LogLevel::Warn, format_args!($($args)*))
     }
 }
 
@@ -167,24 +181,26 @@ modifier). The downside is that it's a bit messier:
 ```rust,ignore
 #[macro_export(local_inner_macros)]
 macro_rules! warn {
-    ($msg:expr) => {
-        log!(stringify!($crate::LogLevel::Warn), $msg)
+    ($($args:tt)*) => {
+        __impl_log!($crate::LogLevel::Warn, format_args!($($args)*))
     }
 }
 ```
 
 So the code knows to look for any macros used locally. But wait - this won't compile, because we
-use the `stringify!` macro that isn't in our local crate (hence the convoluted example). The
-solution is to add a level of indirection: we crate a macro that wraps stringify, but is local to
-our crate. That way everything works in both editions (sadly we have to pollute the global
+use the `format_args!` macro that isn't in our local crate (hence the convoluted example). The
+solution is to add a level of indirection: we crate a macro that wraps `format_args`, but is local 
+to our crate. That way everything works in both editions (sadly we have to pollute the global
 namespace a bit, but that's ok).
 
 ```rust,ignore
+// I've used the pattern `_<my crate  name>__<macro name>` to name this macro, hopefully avoiding
+// name clashes.
 #[doc(hidden)]
 #[macro_export]
-macro_rules! my_special_stringify {
+macro_rules! _log__format_args {
     ($($inner:tt)*) => {
-        stringify!($($inner)*)
+        format_args! { $($inner)* }
     }
 }
 ```
@@ -194,39 +210,53 @@ whatever tokens we get to the inner macro, and rely on it to report errors.
 
 So the full 2015/2018 working example would be:
 
-```rust,ignore
+```rust
+/// How important/severe the log message is.
+#[derive(Copy, Clone)]
 pub struct LogLevel {
     Warn,
     Error
 }
 
-#[doc(hidden)]
-#[macro_export]
-macro_rules! log {
-    ($level:expr, $msg:expr) => {
-        println!("{}: {}", $level, $msg)
+impl fmt::Display for LogLevel {
+    pub fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            LogLevel::Warn => write!(f, "warning"),
+            LogLevel::Error => write!(f, "error"),
+        }
     }
 }
 
+// A helper macro to log the message.
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __impl_log {
+    ($level:expr, $msg:expr) => {{
+        println!("{}: {}", $level, $msg)
+    }}
+}
+
+/// Warn level log message
 #[macro_export(local_inner_macros)]
 macro_rules! warn {
-    ($msg:expr) => {
-        log!(my_special_stringify!($crate::LogLevel::Warn), $msg)
+    ($($args:tt)*) => {
+        __impl_log!($crate::LogLevel::Warn, format_args!($($args)*))
     }
 }
 
+/// Error level log message
 #[macro_export(local_inner_macros)]
 macro_rules! error {
-    ($msg:expr) => {
-        log!(my_special_stringify!($crate::LogLevel::Error), $msg)
+    ($($args:tt)*) => {
+        __impl_log!($crate::LogLevel::Error, format_args!($($args)*))
     }
 }
 
 #[doc(hidden)]
 #[macro_export]
-macro_rules! my_special_stringify {
-    ($($args:tt)*) => {
-        stringify!($($args)*)
+macro_rules! _log__format_args {
+    ($($inner:tt)*) => {
+        format_args! { $($inner)* }
     }
 }
 ```
