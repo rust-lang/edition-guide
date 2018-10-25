@@ -90,6 +90,8 @@ For example, let's make a simplified (and slightly contrived) version of the `lo
 edition style:
 
 ```rust
+use std::fmt;
+
 /// How important/severe the log message is.
 #[derive(Copy, Clone)]
 pub enum LogLevel {
