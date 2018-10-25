@@ -89,16 +89,16 @@ supporting both versions of rust more complicated.
 For example, let's make a simplified (and slightly contrived) version of the `log` crate in 2015
 edition style:
 
-```rust,ignore
+```rust
 /// How important/severe the log message is.
 #[derive(Copy, Clone)]
-pub struct LogLevel {
+pub enum LogLevel {
     Warn,
     Error
 }
 
 impl fmt::Display for LogLevel {
-    pub fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             LogLevel::Warn => write!(f, "warning"),
             LogLevel::Error => write!(f, "error"),
@@ -159,7 +159,7 @@ which would make our code compile, but `__impl_log` is meant to be an implementa
 The cleanest way to handle this situation is to use the `$crate::` prefix for macros, the same as
 you would for any other path. Versions of the compiler >= 1.30 will handle this in both editions:
 
-```rust,ignore
+```rust
 macro_rules! warn {
     ($($args:tt)*) => {
         $crate::__impl_log!($crate::LogLevel::Warn, format_args!($($args)*))
@@ -193,7 +193,7 @@ solution is to add a level of indirection: we crate a macro that wraps `format_a
 to our crate. That way everything works in both editions (sadly we have to pollute the global
 namespace a bit, but that's ok).
 
-```rust,ignore
+```rust
 // I've used the pattern `_<my crate  name>__<macro name>` to name this macro, hopefully avoiding
 // name clashes.
 #[doc(hidden)]
@@ -211,15 +211,17 @@ whatever tokens we get to the inner macro, and rely on it to report errors.
 So the full 2015/2018 working example would be:
 
 ```rust
+use std::fmt;
+
 /// How important/severe the log message is.
-#[derive(Copy, Clone)]
-pub struct LogLevel {
+#[derive(Debug, Copy, Clone)]
+pub enum LogLevel {
     Warn,
     Error
 }
 
 impl fmt::Display for LogLevel {
-    pub fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             LogLevel::Warn => write!(f, "warning"),
             LogLevel::Error => write!(f, "error"),
