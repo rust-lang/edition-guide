@@ -82,7 +82,7 @@ then removing the `extern crate` line on its own won't work. You'll need to do t
 ```rust,ignore
 use futures as f;
 
-use f::Future;
+use self::f::Future;
 ```
 
 This change will need to happen in any module that uses `f`.
