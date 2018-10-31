@@ -466,7 +466,7 @@ use f::Future;
 <p>then removing the <code>extern crate</code> line on its own won't work. You'll need to do this:</p>
 <pre><code class="language-rust ignore">use futures as f;
 
-use f::Future;
+use self::f::Future;
 </code></pre>
 <p>This change will need to happen in any module that uses <code>f</code>.</p>
 <a class="header" href="#the-crate-keyword-refers-to-the-current-crate" id="the-crate-keyword-refers-to-the-current-crate"><h3>The <code>crate</code> keyword refers to the current crate.</h3></a>
@@ -1670,7 +1670,7 @@ impl Foo&lt;'_, '_&gt; {
 Finally, the relationship <code>'a: 'b</code> which the struct requires must be upheld.</p>
 <p>For more details, see the <a href="https://github.com/rust-lang/rust/issues/44524">tracking issue on In-band lifetime bindings</a>.</p>
 <a class="header" href="#lifetime-elision-in-impl" id="lifetime-elision-in-impl"><h1>Lifetime elision in impl</h1></a>
-<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" /></p>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.31-brightgreen.svg" alt="Minimum Rust version: 1.31" /></p>
 <p>When writing <code>impl</code> blocks, you can now elide lifetime annotations in some
 situations.</p>
 <p>Consider a trait like <code>MyIterator</code>:</p>

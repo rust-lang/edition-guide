@@ -201,7 +201,7 @@ use f::Future;
 <p>then removing the <code>extern crate</code> line on its own won't work. You'll need to do this:</p>
 <pre><code class="language-rust ignore">use futures as f;
 
-use f::Future;
+use self::f::Future;
 </code></pre>
 <p>This change will need to happen in any module that uses <code>f</code>.</p>
 <a class="header" href="#the-crate-keyword-refers-to-the-current-crate" id="the-crate-keyword-refers-to-the-current-crate"><h3>The <code>crate</code> keyword refers to the current crate.</h3></a>
