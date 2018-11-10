@@ -191,7 +191,7 @@ macro_rules! warn {
 
 So the code knows to look for any macros used locally. But wait - this won't compile, because we
 use the `format_args!` macro that isn't in our local crate (hence the convoluted example). The
-solution is to add a level of indirection: we crate a macro that wraps `format_args`, but is local 
+solution is to add a level of indirection: we create a macro that wraps `format_args`, but is local 
 to our crate. That way everything works in both editions (sadly we have to pollute the global
 namespace a bit, but that's ok).
 
