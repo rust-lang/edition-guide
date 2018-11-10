@@ -138,6 +138,7 @@
                     <main>
                         <a class="header" href="#macro-changes" id="macro-changes"><h1>Macro changes</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" /></p>
+<a class="header" href="#macro_rules-style-macros" id="macro_rules-style-macros"><h2><code>macro_rules!</code> style macros</h2></a>
 <p>In Rust 2018, you can import specific macros from external crates via <code>use</code>
 statements, rather than the old <code>#[macro_use]</code> attribute.</p>
 <p>For example, consider a <code>bar</code> crate that implements a <code>baz!</code> macro. In
@@ -195,6 +196,177 @@ struct Bar;
 <a class="header" href="#more-details" id="more-details"><h2>More details</h2></a>
 <p>This only works for macros defined in external crates.
 For macros defined locally, <code>#[macro_use] mod foo;</code> is still required, as it was in Rust 2015.</p>
+<a class="header" href="#local-helper-macros" id="local-helper-macros"><h3>Local helper macros</h3></a>
+<p>Sometimes it is helpful or necessary to have helper macros inside your module. This can make
+supporting both versions of rust more complicated.</p>
+<p>For example, let's make a simplified (and slightly contrived) version of the <code>log</code> crate in 2015
+edition style:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use std::fmt;
+
+/// How important/severe the log message is.
+#[derive(Copy, Clone)]
+pub enum LogLevel {
+    Warn,
+    Error
+}
+
+impl fmt::Display for LogLevel {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        match self {
+            LogLevel::Warn =&gt; write!(f, &quot;warning&quot;),
+            LogLevel::Error =&gt; write!(f, &quot;error&quot;),
+        }
+    }
+}
+
+// A helper macro to log the message.
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __impl_log {
+    ($level:expr, $msg:expr) =&gt; {{
+        println!(&quot;{}: {}&quot;, $level, $msg)
+    }}
+}
+
+/// Warn level log message
+#[macro_export]
+macro_rules! warn {
+    ($($args:tt)*) =&gt; {
+        __impl_log!($crate::LogLevel::Warn, format_args!($($args)*))
+    }
+}
+
+/// Error level log message
+#[macro_export]
+macro_rules! error {
+    ($($args:tt)*) =&gt; {
+        __impl_log!($crate::LogLevel::Error, format_args!($($args)*))
+    }
+}
+#}</code></pre></pre>
+<p>Our <code>__impl_log!</code> macro is private to our module, but needs to be exported as it is called by other
+macros, and in 2015 edition all used macros must be exported.</p>
+<p>Now, in 2018 this example will not compile:</p>
+<pre><code class="language-rust ignore">use log::error;
+
+fn main() {
+    error!(&quot;error message&quot;);
+}
+</code></pre>
+<p>will give an error message about not finding the <code>__impl_log!</code> macro. This is because unlike in
+the 2015 edition, macros are namespaced and we must import them. We could do</p>
+<pre><code class="language-rust ignore">use log::{__impl_log, error};
+</code></pre>
+<p>which would make our code compile, but <code>__impl_log</code> is meant to be an implementation detail!</p>
+<a class="header" href="#macros-with-crate-prefix" id="macros-with-crate-prefix"><h4>Macros with <code>$crate::</code> prefix.</h4></a>
+<p>The cleanest way to handle this situation is to use the <code>$crate::</code> prefix for macros, the same as
+you would for any other path. Versions of the compiler &gt;= 1.30 will handle this in both editions:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+macro_rules! warn {
+    ($($args:tt)*) =&gt; {
+        $crate::__impl_log!($crate::LogLevel::Warn, format_args!($($args)*))
+    }
+}
+
+// ...
+#}</code></pre></pre>
+<p>However, this will not work for older versions of the compiler that don't understand the
+<code>$crate::</code> prefix for macros.</p>
+<a class="header" href="#macros-using-local_inner_macros" id="macros-using-local_inner_macros"><h4>Macros using <code>local_inner_macros</code></h4></a>
+<p>We also have the <code>local_inner_macros</code> modifier that we can add to our <code>#[macro_export]</code> attribute.
+This has the advantage of working with older rustc versions (older versions just ignore the extra
+modifier). The downside is that it's a bit messier:</p>
+<pre><code class="language-rust ignore">#[macro_export(local_inner_macros)]
+macro_rules! warn {
+    ($($args:tt)*) =&gt; {
+        __impl_log!($crate::LogLevel::Warn, format_args!($($args)*))
+    }
+}
+</code></pre>
+<p>So the code knows to look for any macros used locally. But wait - this won't compile, because we
+use the <code>format_args!</code> macro that isn't in our local crate (hence the convoluted example). The
+solution is to add a level of indirection: we create a macro that wraps <code>format_args</code>, but is local
+to our crate. That way everything works in both editions (sadly we have to pollute the global
+namespace a bit, but that's ok).</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// I've used the pattern `_&lt;my crate  name&gt;__&lt;macro name&gt;` to name this macro, hopefully avoiding
+// name clashes.
+#[doc(hidden)]
+#[macro_export]
+macro_rules! _log__format_args {
+    ($($inner:tt)*) =&gt; {
+        format_args! { $($inner)* }
+    }
+}
+#}</code></pre></pre>
+<p>Here we're using the most general macro pattern possible, a list of token trees. We just pass
+whatever tokens we get to the inner macro, and rely on it to report errors.</p>
+<p>So the full 2015/2018 working example would be:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use std::fmt;
+
+/// How important/severe the log message is.
+#[derive(Debug, Copy, Clone)]
+pub enum LogLevel {
+    Warn,
+    Error
+}
+
+impl fmt::Display for LogLevel {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        match self {
+            LogLevel::Warn =&gt; write!(f, &quot;warning&quot;),
+            LogLevel::Error =&gt; write!(f, &quot;error&quot;),
+        }
+    }
+}
+
+// A helper macro to log the message.
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __impl_log {
+    ($level:expr, $msg:expr) =&gt; {{
+        println!(&quot;{}: {}&quot;, $level, $msg)
+    }}
+}
+
+/// Warn level log message
+#[macro_export(local_inner_macros)]
+macro_rules! warn {
+    ($($args:tt)*) =&gt; {
+        __impl_log!($crate::LogLevel::Warn, _log__format_args!($($args)*))
+    }
+}
+
+/// Error level log message
+#[macro_export(local_inner_macros)]
+macro_rules! error {
+    ($($args:tt)*) =&gt; {
+        __impl_log!($crate::LogLevel::Error, _log__format_args!($($args)*))
+    }
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! _log__format_args {
+    ($($inner:tt)*) =&gt; {
+        format_args! { $($inner)* }
+    }
+}
+#}</code></pre></pre>
+<p>Once everyone is using a rustc version &gt;= 1.30, we can all just use the <code>$crate::</code> method (2015
+crates are guaranteed to carry on compiling fine with later versions of the compiler). We need to
+wait for package managers and larger organisations to update their compilers before this happens,
+so in the mean time we can use the <code>local_inner_macros</code> method to support everybody. :)</p>
 
                     </main>
 
