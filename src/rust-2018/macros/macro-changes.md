@@ -244,7 +244,7 @@ macro_rules! __impl_log {
 #[macro_export(local_inner_macros)]
 macro_rules! warn {
     ($($args:tt)*) => {
-        __impl_log!($crate::LogLevel::Warn, format_args!($($args)*))
+        __impl_log!($crate::LogLevel::Warn, _log__format_args!($($args)*))
     }
 }
 
@@ -252,7 +252,7 @@ macro_rules! warn {
 #[macro_export(local_inner_macros)]
 macro_rules! error {
     ($($args:tt)*) => {
-        __impl_log!($crate::LogLevel::Error, format_args!($($args)*))
+        __impl_log!($crate::LogLevel::Error, _log__format_args!($($args)*))
     }
 }
 
