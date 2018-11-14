@@ -92,18 +92,24 @@ In Rust 2018, it's considered idiomatic to use the [`dyn`
 keyword](../rust-2018/trait-system/dyn-trait-for-trait-objects.html) for
 trait objects.
 
-We can ask `cargo fix` to fix it:
+We ideally want `cargo fix` to fix all these idioms automatically in the same
+manner we did for upgrading to the 2018 edition. **At this point in time,
+though, the "idiom lints" are not ready for widespread automatic fixing.** The
+compiler isn't making `cargo fix`-compatible suggestions in many cases right
+now (and is making incorrect suggestions in others), so enabling the idiom
+lints, even with `cargo fix`, is likely to leave your crate with many warnings
+still remaining.
+
+It's planned to make these idiom migrations a seamless part of the Rust 2018
+experience, but we're not there yet. As a result the following instructions are
+recommended only for the intrepid who are willing to work through a few
+compiler/Cargo bugs!
+
+With that out of the way, we can instruct Cargo to fix our code snippet with:
 
 ```console
 $ cargo fix --edition-idioms
 ```
-> The `--edition-idioms` flag applies only to the "current crate" if you want
-> to run it against a workspace is necessary to use a workaround with
-> `RUSTFLAGS` in order to execute it in all the workspace members.
->
-> ```shell
-> $ RUSTFLAGS='-Wrust_2018_idioms' cargo fix --all
-> ```
 
 Afterwards, `src/lib.rs` looks like this:
 
@@ -118,5 +124,21 @@ We're now more idiomatic, and we didn't have to fix our code manually!
 As before, `cargo fix` may not be able to automatically update our code.
 If `cargo fix` can't fix something, it will print a warning to the console,
 and you'll have to fix it manually.
+
+Also as mentioned before, there are known bugs around the idiom lints which
+means they're not all ready for prime time yet. This means that you may get a
+scary-looking warning to report a bug to Cargo, which happens whenever a fix
+proposed by rustc actually caused code to stop compiling by accident. If you'd
+like `cargo fix` to make as much progress as possible, even if it causes code to
+stop compiling, you can execute:
+
+```console
+$ cargo fix --edition-idioms --broken-code
+```
+
+This will instruct `cargo fix` to apply changes even if they cause code to stop
+compiling, and you'll see the compilation result after all fixes are applied. If
+you notice anything awry, please feel free to report an issue to Cargo and we'll
+help prioritize and fix it.
 
 Enjoy the new edition!
