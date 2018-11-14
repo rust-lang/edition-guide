@@ -212,16 +212,20 @@ trait Foo {
 <p>In Rust 2018, it's considered idiomatic to use the <a href="../rust-2018/trait-system/dyn-trait-for-trait-objects.html"><code>dyn</code>
 keyword</a> for
 trait objects.</p>
-<p>We can ask <code>cargo fix</code> to fix it:</p>
+<p>Eventually, we want <code>cargo fix</code> to fix all these idioms automatically in the same
+manner we did for upgrading to the 2018 edition. <strong>Currently,
+though, the <em>&quot;idiom lints&quot;</em> are not ready for widespread automatic fixing.</strong> The
+compiler isn't making <code>cargo fix</code>-compatible suggestions in many cases right
+now, and it is making incorrect suggestions in others. Enabling the idiom lints,
+even with <code>cargo fix</code>, is likely to leave your crate either broken or with many
+warnings still remaining.</p>
+<p>We have plans to make these idiom migrations a seamless part of the Rust 2018
+experience, but we're not there yet. As a result the following instructions are
+recommended only for the intrepid who are willing to work through a few
+compiler/Cargo bugs!</p>
+<p>With that out of the way, we can instruct Cargo to fix our code snippet with:</p>
 <pre><code class="language-console">$ cargo fix --edition-idioms
 </code></pre>
-<blockquote>
-<p>The <code>--edition-idioms</code> flag applies only to the &quot;current crate&quot; if you want
-to run it against a workspace is necessary to use a workaround with
-<code>RUSTFLAGS</code> in order to execute it in all the workspace members.</p>
-<pre><code class="language-shell">$ RUSTFLAGS='-Wrust_2018_idioms' cargo fix --all
-</code></pre>
-</blockquote>
 <p>Afterwards, <code>src/lib.rs</code> looks like this:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -231,9 +235,20 @@ trait Foo {
 }
 #}</code></pre></pre>
 <p>We're now more idiomatic, and we didn't have to fix our code manually!</p>
-<p>As before, <code>cargo fix</code> may not be able to automatically update our code.
-If <code>cargo fix</code> can't fix something, it will print a warning to the console,
-and you'll have to fix it manually.</p>
+<p>Note that <code>cargo fix</code> may still not be able to automatically update our code.
+If <code>cargo fix</code> can't fix something, it will print a warning to the console, and
+you'll have to fix it manually.</p>
+<p>As mentioned before, there are known bugs around the idiom lints which
+means they're not all ready for prime time yet. You may get a scary-looking
+warning to report a bug to Cargo, which happens whenever a fix proposed by
+<code>rustc</code> actually caused code to stop compiling by accident. If you'd like <code>cargo fix</code> to make as much progress as possible, even if it causes code to stop
+compiling, you can execute:</p>
+<pre><code class="language-console">$ cargo fix --edition-idioms --broken-code
+</code></pre>
+<p>This will instruct <code>cargo fix</code> to apply automatic suggestions regardless of
+whether they work or not. Like usual, you'll see the compilation result after
+all fixes are applied. If you notice anything wrong or unusual, please feel free
+to report an issue to Cargo and we'll help prioritize and fix it.</p>
 <p>Enjoy the new edition!</p>
 
                     </main>
