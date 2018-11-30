@@ -429,7 +429,7 @@ features, but they end up <em>simplifying</em> the module system, to make it mor
 clear as to what is going on.</p>
 <p>Here's a brief summary:</p>
 <ul>
-<li><code>extern crate</code> is no longer needed</li>
+<li><code>extern crate</code> is no longer needed in 99% of circumstances.</li>
 <li>The <code>crate</code> keyword refers to the current crate.</li>
 <li>Absolute paths begin with a crate name, where the keyword <code>crate</code>
 refers to the current crate.</li>
@@ -471,6 +471,28 @@ keep doing what you were doing there as well.</p>
 <p>One small note here: <code>cargo fix</code> will not currently automate this change. We may
 have it do this for you in the future.</p>
 </blockquote>
+<a class="header" href="#an-exception" id="an-exception"><h4>An exception</h4></a>
+<p>There's one exception to this rule, and that's the &quot;sysroot&quot; crates. These are the
+crates distributed with Rust itself. We'd eventually like to remove the requirement
+for <code>extern crate</code> for them as well, but it hasn't shipped yet.</p>
+<p>You'll need to use <code>extern crate</code> for:</p>
+<ul>
+<li><code>proc_macro</code></li>
+</ul>
+<p>Additionally, you would need to use it for:</p>
+<ul>
+<li><code>core</code></li>
+<li><code>std</code></li>
+</ul>
+<p>However, <code>extern crate std;</code> is already implicit, and with <code>#![no_std]</code>,
+<code>extern crate core;</code> is already implicit. You'll only need these in highly
+specialized situations.</p>
+<p>Finally, on nightly, you'll need it for crates like:</p>
+<ul>
+<li><code>alloc</code></li>
+<li><code>test</code></li>
+</ul>
+<a class="header" href="#macros" id="macros"><h4>Macros</h4></a>
 <p>One other use for <code>extern crate</code> was to import macros; that's no longer needed.
 Check <a href="../macros/macro-changes.html">the macro section</a> for more.</p>
 <p>If you've been using <code>as</code> to rename your crate like this:</p>
@@ -2187,7 +2209,7 @@ with no SIMD:</p>
 <p>Beyond that, you may never write any of this yourself, but as always, the
 libraries you depend on may. For example, the regex crate contains these SIMD
 speedups without you needing to do anything at all!</p>
-<a class="header" href="#macros" id="macros"><h1>Macros</h1></a>
+<a class="header" href="#macros-1" id="macros-1"><h1>Macros</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to the macro system.
 A notable addition here is the introduction of <a href="custom-derive.html">custom derive macros</a>.</p>
 <a class="header" href="#custom-derive" id="custom-derive"><h1>Custom Derive</h1></a>
