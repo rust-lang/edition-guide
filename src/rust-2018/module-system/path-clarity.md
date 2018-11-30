@@ -15,7 +15,7 @@ clear as to what is going on.
 
 Here's a brief summary:
 
-* `extern crate` is no longer needed
+* `extern crate` is no longer needed in 99% of circumstances.
 * The `crate` keyword refers to the current crate.
 * Absolute paths begin with a crate name, where the keyword `crate`
   refers to the current crate.
@@ -65,6 +65,32 @@ keep doing what you were doing there as well.
 
 > One small note here: `cargo fix` will not currently automate this change. We may
 > have it do this for you in the future.
+
+#### An exception
+
+There's one exception to this rule, and that's the "sysroot" crates. These are the
+crates distributed with Rust itself. We'd eventually like to remove the requirement
+for `extern crate` for them as well, but it hasn't shipped yet.
+
+You'll need to use `extern crate` for:
+
+* `proc_macro`
+
+Additionally, you would need to use it for:
+
+* `core`
+* `std`
+
+However, `extern crate std;` is already implicit, and with `#![no_std]`,
+`extern crate core;` is already implicit. You'll only need these in highly
+specialized situations.
+
+Finally, on nightly, you'll need it for crates like:
+
+* `alloc`
+* `test`
+
+#### Macros
 
 One other use for `extern crate` was to import macros; that's no longer needed.
 Check [the macro section](../macros/macro-changes.html) for more.
