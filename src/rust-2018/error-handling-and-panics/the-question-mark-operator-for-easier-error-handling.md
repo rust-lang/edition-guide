@@ -30,7 +30,7 @@ fn read_username_from_file() -> Result<String, io::Error> {
 
 > Note: this code could be made simpler with a single call to
 > [`std::fs::read_to_string`](https://doc.rust-lang.org/stable/std/fs/fn.read_to_string.html),
-> but we're writing it all out manually here to have an example with mutliple
+> but we're writing it all out manually here to have an example with multiple
 > errors.
 
 This code has two paths that can fail, opening the file and reading the data
