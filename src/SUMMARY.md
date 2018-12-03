@@ -53,6 +53,7 @@
     - [Macros](rust-2018/macros/index.md)
       - [Custom Derive](rust-2018/macros/custom-derive.md)
       - [Macro changes](rust-2018/macros/macro-changes.md)
+      - [At most one repetition](rust-2018/macros/at-most-once.md)
     - [The compiler](rust-2018/the-compiler/index.md)
       - [Improved error messages](rust-2018/the-compiler/improved-error-messages.md)
       - [Incremental Compilation for faster compiles](rust-2018/the-compiler/incremental-compilation-for-faster-compiles.md)
