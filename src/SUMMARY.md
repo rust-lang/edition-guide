@@ -84,5 +84,3 @@
       - [MSVC toolchain support](rust-2018/platform-and-target-support/msvc-toolchain-support.md)
       - [MUSL support for fully static binaries](rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.md)
       - [`cdylib` crates for C interoperability](rust-2018/platform-and-target-support/cdylib-crates-for-c-interoperability.md)
-
-- [Unstable feature status](unstable-feature-status.md)
