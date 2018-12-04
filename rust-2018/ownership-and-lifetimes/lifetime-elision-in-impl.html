@@ -179,7 +179,7 @@ references:</p>
     }
 }
 </code></pre>
-<p>But in Rust 2018, we can combine elision with <a href="the-anonymous-lifetime.html">the anonymous lifetime</a> and
+<p>But in Rust 2018, we can combine elision with <a href="rust-2018/ownership-and-lifetimes/the-anonymous-lifetime.html">the anonymous lifetime</a> and
 write this instead.</p>
 <pre><code class="language-rust ignore">impl&lt;T&gt; Drop for SetOnDrop&lt;'_, T&gt; {
     fn drop(&amp;mut self) {

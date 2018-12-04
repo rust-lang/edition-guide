@@ -254,7 +254,7 @@ trait Foo {
     fn foo(&amp;self, Box&lt;Foo&gt;);
 }
 #}</code></pre></pre>
-<p>This code uses an anonymous parameter, that <code>Box&lt;Foo&gt;</code>. This is <a href="../rust-2018/trait-system/no-anon-params.html">not
+<p>This code uses an anonymous parameter, that <code>Box&lt;Foo&gt;</code>. This is <a href="rust-2018/trait-system/no-anon-params.html">not
 supported in Rust 2018</a>, and
 so this would fail to compile. Let's get this code up to date!</p>
 <a class="header" href="#updating-your-code-to-be-compatible-with-the-new-edition" id="updating-your-code-to-be-compatible-with-the-new-edition"><h2>Updating your code to be compatible with the new edition</h2></a>
@@ -306,7 +306,7 @@ trait Foo {
     fn foo(&amp;self, _: Box&lt;Foo&gt;);
 }
 #}</code></pre></pre>
-<p>In Rust 2018, it's considered idiomatic to use the <a href="../rust-2018/trait-system/dyn-trait-for-trait-objects.html"><code>dyn</code>
+<p>In Rust 2018, it's considered idiomatic to use the <a href="rust-2018/trait-system/dyn-trait-for-trait-objects.html"><code>dyn</code>
 keyword</a> for
 trait objects.</p>
 <p>Eventually, we want <code>cargo fix</code> to fix all these idioms automatically in the same
@@ -371,7 +371,7 @@ Rust 2018 smooths off rough edges, makes writing code simpler and easier,
 and removes some inconsistencies.</p>
 <a class="header" href="#module-system" id="module-system"><h1>Module system</h1></a>
 <p>In this chapter of the guide, we discuss a few changes to the module system.
-The most notable of these are the <a href="path-clarity.html">path clarity changes</a>.</p>
+The most notable of these are the <a href="rust-2018/module-system/path-clarity.html">path clarity changes</a>.</p>
 <a class="header" href="#raw-identifiers" id="raw-identifiers"><h1>Raw identifiers</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" /></p>
 <p>Rust, like many programming languages, has the concept of &quot;keywords&quot;.
@@ -494,7 +494,7 @@ specialized situations.</p>
 </ul>
 <a class="header" href="#macros" id="macros"><h4>Macros</h4></a>
 <p>One other use for <code>extern crate</code> was to import macros; that's no longer needed.
-Check <a href="../macros/macro-changes.html">the macro section</a> for more.</p>
+Check <a href="rust-2018/macros/macro-changes.html">the macro section</a> for more.</p>
 <p>If you've been using <code>as</code> to rename your crate like this:</p>
 <pre><code class="language-rust ignore">extern crate futures as f;
 
@@ -787,7 +787,7 @@ use std::{
 <p>This can reduce some repetition, and make things a bit more clear.</p>
 <a class="header" href="#error-handling-and-panics" id="error-handling-and-panics"><h1>Error handling and Panics</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to error handling
-in Rust. The most notable of these is <a href="the-question-mark-operator-for-easier-error-handling.html">the introduction of the <code>?</code> operator</a>.</p>
+in Rust. The most notable of these is <a href="rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html">the introduction of the <code>?</code> operator</a>.</p>
 <a class="header" href="#the--operator-for-easier-error-handling" id="the--operator-for-easier-error-handling"><h1>The <code>?</code> operator for easier error handling</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.13-brightgreen.svg" alt="Minimum Rust version: 1.13" /> for <code>Result&lt;T, E&gt;</code></p>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.22-brightgreen.svg" alt="Minimum Rust version: 1.22" /> for <code>Option&lt;T&gt;</code></p>
@@ -1087,7 +1087,7 @@ get smaller binaries. You will lose the ability to catch panics. Which choice
 is right for you depends on exactly what you're doing.</p>
 <a class="header" href="#control-flow" id="control-flow"><h1>Control flow</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to control flow.
-The most notable of these <em>will</em> be <a href="async-await-for-easier-concurrency.html"><code>async</code> and <code>await</code></a>.</p>
+The most notable of these <em>will</em> be <a href="rust-2018/control-flow/async-await-for-easier-concurrency.html"><code>async</code> and <code>await</code></a>.</p>
 <a class="header" href="#loops-can-break-with-a-value" id="loops-can-break-with-a-value"><h1><code>loop</code>s can break with a value</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.19-brightgreen.svg" alt="Minimum Rust version: 1.19" /></p>
 <p><code>loop</code>s can now break with a value:</p>
@@ -1118,7 +1118,7 @@ we have reserved the keywords so that a future release will contain them.
 We'll update this page when it's closer to shipping!</p>
 <a class="header" href="#trait-system" id="trait-system"><h1>Trait system</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to the trait system.
-The most notable of these is <a href="impl-trait-for-returning-complex-types-with-ease.html"><code>impl Trait</code></a>.</p>
+The most notable of these is <a href="rust-2018/trait-system/impl-trait-for-returning-complex-types-with-ease.html"><code>impl Trait</code></a>.</p>
 <a class="header" href="#impl-trait-for-returning-complex-types-with-ease" id="impl-trait-for-returning-complex-types-with-ease"><h1><code>impl Trait</code> for returning complex types with ease</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg" alt="Minimum Rust version: 1.26" /></p>
 <p><code>impl Trait</code> is the new way to specify unnamed but concrete types that
@@ -1287,7 +1287,7 @@ and favors a feature that is not more frequently used than its alternatives,
 is sometimes slower, and often cannot be used at all when its alternatives can.</p>
 <p>Furthermore, with <code>impl Trait</code> arriving, &quot;<code>impl Trait</code> vs <code>dyn Trait</code>&quot; is much
 more symmetric, and therefore a bit nicer, than &quot;<code>impl Trait</code> vs <code>Trait</code>&quot;.
-<code>impl Trait</code> is explained <a href="impl-trait-for-returning-complex-types-with-ease.html">here</a></p>
+<code>impl Trait</code> is explained <a href="rust-2018/trait-system/impl-trait-for-returning-complex-types-with-ease.html">here</a></p>
 <p>In the new edition, you should therefore prefer <code>dyn Trait</code> to just <code>Trait</code>
 where you need a trait object.</p>
 <a class="header" href="#more-container-types-support-trait-objects" id="more-container-types-support-trait-objects"><h1>More container types support trait objects</h1></a>
@@ -1499,7 +1499,7 @@ If we try to match on 2 or 4 elements,we get the errors:</p>
 have not been stabilized yet. To learn more, follow <a href="https://github.com/rust-lang/rust/issues/23121">the tracking issue</a>.</p>
 <a class="header" href="#ownership-and-lifetimes" id="ownership-and-lifetimes"><h1>Ownership and lifetimes</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to ownership and lifetimes.
-One of the most notable of these is <a href="default-match-bindings.html">default match binding modes</a>.</p>
+One of the most notable of these is <a href="rust-2018/ownership-and-lifetimes/default-match-bindings.html">default match binding modes</a>.</p>
 <a class="header" href="#non-lexical-lifetimes" id="non-lexical-lifetimes"><h1>Non-lexical lifetimes</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg" alt="Minimum Rust version: beta" /></p>
 <p>The borrow checker has been enhanced to accept more code, via a mechanism
@@ -1749,7 +1749,7 @@ references:</p>
     }
 }
 </code></pre>
-<p>But in Rust 2018, we can combine elision with <a href="the-anonymous-lifetime.html">the anonymous lifetime</a> and
+<p>But in Rust 2018, we can combine elision with <a href="rust-2018/ownership-and-lifetimes/the-anonymous-lifetime.html">the anonymous lifetime</a> and
 write this instead.</p>
 <pre><code class="language-rust ignore">impl&lt;T&gt; Drop for SetOnDrop&lt;'_, T&gt; {
     fn drop(&amp;mut self) {
@@ -1864,7 +1864,7 @@ const NAMES: &amp;[&amp;str; 2] = &amp;[&quot;Ferris&quot;, &quot;Bors&quot;];
 #}</code></pre></pre>
 <a class="header" href="#data-types" id="data-types"><h1>Data types</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to data types.
-One of these are <a href="field-init-shorthand.html">field-init-shorthand</a>.</p>
+One of these are <a href="rust-2018/data-types/field-init-shorthand.html">field-init-shorthand</a>.</p>
 <a class="header" href="#field-init-shorthand" id="field-init-shorthand"><h1>Field init shorthand</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.17-brightgreen.svg" alt="Minimum Rust version: 1.17" /></p>
 <p>In older Rust, when initializing a struct, you must always give the full set of <code>key: value</code> pairs
@@ -2211,7 +2211,7 @@ libraries you depend on may. For example, the regex crate contains these SIMD
 speedups without you needing to do anything at all!</p>
 <a class="header" href="#macros-1" id="macros-1"><h1>Macros</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to the macro system.
-A notable addition here is the introduction of <a href="custom-derive.html">custom derive macros</a>.</p>
+A notable addition here is the introduction of <a href="rust-2018/macros/custom-derive.html">custom derive macros</a>.</p>
 <a class="header" href="#custom-derive" id="custom-derive"><h1>Custom Derive</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.15-brightgreen.svg" alt="Minimum Rust version: 1.15" /></p>
 <p>In Rust, you’ve always been able to automatically implement some traits
@@ -2528,7 +2528,7 @@ macro_rules! foo {
 #}</code></pre></pre>
 <a class="header" href="#the-compiler" id="the-compiler"><h1>The compiler</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to the compiler.
-A notable addition here is our new and <a href="improved-error-messages.html">improved error messages</a>.</p>
+A notable addition here is our new and <a href="rust-2018/the-compiler/improved-error-messages.html">improved error messages</a>.</p>
 <a class="header" href="#improved-error-messages" id="improved-error-messages"><h1>Improved error messages</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.12-brightgreen.svg" alt="Minimum Rust version: 1.12" /></p>
 <p>We're always working on error improvements, and there are little improvements
@@ -2741,7 +2741,7 @@ documentation</a>.</p>
 moment.</p>
 <a class="header" href="#cargo-and-cratesio" id="cargo-and-cratesio"><h1>Cargo and crates.io</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to <code>cargo</code> and crates.io.
-A notable addition here is the new <a href="cargo-check-for-faster-checking.html"><code>cargo check</code></a> command.</p>
+A notable addition here is the new <a href="rust-2018/cargo-and-crates-io/cargo-check-for-faster-checking.html"><code>cargo check</code></a> command.</p>
 <a class="header" href="#cargo-check-for-faster-checking" id="cargo-check-for-faster-checking"><h1><code>cargo check</code> for faster checking</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.16-brightgreen.svg" alt="Minimum Rust version: 1.16" /></p>
 <p><code>cargo check</code> is a new subcommand should speed up the development
@@ -2950,7 +2950,7 @@ regex = &quot;1.0.0&quot;
 <p>instead. <code>&gt;</code>, <code>&lt;=</code>, and all of the other, non-<code>*</code> ranges work as well.</p>
 <a class="header" href="#documentation" id="documentation"><h1>Documentation</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to documentation.
-A notable addition here is the <a href="new-editions-of-the-book.html">second edition of &quot;the book&quot;</a>.</p>
+A notable addition here is the <a href="rust-2018/documentation/new-editions-of-the-book.html">second edition of &quot;the book&quot;</a>.</p>
 <a class="header" href="#new-editions-of-the-the-book" id="new-editions-of-the-the-book"><h1>New editions of the &quot;the book&quot;</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.18-red.svg" alt="Minimum Rust version: 1.18" /> for drafts of the second edition</p>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg" alt="Minimum Rust version: 1.26" /> for the final version of the second edition</p>
@@ -3019,7 +3019,7 @@ specific to the standard library and not for general use; we hope to improve
 this further in the future.</p>
 <a class="header" href="#rustdoc" id="rustdoc"><h1><code>rustdoc</code></h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to <code>rustdoc</code>.
-A notable addition to it was <a href="documentation-tests-can-now-compile-fail.html">that documentation tests can now compile-fail</a>.</p>
+A notable addition to it was <a href="rust-2018/rustdoc/documentation-tests-can-now-compile-fail.html">that documentation tests can now compile-fail</a>.</p>
 <a class="header" href="#documentation-tests-can-now-compile-fail" id="documentation-tests-can-now-compile-fail"><h1>Documentation tests can now compile-fail</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.22-brightgreen.svg" alt="Minimum Rust version: 1.22" /></p>
 <p>You can now create <code>compile-fail</code> tests in Rustdoc, like this:</p>
@@ -3048,7 +3048,7 @@ Commonmark via a flag, <code>--enable-commonmark</code>. Today, we only support
 CommonMark.</p>
 <a class="header" href="#platform-and-target-support" id="platform-and-target-support"><h1>Platform and target support</h1></a>
 <p>In this chapter of the guide, we discuss a few improvements to platform and target support.
-A notable addition to it was <a href="libcore-for-low-level-rust.html">that the <code>libcore</code> library now works on stable Rust</a>.</p>
+A notable addition to it was <a href="rust-2018/platform-and-target-support/libcore-for-low-level-rust.html">that the <code>libcore</code> library now works on stable Rust</a>.</p>
 <a class="header" href="#libcore-for-low-level-rust" id="libcore-for-low-level-rust"><h1>libcore for low-level Rust</h1></a>
 <p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.6-brightgreen.svg" alt="Minimum Rust version: 1.6" /></p>
 <p>Rust’s standard library is two-tiered: there’s a small core library,
