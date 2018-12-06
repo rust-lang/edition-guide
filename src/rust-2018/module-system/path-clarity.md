@@ -347,7 +347,7 @@ fn func() {
 }
 ```
 
-With Rust 2018, however, the same code will also work completely unmodified in
+With uniform paths, however, the same code will also work completely unmodified in
 a submodule:
 
 ```rust,ignore
