@@ -45,7 +45,7 @@ trait Foo {
 
 It's re-written our code to introduce a parameter name for that trait object.
 In this case, since it had no name, `cargo fix` will replace it with `_`,
-which is conventional for unusued variables.
+which is conventional for unused variables.
 
 `cargo fix` is still pretty new, and so it can't always fix your code automatically.
 If `cargo fix` can't fix something, it will print the warning that it cannot fix
