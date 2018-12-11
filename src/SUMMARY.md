@@ -15,6 +15,7 @@
 ## Rust 2018
 
 - [Rust 2018](rust-2018/index.md)
+    - [2018-Specific Changes](rust-2018/edition-changes.md)
     - [Module system](rust-2018/module-system/index.md)
       - [Raw identifiers](rust-2018/module-system/raw-identifiers.md)
       - [Path clarity](rust-2018/module-system/path-clarity.md)
@@ -84,4 +85,3 @@
       - [MSVC toolchain support](rust-2018/platform-and-target-support/msvc-toolchain-support.md)
       - [MUSL support for fully static binaries](rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.md)
       - [`cdylib` crates for C interoperability](rust-2018/platform-and-target-support/cdylib-crates-for-c-interoperability.md)
-    - [2018-Specific Changes](rust-2018/edition-changes.md)

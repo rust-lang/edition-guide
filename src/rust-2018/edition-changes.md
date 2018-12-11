@@ -4,7 +4,7 @@ The following is a summary of changes that only apply to code compiled with
 the 2018 edition compared to the 2015 edition.
 
 ## Rust
-- [Non-lexical lifetimes].
+- [Non-lexical lifetimes]&nbsp;(future inclusion planned for 2015 edition)
 - [At most once] `?` macro repetition operator.
 - [Path changes]:
     - `use` declarations must begin with:
@@ -14,7 +14,8 @@ the 2018 edition compared to the 2015 edition.
         - An external crate name.
         - `::` – must be followed by an external crate name. This is required
           if an external crate has the same name as an in-scope item, to catch
-          possible ambiguities with future module changes.
+          possible ambiguities with [uniform paths]&nbsp;(which is planned for
+          inclusion soon [#55618]).
     - Paths in `pub(in path)` visibility modifiers must start with `crate`,
       `self`, or `super`.
 - [Anonymous trait function parameters] are not allowed.
@@ -34,6 +35,7 @@ the 2018 edition compared to the 2015 edition.
 - `cargo install` for the current directory is no longer allowed, you must
   specify `cargo install --path .` to install the current package.
 
+[#55618]: https://github.com/rust-lang/rust/issues/55618
 [Anonymous trait function parameters]: rust-2018/trait-system/no-anon-params.html
 [At most once]: rust-2018/macros/at-most-once.html
 [Non-lexical lifetimes]: rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html
@@ -44,4 +46,5 @@ the 2018 edition compared to the 2015 edition.
 [reserved keywords]: https://doc.rust-lang.org/reference/keywords.html#reserved-keywords
 [strict keyword]: https://doc.rust-lang.org/reference/keywords.html#strict-keywords
 [tyvar_behind_raw_pointer]: https://github.com/rust-lang/rust/issues/46906
+[uniform paths]: rust-2018/module-system/path-clarity.html#uniform-paths
 [weak keyword]: https://doc.rust-lang.org/reference/keywords.html#weak-keywords
