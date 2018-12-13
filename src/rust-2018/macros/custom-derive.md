@@ -46,4 +46,4 @@ like [serde](https://serde.rs/) and [Diesel](http://diesel.rs/).
 
 For more, including learning how to build your own custom derive, see [The
 Rust Programming
-Language](https://doc.rust-lang.org/book/second-edition/appendix-04-macros.html#procedural-macros-for-custom-derive).
+Language](https://doc.rust-lang.org/book/ch19-06-macros.html#how-to-write-a-custom-derive-macro).
