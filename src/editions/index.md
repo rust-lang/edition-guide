@@ -41,28 +41,3 @@ stable releases are made.  In some cases however, mainly when new keywords are
 added, but sometimes for other reasons, there may be new features that are only
 available in later editions.  You only need to upgrade if you want to take
 advantage of such features.
-
-## Trying out the 2018 edition
-
-At the time of writing, there are two editions: 2015 and 2018. 2015 is today's
-Rust; Rust 2018 is currently in beta, and will land in stable in Rust 1.31, on December 6, 2018.
-
-To give the 2018 edition a try, install the beta toolchain:
-
-```console
-> rustup install beta
-````
-
-If you want the really bleeding edge, you can try nightly:
-
-```console
-> rustup install nightly
-```
-
-When you see commands like `cargo fix` elsewhere in this guide, you may
-need to preface them with the toolchain:
-
-```console
-> cargo +beta fix --edition
-> cargo +nightly fix --edition
-```

@@ -1,6 +1,6 @@
 # `T: 'a` inference in structs
 
-![Minimum Rust version: beta](https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg)
+![Minimum Rust version: 1.31](https://img.shields.io/badge/Minimum%20Rust%20Version-1.31-brightgreen.svg)
 
 An annotation in the form of `T: 'a`, where `T` is either a type or another
 lifetime, is called an *"outlives"* requirement. Note that *"outlives"* also

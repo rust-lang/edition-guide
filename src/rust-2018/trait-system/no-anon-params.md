@@ -1,6 +1,6 @@
 # No more anonymous trait parameters
 
-![Minimum Rust version: beta](https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg)
+![Minimum Rust version: 1.31](https://img.shields.io/badge/Minimum%20Rust%20Version-1.31-brightgreen.svg)
 
 In accordance with RFC [#1685](https://github.com/rust-lang/rfcs/pull/1685),
 parameters in trait method declarations are no longer allowed to be anonymous.

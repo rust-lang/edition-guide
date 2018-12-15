@@ -1,6 +1,6 @@
 # Non-lexical lifetimes
 
-![Minimum Rust version: beta](https://img.shields.io/badge/Minimum%20Rust%20Version-beta-orange.svg)
+![Minimum Rust version: 1.31](https://img.shields.io/badge/Minimum%20Rust%20Version-1.31-brightgreen.svg)
 
 The borrow checker has been enhanced to accept more code, via a mechanism
 called "non-lexical lifetimes." Consider this example:
