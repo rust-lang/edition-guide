@@ -29,31 +29,31 @@ $ cargo install mdbook
 
 ### Building
 
-To build the book, do this:
-
+The most straight-forward way to build and view the book locally is to use the following command:
 ```bash
-$ mdbook build
+$ mdbook serve
 ```
 
-The output will be in the `book` subdirectory. To check it out, open it in
-your web browser.
+This serves the book at http://localhost:3000, and rebuilds it on changes.
+You can now view the book in your web browser. If you make changes to the book's source code, 
+you should only need to refresh your browser to see them.
 
 _Firefox:_
 
 ```shell
-$ firefox book/index.html                       # Linux
-$ open -a "Firefox" book/index.html             # OS X
-$ Start-Process "firefox.exe" .\book\index.html # Windows (PowerShell)
-$ start firefox.exe .\book\index.html           # Windows (Cmd)
+$ firefox http://localhost:3000                       # Linux
+$ open -a "Firefox" http://localhost:3000             # OS X
+$ Start-Process "firefox.exe" http://localhost:3000   # Windows (PowerShell)
+$ start firefox.exe http://localhost:3000             # Windows (Cmd)
 ```
 
 _Chrome:_
 
 ```shell
-$ google-chrome book/index.html                 # Linux
-$ open -a "Google Chrome" book/index.html       # OS X
-$ Start-Process "chrome.exe" .\book\index.html  # Windows (PowerShell)
-$ start chrome.exe .\book\index.html            # Windows (Cmd)
+$ google-chrome http://localhost:3000                 # Linux
+$ open -a "Google Chrome" http://localhost:3000       # OS X
+$ Start-Process "chrome.exe" http://localhost:3000    # Windows (PowerShell)
+$ start chrome.exe http://localhost:3000              # Windows (Cmd)
 ```
 
 To run the tests:
