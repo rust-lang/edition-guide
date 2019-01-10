@@ -6,7 +6,7 @@ By default, Rust programs will unwind the stack when a `panic!` happens. If you'
 immediate abort instead, you can configure this in `Cargo.toml`:
 
 ```toml
-[profile.debug]
+[profile.dev]
 panic = "abort"
 
 [profile.release]
