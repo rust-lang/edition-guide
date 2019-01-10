@@ -15,6 +15,7 @@
 ## Rust 2018
 
 - [Rust 2018](rust-2018/index.md)
+    - [2018-Specific Changes](rust-2018/edition-changes.md)
     - [Module system](rust-2018/module-system/index.md)
       - [Raw identifiers](rust-2018/module-system/raw-identifiers.md)
       - [Path clarity](rust-2018/module-system/path-clarity.md)
