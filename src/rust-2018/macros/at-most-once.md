@@ -1,5 +1,7 @@
 # At most one repetition
 
+![Minimum Rust version: 1.32](https://img.shields.io/badge/Minimum%20Rust%20Version-1.32-brightgreen.svg)
+
 In Rust 2018, we have made a couple of changes to the macros-by-example syntax.
 
 1. We have added a new Kleene operator `?` which means "at most one"
