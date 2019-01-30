@@ -32,7 +32,10 @@
     </head>
     <body class="light">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">var path_to_root = "../../";</script>
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = "light";
+        </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script type="text/javascript">
@@ -54,7 +57,7 @@
         <script type="text/javascript">
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
-            if (theme === null || theme === undefined) { theme = 'light'; }
+            if (theme === null || theme === undefined) { theme = default_theme; }
             document.body.className = theme;
             document.querySelector('html').className = theme + ' js';
         </script>
@@ -89,7 +92,7 @@
                                 <i class="fa fa-paint-brush"></i>
                             </button>
                             <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -108,6 +111,7 @@
                             <a href="../../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
                             </a>
+                            
                         </div>
                     </div>
                 </div>
@@ -136,8 +140,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#a_-the-anonymous-lifetime" id="a_-the-anonymous-lifetime"><h1><code>'_</code>, the anonymous lifetime</h1></a>
-<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-nightly-red.svg" alt="Minimum Rust version: nightly" /></p>
+                        <a class="header" href="#_-the-anonymous-lifetime" id="_-the-anonymous-lifetime"><h1><code>'_</code>, the anonymous lifetime</h1></a>
+<p><img src="https://img.shields.io/badge/Minimum%20Rust%20Version-1.31-brightgreen.svg" alt="Minimum Rust version: 1.31" /></p>
 <p>Rust 2018 allows you to explicitly mark where a lifetime is elided, for types
 where this elision might otherwise be unclear. To do this, you can use the
 special lifetime <code>'_</code> much like you can explicitly mark that a type is inferred
@@ -171,8 +175,6 @@ impl&lt;'a&gt; fmt::Debug for StrWrap&lt;'a&gt; {
 <p>In Rust 2018, you can instead write:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
-#![feature(rust_2018_preview)]
-
 #fn main() {
 # use std::fmt;
 # struct StrWrap&lt;'a&gt;(&amp;'a str);
@@ -217,8 +219,6 @@ impl&lt;'a, 'b: 'a&gt; Foo&lt;'a, 'b&gt; {
 <p>We can rewrite this as:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
-#![feature(rust_2018_preview)]
-
 #fn main() {
 # struct Foo&lt;'a, 'b: 'a&gt; {
 #     field: &amp;'a &amp;'b str,
