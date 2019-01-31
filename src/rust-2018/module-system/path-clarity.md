@@ -20,7 +20,7 @@ Here's a brief summary:
 * Paths starting with `::` must reference an external crate.
 * A `foo.rs` and `foo/` subdirectory may coexist; `mod.rs` is no longer needed
   when placing submodules in a subdirectory.
-* `use` declarations take [uniform paths](#uniform-paths).
+* Paths in `use` declarations work the same as other paths.
 
 These may seem like arbitrary new rules when put this way, but the mental
 model is now significantly simplified overall. Read on for more details!
@@ -140,9 +140,6 @@ mod submodule {
         // but in a submodule it requires a leading :: if not imported with `use`
         let x = ::chrono::Utc::now();
     }
-
-    // unlike expressions, `use` paths were allowed to reference crates directly
-    use chrono::Local;
 }
 ```
 
@@ -162,9 +159,6 @@ mod submodule {
         // crates may be referenced directly, even in submodules
         let x = chrono::Utc::now();
     }
-
-    // `use` paths have the same path style
-    use chrono::Local;
 }
 ```
 
@@ -201,23 +195,22 @@ and the submodule is still `foo/bar.rs`. This eliminates the special
 name, and if you have a bunch of files open in your editor, you can clearly
 see their names, instead of having a bunch of tabs named `mod.rs`.
 
-# Uniform paths
+### `use` paths
 
 ![Minimum Rust version: 1.32](https://img.shields.io/badge/Minimum%20Rust%20Version-1.32-brightgreen.svg)
 
-The uniform paths variant of Rust 2018 simplifies and unifies path handling
-compared to Rust 2015. In Rust 2015, paths work differently in `use`
-declarations than they do elsewhere. In particular, paths in `use`
-declarations would always start from the crate root, while paths in other code
-implicitly started from the current scope. Those differences didn't have any
-effect in the top-level module, which meant that everything would seem
-straightforward until working on a project large enough to have submodules.
+Rust 2018 simplifies and unifies path handling compared to Rust 2015. In Rust
+2015, paths work differently in `use` declarations than they do elsewhere. In
+particular, paths in `use` declarations would always start from the crate
+root, while paths in other code implicitly started from the current scope.
+Those differences didn't have any effect in the top-level module, which meant
+that everything would seem straightforward until working on a project large
+enough to have submodules.
 
-In the uniform paths variant of Rust 2018, paths in `use` declarations and in
-other code almost always work the same way, both in the top-level module and
-in any submodule. You can use a relative path from the current scope, a path
-starting from an external crate name, or a path starting with `crate`,
-`super`, or `self`.
+In Rust 2018, paths in `use` declarations and in other code work the same way,
+both in the top-level module and in any submodule. You can use a relative path
+from the current scope, a path starting from an external crate name, or a path
+starting with `crate`, `super`, or `self`.
 
 Code that looked like this:
 
@@ -255,7 +248,7 @@ will look exactly the same in Rust 2018, except that you can delete the `extern
 crate` line:
 
 ```rust,ignore
-// Rust 2018 (uniform paths variant)
+// Rust 2018
 
 use futures::Future;
 
@@ -282,11 +275,10 @@ fn func() {
 }
 ```
 
-With uniform paths, however, the same code will also work completely unmodified in
-a submodule:
+The same code will also work completely unmodified in a submodule:
 
 ```rust,ignore
-// Rust 2018 (uniform paths variant)
+// Rust 2018
 
 mod submodule {
     use futures::Future;

@@ -7,8 +7,8 @@ the 2018 edition compared to the 2015 edition.
 - [Non-lexical lifetimes]&nbsp;(future inclusion planned for 2015 edition)
 - [At most once] `?` macro repetition operator.
 - [Path changes]:
-    - [Uniform paths] in `use` declarations.
-    - Paths staring with `::` must be followed with an external crate.
+    - Paths in `use` declarations work the same as other paths.
+    - Paths starting with `::` must be followed with an external crate.
     - Paths in `pub(in path)` visibility modifiers must start with `crate`,
       `self`, or `super`.
 - [Anonymous trait function parameters] are not allowed.
@@ -38,5 +38,4 @@ the 2018 edition compared to the 2015 edition.
 [reserved keywords]: https://doc.rust-lang.org/reference/keywords.html#reserved-keywords
 [strict keyword]: https://doc.rust-lang.org/reference/keywords.html#strict-keywords
 [tyvar_behind_raw_pointer]: https://github.com/rust-lang/rust/issues/46906
-[uniform paths]: rust-2018/module-system/path-clarity.html#uniform-paths
 [weak keyword]: https://doc.rust-lang.org/reference/keywords.html#weak-keywords
