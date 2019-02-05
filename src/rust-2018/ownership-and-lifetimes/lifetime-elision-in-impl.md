@@ -72,4 +72,4 @@ impl<T> Drop for SetOnDrop<'_, T> {
 }
 ```
 
-[the anonymous lifetime]: rust-2018/ownership-and-lifetimes/the-anonymous-lifetime.html
+[the anonymous lifetime]: the-anonymous-lifetime.html
