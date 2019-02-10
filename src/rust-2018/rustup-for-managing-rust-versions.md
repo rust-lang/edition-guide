@@ -72,6 +72,11 @@ If you run this inside of a project:
 $ rustup override set nightly
 ```
 
+Or, if you'd like to target a different version of Rust:
+```console
+$ rustup override set 1.30.0
+```
+
 Then when you're in that directory, any invocations of `rustc` or `cargo`
 will use that toolchain. To share this with others, you can create a
 `rust-toolchain` file with the contents of a toolchain, and check it into
