@@ -182,6 +182,9 @@ will update anything that has one.</p>
 If you run this inside of a project:</p>
 <pre><code class="language-console">$ rustup override set nightly
 </code></pre>
+<p>Or, if you'd like to target a different version of Rust:</p>
+<pre><code class="language-console">$ rustup override set 1.30.0
+</code></pre>
 <p>Then when you're in that directory, any invocations of <code>rustc</code> or <code>cargo</code>
 will use that toolchain. To share this with others, you can create a
 <code>rust-toolchain</code> file with the contents of a toolchain, and check it into
