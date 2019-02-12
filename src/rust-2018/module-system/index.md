@@ -1,6 +1,6 @@
 # Module system
 
-[path clarity changes]: rust-2018/module-system/path-clarity.html
+[path clarity changes]: path-clarity.html
 
 In this chapter of the guide, we discuss a few changes to the module system.
 The most notable of these are the [path clarity changes].

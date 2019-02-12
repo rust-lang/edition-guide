@@ -36,15 +36,15 @@ the 2018 edition compared to the 2015 edition.
   specify `cargo install --path .` to install the current package.
 
 [#55618]: https://github.com/rust-lang/rust/issues/55618
-[Anonymous trait function parameters]: rust-2018/trait-system/no-anon-params.html
-[At most once]: rust-2018/macros/at-most-once.html
-[Non-lexical lifetimes]: rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html
-[Path changes]: rust-2018/module-system/path-clarity.html
+[Anonymous trait function parameters]: trait-system/no-anon-params.html
+[At most once]: macros/at-most-once.html
+[Non-lexical lifetimes]: ownership-and-lifetimes/non-lexical-lifetimes.html
+[Path changes]: module-system/path-clarity.html
 [Trait function parameters]: https://doc.rust-lang.org/stable/reference/items/traits.html#parameter-patterns
-[`dyn`]: rust-2018/trait-system/dyn-trait-for-trait-objects.html
+[`dyn`]: trait-system/dyn-trait-for-trait-objects.html
 [overflowing_literals]: https://github.com/rust-lang/rfcs/blob/master/text/2438-deny-integer-literal-overflow-lint.md
 [reserved keywords]: https://doc.rust-lang.org/reference/keywords.html#reserved-keywords
 [strict keyword]: https://doc.rust-lang.org/reference/keywords.html#strict-keywords
 [tyvar_behind_raw_pointer]: https://github.com/rust-lang/rust/issues/46906
-[uniform paths]: rust-2018/module-system/path-clarity.html#uniform-paths
+[uniform paths]: module-system/path-clarity.html#uniform-paths
 [weak keyword]: https://doc.rust-lang.org/reference/keywords.html#weak-keywords
