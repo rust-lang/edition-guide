@@ -149,18 +149,8 @@ the 2018 edition compared to the 2015 edition.</p>
 <li><a href="rust-2018/macros/at-most-once.html">At most once</a> <code>?</code> macro repetition operator.</li>
 <li><a href="rust-2018/module-system/path-clarity.html">Path changes</a>:
 <ul>
-<li><code>use</code> declarations must begin with:
-<ul>
-<li><code>crate</code> – refers to the current crate.</li>
-<li><code>self</code> – refers to the current module.</li>
-<li><code>super</code> – refers to the parent module.</li>
-<li>An external crate name.</li>
-<li><code>::</code> – must be followed by an external crate name. This is required
-if an external crate has the same name as an in-scope item, to catch
-possible ambiguities with <a href="rust-2018/module-system/path-clarity.html#uniform-paths">uniform paths</a> (which is planned for
-inclusion soon <a href="https://github.com/rust-lang/rust/issues/55618">#55618</a>).</li>
-</ul>
-</li>
+<li>Paths in <code>use</code> declarations work the same as other paths.</li>
+<li>Paths starting with <code>::</code> must be followed with an external crate.</li>
 <li>Paths in <code>pub(in path)</code> visibility modifiers must start with <code>crate</code>,
 <code>self</code>, or <code>super</code>.</li>
 </ul>
