@@ -17,7 +17,6 @@ the 2018 edition compared to the 2015 edition.
 - [`dyn`] is a [strict keyword], in 2015 it is a [weak keyword].
 - `async`, `await`, and `try` are [reserved keywords].
 - The following lints are now deny by default:
-    - [overflowing_literals]
     - [tyvar_behind_raw_pointer]
 
 ## Cargo
