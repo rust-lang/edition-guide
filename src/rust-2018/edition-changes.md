@@ -17,7 +17,6 @@ the 2018 edition compared to the 2015 edition.
 - [`dyn`] is a [strict keyword], in 2015 it is a [weak keyword].
 - `async`, `await`, and `try` are [reserved keywords].
 - The following lints are now deny by default:
-    - [overflowing_literals]
     - [tyvar_behind_raw_pointer]
 
 ## Cargo
@@ -34,7 +33,6 @@ the 2018 edition compared to the 2015 edition.
 [Path changes]: rust-2018/module-system/path-clarity.html
 [Trait function parameters]: https://doc.rust-lang.org/stable/reference/items/traits.html#parameter-patterns
 [`dyn`]: rust-2018/trait-system/dyn-trait-for-trait-objects.html
-[overflowing_literals]: https://github.com/rust-lang/rfcs/blob/master/text/2438-deny-integer-literal-overflow-lint.md
 [reserved keywords]: https://doc.rust-lang.org/reference/keywords.html#reserved-keywords
 [strict keyword]: https://doc.rust-lang.org/reference/keywords.html#strict-keywords
 [tyvar_behind_raw_pointer]: https://github.com/rust-lang/rust/issues/46906
