@@ -1887,7 +1887,7 @@ for i in 1..=3 {
 three is included in the range. Inclusive ranges are especially useful if you
 want to iterate over every possible value in a range. For example, this is a
 surprising Rust program:</p>
-<pre><pre class="playpen"><code class="language-rust">fn takes_u8(x: u8) {
+<pre><pre class="playpen"><code class="language-rust compile_fail">fn takes_u8(x: u8) {
     // ...
 }
 
@@ -1898,18 +1898,18 @@ fn main() {
     }
 }
 </code></pre></pre>
-<p>What does this program do? The answer: nothing. The warning we get when
-compiling has a hint:</p>
-<pre><code class="language-text">warning: literal out of range for u8
+<p>What does this program do? The answer: it fails to compile. The error we get
+when compiling has a hint:</p>
+<pre><code class="language-text">error: literal out of range for u8
  --&gt; src/main.rs:6:17
   |
 6 |     for i in 0..256 {
   |                 ^^^
   |
-  = note: #[warn(overflowing_literals)] on by default
+  = note: #[deny(overflowing_literals)] on by default
 </code></pre>
-<p>That’s right, since <code>i</code> is a <code>u8</code>, this overflows, and is the same as writing
-<code>for i in 0..0</code>, so the loop executes zero times.</p>
+<p>That’s right, since <code>i</code> is a <code>u8</code>, this overflows, and the compiler produces
+an error.</p>
 <p>We can do this with inclusive ranges, however:</p>
 <pre><pre class="playpen"><code class="language-rust">fn takes_u8(x: u8) {
     // ...
