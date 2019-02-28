@@ -25,7 +25,7 @@ three is included in the range. Inclusive ranges are especially useful if you
 want to iterate over every possible value in a range. For example, this is a
 surprising Rust program:
 
-```rust
+```rust,compile_fail
 fn takes_u8(x: u8) {
     // ...
 }
@@ -38,21 +38,21 @@ fn main() {
 }
 ```
 
-What does this program do? The answer: nothing. The warning we get when
-compiling has a hint:
+What does this program do? The answer: it fails to compile. The error we get
+when compiling has a hint:
 
 ```text
-warning: literal out of range for u8
+error: literal out of range for u8
  --> src/main.rs:6:17
   |
 6 |     for i in 0..256 {
   |                 ^^^
   |
-  = note: #[warn(overflowing_literals)] on by default
+  = note: #[deny(overflowing_literals)] on by default
 ```
 
-That’s right, since `i` is a `u8`, this overflows, and is the same as writing
-`for i in 0..0`, so the loop executes zero times.
+That’s right, since `i` is a `u8`, this overflows, and the compiler produces
+an error.
 
 We can do this with inclusive ranges, however:
 
