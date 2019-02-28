@@ -21,7 +21,7 @@ The final version was shipped with Rust 1.26. The second edition is a complete
 re-write from the ground up, using the last two years of knowledge we’ve
 gained from teaching people Rust.
 
-You can purchase [a dead-tree version of the second edition from No Starch
+You can purchase [a printed version of the second edition from No Starch
 Press](https://nostarch.com/Rust). Now that the print version has shipped, the
 second edition is frozen.
 
