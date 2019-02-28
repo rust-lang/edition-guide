@@ -4,7 +4,7 @@
 
 This book explains the concept of "editions", major new eras in [Rust]'s
 development. You can [read the book
-online](https://rust-lang-nursery.github.io/edition-guide/).
+online](https://doc.rust-lang.org/nightly/edition-guide/).
 
 [Rust]: https://www.rust-lang.org/
 
