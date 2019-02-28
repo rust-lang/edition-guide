@@ -26,12 +26,12 @@ the 2018 edition compared to the 2015 edition.
 - `cargo install` for the current directory is no longer allowed, you must
   specify `cargo install --path .` to install the current package.
 
-[Anonymous trait function parameters]: rust-2018/trait-system/no-anon-params.html
-[At most once]: rust-2018/macros/at-most-once.html
-[Non-lexical lifetimes]: rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html
-[Path changes]: rust-2018/module-system/path-clarity.html
+[Anonymous trait function parameters]: trait-system/no-anon-params.md
+[At most once]: macros/at-most-once.md
+[Non-lexical lifetimes]: ownership-and-lifetimes/non-lexical-lifetimes.md
+[Path changes]: module-system/path-clarity.md
 [Trait function parameters]: https://doc.rust-lang.org/stable/reference/items/traits.html#parameter-patterns
-[`dyn`]: rust-2018/trait-system/dyn-trait-for-trait-objects.html
+[`dyn`]: trait-system/dyn-trait-for-trait-objects.md
 [reserved keywords]: https://doc.rust-lang.org/reference/keywords.html#reserved-keywords
 [strict keyword]: https://doc.rust-lang.org/reference/keywords.html#strict-keywords
 [tyvar_behind_raw_pointer]: https://github.com/rust-lang/rust/issues/46906

@@ -19,7 +19,7 @@ You can also build the book and read it locally if you'd like.
 
 ### Requirements
 
-Building the book requires [mdBook]. To get it:
+Building the book requires [mdBook] 0.2. To get it:
 
 [mdBook]: https://github.com/azerupi/mdBook
 
