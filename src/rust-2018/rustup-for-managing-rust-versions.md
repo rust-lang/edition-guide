@@ -50,7 +50,7 @@ will update anything that has one.
 To set the default toolchain to something other than `stable`:
 
 ```console
-$ rustup toolchain default nightly
+$ rustup default nightly
 ```
 
 To use a toolchain other than the default, use `rustup run`:
