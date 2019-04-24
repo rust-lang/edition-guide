@@ -3,7 +3,6 @@
 The following is a summary of changes that only apply to code compiled with
 the 2018 edition compared to the 2015 edition.
 
-- [Non-lexical lifetimes]&nbsp;(future inclusion planned for 2015 edition)
 - [At most once] `?` macro repetition operator.
 - [Path changes]:
     - Paths in `use` declarations work the same as other paths.
