@@ -1,6 +1,8 @@
 # Non-lexical lifetimes
 
-![Minimum Rust version: 1.31](https://img.shields.io/badge/Minimum%20Rust%20Version-1.31-brightgreen.svg)
+![Minimum Rust version: 1.31](https://img.shields.io/badge/Minimum%20Rust%20Version-1.31-brightgreen.svg) for 2018 edition
+
+![Minimum Rust version: 1.36](https://img.shields.io/badge/Minimum%20Rust%20Version-1.36-brightgreen.svg) for 2015 edition
 
 The borrow checker has been enhanced to accept more code, via a mechanism
 called "non-lexical lifetimes." Consider this example:
@@ -44,7 +46,7 @@ fn main() {
     let mut x = 5;
     let y = &x;
     let z = &mut x;
-    
+
     println!("y: {}", y);
 }
 ```
@@ -74,7 +76,7 @@ error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immuta
   |             -- immutable borrow occurs here
 5 |     let z = &mut x;
   |             ^^^^^^ mutable borrow occurs here
-6 |     
+6 |
 7 |     println!("y: {}", y);
   |                       - borrow later used here
 ```
