@@ -49,7 +49,7 @@ and so catching panics may not work. If your code relies on `catch_unwind`, you
 should add this to your Cargo.toml:
 
 ```toml
-[profile.debug]
+[profile.dev]
 panic = "unwind"
 
 [profile.release]
