@@ -3,7 +3,6 @@
 The following is a summary of changes that only apply to code compiled with
 the 2018 edition compared to the 2015 edition.
 
-- [At most once] `?` macro repetition operator.
 - [Path changes]:
     - Paths in `use` declarations work the same as other paths.
     - Paths starting with `::` must be followed with an external crate.
@@ -26,7 +25,6 @@ the 2018 edition compared to the 2015 edition.
   specify `cargo install --path .` to install the current package.
 
 [Anonymous trait function parameters]: trait-system/no-anon-params.md
-[At most once]: macros/at-most-once.md
 [Non-lexical lifetimes]: ownership-and-lifetimes/non-lexical-lifetimes.md
 [Path changes]: module-system/path-clarity.md
 [Trait function parameters]: https://doc.rust-lang.org/stable/reference/items/traits.html#parameter-patterns
