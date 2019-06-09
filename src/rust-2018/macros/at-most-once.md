@@ -1,6 +1,8 @@
 # At most one repetition
 
-![Minimum Rust version: 1.32](https://img.shields.io/badge/Minimum%20Rust%20Version-1.32-brightgreen.svg)
+![Minimum Rust version: 1.32](https://img.shields.io/badge/Minimum%20Rust%20Version-1.32-brightgreen.svg) for 2018 edition
+
+![Minimum Rust version: 1.37](https://img.shields.io/badge/Minimum%20Rust%20Version-1.37-brightgreen.svg) for 2015 edition
 
 In Rust 2018, we have made a couple of changes to the macros-by-example syntax.
 
