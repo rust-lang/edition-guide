@@ -25,7 +25,6 @@ the 2018 edition compared to the 2015 edition.
   specify `cargo install --path .` to install the current package.
 
 [Anonymous trait function parameters]: trait-system/no-anon-params.md
-[Non-lexical lifetimes]: ownership-and-lifetimes/non-lexical-lifetimes.md
 [Path changes]: module-system/path-clarity.md
 [Trait function parameters]: https://doc.rust-lang.org/stable/reference/items/traits.html#parameter-patterns
 [`dyn`]: trait-system/dyn-trait-for-trait-objects.md
