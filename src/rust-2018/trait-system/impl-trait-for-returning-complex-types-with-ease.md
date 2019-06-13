@@ -124,7 +124,7 @@ fn foo<T: Trait>(x: T) {
 ```
 
 When you call it, you set the type, `T`. "you" being the caller here. This
-signature says "I accept any type that implements Trait." ("any type" ==
+signature says "I accept any type that implements `Trait`." ("any type" ==
 universal in the jargon)
 
 This version:
