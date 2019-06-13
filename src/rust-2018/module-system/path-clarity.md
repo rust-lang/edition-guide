@@ -111,7 +111,7 @@ use self::f::Future;
 
 This change will need to happen in any module that uses `f`.
 
-### The `crate` keyword refers to the current crate.
+### The `crate` keyword refers to the current crate
 
 In `use` declarations and in other code, you can refer to the root of the
 current crate with the `crate::` prefix. For instance, `crate::foo::bar` will
