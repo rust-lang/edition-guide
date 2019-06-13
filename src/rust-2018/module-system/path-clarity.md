@@ -91,6 +91,8 @@ Finally, on nightly, you'll need it for crates like:
 One other use for `extern crate` was to import macros; that's no longer needed.
 Check [the macro section](../macros/macro-changes.md) for more.
 
+#### Renaming crates
+
 If you've been using `as` to rename your crate like this:
 
 ```rust,ignore
