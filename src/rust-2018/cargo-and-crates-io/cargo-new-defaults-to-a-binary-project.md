@@ -6,7 +6,7 @@
 We try to keep Cargo’s CLI quite stable, but this change is important, and is
 unlikely to cause breakage.
 
-For some background, cargo new accepts two flags: `--lib`, for creating
+For some background, `cargo new` accepts two flags: `--lib`, for creating
 libraries, and `--bin`, for creating binaries, or executables. If you don’t
 pass one of these flags, it used to default to `--lib`. At the time, we made
 this decision because each binary (often) depends on many libraries, and so
