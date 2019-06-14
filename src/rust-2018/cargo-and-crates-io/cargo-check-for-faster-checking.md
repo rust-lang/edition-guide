@@ -2,7 +2,7 @@
 
 ![Minimum Rust version: 1.16](https://img.shields.io/badge/Minimum%20Rust%20Version-1.16-brightgreen.svg)
 
-`cargo check` is a new subcommand should speed up the development
+`cargo check` is a new subcommand that should speed up the development
 workflow in many cases.
 
 What does it do? Let's take a step back and talk about how `rustc` compiles
