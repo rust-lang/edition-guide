@@ -12,7 +12,7 @@ compilation is that you only need to compile the code you’ve actually
 changed, which means that that second build is faster.
 
 This is now turned on by default. This means that your builds should be
-faster! Don’t forget about cargo check when trying to get the lowest possible
+faster! Don’t forget about `cargo check` when trying to get the lowest possible
 build times.
 
 This is still not the end story for compiler performance generally, nor
