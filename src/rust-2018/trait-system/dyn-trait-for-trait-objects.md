@@ -36,7 +36,7 @@ is sometimes slower, and often cannot be used at all when its alternatives can.
 
 Furthermore, with `impl Trait` arriving, "`impl Trait` vs `dyn Trait`" is much
 more symmetric, and therefore a bit nicer, than "`impl Trait` vs `Trait`".
-`impl Trait` is explained [here](impl-trait-for-returning-complex-types-with-ease.md)
+`impl Trait` is explained [here](impl-trait-for-returning-complex-types-with-ease.md).
 
 In the new edition, you should therefore prefer `dyn Trait` to just `Trait`
 where you need a trait object.

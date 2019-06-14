@@ -124,7 +124,7 @@ fn foo<T: Trait>(x: T) {
 ```
 
 When you call it, you set the type, `T`. "you" being the caller here. This
-signature says "I accept any type that implements Trait." ("any type" ==
+signature says "I accept any type that implements `Trait`." ("any type" ==
 universal in the jargon)
 
 This version:
@@ -154,7 +154,7 @@ type... anyway, you can see how `F` is in the return position here. So you
 have the ability to choose.
 
 With `impl Trait`, you're saying "hey, some type exists that implements this
-trait, but I'm not gonna tell you what it is.". So now, the caller can't
+trait, but I'm not gonna tell you what it is." So now, the caller can't
 choose, and the function itself gets to choose. If we tried to define parse
 with `Result<impl F,...` as the return type, it wouldn't work.
 

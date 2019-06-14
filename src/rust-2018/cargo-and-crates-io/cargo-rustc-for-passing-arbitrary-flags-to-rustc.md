@@ -7,7 +7,7 @@
 
 For example, Cargo does not have a way to pass unstable flags built-in. But
 if we'd like to use `print-type-sizes` to see what layout information our
-types have. We can run this:
+types have, we can run this:
 
 ```console
 $ cargo rustc -- -Z print-type-sizes

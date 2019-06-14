@@ -91,6 +91,8 @@ Finally, on nightly, you'll need it for crates like:
 One other use for `extern crate` was to import macros; that's no longer needed.
 Check [the macro section](../macros/macro-changes.md) for more.
 
+#### Renaming crates
+
 If you've been using `as` to rename your crate like this:
 
 ```rust,ignore
@@ -109,7 +111,7 @@ use self::f::Future;
 
 This change will need to happen in any module that uses `f`.
 
-### The `crate` keyword refers to the current crate.
+### The `crate` keyword refers to the current crate
 
 In `use` declarations and in other code, you can refer to the root of the
 current crate with the `crate::` prefix. For instance, `crate::foo::bar` will

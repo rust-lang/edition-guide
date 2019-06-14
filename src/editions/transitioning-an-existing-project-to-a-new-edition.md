@@ -47,7 +47,7 @@ It's re-written our code to introduce a parameter name for that trait object.
 In this case, since it had no name, `cargo fix` will replace it with `_`,
 which is conventional for unused variables.
 
-`cargo fix` is still pretty new, and so it can't always fix your code automatically.
+`cargo fix` can't always fix your code automatically.
 If `cargo fix` can't fix something, it will print the warning that it cannot fix
 to the console. If you see one of these warnings, you'll have to update your code
 manually. See the corresponding section of this guide for help, and if you have

@@ -23,4 +23,4 @@ rather than statements. `loop` stuck out as strange in this way, as it was
 previously a statement.
 
 For now, this only applies to `loop`, and not things like `while` or `for`.
-It's not clear yet, but we may add this to those in the future.
+See the rationale for this decision in RFC issue [#1767](https://github.com/rust-lang/rfcs/issues/1767).
