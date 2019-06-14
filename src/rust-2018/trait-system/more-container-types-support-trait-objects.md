@@ -24,5 +24,6 @@ fn main() {
 
 This code would not work with Rust 1.0, but now works.
 
-> If you haven't seen the `dyn` syntax before, see the section on it. For
-> versions that do not support it, replace `Rc<dyn Foo>` with `Rc<Foo>`.
+> If you haven't seen the `dyn` syntax before, see [the section on
+> it](dyn-trait-for-trait-objects.md). For versions that do not support it, replace `Rc<dyn Foo>`
+> with `Rc<Foo>`.
