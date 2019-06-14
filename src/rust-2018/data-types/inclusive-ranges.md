@@ -3,7 +3,7 @@
 ![Minimum Rust version: 1.26](https://img.shields.io/badge/Minimum%20Rust%20Version-1.26-brightgreen.svg)
 
 Since well before Rust 1.0, you’ve been able to create exclusive ranges with
-.. like this:
+`..` like this:
 
 ```
 for i in 1..3 {
