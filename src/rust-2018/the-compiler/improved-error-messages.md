@@ -8,41 +8,42 @@ error message system was created.
 
 For example, here's some code that produces an error:
 
-```rust,ignore
+```rust,compile_fail
 fn main() {
     let mut x = 5;
-
     let y = &x;
-
     x += 1;
+    println!("{} {}", x, y);
 }
 ```
 
 Here's the error in Rust 1.11:
 
 ```text
-foo.rs:6:5: 6:11 error: cannot assign to `x` because it is borrowed [E0506]
-foo.rs:6     x += 1;
+foo.rs:4:5: 4:11 error: cannot assign to `x` because it is borrowed [E0506]
+foo.rs:4     x += 1;
              ^~~~~~
-foo.rs:4:14: 4:15 note: borrow of `x` occurs here
-foo.rs:4     let y = &x;
+foo.rs:3:14: 3:15 note: borrow of `x` occurs here
+foo.rs:3     let y = &x;
                       ^
-foo.rs:6:5: 6:11 help: run `rustc --explain E0506` to see a detailed explanation
+foo.rs:4:5: 4:11 help: run `rustc --explain E0506` to see a detailed explanation
+error: aborting due to previous error
 ```
 
 Here's the error in Rust 1.28:
 
 ```text
 error[E0506]: cannot assign to `x` because it is borrowed
- --> foo.rs:6:5
+ --> foo.rs:4:5
   |
-4 |     let y = &x;
+3 |     let y = &x;
   |              - borrow of `x` occurs here
-5 |
-6 |     x += 1;
+4 |     x += 1;
   |     ^^^^^^ assignment to borrowed `x` occurs here
 
 error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0506`.
 ```
 
 This error isn't terribly different, but shows off how the format has changed. It shows
