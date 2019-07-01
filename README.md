@@ -1,6 +1,6 @@
 # The Rust Edition Guide
 
-[![Build Status](https://travis-ci.org/rust-lang-nursery/edition-guide.svg?branch=master)](https://travis-ci.org/rust-lang-nursery/edition-guide)
+[![Build Status](https://api.travis-ci.com/rust-lang-nursery/edition-guide.svg?branch=master)](https://travis-ci.com/rust-lang-nursery/edition-guide)
 
 This book explains the concept of "editions", major new eras in [Rust]'s
 development. You can [read the book
@@ -35,7 +35,7 @@ $ mdbook serve
 ```
 
 This serves the book at http://localhost:3000, and rebuilds it on changes.
-You can now view the book in your web browser. If you make changes to the book's source code, 
+You can now view the book in your web browser. If you make changes to the book's source code,
 you should only need to refresh your browser to see them.
 
 _Firefox:_
