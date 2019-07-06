@@ -12,12 +12,12 @@ In Rust 2018, we have made a couple of changes to the macros-by-example syntax.
 
 For example, consider the following Rust 2015 code:
 
-```rust2018
+```rust
 macro_rules! foo {
     ($a:ident, $b:expr) => {
         println!("{}", $a);
         println!("{}", $b);
-    }
+    };
     ($a:ident) => {
         println!("{}", $a);
     }
@@ -29,7 +29,7 @@ but you need a whole other matcher to represent this possibility. This is
 annoying if your matchers are long. In Rust 2018, one can simply write the
 following:
 
-```rust2018
+```rust
 macro_rules! foo {
     ($a:ident $(, $b:expr)?) => {
         println!("{}", $a);
