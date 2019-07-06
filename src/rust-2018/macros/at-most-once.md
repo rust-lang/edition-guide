@@ -17,7 +17,7 @@ macro_rules! foo {
     ($a:ident, $b:expr) => {
         println!("{}", $a);
         println!("{}", $b);
-    }
+    };
     ($a:ident) => {
         println!("{}", $a);
     }
