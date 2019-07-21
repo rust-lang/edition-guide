@@ -19,6 +19,8 @@ And then use it with
 $ mdbook --help
 ```
 
+## Cargo Extensions
+
 As an example of extending Cargo, you can use the [`cargo-update`](https://crates.io/crates/cargo-update)
 package. To install it:
 
@@ -26,9 +28,5 @@ package. To install it:
 $ cargo install cargo-update
 ```
 
-This will allow you to use this command, which checks everything you've `cargo install`'d and
-updates it to the latest version:
-
-```console
-$ cargo install-update -a
-```
+This will allow you to use `cargo install-update -a` command, which checks everything you've `cargo install`'d and
+updates it to the latest version.
