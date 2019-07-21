@@ -47,7 +47,7 @@ So how much speedup do you actually get? Like most performance related
 questions, the answer is "it depends." Here are some very un-scientific
 benchmarks at the time of writing.
 
-|  build | performance | check performance | speedup |
+|  use case | build performance | check performance | speedup |
 |--------|-------------|-------------------|---------|
 | initial compile | 11s | 5.6s | 1.96x |
 | second compile (no changes) | 3s | 1.9s | 1.57x |
