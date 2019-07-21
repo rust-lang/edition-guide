@@ -169,10 +169,8 @@ mod submodule {
 In Rust 2015, if you have a submodule:
 
 ```rust,ignore
-///  foo.rs
-///  or
-///  foo/mod.rs
-
+// This `mod` declaration looks for the `foo` module in
+// `foo.rs` or `foo/mod.rs`.
 mod foo;
 ```
 
@@ -180,22 +178,42 @@ It can live in `foo.rs` or `foo/mod.rs`. If it has submodules of its own, it
 *must* be `foo/mod.rs`. So a `bar` submodule of `foo` would live at
 `foo/bar.rs`.
 
-In Rust 2018, `mod.rs` is no longer needed.
-
-```rust,ignore
-///  foo.rs
-///  foo/bar.rs
-
-mod foo;
-
-/// in foo.rs
-mod bar;
-```
-
-`foo.rs` can just be `foo.rs`,
+In Rust 2018 the restriction that a module with submodules must be named
+`mod.rs` is lifted. `foo.rs` can just be `foo.rs`,
 and the submodule is still `foo/bar.rs`. This eliminates the special
 name, and if you have a bunch of files open in your editor, you can clearly
 see their names, instead of having a bunch of tabs named `mod.rs`.
+
+<table>
+  <thead>
+    <tr>
+      <th>Rust 2015</th>
+      <th>Rust 2018</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+<pre>
+.
+├── lib.rs
+└── foo/
+    ├── mod.rs
+    └── bar.rs
+</pre>
+    </td>
+    <td>
+<pre>
+.
+├── lib.rs
+├── foo.rs
+└── foo/
+    └── bar.rs
+</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### `use` paths
 
