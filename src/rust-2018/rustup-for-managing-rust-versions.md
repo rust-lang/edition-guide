@@ -145,15 +145,7 @@ information to know more about the functions you're trying to call.
 $ rustup component add rust-src
 ```
 
-### The "preview" components
-
-There are several components in a "preview" stage. These components currently
-have `-preview` in their name, and this indicates that they're not quite 100%
-ready for general consumption yet. Please try them out and give us feedback,
-but know that they do not follow Rust's stability guarantees, and are still
-actively changing, possibly in backwards-incompatible ways.
-
-#### `rustfmt-preview` for automatic code formatting
+### `rustfmt` for automatic code formatting
 
 ![Minimum Rust version: 1.24](https://img.shields.io/badge/Minimum%20Rust%20Version-1.24-brightgreen.svg)
 
@@ -161,7 +153,7 @@ If you'd like to have your code automatically formatted, you can
 install this component:
 
 ```console
-$ rustup component add rustfmt-preview
+$ rustup component add rustfmt
 ```
 
 This will install two tools, `rustfmt` and `cargo-fmt`, that will reformat your
@@ -173,7 +165,7 @@ $ cargo fmt
 
 will reformat your entire Cargo project.
 
-#### `rls-preview` for IDE integration
+### `rls` for IDE integration
 
 ![Minimum Rust version: 1.21](https://img.shields.io/badge/Minimum%20Rust%20Version-1.21-brightgreen.svg)
 
@@ -182,17 +174,18 @@ protocol](http://langserver.org/). To gain support for Rust with these IDEs,
 you'll need to install the Rust language sever, aka the "RLS":
 
 ```console
-$ rustup component add rls-preview
+$ rustup component add rls
 ```
 
-Your IDE should take it from there.
+For more information about integrating this into your IDE, see the [RLS
+documentation](https://github.com/rust-lang/rls).
 
-#### `clippy-preview` for more lints
+### `clippy` for more lints
 
 For even more lints to help you write Rust code, you can install `clippy`:
 
 ```console
-$ rustup component add clippy-preview
+$ rustup component add clippy
 ```
 
 This will install `cargo-clippy` for you:
@@ -202,7 +195,15 @@ $ cargo clippy
 ```
 
 For more, check out [clippy's
-documentation](https://github.com/rust-lang-nursery/rust-clippy).
+documentation](https://github.com/rust-lang/rust-clippy).
+
+### The "preview" components
+
+There are several components in a "preview" stage. These components currently
+have `-preview` in their name, and this indicates that they're not quite 100%
+ready for general consumption yet. Please try them out and give us feedback,
+but know that they do not follow Rust's stability guarantees, and are still
+actively changing, possibly in backwards-incompatible ways.
 
 #### `llvm-tools-preview` for using extra LLVM tools
 
