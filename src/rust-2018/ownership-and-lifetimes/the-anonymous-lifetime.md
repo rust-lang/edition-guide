@@ -16,11 +16,9 @@ struct StrWrap<'a>(&'a str);
 In Rust 2015, you might have written:
 
 ```rust
-// Rust 2015
-
-use std::fmt;
-
+# use std::fmt;
 # struct StrWrap<'a>(&'a str);
+// Rust 2015
 
 fn make_wrapper(string: &str) -> StrWrap {
     StrWrap(string)
@@ -38,7 +36,6 @@ In Rust 2018, you can instead write:
 ```rust
 # use std::fmt;
 # struct StrWrap<'a>(&'a str);
-
 // Rust 2018
 
 fn make_wrapper(string: &str) -> StrWrap<'_> {
