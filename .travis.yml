@@ -1,9 +1,0 @@
-language: rust
-cache: cargo
-rust: nightly
-before_script:
-  - cargo install mdbook -Z install-upgrade
-  - mdbook --version
-script:
-  - mdbook build
-  - mdbook test
