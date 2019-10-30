@@ -1,7 +1,5 @@
 # The Rust Edition Guide
 
-[![Build Status](https://api.travis-ci.com/rust-lang-nursery/edition-guide.svg?branch=master)](https://travis-ci.com/rust-lang-nursery/edition-guide)
-
 This book explains the concept of "editions", major new eras in [Rust]'s
 development. You can [read the book
 online](https://doc.rust-lang.org/nightly/edition-guide/).

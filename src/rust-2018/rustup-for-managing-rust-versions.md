@@ -133,7 +133,7 @@ contains a copy of Rust's documentation, so that you can read it offline.
 
 This component cannot be removed for now; if that's of interest, please
 comment on [this
-issue](https://github.com/rust-lang-nursery/rustup.rs/issues/998).
+issue](https://github.com/rust-lang/rustup.rs/issues/998).
 
 ### `rust-src` for a copy of Rust's source code
 
