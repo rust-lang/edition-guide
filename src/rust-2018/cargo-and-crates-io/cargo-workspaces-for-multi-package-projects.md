@@ -21,7 +21,7 @@ is a *workspace* that contains many related packages:
 
 and more.
 
-[the `futures` package]: https://github.com/rust-lang-nursery/futures-rs
+[the `futures` package]: https://github.com/rust-lang/futures-rs
 
 Workspaces allow these packages to be developed individually, but they share
 a single set of dependencies, and therefore have a single target directory
