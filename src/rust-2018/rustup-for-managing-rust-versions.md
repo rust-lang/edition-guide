@@ -17,21 +17,21 @@ version of `rustc` and `cargo`.
 To install a specific Rust version, you can use `rustup install`:
 
 ```console
-$ rustup install 1.30.0
+$ rustup toolchain install 1.30.0
 ```
 
 This works for a specific nightly, as well:
 
 ```console
-$ rustup install nightly-2018-08-01
+$ rustup toolchain install nightly-2018-08-01
 ```
 
 As well as any of our release channels:
 
 ```console
-$ rustup install stable
-$ rustup install beta
-$ rustup install nightly
+$ rustup toochain install stable
+$ rustup toolchain install beta
+$ rustup toolchain install nightly
 ```
 
 ## For updating your installation
