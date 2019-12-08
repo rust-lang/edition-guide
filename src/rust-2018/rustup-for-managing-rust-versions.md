@@ -29,7 +29,7 @@ $ rustup toolchain install nightly-2018-08-01
 As well as any of our release channels:
 
 ```console
-$ rustup toochain install stable
+$ rustup toolchain install stable
 $ rustup toolchain install beta
 $ rustup toolchain install nightly
 ```
