@@ -14,24 +14,24 @@ To install Rust through Rustup, you can go to
 so on your platform. This will install both `rustup` itself and the `stable`
 version of `rustc` and `cargo`.
 
-To install a specific Rust version, you can use `rustup install`:
+To install a specific Rust version, you can use `rustup toolchain install`:
 
 ```console
-$ rustup install 1.30.0
+$ rustup toolchain install 1.30.0
 ```
 
 This works for a specific nightly, as well:
 
 ```console
-$ rustup install nightly-2018-08-01
+$ rustup toolchain install nightly-2018-08-01
 ```
 
 As well as any of our release channels:
 
 ```console
-$ rustup install stable
-$ rustup install beta
-$ rustup install nightly
+$ rustup toolchain install stable
+$ rustup toolchain install beta
+$ rustup toolchain install nightly
 ```
 
 ## For updating your installation
@@ -51,6 +51,12 @@ To set the default toolchain to something other than `stable`:
 
 ```console
 $ rustup default nightly
+```
+
+To uninstall a specific Rust version, you can use `rustup toolchain uninstall`:
+
+```console
+$ rustup toolchain uninstall 1.30.0
 ```
 
 To use a toolchain other than the default, use `rustup run`:
