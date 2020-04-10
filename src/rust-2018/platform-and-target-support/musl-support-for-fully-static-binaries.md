@@ -13,7 +13,7 @@ libc`](https://www.musl-libc.org/) can be used on Linux.
 
 To add support for MUSL, you need to choose the correct target. [The forge
 has a full list of
-targets](https://forge.rust-lang.org/platform-support.html) supported,
+targets](https://forge.rust-lang.org/release/platform-support.html) supported,
 with a number of ones using `musl`.
 
 If you're not sure what you want, it's probably `x86_64-unknown-linux-musl`,
