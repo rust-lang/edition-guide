@@ -85,3 +85,13 @@
       - [MSVC toolchain support](rust-2018/platform-and-target-support/msvc-toolchain-support.md)
       - [MUSL support for fully static binaries](rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.md)
       - [`cdylib` crates for C interoperability](rust-2018/platform-and-target-support/cdylib-crates-for-c-interoperability.md)
+
+## The Next Edition
+
+- [The Next Edition](rust-next/index.md)
+    - [Next-Specific Changes](rust-next/edition-changes.md)
+    - [The dbg! macro](rust-next/dbg-macro.md)
+    - [No jemalloc by default](rust-next/no-jemalloc.md)
+    - [Uniform Paths](rust-next/uniform-paths.md)
+    - [`literal` macro matcher](rust-next/literal-macro-matcher.md)
+    - [`?` operator in macros](rust-next/qustion-mark-operator-in-macros.md)
