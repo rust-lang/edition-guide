@@ -34,7 +34,7 @@ jemallocator = "0.1.8"
 
 And in your crate root:
 
-```rust
+```rust,ignore
 #[global_allocator]
 static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
 ```
