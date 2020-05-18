@@ -7,7 +7,7 @@ tweak landing in 1.32.0. Nicknamed "uniform paths", it permits previously
 invalid import path statements to be resolved exactly the same way as
 non-import paths. For example:
 
-```rust,rust2018
+```rust,edition2018
 enum Color {
     Red,
     Green,
