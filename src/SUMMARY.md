@@ -95,3 +95,5 @@
     - [Uniform Paths](rust-next/uniform-paths.md)
     - [`literal` macro matcher](rust-next/literal-macro-matcher.md)
     - [`?` operator in macros](rust-next/qustion-mark-operator-in-macros.md)
+    - [const fn](rust-next/const-fn.md)
+    - [Pinning](rust-next/pin.md)
