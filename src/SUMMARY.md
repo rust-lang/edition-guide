@@ -97,3 +97,5 @@
     - [`?` operator in macros](rust-next/qustion-mark-operator-in-macros.md)
     - [const fn](rust-next/const-fn.md)
     - [Pinning](rust-next/pin.md)
+    - [Alternative Cargo Registries](rust-next/alternative-cargo-registries.md)
+    - [TryFrom and TryInto](rust-next/tryfrom-and-tryinto.md)
