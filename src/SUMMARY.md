@@ -97,3 +97,4 @@
     - [`?` operator in macros](rust-next/qustion-mark-operator-in-macros.md)
     - [const fn](rust-next/const-fn.md)
     - [Pinning](rust-next/pin.md)
+    - [No more FnBox](rust-next/no-more-fnbox.md)
