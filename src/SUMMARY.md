@@ -98,3 +98,5 @@
     - [const fn](rust-next/const-fn.md)
     - [Pinning](rust-next/pin.md)
     - [No more FnBox](rust-next/no-more-fnbox.md)
+    - [Alternative Cargo Registries](rust-next/alternative-cargo-registries.md)
+    - [TryFrom and TryInto](rust-next/tryfrom-and-tryinto.md)
