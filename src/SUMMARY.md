@@ -100,3 +100,7 @@
     - [No more FnBox](rust-next/no-more-fnbox.md)
     - [Alternative Cargo Registries](rust-next/alternative-cargo-registries.md)
     - [TryFrom and TryInto](rust-next/tryfrom-and-tryinto.md)
+    - [The Future trait](rust-next/future.md)
+    - [The alloc crate](rust-next/alloc.md)
+    - [MaybeUninit<T>](rust-next/maybe-uninit.md)
+    - [cargo vendor](rust-next/cargo-vendor.md)
