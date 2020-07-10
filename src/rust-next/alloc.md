@@ -19,7 +19,7 @@ prior to stabilizing support for `#![no_std]` binaries using `alloc`.
 If you are the maintainer of a library that only relies on some allocation primitives to function,
 consider making your library `#[no_std]` compatible by using the following at the top of your `lib.rs` file:
 
-```rust
+```rust,ignore
 #![no_std]
 
 extern crate alloc;
