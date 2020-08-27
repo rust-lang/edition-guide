@@ -230,7 +230,7 @@ const fn foo() {
 
 ![Minimum Rust version: 1.33](https://img.shields.io/badge/Minimum%20Rust%20Version-1.33-brightgreen.svg)
 
-YOu can call an `unsafe fn` inside a `const fn`:
+You can call an `unsafe fn` inside a `const fn`:
 
 ```
 const unsafe fn foo() -> i32 { 5 }
