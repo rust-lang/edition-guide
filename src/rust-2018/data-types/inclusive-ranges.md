@@ -5,7 +5,7 @@
 Since well before Rust 1.0, you’ve been able to create exclusive ranges with
 `..` like this:
 
-```
+```rust
 for i in 1..3 {
     println!("i: {}", i);
 }

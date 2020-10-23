@@ -6,7 +6,7 @@ Expanded in many releases, see each aspect below for more details.
 
 A `const fn` allows you to execute code in a "const context." For example:
 
-```
+```rust
 const fn five() -> i32 {
     5
 }
@@ -34,7 +34,7 @@ that it is becoming more `const` over time.
 
 You can do arithmetic on integer literals:
 
-```
+```rust
 const fn foo() -> i32 {
     5 + 6
 }
@@ -46,7 +46,7 @@ const fn foo() -> i32 {
 
 You can use boolean operators other than `&&` and `||`, because they short-circut evaluation:
 
-```
+```rust
 const fn mask(val: u8) -> u8 {
     let mask = 0x0f;
 
@@ -60,7 +60,7 @@ const fn mask(val: u8) -> u8 {
 
 You can create arrays, structs, enums, and tuples:
 
-```
+```rust
 struct Point {
     x: i32,
     y: i32,
@@ -92,7 +92,7 @@ const fn foo() {
 You can call `const fn` from a `const fn`:
 
 
-```
+```rust
 const fn foo() -> i32 {
     5
 }
@@ -108,7 +108,7 @@ const fn bar() -> i32 {
 
 You can index into an array or slice:
 
-```
+```rust
 const fn foo() -> i32 {
     let array = [1, 2, 3];
 
@@ -122,7 +122,7 @@ const fn foo() -> i32 {
 
 You can access parts of a struct or tuple:
 
-```
+```rust
 struct Point {
     x: i32,
     y: i32,
@@ -147,7 +147,7 @@ const fn foo() {
 
 You can read from a constant:
 
-```
+```rust
 const FOO: i32 = 5;
 
 const fn foo() -> i32 {
@@ -163,7 +163,7 @@ Note that this is *only* `const`, not `static`.
 
 You can create and de-reference references:
 
-```
+```rust
 const fn foo(r: &i32) {
     *r;
 
@@ -177,7 +177,7 @@ const fn foo(r: &i32) {
 
 You may cast things, except for raw pointers may not be casted to an integer:
 
-```
+```rust
 const fn foo() {
     let x: usize = 5;
 
@@ -191,7 +191,7 @@ const fn foo() {
 
 You can use irrefutable patterns that destructure values. For example:
 
-```
+```rust
 const fn foo((x, y): (u8, u8)) {
     // ...
 }
@@ -206,7 +206,7 @@ place that uses irrefutable patterns.
 
 You can use both mutable and immutable `let` bindings:
 
-```
+```rust
 const fn foo() {
     let x = 5;
     let mut y = 10;
@@ -219,7 +219,7 @@ const fn foo() {
 
 You can use assignment and assignment operators:
 
-```
+```rust
 const fn foo() {
     let mut x = 5;
     x = 10;
@@ -232,7 +232,7 @@ const fn foo() {
 
 You can call an `unsafe fn` inside a `const fn`:
 
-```
+```rust
 const unsafe fn foo() -> i32 { 5 }
 
 const fn bar() -> i32 {
