@@ -75,7 +75,9 @@ fn main() -> Result<(), std::io::Error> {
 
 In this case, if say the file doesn't exist and there is an `Err(err)` somewhere,
 then `main` will exit with an error code (not `0`) and print out a `Debug`
-representation of `err`.
+representation of `err`. Note that this will always print out the `Debug` representation.
+If you would like to, for example, print out the `Display` representation of `err`, 
+you will still have to do what you would in Rust 2015. 
 
 ## More details
 
