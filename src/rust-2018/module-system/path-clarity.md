@@ -65,26 +65,40 @@ keep doing what you were doing there as well.
 #### An exception
 
 There's one exception to this rule, and that's the "sysroot" crates. These are the
-crates distributed with Rust itself. We'd eventually like to remove the requirement
-for `extern crate` for them as well, but it hasn't shipped yet.
+crates distributed with Rust itself.
 
-You'll need to use `extern crate` for:
+Usually these are only needed in very specialized situations. Starting in
+1.41, `rustc` accepts the `--extern=CRATE_NAME` flag which automatically adds
+the given crate name in a way similar to `extern crate`. Build tools may use
+this to inject sysroot crates into the crate's prelude. Cargo does not have a
+general way to express this, though it uses it for `proc_macro` crates.
 
-* `proc_macro`
+Some examples of needing to explicitly import sysroot crates are:
 
-Additionally, you would need to use it for:
+* [`std`]: Usually this is not neccesary, because `std` is automatically
+  imported unless the crate is marked with [`#![no_std]`][no_std].
+* [`core`]: Usually this is not necessary, because `core` is automatically
+  imported, unless the crate is marked with [`#![no_core]`][no_core]. For
+  example, some of the internal crates used by the standard library itself
+  need this.
+* [`proc_macro`]: This is automatically imported by Cargo if it is a
+  proc-macro crate starting in 1.42. `extern crate proc_macro;` would be
+  needed if you want to support older releases, or if using another build tool
+  that does not pass the appropriate `--extern` flags to `rustc`.
+* [`alloc`]: Items in the `alloc` crate are usually accessed via re-exports in
+  the `std` crate. If you are working with a `no_std` crate that supports
+  allocation, then you may need to explicitly import `alloc`.
+* [`test`]: This is only available on the [nightly channel], and is usually
+  only used for the unstable benchmark support.
 
-* `core`
-* `std`
-
-However, `extern crate std;` is already implicit, and with `#![no_std]`,
-`extern crate core;` is already implicit. You'll only need these in highly
-specialized situations.
-
-Finally, on nightly, you'll need it for crates like:
-
-* `alloc`
-* `test`
+[`alloc`]: ../../../alloc/index.html
+[`core`]: ../../../core/index.html
+[`proc_macro`]: ../../../proc_macro/index.html
+[`std`]: ../../../std/index.html
+[`test`]: ../../../test/index.html
+[nightly channel]: ../../../book/appendix-07-nightly-rust.html
+[no_core]: https://github.com/rust-lang/rust/issues/29639
+[no_std]: ../../../reference/crates-and-source-files.html#preludes-and-no_std
 
 #### Macros
 
