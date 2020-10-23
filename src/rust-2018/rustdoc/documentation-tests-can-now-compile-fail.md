@@ -4,7 +4,7 @@
 
 You can now create `compile-fail` tests in Rustdoc, like this:
 
-```
+```rust
 /// ```compile_fail
 /// let x = 5;
 /// x += 2; // shouldn't compile!

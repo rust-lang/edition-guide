@@ -11,9 +11,11 @@ the 2018 edition compared to the 2015 edition.
 - [Anonymous trait function parameters] are not allowed.
     - [Trait function parameters] may use any irrefutable pattern when the
       function has a body.
-- [`dyn`] is a [strict keyword], in 2015 it is a [weak keyword].
-- `async`, `await`, and `try` are [reserved keywords].
-- The following lints are now deny by default:
+- Keyword changes:
+    - [`dyn`] is a [strict keyword][strict], in 2015 it is a [weak keyword].
+    - `async` and `await` are [strict keywords][strict].
+    - `try` is a [reserved keyword].
+- The following lints are now a hard error that you cannot silence:
     - [tyvar_behind_raw_pointer]
 
 ## Cargo
@@ -28,7 +30,7 @@ the 2018 edition compared to the 2015 edition.
 [Path changes]: module-system/path-clarity.md
 [Trait function parameters]: https://doc.rust-lang.org/stable/reference/items/traits.html#parameter-patterns
 [`dyn`]: trait-system/dyn-trait-for-trait-objects.md
-[reserved keywords]: https://doc.rust-lang.org/reference/keywords.html#reserved-keywords
-[strict keyword]: https://doc.rust-lang.org/reference/keywords.html#strict-keywords
+[reserved keyword]: https://doc.rust-lang.org/reference/keywords.html#reserved-keywords
+[strict]: https://doc.rust-lang.org/reference/keywords.html#strict-keywords
 [tyvar_behind_raw_pointer]: https://github.com/rust-lang/rust/issues/46906
 [weak keyword]: https://doc.rust-lang.org/reference/keywords.html#weak-keywords
