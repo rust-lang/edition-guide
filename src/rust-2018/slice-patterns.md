@@ -15,7 +15,7 @@ fn main() {
     greet(&["Alan"]);
     // output: Hey, there Alan! You seem to be alone.
     greet(&["Joan", "Hugh"]);
-    // output: Hello, Joan and Hugh. Nice to see you are at least 2!
+    // output: Hello, Joan and Hugh. Nice to see you are exactly 2!
     greet(&["John", "Peter", "Stewart"]);
     // output: Hey everyone, we seem to be 3 here today.
 }
@@ -25,7 +25,7 @@ fn greet(people: &[&str]) {
         [] => println!("Bummer, there's no one here :("),
         [only_one] => println!("Hey, there {}! You seem to be alone.", only_one),
         [first, second] => println!(
-            "Hello, {} and {}. Nice to see you are at least 2!",
+            "Hello, {} and {}. Nice to see you are exactly 2!",
             first, second
         ),
         _ => println!("Hey everyone, we seem to be {} here today.", people.len()),
