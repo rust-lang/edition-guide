@@ -2,6 +2,9 @@
 
 ![Minimum Rust version: 1.1](https://img.shields.io/badge/Minimum%20Rust%20Version-1.1-brightgreen.svg)
 
+(Note: current Rust (as of 1.48) supports static linking with either glibc or
+MUSL, so you can select whichever libc you need or prefer.)
+
 By default, Rust will statically link all Rust code. However, if you use the
 standard library, it will dynamically link to the system's `libc`
 implementation.
