@@ -39,7 +39,7 @@ Let's look at `src/lib.rs` again:
 
 ```rust
 trait Foo {
-    fn foo(&self, _: Box<Foo>);
+    fn foo(&self, _: Box<dyn Foo>);
 }
 ```
 
