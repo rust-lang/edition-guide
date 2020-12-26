@@ -17,9 +17,9 @@ You can also build the book and read it locally if you'd like.
 
 ### Requirements
 
-Building the book requires [mdBook] 0.2. To get it:
+Building the book requires [mdBook] 0.4. To get it:
 
-[mdBook]: https://github.com/azerupi/mdBook
+[mdBook]: https://github.com/rust-lang/mdBook
 
 ```bash
 $ cargo install mdbook
@@ -29,30 +29,13 @@ $ cargo install mdbook
 
 The most straight-forward way to build and view the book locally is to use the following command:
 ```bash
-$ mdbook serve
+$ mdbook serve --open
 ```
 
-This serves the book at http://localhost:3000, and rebuilds it on changes.
-You can now view the book in your web browser. If you make changes to the book's source code,
-you should only need to refresh your browser to see them.
-
-_Firefox:_
-
-```shell
-$ firefox http://localhost:3000                       # Linux
-$ open -a "Firefox" http://localhost:3000             # OS X
-$ Start-Process "firefox.exe" http://localhost:3000   # Windows (PowerShell)
-$ start firefox.exe http://localhost:3000             # Windows (Cmd)
-```
-
-_Chrome:_
-
-```shell
-$ google-chrome http://localhost:3000                 # Linux
-$ open -a "Google Chrome" http://localhost:3000       # OS X
-$ Start-Process "chrome.exe" http://localhost:3000    # Windows (PowerShell)
-$ start chrome.exe http://localhost:3000              # Windows (Cmd)
-```
+This builds the HTML version of the book, starts a webserver at
+http://localhost:3000, and opens your default web browser. It will also
+automatically rebuild the book whenever the source changes, and the page
+should automatically reload.
 
 To run the tests:
 
