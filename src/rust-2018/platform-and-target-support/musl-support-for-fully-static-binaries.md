@@ -7,7 +7,7 @@ standard library, it will dynamically link to the system's `libc`
 implementation.
 
 If you'd like a 100% static binary, the [`MUSL
-libc`](https://www.musl-libc.org/) can be used on Linux.
+libc`](https://musl.libc.org/) can be used on Linux.
 
 ## Installing MUSL support
 
