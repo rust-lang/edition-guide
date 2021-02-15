@@ -98,7 +98,7 @@ Some examples of needing to explicitly import sysroot crates are:
 [`test`]: ../../../test/index.html
 [nightly channel]: ../../../book/appendix-07-nightly-rust.html
 [no_core]: https://github.com/rust-lang/rust/issues/29639
-[no_std]: ../../../reference/crates-and-source-files.html#preludes-and-no_std
+[no_std]: ../../../reference/names/preludes.html#the-no_std-attribute
 
 #### Macros
 
