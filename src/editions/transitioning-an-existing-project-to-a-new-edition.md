@@ -7,7 +7,7 @@ have a project that's using Rust 2015, and you'd like to use Rust 2018 for it
 instead, there's a few steps that you need to take.
 
 > It's our intention that the migration to new editions is as smooth an
-> experience as possible. If it's difficult for you to upgrade to Rust 2018,
+> experience as possible. If it's difficult for you to upgrade to the latest edition,
 > we consider that a bug. If you run into problems with this process, please
 > [file a bug](https://github.com/rust-lang/rust/issues/new). Thank you!
 

@@ -20,7 +20,18 @@
   - [New keywords](rust-2018/new_keywords.md)
   - [Method dispatch for raw pointers to inference variables](rust-2018/tyvar_behind_raw_pointer.md)
   - [Cargo changes](rust-2018/cargo.md)
-- [Rust 2021](rust-2021/index.md)
+
+## Rust 2021
+
+- [Rust 2021 ⚠️](rust-2021/index.md)
+  - [Additions to the prelude](rust-2021/prelude.md)
+  - [Default Cargo feature resolver](rust-2021/default_cargo_resolver.md)
+  - [IntoIterator for arrays](rust-2021/IntoIterator_for_arrays.md)
+  - [Disjoint capture in closures](rust-2021/disjoint_capture_in_closures.md)
+  - [Panic macro consistency](rust-2021/panic_macro_consistency.md)
+  - [Reserving syntax](rust-2021/reserving_syntax.md)
+  - [Warnings promoted to errors](rust-2021/warnings_promoted_to_error.md)
+  - [Or patterns in macro-rules](rust-2021/or_patterns_macro_rules.md)
 
 ## Rust 2018 (outdated)
 
