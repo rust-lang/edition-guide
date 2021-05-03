@@ -23,7 +23,7 @@
 
 ## Rust 2021
 
-- [Rust 2021 ⚠️](rust-2021/index.md)
+- [Rust 2021 🚧](rust-2021/index.md)
   - [Additions to the prelude](rust-2021/prelude.md)
   - [Default Cargo feature resolver](rust-2021/default_cargo_resolver.md)
   - [IntoIterator for arrays](rust-2021/IntoIterator_for_arrays.md)
