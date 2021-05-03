@@ -2,6 +2,11 @@
 
 🚧 The 2021 Edition has not yet been released and hence this section is still "under construction".
 
+| Info | |
+| --- | --- |
+| RFC | [#3085](https://github.com/rust-lang/rfcs/pull/3085) |
+| Release version | 1.56.0 (anticipated) |
+
 The Rust 2021 Edition is currently slated for release in Rust 1.56.0.
 Rust 1.56.0 will then be in beta for six weeks,
 after which it is released as stable on October 21st.
