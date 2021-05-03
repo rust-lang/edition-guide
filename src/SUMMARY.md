@@ -14,6 +14,16 @@
 
 ## Rust 2018
 
+- [Rust 2018](rust-2018/index.md)
+  - [Path and module system changes](rust-2018/path-changes.md)
+  - [Anonymous trait function parameters deprecated](rust-2018/trait_fn_parameters.md)
+  - [New keywords](rust-2018/new_keywords.md)
+  - [Method dispatch for raw pointers to inference variables](rust-2018/tyvar_behind_raw_pointer.md)
+  - [Cargo changes](rust-2018/cargo.md)
+- [Rust 2021](rust-2021/index.md)
+
+## Rust 2018 (outdated)
+
 - [Rust 2018 (outdated)](rust-2018-outdated/index.md)
     - [2018-Specific Changes](rust-2018-outdated/edition-changes.md)
     - [Module system](rust-2018-outdated/module-system/index.md)
