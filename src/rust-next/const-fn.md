@@ -44,7 +44,7 @@ const fn foo() -> i32 {
 
 ![Minimum Rust version: 1.31](https://img.shields.io/badge/Minimum%20Rust%20Version-1.31-brightgreen.svg)
 
-You can use boolean operators other than `&&` and `||`, because they short-circut evaluation:
+You can use boolean operators other than `&&` and `||`, because they short-circuit evaluation:
 
 ```rust
 const fn mask(val: u8) -> u8 {
