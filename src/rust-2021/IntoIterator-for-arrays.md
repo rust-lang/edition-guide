@@ -8,7 +8,7 @@ Until Rust 1.53, only *references* to arrays implement `IntoIterator`.
 This means you can iterate over `&[1, 2, 3]` and `&mut [1, 2, 3]`,
 but not over `[1, 2, 3]` directly.
 
-```rust
+```rust,ignore
 for &e in &[1, 2, 3] {} // Ok :)
 
 for e in [1, 2, 3] {} // Error :(

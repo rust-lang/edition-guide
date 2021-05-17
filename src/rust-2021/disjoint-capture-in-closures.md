@@ -15,7 +15,7 @@ When a field of the struct is already borrowed (mutably) or moved out of,
 the other fields can no longer be used in a closure,
 since that would capture the whole struct, which is no longer available.
 
-```rust
+```rust,ignore
 let a = SomeStruct::new();
 
 drop(a.x); // Move out of one field of the struct

@@ -9,7 +9,7 @@ The `panic!()` macro is one of Rust's most well known macros.
 However, it has [some subtle surprises](https://github.com/rust-lang/rfcs/blob/master/text/3007-panic-plan.md)
 that we can't just change due to backwards compatibility.
 
-```rust
+```rust,ignore
 panic!("{}", 1); // Ok, panics with the message "1"
 panic!("{}"); // Ok, panics with the message "{}"
 ```
@@ -17,7 +17,7 @@ panic!("{}"); // Ok, panics with the message "{}"
 The `panic!()` macro only uses string formatting when it's invoked with more than one argument.
 When invoked with a single argument, it doesn't even look at that argument.
 
-```rust
+```rust,ignore
 let a = "{";
 println!(a); // Error: First argument must be a format string literal
 panic!(a); // Ok: The panic macro doesn't care
