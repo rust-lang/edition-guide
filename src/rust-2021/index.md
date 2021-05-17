@@ -1,6 +1,7 @@
 # Rust 2021
 
 🚧 The 2021 Edition has not yet been released and hence this section is still "under construction".
+You can [read more about our plans in this blog post](https://blog.rust-lang.org/2021/05/11/edition-2021.html).
 
 | Info | |
 | --- | --- |
