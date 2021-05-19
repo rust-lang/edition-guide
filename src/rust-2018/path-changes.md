@@ -99,19 +99,39 @@ Some examples of needing to explicitly import sysroot crates are:
 * [`test`]: This is only available on the [nightly channel], and is usually
   only used for the unstable benchmark support.
 
-[`alloc`]: ../../../alloc/index.html
-[`core`]: ../../../core/index.html
-[`proc_macro`]: ../../../proc_macro/index.html
-[`std`]: ../../../std/index.html
-[`test`]: ../../../test/index.html
-[nightly channel]: ../../../book/appendix-07-nightly-rust.html
+[`alloc`]: ../../alloc/index.html
+[`core`]: ../../core/index.html
+[`proc_macro`]: ../../proc_macro/index.html
+[`std`]: ../../std/index.html
+[`test`]: ../../test/index.html
+[nightly channel]: ../../book/appendix-07-nightly-rust.html
 [no_core]: https://github.com/rust-lang/rust/issues/29639
-[no_std]: ../../../reference/names/preludes.html#the-no_std-attribute
+[no_std]: ../../reference/names/preludes.html#the-no_std-attribute
 
 #### Macros
 
 One other use for `extern crate` was to import macros; that's no longer needed.
-Check [the macro section](../macros/macro-changes.md) for more.
+Macros may be imported with `use` like any other item. For example, the
+following use of `extern crate`:
+
+```rust,ignore
+#[macro_use]
+extern crate bar;
+
+fn main() {
+    baz!();
+}
+```
+
+Can be changed to something like the following:
+
+```rust,ignore
+use bar::baz;
+
+fn main() {
+    baz!();
+}
+```
 
 #### Renaming crates
 

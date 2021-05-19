@@ -4,7 +4,7 @@
 
 ## Summary
 
-- [`dyn`] is a [strict keyword][strict], in 2015 it is a [weak keyword].
+- `dyn` is a [strict keyword][strict], in 2015 it is a [weak keyword].
 - `async` and `await` are [strict keywords][strict].
 - `try` is a [reserved keyword].
 
@@ -50,10 +50,12 @@ is sometimes slower, and often cannot be used at all when its alternatives can.
 
 Furthermore, with `impl Trait` arriving, "`impl Trait` vs `dyn Trait`" is much
 more symmetric, and therefore a bit nicer, than "`impl Trait` vs `Trait`".
-`impl Trait` is explained [here](impl-trait-for-returning-complex-types-with-ease.md).
+`impl Trait` is explained [here][impl-trait].
 
 In the new edition, you should therefore prefer `dyn Trait` to just `Trait`
 where you need a trait object.
+
+[impl-trait]: ../../rust-by-example/trait/impl_trait.html
 
 ### `async` and `await`
 
