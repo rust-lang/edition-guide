@@ -1,8 +1,8 @@
 # Rust 2018
 
-The edition system was created for the release of Rust 2018. The theme of Rust 2018
-is *productivity*. Rust 2018 improves upon Rust 2015 through new features,
-simpler syntax in some cases, a smarter borrow-checker, and a host of other things.
-These are all in service of the productivity goal. Rust 2015 was a foundation;
-Rust 2018 smooths off rough edges, makes writing code simpler and easier,
-and removes some inconsistencies.
+| Info | |
+| --- | --- |
+| RFC | [#2052](https://rust-lang.github.io/rfcs/2052-epochs.html), which also proposed the Edition system |
+| Release version | [1.31.0](https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html) |
+
+The edition system was created for the release of Rust 2018. The release of the Rust 2018 edition coincided with a number of other features all coordinated around the theme of *productivity*. The majority of those features were backwards compatible and are now available on all editions; however, some of those changes required the edition mechanism (most notably the [module system changes](path-changes.md)).
