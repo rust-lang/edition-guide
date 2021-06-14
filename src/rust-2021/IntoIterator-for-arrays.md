@@ -2,6 +2,11 @@
 
 ## Summary
 
+- Arrays implement `IntoIterator` in *all* editions.
+- The new `.into_iter()` is *hidden* in Rust 2015 and Rust 2018 in method call syntax.
+  So, `array.into_iter()` still resolves to `(&array).into_iter()` as before.
+- `array.into_iter()` changes meaning when switching to Rust 2021.
+
 ## Details
 
 Until Rust 1.53, only *references* to arrays implement `IntoIterator`.

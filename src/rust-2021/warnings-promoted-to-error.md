@@ -2,6 +2,8 @@
 
 ## Summary
 
+- `bare-trait-objects` and `ellipsis-inclusive-range-patters` are now hard errors.
+
 ## Details
 
 Two existing lints are becoming hard errors in Rust 2021.

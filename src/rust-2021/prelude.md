@@ -2,6 +2,9 @@
 
 ## Summary
 
+- `TryInto`, `TryFrom` and `FromIterator` are now part of the prelude.
+- This might change the meaning of e.g. `x.try_into()` depending on types and imports.
+
 ## Details
 
 The [prelude of the standard library](https://doc.rust-lang.org/stable/std/prelude/index.html)

@@ -2,8 +2,12 @@
 
 ## Summary
 
-## Details
+- `panic!(..)` now always use `format_args!(..)`, just like `println!()`.
+- `panic!("{")` is no longer accepted, without escaping the `{` as `{{`.
+- `panic!(x)` is no longer accepted if `x` is not a string literal.
+- Use `std::panic::panic_any(x)` to panic with a non-string payload.
 
+## Details
 
 The `panic!()` macro is one of Rust's most well known macros.
 However, it has [some subtle surprises](https://github.com/rust-lang/rfcs/blob/master/text/3007-panic-plan.md)
