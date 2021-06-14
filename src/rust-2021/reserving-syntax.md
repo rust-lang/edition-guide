@@ -2,6 +2,10 @@
 
 ## Summary
 
+- `any_prefix#..`, `any_prefix".."`, and `any_prefix'..'` are reserved syntax, and no longer tokenize.
+- These did not parse as valid Rust in any edition, except in arguments to macros.
+- Insert whitespace to avoid errors.
+
 ## Details
 
 To make space for some new syntax in the future,

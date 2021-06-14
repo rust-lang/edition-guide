@@ -2,6 +2,8 @@
 
 ## Summary
 
+- `edition = "2021"` implies `resolver = "2"` in `Cargo.toml`.
+
 ## Details
 
 Since Rust 1.51.0, Cargo has opt-in support for a [new feature resolver][4]

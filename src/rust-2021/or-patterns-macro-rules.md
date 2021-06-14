@@ -2,6 +2,10 @@
 
 ## Summary
 
+- `$_:pat` in `macro_rules` now matches `|` too: e.g. `A | B`.
+- `$_:pat_param` behaves like `$_:pat` did before; it does not match (top level) `|`.
+- `$_:pat_param` is available in all editions.
+
 ## Details
 
 Starting in Rust 1.53.0, [patterns](https://doc.rust-lang.org/stable/reference/patterns.html)

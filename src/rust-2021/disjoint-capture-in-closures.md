@@ -2,6 +2,9 @@
 
 ## Summary
 
+- `|| a.x + 1` now captures only `a.x` instead of `a`.
+- This can subtly change the drop order of things.
+
 ## Details
 
 [Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)
