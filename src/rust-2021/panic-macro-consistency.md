@@ -14,6 +14,7 @@ However, it has [some subtle surprises](https://github.com/rust-lang/rfcs/blob/m
 that we can't just change due to backwards compatibility.
 
 ```rust,ignore
+// Rust 2018
 panic!("{}", 1); // Ok, panics with the message "1"
 panic!("{}"); // Ok, panics with the message "{}"
 ```
@@ -22,6 +23,7 @@ The `panic!()` macro only uses string formatting when it's invoked with more tha
 When invoked with a single argument, it doesn't even look at that argument.
 
 ```rust,ignore
+// Rust 2018
 let a = "{";
 println!(a); // Error: First argument must be a format string literal
 panic!(a); // Ok: The panic macro doesn't care
@@ -42,6 +44,13 @@ It will, just like `println!()`, always process the first argument as format str
 Since `panic!()` will no longer accept arbitrary payloads,
 [`panic_any()`](https://doc.rust-lang.org/stable/std/panic/fn.panic_any.html)
 will be the only way to panic with something other than a formatted string.
+
+```rust,ignore
+// Rust 2021
+panic!("{}", 1); // Ok, panics with the message "1"
+panic!("{}"); // Error, missing argument
+panic!(a); // Error, must be a string literal
+```
 
 In addition, `core::panic!()` and `std::panic!()` will be identical in Rust 2021.
 Currently, there are some historical differences between those two,
