@@ -41,7 +41,7 @@ When running `cargo fix --edition`, Cargo will update the closures in your code 
 ### Wild Card Patterns
 Closures now only capture data that needs to be read, which means the following closures will not capture `x`
 
-```rust,ignore
+```rust
 let x = 10;
 let c = || {
     let _ = x;
@@ -55,13 +55,14 @@ let c = || match x {
 ### Drop Order
 Since only a part of a variable might be captured instead of the entire variable, when different fields or elements (in case of tuple) get drop, the drop order might be affected.
 
-```rust,ignore
+```rust
+# fn move_value<T>(_: T){}
 {
     let t = (vec![0], vec![0]);
 
     {
         let c = || {
-            move(t.0);
+            move_value(t.0); // t.0 is moved here
         };
     } // c and t.0 dropped here
 } // t.1 dropped here
@@ -77,16 +78,20 @@ For instance, a common way to allow passing around raw pointers between threads 
 With disjoint captures, only the specific field mentioned in the closure gets captured, which wasn't originally `Send`/`Sync` defeating the purpose of the wrapper.
 
 
-```rust,ignore
+```rust
+use std::thread;
+
 struct Ptr(*mut i32);
-unsafe impl Send for Ptr;
+unsafe impl Send for Ptr {}
 
 
 let mut x = 5;
-let px = (&mut x as *mut i32);
+let px = Ptr(&mut x as *mut i32);
 
 let c = thread::spawn(move || {
-    *(px.0) += 10;
+    unsafe {
+        *(px.0) += 10;
+    }
 }); // Closure captured px.0 which is not Send
 ```
 
