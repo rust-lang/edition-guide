@@ -3,7 +3,7 @@
 ## Summary
 
 - `|| a.x + 1` now captures only `a.x` instead of `a`.
-- This can subtly change the drop order of things, and auto traits usage with closures.
+- This can subtly change the drop order of things and whether auto traits are applied to closures or not.
 
 ## Details
 
@@ -35,7 +35,9 @@ So, the above example will compile fine in Rust 2021.
 Disjoint capture was proposed as part of [RFC 2229](https://github.com/rust-lang/rfcs/blob/master/text/2229-capture-disjoint-fields.md), and we suggest reading the RFC to better understand motivations behind the feature.
 
 ## Changes to semantics because of disjoint capture
-`#[feature(capture_disjoint_fields)]` introduces (minor) breaking change to the language. This means that there might be observable changes or valid Rust 2018 code that fails to compile once you move to Rust Edition 2021. You can use `cargo fix` with the `disjoint_capture_migrations` lint to migrate your existing code to Rust 2021.
+Disjoint captures introduces a minor breaking change to the language. This means that there might be observable changes or valid Rust 2018 code that fails to compile once you move to Rust Edition 2021. 
+
+When running `cargo fix --edition`, Cargo will update the closures in your code to help you migrate to Rust 2021, as described below in [Migrations](#migrations).
 ### Wild Card Patterns
 Closures now only capture data that needs to be read, which means the following closures will not capture `x`
 
@@ -46,7 +48,7 @@ let c = || {
 };
 
 let c = || match x {
-    _ => prinln!("Hello World!")
+    _ => println!("Hello World!")
 };
 ```
 
@@ -68,11 +70,11 @@ Since only a part of a variable might be captured instead of the entire variable
 
 
 ### Auto Traits
-Structs or tuples that implement (an) auto trait(s) and are passed along in a closure may no longer guarantee that the closure can also implement that/those auto trait(s).
+Structs or tuples that implement auto traits and are passed along in a closure may no longer guarantee that the closure can also implement those auto traits.
 
 For instance, a common way to allow passing around raw pointers between threads is to wrap them in a struct and then implement `Send`/`Sync` auto trait for the wrapper. The closure that is passed to `thread::spawn` uses the specific fields within the wrapper but the entire wrapper is captured regardless. Since the wrapper is `Send`/`Sync`, the code is considered safe and therefore compiles successfully.
 
-With this feature only the specific field mentioned in the closure gets captured, which wasn't originally `Send`/`Sync` defeating the purpose of the wrapper.
+With disjoint captures, only the specific field mentioned in the closure gets captured, which wasn't originally `Send`/`Sync` defeating the purpose of the wrapper.
 
 
 ```rust,ignore
@@ -90,10 +92,12 @@ let c = thread::spawn(move || {
 
 ## Migrations
 
-This new behavior is only activated in the new edition, or by specifically enabling it using `#[feature(capture_disjoint_fields)]`,
+This new behavior is only activated starting in the 2021 edition,
 since it can change the order in which fields are dropped and can impact auto trait usage with closures.
 
-As for all edition changes, an automatic migration is available.
-If you would like to be warned of semantics change that may impact your code, you can [use the lint](https://doc.rust-lang.org/rustc/lints/levels.html) `disjoint_capture_migrations`. The lint is also supported with [cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html) to automatically migrate your code.
+When running `cargo fix --edition`, the closures in your code may be updated so that they will retain the old behavior on both the 2018 and 2021 editions.
+It does this by enabling the `disjoint_capture_migration` lint which adds statements like `let _ = &a;` inside the closure to force the entire variable to be captured as before.
 
-The migration fix involves adding `let _ = &a;` inside the closure to force the entire variable to be captured as before.
+After migrating, it is recommended to inspect the changes and see if they are necessary.
+After changing the edition to 2021, you can try to remove the new statements and test that the closure works as expected.
+You should review these closures, and ensure that the changes described above will not cause any problems.
