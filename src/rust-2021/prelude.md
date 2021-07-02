@@ -35,7 +35,7 @@ The tracking issue [can be found here](https://github.com/rust-lang/rust/issues/
 
 ## Migration
 
-As a part of the 2021 edition a migration lint, currently `future_prelude_collision`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
+As a part of the 2021 edition a migration lint, `rust_2021_prelude_collisions`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
 
 ### Implementation Reference
 
