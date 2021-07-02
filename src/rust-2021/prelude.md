@@ -31,5 +31,26 @@ It's identical to the current one, except for three new additions:
 - [`std::convert::TryFrom`](https://doc.rust-lang.org/stable/std/convert/trait.TryFrom.html)
 - [`std::iter::FromIterator`](https://doc.rust-lang.org/stable/std/iter/trait.FromIterator.html)
 
-The library team still needs to formally approve these, which will likely happen soon.
-<!-- TODO: hopefully this happens before we publish this -->
+The tracking issue [can be found here](https://github.com/rust-lang/rust/issues/85684).
+
+## Migration
+
+As a part of the 2021 edition a migration lint, currently `future_prelude_collision`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
+
+### Implementation Reference
+
+The lint needs to take a couple of factors into account when determining whether or not introducing 2021 Edition to a codebase will cause a name resolution collision (thus breaking the code after changing edition). These factors include:
+
+- Is the call a [fully-qualified call] or does it use [dot-call method syntax]?
+  - This will affect how the name is resolved due to auto-reference and auto-dereferencing on method call syntax. Manually dereferencing/referencing will allow specifying priority in the case of dot-call method syntax, while fully-qualified call requires specification of the type and the trait name in the method path (e.g. `<Type as Trait>::method`)
+- Is this an [inherent method] or [a trait method]?
+  - Inherent methods that take `self` will take priority over `TryInto::try_into` as inherent methods take priority over trait methods, but inherent methods that take `&self` or `&mut self` won't take priority due to requiring a auto-reference (while `TryInto::try_into` does not, as it takes `self`)
+- Is the origin of this method from `core`/`std`? (As the traits can't have a collision with themselves)
+- Does the given type implement the trait it could have a collision against?
+- Is the method being called via dynamic dispatch? (i.e. is the `self` type `dyn Trait`)
+  - If so, trait imports don't affect resolution, and no migration lint needs to occur
+
+[fully-qualified call]: https://doc.rust-lang.org/reference/expressions/call-expr.html#disambiguating-function-calls
+[dot-call method syntax]: https://doc.rust-lang.org/reference/expressions/method-call-expr.html
+[inherent method]: https://doc.rust-lang.org/reference/items/implementations.html#inherent-implementations
+[a trait method]: https://doc.rust-lang.org/reference/items/implementations.html#trait-implementations
