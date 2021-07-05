@@ -37,6 +37,12 @@ The tracking issue [can be found here](https://github.com/rust-lang/rust/issues/
 
 As a part of the 2021 edition a migration lint, `rust_2021_prelude_collisions`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
 
+In order to have rustfix migrate your code to be Rust 2021 Edition compatible, run:
+
+```
+cargo fix --edition
+```
+
 ### Implementation Reference
 
 The lint needs to take a couple of factors into account when determining whether or not introducing 2021 Edition to a codebase will cause a name resolution collision (thus breaking the code after changing edition). These factors include:
