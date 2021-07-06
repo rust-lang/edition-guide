@@ -35,8 +35,6 @@ Changing the variables captured by a closure can cause programs to change behavi
 - changes to drop order, or when destructors run ([details](#drop-order));
 - changes to which traits a closure implements ([details](#trait-implementations)).
 
-When running `cargo fix --edition`, Cargo will update the closures in your code to help you migrate to Rust 2021, as described below in [Migrations](#migrations).
-
 Whenever any of the scenarios below are detected, `cargo fix` will insert a "dummy let" into your closure to force it to capture the entire variable:
 
 ```rust
