@@ -40,7 +40,7 @@ When running `cargo fix --edition`, Cargo will update the closures in your code 
 Whenever any of the scenarios below are detected, `cargo fix` will insert a "dummy let" into your closure to force it to capture the entire variable:
 
 ```rust
-let x = (vec![], vec![]);
+let x = (vec![22], vec![23]);
 let c = move || {
     // "Dummy let" that forces `x` to be captured in its entirety
     let _ = &x;
