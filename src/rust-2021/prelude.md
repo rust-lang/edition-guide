@@ -17,7 +17,7 @@ For example, if you have a crate or module called `example` containing a `pub st
 then `use example::*;` will make `Option` unambiguously refer to the one from `example`;
 not the one from the standard library.
 
-However, adding a *trait* to the prelude can break existing code in a subtle way.
+However, adding a _trait_ to the prelude can break existing code in a subtle way.
 A call to `x.try_into()` using a `MyTryInto` trait might become ambiguous and
 fail to compile if `std`'s `TryInto` is also imported,
 since it provides a method with the same name.
@@ -33,7 +33,7 @@ It's identical to the current one, except for three new additions:
 
 The tracking issue [can be found here](https://github.com/rust-lang/rust/issues/85684).
 
-## Migration
+## Migration to Rust 2021
 
 As a part of the 2021 edition a migration lint, `rust_2021_prelude_collisions`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
 
@@ -42,6 +42,47 @@ In order to have rustfix migrate your code to be Rust 2021 Edition compatible, r
 ```
 cargo fix --edition
 ```
+
+The lint detects cases where functions or methods are called that have the same name as the methods defined in one of the new prelude traits. In some cases, it may rewrite your calls in various ways to ensure that you continue to call the same function you did before:
+
+| Scenario                                                                 | Example               | Rewrite (if any)     |
+| ------------------------------------------------------------------------ | --------------------- | -------------------- |
+| [Fully qualified inherent](#fully-qualified-calls-to-inherent-methods)   | `Foo::from_iter(...)` | none                 |
+| [Inherent methods on `dyn Trait`](inherent-methods-on-dyn-trait-objects) | `foo.into_iter()`     | `(*foo).into_iter`() |
+
+### Fully qualified calls to inherent methods
+
+Many types define their own inherent methods with the name `from_iter`:
+
+```rust
+struct Foo {
+  data: Vec<u32>
+}
+impl Foo {
+  fn from_iter(x: impl Iterator<Item = u32>) -> Self {
+    Foo {
+      data: x.collect()
+    }
+  }
+}
+```
+
+Calls like `Foo::from_iter` cannot be confused with calls to `<Foo as FromIter>::from_iter`, because inherent methods take precedence over trait methods.
+
+### Inherent methods on `dyn Trait` objects
+
+Some users invoke methods on a `dyn Trait` value where the method name overlaps with a new prelude trait:
+
+```rust
+trait Foo {
+  fn into_iter(&self);
+}
+fn bar(f: &dyn Foo) {
+  f.into_iter();
+}
+```
+
+In these cases, the lint will sometimes rewrite to introduce additional dereferences or otherwise clarify the type of the method receiver. This ensures that the `dyn Trait` method is chosen, versus the methods from the prelude trait. For example, `f.into_iter()` above would become `(*f).into_iter()`.
 
 ### Implementation Reference
 
