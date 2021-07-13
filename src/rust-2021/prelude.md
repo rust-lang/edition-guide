@@ -2,8 +2,8 @@
 
 ## Summary
 
-- `TryInto`, `TryFrom` and `FromIterator` are now part of the prelude.
-- This might change the meaning of e.g. `x.try_into()` depending on types and imports.
+- The `TryInto`, `TryFrom` and `FromIterator` traits are now part of the prelude.
+- This might make calls to trait methods ambiguous which could make some code fail to compile.
 
 ## Details
 
@@ -18,11 +18,10 @@ then `use example::*;` will make `Option` unambiguously refer to the one from `e
 not the one from the standard library.
 
 However, adding a _trait_ to the prelude can break existing code in a subtle way.
-A call to `x.try_into()` using a `MyTryInto` trait might become ambiguous and
-fail to compile if `std`'s `TryInto` is also imported,
-since it provides a method with the same name.
-This is the reason we haven't added `TryInto` to the prelude yet,
-since there is a lot of code that would break this way.
+For example, a call to `x.try_into()` which comes from a `MyTryInto` trait might fail 
+to compile if `std`'s `TryInto` is also imported, because the call to `try_into` is now 
+ambiguous and could come from either trait. This is the reason we haven't added `TryInto` 
+to the prelude yet, since there is a lot of code that would break this way.
 
 As a solution, Rust 2021 will use a new prelude.
 It's identical to the current one, except for three new additions:
@@ -43,41 +42,53 @@ In order to have rustfix migrate your code to be Rust 2021 Edition compatible, r
 cargo fix --edition
 ```
 
-The lint detects cases where functions or methods are called that have the same name as the methods defined in one of the new prelude traits. In some cases, it may rewrite your calls in various ways to ensure that you continue to call the same function you did before:
-
-| Scenario                                                                 | Example               | Rewrite (if any)     |
-| ------------------------------------------------------------------------ | --------------------- | -------------------- |
-| [Fully qualified inherent](#fully-qualified-calls-to-inherent-methods)   | `Foo::from_iter(...)` | none                 |
-| [Inherent methods on `dyn Trait`](inherent-methods-on-dyn-trait-objects) | `foo.into_iter()`     | `(*foo).into_iter`() |
+The lint detects cases where functions or methods are called that have the same name as the methods defined in one of the new prelude traits. In some cases, it may rewrite your calls in various ways to ensure that you continue to call the same function you did before.
 
 ### Fully qualified calls to inherent methods
 
-Many types define their own inherent methods with the name `from_iter`:
+Many types define their own inherent methods with the name `from_iter` which shares the same name with `std::iter::FromIterator::from_iter`:
 
 ```rust
-struct Foo {
+struct MyStruct {
   data: Vec<u32>
 }
-impl Foo {
+
+impl MyStruct {
+  // This has the same name as `std::iter::FromIterator::from_iter`
   fn from_iter(x: impl Iterator<Item = u32>) -> Self {
-    Foo {
+    Self {
       data: x.collect()
     }
   }
 }
 ```
 
-Calls like `Foo::from_iter` cannot be confused with calls to `<Foo as FromIter>::from_iter`, because inherent methods take precedence over trait methods.
+In case that already use a fully qualified inherent method syntax (e.g., calls like `MyStruct::from_iter`), there is not ambiguity with calls to trait methods (e.g., `<MyStruct as FromIter>::from_iter`), because inherent methods take precedence over trait methods. Therefore, no migration is needed.
+
+A migration is necessary when using "dot method" syntax where the method name is the same as the trait method name for a trait which is now
+in scope. For example, a call like `my_struct.into_iter()` where `into_iter()` used to refer to an inherent method on `MyStruct` but now conflicts with
+the trait method from `IntoIter`. To make these calls unambiguous, fully qualified inherent method syntax must be used:
+
+```rust
+// Before:
+my_struct.into_iter();
+// After:
+MyStruct::into_iter(my_struct);
+```
+
+Note: this only impacts methods which take `&self` and `&mut self` but not `self`.
 
 ### Inherent methods on `dyn Trait` objects
 
 Some users invoke methods on a `dyn Trait` value where the method name overlaps with a new prelude trait:
 
 ```rust
-trait Foo {
+trait MyTrait {
+  // This has the same name as `std::iter::IntoIterator::into_iter`
   fn into_iter(&self);
 }
-fn bar(f: &dyn Foo) {
+
+fn bar(f: &dyn MyTrait) {
   f.into_iter();
 }
 ```
