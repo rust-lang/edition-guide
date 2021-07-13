@@ -36,17 +36,82 @@ The tracking issue [can be found here](https://github.com/rust-lang/rust/issues/
 
 As a part of the 2021 edition a migration lint, `rust_2021_prelude_collisions`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
 
-In order to have rustfix migrate your code to be Rust 2021 Edition compatible, run:
+In order to have `rustfix` migrate your code to be Rust 2021 Edition compatible, run:
 
-```ignore
+```sh
 cargo fix --edition
 ```
 
 The lint detects cases where functions or methods are called that have the same name as the methods defined in one of the new prelude traits. In some cases, it may rewrite your calls in various ways to ensure that you continue to call the same function you did before.
 
-### Fully qualified calls to inherent methods
+If you'd like to migrate your code manually or better understand what `rustfix` is doing, below we've outlined the situations where a migration is needed along with a counter example of when it's not needed.
 
-Many types define their own inherent methods with the name `from_iter` which shares the same name with `std::iter::FromIterator::from_iter`:
+### Migration needed
+
+#### Conflicting trait methods
+
+When two traits that are in scope have the same method name, it is ambiguous which trait method should be used. For example:
+
+```rust
+trait MyTrait<A> {
+  // This name is the same as the `from_iter` method on the `FromIterator` trait from `std`.  
+  fn from_iter(x: Option<A>);
+}
+
+impl<T> MyTrait<()> for Vec<T> {
+  fn from_iter(_: Option<()>) {}
+}
+
+fn main() {
+  // Vec<T> implements both `std::iter::FromIterator` and `MyTrait` 
+  // If both traits are in scope (as would be the case in Rust 2021),
+  // then it becomes ambiguous which `from_iter` method to call
+  <Vec<i32>>::from_iter(None);
+}
+```
+
+We can fix this by using fully qualified syntax:
+
+```rust,ignore
+fn main() {
+  // Now it is clear which trait method we're referring to
+  <Vec<i32> as MyTrait<i32>>::from_iter(None);
+}
+```
+
+#### Inherent methods on `dyn Trait` objects
+
+Some users invoke methods on a `dyn Trait` value where the method name overlaps with a new prelude trait:
+
+```rust
+mod submodule {
+  trait MyTrait {
+    // This has the same name as `TryInto::try_into`
+    fn try_into(&self) -> Result<u32, ()>;
+  }
+}
+
+// `MyTrait` isn't in scope here and can only be referred to through the path `submodule::MyTrait`
+fn bar(f: Box<dyn submodule::MyTrait>) {
+  // If `std::convert::TryInto` is in scope (as would be the case in Rust 2021),
+  // then it becomes ambiguous which `try_into` method to call
+  f.try_into();
+}
+```
+
+Unlike with static dispatch methods, calling a trait method on a trait object does not require that the trait be in scope. The code above works 
+as long as there is no trait in scope with a conflicting method name. When the `TryInto` trait is in scope (which is the case in Rust 2021),
+this causes an ambiguity. Should the call be to `MyTrait::try_into` or `std::convert::TryInto::try_into`?
+
+In these cases, we can fix this by adding an additional dereferences or otherwise clarify the type of the method receiver. This ensures that 
+the `dyn Trait` method is chosen, versus the methods from the prelude trait. For example, turning `f.try_into()` above into `(&*f).try_into()` 
+ensures that we're calling `try_into` on the `dyn MyTrait` which can only refer to the `MyTrait::try_into` method.
+
+### No migration needed
+
+####  Inherent methods
+
+Many types define their own inherent methods with the same name as a trait method. For instance, below the struct `MyStruct` implements `from_iter` which shares the same name with the method from the trait `FromIterator` found in the standard library:
 
 ```rust
 struct MyStruct {
@@ -55,45 +120,23 @@ struct MyStruct {
 
 impl MyStruct {
   // This has the same name as `std::iter::FromIterator::from_iter`
-  fn from_iter(x: impl Iterator<Item = u32>) -> Self {
+  fn from_iter(iter: impl Iterator<Item = u32>) -> Self {
     Self {
-      data: x.collect()
+      data: iter.collect()
     }
   }
 }
-```
 
-In case that already use a fully qualified inherent method syntax (e.g., calls like `MyStruct::from_iter`), there is not ambiguity with calls to trait methods (e.g., `<MyStruct as FromIter>::from_iter`), because inherent methods take precedence over trait methods. Therefore, no migration is needed.
-
-A migration is necessary when using "dot method" syntax where the method name is the same as the trait method name for a trait which is now
-in scope. For example, a call like `my_struct.into_iter()` where `into_iter()` used to refer to an inherent method on `MyStruct` but now conflicts with
-the trait method from `IntoIter`. To make these calls unambiguous, fully qualified inherent method syntax must be used:
-
-```rust,ignore
-// Before:
-my_struct.into_iter();
-// After:
-MyStruct::into_iter(my_struct);
-```
-
-Note: this only impacts methods which take `&self` and `&mut self` but not `self`.
-
-### Inherent methods on `dyn Trait` objects
-
-Some users invoke methods on a `dyn Trait` value where the method name overlaps with a new prelude trait:
-
-```rust
-trait MyTrait {
-  // This has the same name as `std::iter::IntoIterator::into_iter`
-  fn into_iter(&self);
-}
-
-fn bar(f: &dyn MyTrait) {
-  f.into_iter();
+impl FromIterator<u32> for MyStruct {
+    fn from_iter<I: IntoIterator<Item = u32>>(iter: I) -> Self {
+      Self {
+        data: iter.collect()
+      }
+    }
 }
 ```
 
-In these cases, the lint will sometimes rewrite to introduce additional dereferences or otherwise clarify the type of the method receiver. This ensures that the `dyn Trait` method is chosen, versus the methods from the prelude trait. For example, `f.into_iter()` above would become `(*f).into_iter()`.
+Inherent methods always take precedent over trait methods so there's no need for any migration.
 
 ### Implementation Reference
 
