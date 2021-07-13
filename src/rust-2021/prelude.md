@@ -38,7 +38,7 @@ As a part of the 2021 edition a migration lint, `rust_2021_prelude_collisions`, 
 
 In order to have rustfix migrate your code to be Rust 2021 Edition compatible, run:
 
-```
+```ignore
 cargo fix --edition
 ```
 
@@ -69,7 +69,7 @@ A migration is necessary when using "dot method" syntax where the method name is
 in scope. For example, a call like `my_struct.into_iter()` where `into_iter()` used to refer to an inherent method on `MyStruct` but now conflicts with
 the trait method from `IntoIter`. To make these calls unambiguous, fully qualified inherent method syntax must be used:
 
-```rust
+```rust,ignore
 // Before:
 my_struct.into_iter();
 // After:
