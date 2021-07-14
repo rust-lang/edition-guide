@@ -85,7 +85,7 @@ Some users invoke methods on a `dyn Trait` value where the method name overlaps 
 
 ```rust
 mod submodule {
-  trait MyTrait {
+  pub trait MyTrait {
     // This has the same name as `TryInto::try_into`
     fn try_into(&self) -> Result<u32, ()>;
   }
@@ -114,23 +114,25 @@ ensures that we're calling `try_into` on the `dyn MyTrait` which can only refer 
 Many types define their own inherent methods with the same name as a trait method. For instance, below the struct `MyStruct` implements `from_iter` which shares the same name with the method from the trait `FromIterator` found in the standard library:
 
 ```rust
+use std::iter::IntoIterator;
+
 struct MyStruct {
   data: Vec<u32>
 }
 
 impl MyStruct {
   // This has the same name as `std::iter::FromIterator::from_iter`
-  fn from_iter(iter: impl Iterator<Item = u32>) -> Self {
+  fn from_iter(iter: impl IntoIterator<Item = u32>) -> Self {
     Self {
-      data: iter.collect()
+      data: iter.into_iter().collect()
     }
   }
 }
 
-impl FromIterator<u32> for MyStruct {
+impl std::iter::FromIterator<u32> for MyStruct {
     fn from_iter<I: IntoIterator<Item = u32>>(iter: I) -> Self {
       Self {
-        data: iter.collect()
+        data: iter.into_iter().collect()
       }
     }
 }
