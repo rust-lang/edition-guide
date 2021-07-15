@@ -2,9 +2,10 @@
 
 ## Summary
 
-- `$_:pat` in `macro_rules` now matches `|` too: e.g. `A | B`.
-- `$_:pat_param` behaves like `$_:pat` did before; it does not match (top level) `|`.
-- `$_:pat_param` is available in all editions.
+- How patterns work in `macro_rules` macros changes slightly:
+	- `$_:pat` in `macro_rules` now matches usage of `|` too: e.g. `A | B`.
+	- The new `$_:pat_param` behaves like `$_:pat` did before; it does not match (top level) `|`.
+	- `$_:pat_param` is available in all editions.
 
 ## Details
 
@@ -15,18 +16,47 @@ Since this was simply not allowed before, this is not a breaking change.
 
 However, this change also affects [`macro_rules` macros](https://doc.rust-lang.org/stable/reference/macros-by-example.html).
 Such macros can accept patterns using the `:pat` fragment specifier.
-Currently, `:pat` does *not* match `|`, since before Rust 1.53,
+Currently, `:pat` does *not* match top level `|`, since before Rust 1.53,
 not all patterns (at all nested levels) could contain a `|`.
 Macros that accept patterns like `A | B`,
 such as [`matches!()`](https://doc.rust-lang.org/1.51.0/std/macro.matches.html)
-use something like `$($_:pat)|+`.
-Because we don't want to break any existing macros,
-we did *not* change the meaning of `:pat` in Rust 1.53.0 to include `|`.
+use something like `$($_:pat)|+`. 
 
-Instead, we will make that change as part of Rust 2021.
+Because this would potentially break existing macros, the meaning of `:pat` did 
+not change in Rust 1.53.0 to include `|`. Instead, that change happens in Rust 2021. 
 In the new edition, the `:pat` fragment specifier *will* match `A | B`.
 
-Since there are times that one still wishes to match a single pattern
-variant without `|`, the fragment specified `:pat_param` has been added
-to retain the older behavior.
-The name refers to its main use case: a pattern in a closure parameter.
+`$_:pat` fragments in Rust 2021 cannot be followed by an explicit `|`. Since there are times 
+that one still wishes to match pattern fragments followed by a `|`, the fragment specified `:pat_param` 
+has been added to retain the older behavior.
+
+It's important to remember that editions are _per crate_, so the only relevant edition is the edition
+of the crate where the macro is defined. The edition of the crate where the macro is used does not 
+change how the macro works.
+
+## Migration to Rust 2021
+
+If you have a macro which relies on `$_:pat` not matching the top level use of `|` in patterns, 
+you'll need to change each occurrence of `$_:pat` to `$_:pat_param`.
+
+For example:
+
+```rust
+macro_rules! my_macro { 
+	($x:pat | $y:pat) => {
+		// TODO: implementation
+	} 
+}
+
+// This macro works in Rust 2018 since `$x:pat` does not match against `|`:
+my_macro!(1 | 2);
+
+// In Rust 2021 however, the `$_:pat` fragment matches `|` and is not allowed
+// to be followed by a `|`. To make sure this macro still works in Rust 2021
+// change the macro to the following:
+macro_rules! my_macro { 
+	($x:pat_param | $y:pat) => { // <- this line is different
+		// TODO: implementation
+	} 
+}
+```
