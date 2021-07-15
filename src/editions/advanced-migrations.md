@@ -121,6 +121,11 @@ If your documentation tests use syntax that is not supported in the new edition,
 In rare cases, you can manually set the edition for each test.
 For example, you can use the [`edition2018` annotation][rustdoc-annotation] on the triple backticks to tell `rustdoc` which edition to use.
 
+## Generated code
+
+Another area where the automated fixes cannot apply is if you have a build script which generates Rust code at compile time (see [Code generation] for an example).
+In this situation, if you end up with code that doesn't work in the next edition, you will need to manually change the build script to generate code that is compatible.
+
 ## Writing idiomatic code in a new edition
 
 Editions are not only about new features and removing old ones.
@@ -168,6 +173,7 @@ We're now more idiomatic, and we didn't have to fix our code manually!
 [Cargo package]: ../../cargo/reference/manifest.html#the-package-section
 [Cargo targets]: ../../cargo/reference/cargo-targets.html
 [Cargo workspace]: ../../cargo/reference/workspaces.html
+[Code generation]: ../../cargo/reference/build-script-examples.html#code-generation
 [conditional compilation]: ../../reference/conditional-compilation.html
 [documentation tests]: ../../rustdoc/documentation-tests.html
 [lint group]: ../../rustc/lints/groups.html
