@@ -4,8 +4,11 @@
 
 [`cargo fix --edition`][`cargo fix`] works by running the equivalent of [`cargo check`] on your project with special [lints] enabled which will detect code that may not compile in the next edition.
 These lints include instructions on how to modify the code to make it compatible on both the current and the next edition.
-`cargo fix` applies these changes to the source code, and then runs `cargo check` again to verify the fixes work.
+`cargo fix` applies these changes to the source code, and then runs `cargo check` again to verify that the fixes work.
 If the fixes fail, then it will back out the changes and display a warning.
+
+Changing the code to be simultaneously compatible with both the current and next edition makes it easier to incrementally migrate the code.
+If the automated migration does not completely succeed, or requires manual help, you can iterate while staying on the original edition before changing `Cargo.toml` to use the next edition.
 
 The lints that `cargo fix --edition` apply are part of a [lint group].
 For example, when migrating from 2018 to 2021, Cargo uses the `rust-2021-compatibility` group of lints to fix the code.
