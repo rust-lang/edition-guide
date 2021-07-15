@@ -6,17 +6,16 @@ configuration for the latest edition:
 ```console
 > cargo +nightly new foo
      Created binary (application) `foo` project
-> cat .\foo\Cargo.toml
+> cat foo/Cargo.toml
 [package]
 name = "foo"
 version = "0.1.0"
-authors = ["your name <you@example.com>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 ```
 
-That `edition = "2018"` setting will configure your package to use Rust 2018.
+That `edition = "2021"` setting will configure your package to use Rust 2021.
 No more configuration needed!
 
 If you'd prefer to use an older edition, you can change the value in that
@@ -26,7 +25,6 @@ key, for example:
 [package]
 name = "foo"
 version = "0.1.0"
-authors = ["your name <you@example.com>"]
 edition = "2015"
 
 [dependencies]
