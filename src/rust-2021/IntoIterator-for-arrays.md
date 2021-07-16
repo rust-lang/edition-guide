@@ -52,9 +52,13 @@ this solution keeps the difference between the editions to an absolute minimum.
 
 ## Migration
 
-A migration lint, `array_into_iter`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
+A lint, `array_into_iter`, gets triggered whenever there is some call to `into_iter()` that will change
+meaning in Rust 2021. The `array_into_iter` lint has already been a warning by default on all editions 
+since the 1.41 release (with several enhancements made in 1.55). If your code is already warning free, 
+then it should already be ready to go for Rust 2021!
 
-In order to have `rustfix` migrate your code to be Rust 2021 Edition compatible, run:
+You can automatically migrate your code to be Rust 2021 Edition compatible or ensure it is already compatible by
+running:
 
 ```sh
 cargo fix --edition
