@@ -126,6 +126,23 @@ For example, you can use the [`edition2018` annotation][rustdoc-annotation] on t
 Another area where the automated fixes cannot apply is if you have a build script which generates Rust code at compile time (see [Code generation] for an example).
 In this situation, if you end up with code that doesn't work in the next edition, you will need to manually change the build script to generate code that is compatible.
 
+## Migrating non-Cargo projects
+
+If your project is not using Cargo as a build system, it may still be possible to make use of the automated lints to assist migrating to the next build system.
+You can enable the migration lints as described above by enabling the appropriate [lint group].
+For example, you can use the `#![warn(rust_2021_compatibility)]` attribute or the `-Wrust-2021-compatibility` [CLI flag].
+
+The next step is to apply those lints to your code.
+There are several options here:
+
+* Manually read the warnings and apply the suggestions recommended by the compiler.
+* Use an editor or IDE that supports automatically applying suggestions.
+  For example, [Visual Studio Code] with the [Rust Analyzer extension] has the ability to use the "Quick Fix" links to automatically apply suggestions.
+  Many other editors and IDEs have similar functionality.
+* Write a migration tool using the [`rustfix`] library.
+  This is the library that Cargo uses internally to take the [JSON messages] from the compiler and modify the source code.
+  Check the [`examples` directory][rustfix-examples] for examples of how to use the library.
+
 ## Writing idiomatic code in a new edition
 
 Editions are not only about new features and removing old ones.
@@ -168,15 +185,21 @@ We're now more idiomatic, and we didn't have to fix our code manually!
 [`cargo fix`]: ../../cargo/commands/cargo-fix.html
 [`explicit-outlives-requirements`]:  ../../rustc/lints/listing/allowed-by-default.html#explicit-outlives-requirements
 [`keyword-idents`]: ../../rustc/lints/listing/allowed-by-default.html#keyword-idents
+[`rustfix`]: https://github.com/rust-lang/rustfix
 [`unused-extern-crates`]: ../../rustc/lints/listing/allowed-by-default.html#unused-extern-crates
 [Cargo features]: ../../cargo/reference/features.html
 [Cargo package]: ../../cargo/reference/manifest.html#the-package-section
 [Cargo targets]: ../../cargo/reference/cargo-targets.html
 [Cargo workspace]: ../../cargo/reference/workspaces.html
+[CLI flag]: ../../rustc/lints/levels.html#via-compiler-flag
 [Code generation]: ../../cargo/reference/build-script-examples.html#code-generation
 [conditional compilation]: ../../reference/conditional-compilation.html
 [documentation tests]: ../../rustdoc/documentation-tests.html
+[JSON messages]: ../../rustc/json.html
 [lint group]: ../../rustc/lints/groups.html
 [lints]: ../../rustc/lints/index.html
 [proc macros]: ../../reference/procedural-macros.html
+[Rust Analyzer extension]: https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer
 [rustdoc-annotation]: ../../rustdoc/documentation-tests.html#attributes
+[rustfix-examples]: https://github.com/rust-lang/rustfix/tree/master/examples
+[Visual Studio Code]: https://code.visualstudio.com/
