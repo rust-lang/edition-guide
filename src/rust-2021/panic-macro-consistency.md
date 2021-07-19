@@ -2,10 +2,12 @@
 
 ## Summary
 
-- `panic!(..)` now always use `format_args!(..)`, just like `println!()`.
+- `panic!(..)` now always uses `format_args!(..)`, just like `println!()`.
 - `panic!("{")` is no longer accepted, without escaping the `{` as `{{`.
 - `panic!(x)` is no longer accepted if `x` is not a string literal.
-- Use `std::panic::panic_any(x)` to panic with a non-string payload.
+  - Use `std::panic::panic_any(x)` to panic with a non-string payload.
+  - Or use `panic!("{}", x)` to use `x`'s `Display` implementation.
+- The same applies to `assert!(expr, ..)`.
 
 ## Details
 
