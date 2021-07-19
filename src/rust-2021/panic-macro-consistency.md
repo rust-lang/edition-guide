@@ -29,7 +29,8 @@ println!(a); // Error: First argument must be a format string literal
 panic!(a); // Ok: The panic macro doesn't care
 ```
 
-(It even accepts non-strings such as `panic!(123)`, which is uncommon and rarely useful.)
+It even accepts non-strings such as `panic!(123)`, which is uncommon and rarely useful since it
+produces a surprisingly unhelpful message: `panicked at 'Box<Any>'`.
 
 This will especially be a problem once
 [implicit format arguments](https://rust-lang.github.io/rfcs/2795-format-args-implicit-identifiers.html)
@@ -54,4 +55,28 @@ panic!(a); // Error, must be a string literal
 
 In addition, `core::panic!()` and `std::panic!()` will be identical in Rust 2021.
 Currently, there are some historical differences between those two,
-which can be noticable when switching `#![no_std]` on or off.
+which can be noticeable when switching `#![no_std]` on or off.
+
+## Migration
+
+A lint, `non_fmt_panics`, gets triggered whenever there is some call to `panic` that uses some 
+deprecated behavior that will error in Rust 2021. The `non_fmt_panics` lint has already been a warning 
+by default on all editions since the 1.50 release (with several enhancements made in later releases). 
+If your code is already warning free, then it should already be ready to go for Rust 2021!
+
+You can automatically migrate your code to be Rust 2021 Edition compatible or ensure it is already compatible by
+running:
+
+```sh
+cargo fix --edition
+```
+
+Should you choose to or need to manually migrate, you'll need to update all panic invocations to either use the same 
+formatting as `println` currently does or use 
+
+For example, in the case of `panic!(MyStruct)`, you'll need to either convert to using `std::panic::panic_any` (note
+that this is a function not a macro).
+
+In the case of panic messages that include curly braces but no arguments (e.g., `panic!("Some curlies: {}")), you'll 
+need to print the literal string by either using the same syntax as `println!` (i.e., `panic!("{}", Some curlies: {}")`) 
+or by escaping them (i.e., `panic!("Some curlies: {{}}")`).
