@@ -72,13 +72,13 @@ You can see the list of lints enabled for each edition in the [lint group] page,
 ## Migrating macros
 
 Some macros may require manual work to fix them for the next edition.
-For example, a macro that generates syntax that only works on the previous edition, then `cargo fix` will not be able to fix it.
+For example, `cargo fix --edition` may not be able to automatically fix a macro that generates syntax that does not work in the next edition.
 
 This may be a problem for both [proc macros] and `macro_rules`-style macros.
-`macro_rules` macros can be updated if the macro is used within the same crate, but if it is exported with `#[macro_export]`, then it may not be able to fix it.
-Proc macros in general cannot be fixed at all.
+`macro_rules` macros can sometimes be automatically updated if the macro is used within the same crate, but there are several situations where it cannot.
+Proc macros in general cannot be automatically fixed at all.
 
-For example, this (contrived) macro won't get fixed when migrating to 2018.
+For example, if we migrate a crate containing this (contrived) macro `foo` from 2015 to 2018, `foo` would not be automatically fixed.
 
 ```rust
 #[macro_export]
@@ -90,10 +90,15 @@ macro_rules! foo {
 }
 ```
 
-If you don't have any tests that actually call this macro, then `cargo fix --edition` won't display any warnings or errors at all.
-However, it won't work when called from another crate.
+When this macro is defined in a 2015 crate, it can be used from a crate of any other edition due to macro hygiene (discussed below).
+In 2015, `dyn` is a normal identifier and can be used without restriction.
 
-If you have proc macros or exported macros, you are encouraged to test them by importing them in crates from multiple editions.
+However, in 2018, `dyn` is no longer a valid identifier.
+When using `cargo fix --edition` to migrate to 2018, Cargo won't display any warnings or errors at all.
+However, `foo` won't work when called from any crate.
+
+If you have macros, you are encouraged to make sure you have tests that fully cover the macro's syntax.
+You may also want to test the macros by importing and using them in crates from multiple editions, just to ensure it works correctly everywhere.
 If you run into issues, you'll need to read through the chapters of this guide to understand how the code can be changed to work across all editions.
 
 ### Macro hygiene
