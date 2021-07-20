@@ -133,7 +133,7 @@ In this situation, if you end up with code that doesn't work in the next edition
 
 ## Migrating non-Cargo projects
 
-If your project is not using Cargo as a build system, it may still be possible to make use of the automated lints to assist migrating to the next build system.
+If your project is not using Cargo as a build system, it may still be possible to make use of the automated lints to assist migrating to the next edition.
 You can enable the migration lints as described above by enabling the appropriate [lint group].
 For example, you can use the `#![warn(rust_2021_compatibility)]` attribute or the `-Wrust-2021-compatibility` or `--force-warns=rust-2021-compatibility` [CLI flag].
 
