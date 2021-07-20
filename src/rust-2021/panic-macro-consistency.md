@@ -71,12 +71,12 @@ running:
 cargo fix --edition
 ```
 
-Should you choose to or need to manually migrate, you'll need to update all panic invocations to either use the same 
-formatting as `println` currently does or use 
+Should you choose or need to manually migrate, you'll need to update all panic invocations to either use the same 
+formatting as `println` or use `std::panic::panic_any` to panic with non-string data.
 
-For example, in the case of `panic!(MyStruct)`, you'll need to either convert to using `std::panic::panic_any` (note
-that this is a function not a macro).
+For example, in the case of `panic!(MyStruct)`, you'll need to convert to using `std::panic::panic_any` (note
+that this is a function not a macro): `std::panic::panic_any(MyStruct)`.
 
-In the case of panic messages that include curly braces but no arguments (e.g., `panic!("Some curlies: {}")), you'll 
-need to print the literal string by either using the same syntax as `println!` (i.e., `panic!("{}", Some curlies: {}")`) 
-or by escaping them (i.e., `panic!("Some curlies: {{}}")`).
+In the case of panic messages that include curly braces but the wrong number of arguments (e.g., `panic!("Some curlies: {}")`), 
+you can panic with the string literal by either using the same syntax as `println!` (i.e., `panic!("{}", "Some curlies: {}")`) 
+or by escaping the curly braces (i.e., `panic!("Some curlies: {{}}")`).
