@@ -6,7 +6,9 @@
   syntax, and no longer tokenize.
 - This is mostly relevant to macros. E.g. `quote!{ #a#b }` is no longer accepted.
 - It doesn't treat keywords specially, so e.g. `match"..." {}` is no longer accepted.
-- Insert whitespace to avoid errors.
+- Insert whitespace between the identifier and the subsequent `#`, `"`, or `'`
+  to avoid errors.
+- Edition migrations will help you insert whitespace in such cases.
 
 ## Details
 
@@ -25,7 +27,7 @@ Without an edition, this would be a breaking change, since macros can currently
 accept syntax such as `hello"world"`, which they will see as two separate
 tokens: `hello` and `"world"`. The (automatic) fix is simple though: just
 insert a space: `hello "world"`. Likewise, `prefix#ident` should become
-`prefix #ident`.
+`prefix #ident`. Edition migrations will help with this fix.
 
 Other than turning these into a tokenization error,
 [the RFC][10] does not attach a meaning to any prefix yet.
