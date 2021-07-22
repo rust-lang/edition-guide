@@ -2,10 +2,10 @@
 
 ## Summary
 
-- `any_prefix#`, `any_prefix"..."`, and `any_prefix'...'` are now reserved
+- `any_identifier#`, `any_identifier"..."`, and `any_identifier'...'` are now reserved
   syntax, and no longer tokenize.
 - This is mostly relevant to macros. E.g. `quote!{ #a#b }` is no longer accepted.
-- It doesn't treat keywords specially, so e.g. `match".." {}` is no longer accepted.
+- It doesn't treat keywords specially, so e.g. `match"..." {}` is no longer accepted.
 - Insert whitespace to avoid errors.
 
 ## Details
@@ -14,9 +14,11 @@ To make space for new syntax in the future,
 we've decided to reserve syntax for prefixed identifiers and literals:
 `prefix#identifier`, `prefix"string"`, `prefix'c'`, and `prefix#123`,
 where `prefix` can be any identifier.
-(Except those that already have a meaning, such as `b'…'` and `r"…"`.)
+(Except those prefixes that already have a meaning, such as `b'...'` (byte
+strings) and `r"..."` (raw strings).)
+
 This provides syntax we can expand into in the future without requiring an
-edition boundary. We may use that for temporary syntax until the next edition,
+edition boundary. We may use this for temporary syntax until the next edition,
 or for permanent syntax if appropriate.
 
 Without an edition, this would be a breaking change, since macros can currently
