@@ -6,7 +6,7 @@
 - Calls to `IntoIterator::into_iter` are *hidden* in Rust 2015 and Rust 2018 when using method call syntax
   (i.e., `array.into_iter()`). So, `array.into_iter()` still resolves to `(&array).into_iter()` as it
   has before.
-- `array.into_iter()` changes meaning to be the call to `IntoIterator::into_inter` in Rust 2021.
+- `array.into_iter()` changes meaning to be the call to `IntoIterator::into_iter` in Rust 2021.
 
 ## Details
 
