@@ -36,7 +36,7 @@ change how the macro works.
 
 ## Migration to Rust 2021
 
-A lint, `rust_2021_incompatible_or_patterns`, gets triggered whenever there is a use `$:_pat` which
+A lint, `rust_2021_incompatible_or_patterns`, gets triggered whenever there is a use `$_:pat` which
 will change meaning in Rust 2021. 
 
 You can automatically migrate your code to be Rust 2021 Edition compatible or ensure it is already compatible by
