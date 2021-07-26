@@ -50,3 +50,36 @@ committed to any of them yet):
 - `c""` or `z""` for null-terminated C strings.
 
 [10]: https://github.com/rust-lang/rfcs/pull/3101
+
+
+## Migration 
+
+As a part of the 2021 edition a migration lint, `rust_2021_prefixes_incompatible_syntax`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
+
+In order to have `rustfix` migrate your code to be Rust 2021 Edition compatible, run:
+
+```sh
+cargo fix --edition
+```
+
+Should you want or need to manually migrate your code, migration is fairly straight-forward.
+
+Let's say you have a macro that is defined like so:
+
+```rust
+macro_rules! my_macro {
+    ($a:tt $b:tt) => {};
+}
+```
+
+In Rust 2015 and 2018 it's legal for this macro to be called like so with no space between the first token tree and the second:
+
+```rust,ignore
+my_macro!(z"hey");
+```
+
+This `z` prefix is no longer allowed in Rust 2021, so in order to call this macro, you must add a space after the prefix like so:
+
+```rust,ignore
+my_macro!(z "hey");
+```

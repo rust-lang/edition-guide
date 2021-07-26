@@ -34,7 +34,7 @@ It's important to remember that editions are _per crate_, so the only relevant e
 of the crate where the macro is defined. The edition of the crate where the macro is used does not 
 change how the macro works.
 
-## Migration to Rust 2021
+## Migration 
 
 A lint, `rust_2021_incompatible_or_patterns`, gets triggered whenever there is a use `$_:pat` which
 will change meaning in Rust 2021. 
