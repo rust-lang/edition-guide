@@ -46,4 +46,5 @@ or `ellipsis_inclusive_range_patterns` and you've not allowed these lints throug
 use of `#![allow()]` or some other mechanism, then there's no need to migrate.
 
 To automatically migrate any crate that uses `...` in patterns or does not use `dyn` with
-trait objects, you can run `cargo fix --edition`.
+trait objects, you can run `cargo fix --edition` you can manually change `...` to `..=` and 
+add `dyn` before trait objects.

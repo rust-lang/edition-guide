@@ -28,7 +28,18 @@ Starting in Rust 2021, closures captures are more precise. Typically they will o
 
 Disjoint capture was proposed as part of [RFC 2229](https://github.com/rust-lang/rfcs/blob/master/text/2229-capture-disjoint-fields.md) and the RFC contains details about the motivation.
 
-## Migrating to Rust 2021
+## Migration
+
+As a part of the 2021 edition a migration lint, `rust_2021_incompatible_closure_captures`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
+
+In order to have `rustfix` migrate your code to be Rust 2021 Edition compatible, run:
+
+```sh
+cargo fix --edition
+```
+
+Below is an examination of how to manually migrate code to use closure captures that are compatible with Rust 2021 should the automatic migration fail 
+or you would like to better understand how the migration works.
 
 Changing the variables captured by a closure can cause programs to change behavior or to stop compiling in two cases:
 
