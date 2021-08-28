@@ -8,15 +8,6 @@ Briefly, the steps to update to the next edition are:
 2. Edit `Cargo.toml` and set the `edition` field to the next edition, for example `edition = "2021"`
 3. Run `cargo build` or `cargo test` to verify the fixes worked.
 
-<!-- remove this when 2021 is stabilized -->
-> If you are migrating from 2018 to 2021, the steps are slightly different because 2021 is not yet stabilized, and is only available on the [nightly channel].
-> The steps to follow are:
->
-> 1. Install the most recent nightly: `rustup update nightly`.
-> 2. Run `cargo +nightly fix --edition`.
-> 3. Edit `Cargo.toml` and place `cargo-features = ["edition2021"]` at the top (above `[package]`), and change the edition field to say `edition = "2021"`.
-> 4. Run `cargo +nightly check` to verify it now works in the new edition.
-
 The following sections dig into the details of these steps, and some of the issues you may encounter along the way.
 
 > It's our intention that the migration to new editions is as smooth an
