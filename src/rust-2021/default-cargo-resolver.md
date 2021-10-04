@@ -12,12 +12,20 @@ which can be activated with `resolver = "2"` in `Cargo.toml`.
 Starting in Rust 2021, this will be the default.
 That is, writing `edition = "2021"` in `Cargo.toml` will imply `resolver = "2"`.
 
+The resolver is a global setting for a [workspace], and the setting is ignored in dependencies.
+The setting is only honored for the top-level package of the workspace.
+If you are using a [virtual workspace], you will still need to explicitly set the [`resolver` field]
+in the `[workspace]` definition if you want to opt-in to the new resolver.
+
 The new feature resolver no longer merges all requested features for
 crates that are depended on in multiple ways.
 See [the announcement of Rust 1.51][5] for details.
 
 [4]: ../../cargo/reference/resolver.html#feature-resolver-version-2
 [5]: https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html#cargos-new-feature-resolver
+[workspace]: ../../cargo/reference/workspaces.html
+[virtual workspace]: ../../cargo/reference/workspaces.html#virtual-manifest
+[`resolver` field]: ../../cargo/reference/resolver.html#resolver-versions
 
 ## Migration
 
