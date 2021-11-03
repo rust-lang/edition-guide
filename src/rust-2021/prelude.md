@@ -75,7 +75,7 @@ We can fix this by using fully qualified syntax:
 ```rust,ignore
 fn main() {
   // Now it is clear which trait method we're referring to
-  <Vec<i32> as MyTrait<()>::from_iter(None);
+  <Vec<i32> as MyTrait<()>>::from_iter(None);
 }
 ```
 
