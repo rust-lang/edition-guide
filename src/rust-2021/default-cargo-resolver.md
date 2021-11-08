@@ -173,7 +173,7 @@ bstr v0.2.16
 ```
 
 This snippet of output shows that the project `foo` depends on `bar` with the "default" feature.
-Then, `bar` depends on `bstr` as a build-dependency with the "default" feature
+Then, `bar` depends on `bstr` as a build-dependency with the "default" feature.
 We can further see that `bstr`'s  "default" feature enables "unicode" (among other features).
 
 [`cargo tree`]: ../../cargo/commands/cargo-tree.html
