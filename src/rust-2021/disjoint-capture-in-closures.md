@@ -132,14 +132,14 @@ In most cases, dropping values at different times just affects when memory is fr
 
 Closures automatically implement the following traits based on what values they capture:
 
-- [`Clone`]: if all captured values are [`Clone`].
+- [`Clone`]: if all captured values are `Clone`.
 - [Auto traits] like [`Send`], [`Sync`], and [`UnwindSafe`]: if all captured values implement the given trait.
 
 [auto traits]: https://doc.rust-lang.org/nightly/reference/special-types-and-traits.html#auto-traits
 [`clone`]: https://doc.rust-lang.org/std/clone/trait.Clone.html
 [`send`]: https://doc.rust-lang.org/std/marker/trait.Send.html
 [`sync`]: https://doc.rust-lang.org/std/marker/trait.Sync.html
-[`unwindsafe`]: https://doc.rust-lang.org/std/marker/trait.UnwindSafe.html
+[`unwindsafe`]: https://doc.rust-lang.org/std/panic/trait.UnwindSafe.html
 
 In Rust 2021, since different values are being captured, this can affect what traits a closure will implement. The migration lints test each closure to see whether it would have implemented a given trait before and whether it still implements it now; if they find that a trait used to be implemented but no longer is, then "dummy lets" are inserted.
 
