@@ -83,7 +83,7 @@ general way to express this, though it uses it for `proc_macro` crates.
 
 Some examples of needing to explicitly import sysroot crates are:
 
-* [`std`]: Usually this is not neccesary, because `std` is automatically
+* [`std`]: Usually this is not necessary, because `std` is automatically
   imported unless the crate is marked with [`#![no_std]`][no_std].
 * [`core`]: Usually this is not necessary, because `core` is automatically
   imported, unless the crate is marked with [`#![no_core]`][no_core]. For
