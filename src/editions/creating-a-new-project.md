@@ -4,7 +4,7 @@ When you create a new project with Cargo, it will automatically add
 configuration for the latest edition:
 
 ```console
-> cargo +nightly new foo
+> cargo new foo
      Created binary (application) `foo` project
 > cat foo/Cargo.toml
 [package]
