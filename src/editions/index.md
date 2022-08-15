@@ -53,11 +53,11 @@ there might be some corner cases where manual changes are still required.
 The tooling tries hard to avoid changes
 to semantics that could affect the correctness or performance of the code.
 
-In addition to tooling, we also maintain this Edition Migration Guide that covers
+In addition to tooling, we also maintain this Rust Edition Guide that covers
 the changes that are part of an edition.
 This guide describes each change and gives pointers to where you can learn more about it.
 It also covers any corner cases or details you should be aware of.
-This guide serves both as an overview of the edition
+This guide serves as an overview of editions,
+as a migration guide for specific editions,
 and as a quick troubleshooting reference
 if you encounter problems with the automated tooling.
-
