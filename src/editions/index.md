@@ -1,6 +1,8 @@
 # What are Editions?
 
-The release of Rust 1.0 established
+The release of Rust 1.0
+([in May 2015](https://blog.rust-lang.org/2015/05/15/Rust-1.0.html))
+established
 ["stability without stagnation"](https://blog.rust-lang.org/2014/10/30/Stability.html)
 as a core Rust deliverable.
 Ever since the 1.0 release,
