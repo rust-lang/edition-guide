@@ -8,8 +8,8 @@ online](https://doc.rust-lang.org/nightly/edition-guide/).
 
 ## License
 
-The Edition Guide is dual licensed under `MIT`/`Apache2`, just like Rust itself.
-See the `LICENSE-*` files in this repository for more details.
+The Rust Edition Guide is dual licensed under `MIT`/`Apache2`, just like Rust
+itself. See the `LICENSE-*` files in this repository for more details.
 
 ## Building locally
 

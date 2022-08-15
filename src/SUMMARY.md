@@ -1,4 +1,4 @@
-# The Edition Guide
+# The Rust Edition Guide
 
 [Introduction](introduction.md)
 

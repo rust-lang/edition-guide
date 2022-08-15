@@ -2,7 +2,7 @@
 authors = ["The Rust Project Developers"]
 multilingual = false
 src = "src"
-title = "The Edition Guide"
+title = "The Rust Edition Guide"
 
 [output.html]
 git-repository-url = "https://github.com/rust-lang/edition-guide"
