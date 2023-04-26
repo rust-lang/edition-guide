@@ -13,7 +13,7 @@ The following sections dig into the details of these steps, and some of the issu
 > It's our intention that the migration to new editions is as smooth an
 > experience as possible. If it's difficult for you to upgrade to the latest edition,
 > we consider that a bug. If you run into problems with this process, please
-> [file a bug](https://github.com/rust-lang/rust/issues/new/choose). Thank you!
+> [file a bug report](https://github.com/rust-lang/rust/issues/new/choose). Thank you!
 
 ## Starting the migration
 
