@@ -17,7 +17,7 @@ we've decided to reserve syntax for prefixed identifiers and literals:
 `prefix#identifier`, `prefix"string"`, `prefix'c'`, and `prefix#123`,
 where `prefix` can be any identifier.
 (Except those prefixes that already have a meaning, such as `b'...'` (byte
-strings) and `r"..."` (raw strings).)
+chars) and `r"..."` (raw strings).)
 
 This provides syntax we can expand into in the future without requiring an
 edition boundary. We may use this for temporary syntax until the next edition,
