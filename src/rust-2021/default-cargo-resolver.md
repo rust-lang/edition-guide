@@ -24,7 +24,7 @@ See [the announcement of Rust 1.51][5] for details.
 [4]: ../../cargo/reference/resolver.html#feature-resolver-version-2
 [5]: https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html#cargos-new-feature-resolver
 [workspace]: ../../cargo/reference/workspaces.html
-[virtual workspace]: ../../cargo/reference/workspaces.html#virtual-manifest
+[virtual workspace]: ../../cargo/reference/workspaces.html#virtual-workspace
 [`resolver` field]: ../../cargo/reference/resolver.html#resolver-versions
 
 ## Migration
