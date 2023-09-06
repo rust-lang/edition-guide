@@ -272,7 +272,7 @@ enough to have submodules.
 In Rust 2018, paths in `use` declarations and in other code work the same way,
 both in the top-level module and in any submodule. You can use a relative path
 from the current scope, a path starting from an external crate name, or a path
-starting with `crate`, `super`, or `self`.
+starting with `::`, `crate`, `super`, or `self`.
 
 Code that looked like this:
 
