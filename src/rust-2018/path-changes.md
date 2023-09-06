@@ -206,6 +206,11 @@ mod submodule {
 }
 ```
 
+If you have a local module or item with the same name as an external crate, a
+path begining with that name will be taken to refer to the local module or
+item. To explicitly refer to the external crate, use the `::name` form.
+
+
 ### No more `mod.rs`
 
 In Rust 2015, if you have a submodule:
@@ -371,9 +376,3 @@ mod submodule {
 
 This makes it easy to move code around in a project, and avoids introducing
 additional complexity to multi-module projects.
-
-If a path is ambiguous, such as if you have an external crate and a local
-module or item with the same name, you'll get an error, and you'll need to
-either rename one of the conflicting names or explicitly disambiguate the path.
-To explicitly disambiguate a path, use `::name` for an external crate name, or
-`self::name` for a local module or item.
