@@ -33,3 +33,4 @@
   - [Reserving syntax](rust-2021/reserving-syntax.md)
   - [Warnings promoted to errors](rust-2021/warnings-promoted-to-error.md)
   - [Or patterns in macro-rules](rust-2021/or-patterns-macro-rules.md)
+  - [C-string literals](rust-2021/c-string-literals.md)
