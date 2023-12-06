@@ -56,7 +56,7 @@ committed to any of them yet):
 
 As a part of the 2021 edition a migration lint, `rust_2021_prefixes_incompatible_syntax`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
 
-In order to have `rustfix` migrate your code to be Rust 2021 Edition compatible, run:
+In order to migrate your code to be Rust 2021 Edition compatible, run:
 
 ```sh
 cargo fix --edition
