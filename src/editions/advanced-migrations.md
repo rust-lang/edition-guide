@@ -190,7 +190,7 @@ We're now more idiomatic, and we didn't have to fix our code manually!
 [`cargo fix`]: ../../cargo/commands/cargo-fix.html
 [`explicit-outlives-requirements`]:  ../../rustc/lints/listing/allowed-by-default.html#explicit-outlives-requirements
 [`keyword-idents`]: ../../rustc/lints/listing/allowed-by-default.html#keyword-idents
-[`rustfix`]: https://github.com/rust-lang/rustfix
+[`rustfix`]: https://crates.io/crates/rustfix
 [`unused-extern-crates`]: ../../rustc/lints/listing/allowed-by-default.html#unused-extern-crates
 [Cargo features]: ../../cargo/reference/features.html
 [Cargo package]: ../../cargo/reference/manifest.html#the-package-section
@@ -206,5 +206,5 @@ We're now more idiomatic, and we didn't have to fix our code manually!
 [proc macros]: ../../reference/procedural-macros.html
 [Rust Analyzer extension]: https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer
 [rustdoc-annotation]: ../../rustdoc/documentation-tests.html#attributes
-[rustfix-examples]: https://github.com/rust-lang/rustfix/tree/master/examples
+[rustfix-examples]: https://github.com/rust-lang/cargo/tree/master/crates/rustfix/examples
 [Visual Studio Code]: https://code.visualstudio.com/

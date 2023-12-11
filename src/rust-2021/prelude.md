@@ -36,7 +36,7 @@ The tracking issue [can be found here](https://github.com/rust-lang/rust/issues/
 
 As a part of the 2021 edition a migration lint, `rust_2021_prelude_collisions`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
 
-In order to have `rustfix` migrate your code to be Rust 2021 Edition compatible, run:
+In order to migrate your code to be Rust 2021 Edition compatible, run:
 
 ```sh
 cargo fix --edition
@@ -44,7 +44,7 @@ cargo fix --edition
 
 The lint detects cases where functions or methods are called that have the same name as the methods defined in one of the new prelude traits. In some cases, it may rewrite your calls in various ways to ensure that you continue to call the same function you did before.
 
-If you'd like to migrate your code manually or better understand what `rustfix` is doing, below we've outlined the situations where a migration is needed along with a counter example of when it's not needed.
+If you'd like to migrate your code manually or better understand what `cargo fix` is doing, below we've outlined the situations where a migration is needed along with a counter example of when it's not needed.
 
 ### Migration needed
 
