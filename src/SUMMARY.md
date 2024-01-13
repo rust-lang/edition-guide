@@ -34,3 +34,13 @@
   - [Warnings promoted to errors](rust-2021/warnings-promoted-to-error.md)
   - [Or patterns in macro-rules](rust-2021/or-patterns-macro-rules.md)
   - [C-string literals](rust-2021/c-string-literals.md)
+
+## Rust 2024
+
+- [Rust 2024 🚧](rust-2024/index.md)
+  - [`unsafe_op_in_unsafe_fn` warning](rust-2024/unsafe-op-in-unsafe-fn.md)
+  - [RPIT lifetime capture](rust-2024/rpit-lifetime-capture.md)
+  - [Disallow references to `static mut`](rust-2024/static-mut-reference.md)
+  - [Public/private dependencies](rust-2024/public-private-dependencies.md)
+  - [Cargo: Remove implicit features](rust-2024/cargo-remove-implicit-features.md)
+  - [Rustfmt: Combine all delimited exprs as last argument](rust-2024/rustfmt-overflow-delimited-expr.md)
