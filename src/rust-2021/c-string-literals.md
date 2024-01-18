@@ -8,7 +8,7 @@
 
 ## Details
 
-Starting with Rust 1.76, C-strings can be written using C-string literal syntax with the `c` or `cr` prefix.
+Starting with Rust 1.77, C-strings can be written using C-string literal syntax with the `c` or `cr` prefix.
 
 Previously, it was challenging to properly produce a valid string literal that could interoperate with C APIs which terminate with a NUL byte.
 The [`cstr`] crate was a popular solution, but that required compiling a proc-macro which was quite expensive.
