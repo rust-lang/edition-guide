@@ -96,7 +96,13 @@ The steps are roughly similar to the stable channel:
 3. Edit `Cargo.toml` and place `cargo-features = ["edition2024"]` at the top (above `[package]`), and change the edition field to say `edition = "2024"`.
 4. Run `cargo +nightly check` to verify it now works in the new edition.
 
+> **⚠ Caution**: Features implemented in the next edition may not have automatic migrations implemented with `cargo fix`, and the features themselves may not be finished.
+> When possible, this guide should contain information about which features are implemented
+> on nightly along with more information about their status.
+> A few months before the edition is stabilized, all of the new features should be fully implemented, and the [Rust Blog] will announce a call for testing.
+
 [`cargo fix`]: ../../cargo/commands/cargo-fix.html
 [`cargo test`]: ../../cargo/commands/cargo-test.html
 [Advanced migration strategies]: advanced-migrations.md
 [nightly channel]: ../../book/appendix-07-nightly-rust.html
+[Rust Blog]: https://blog.rust-lang.org/
