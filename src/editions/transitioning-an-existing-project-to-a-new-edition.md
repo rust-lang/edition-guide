@@ -83,7 +83,26 @@ If new warnings are issued, you may want to consider running `cargo fix` again (
 
 Congrats! Your code is now valid in both Rust 2015 and Rust 2018!
 
+## Migrating to an unstable edition
+
+After an edition is released, there is roughly a three year window before the next edition.
+During that window, new features may be added to the next edition, which will only be available on the [nightly channel].
+If you want to help test those new features before they are stabilized, you can use the nightly channel to try them out.
+
+The steps are roughly similar to the stable channel:
+
+1. Install the most recent nightly: `rustup update nightly`.
+2. Run `cargo +nightly fix --edition`.
+3. Edit `Cargo.toml` and place `cargo-features = ["edition2024"]` at the top (above `[package]`), and change the edition field to say `edition = "2024"`.
+4. Run `cargo +nightly check` to verify it now works in the new edition.
+
+> **⚠ Caution**: Features implemented in the next edition may not have automatic migrations implemented with `cargo fix`, and the features themselves may not be finished.
+> When possible, this guide should contain information about which features are implemented
+> on nightly along with more information about their status.
+> A few months before the edition is stabilized, all of the new features should be fully implemented, and the [Rust Blog] will announce a call for testing.
+
 [`cargo fix`]: ../../cargo/commands/cargo-fix.html
 [`cargo test`]: ../../cargo/commands/cargo-test.html
 [Advanced migration strategies]: advanced-migrations.md
 [nightly channel]: ../../book/appendix-07-nightly-rust.html
+[Rust Blog]: https://blog.rust-lang.org/
