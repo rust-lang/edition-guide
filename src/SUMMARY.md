@@ -38,6 +38,7 @@
 ## Rust 2024
 
 - [Rust 2024 🚧](rust-2024/index.md)
+  - [Additions to the prelude](rust-2024/prelude.md)
   - [`unsafe_op_in_unsafe_fn` warning](rust-2024/unsafe-op-in-unsafe-fn.md)
   - [RPIT lifetime capture](rust-2024/rpit-lifetime-capture.md)
   - [Disallow references to `static mut`](rust-2024/static-mut-reference.md)
