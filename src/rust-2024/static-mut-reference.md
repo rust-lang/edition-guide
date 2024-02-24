@@ -4,10 +4,10 @@
 
 ## Summary
 
-- The [`static_mut_ref`] lint is now a hard error that cannot be disabled.
+- The [`static_mut_refs`] lint is now a hard error that cannot be disabled.
   This prevents taking a shared or mutable reference to a `static mut`.
 
-[`static_mut_ref`]: ../../rustc/lints/listing/warn-by-default.html#static-mut-ref
+[`static_mut_refs`]: ../../rustc/lints/listing/warn-by-default.html#static-mut-refs
 
 ## Details
 
