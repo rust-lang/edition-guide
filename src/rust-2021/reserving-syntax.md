@@ -47,8 +47,6 @@ committed to any of them yet):
 
 - `s""` for `String` literals.
 
-- `c""` or `z""` for null-terminated C strings.
-
 [10]: https://github.com/rust-lang/rfcs/pull/3101
 
 
