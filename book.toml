@@ -6,6 +6,8 @@ title = "The Rust Edition Guide"
 
 [output.html]
 git-repository-url = "https://github.com/rust-lang/edition-guide"
+edit-url-template = "https://github.com/rust-lang/edition-guide/edit/master/{path}"
+search.use-boolean-and = true
 
 [output.html.redirect]
 "/rust-2018/edition-changes.html" = "index.html"
