@@ -25,13 +25,17 @@ unsafe {
 }
 ```
 
-Shared or mutable references of mutable static are almost always a mistake and can lead to undefined behavior and various other problems in your code.
-For example, another thread writing to the `static mut` will cause an aliasing violation and incur [Undefined Behavior].
+Merely taking such a reference in violation of Rust's mutability XOR aliasing requirement has always been *instantaneous* [undefined behavior], **even if the reference is never read from or written to**.  Furthermore, upholding mutability XOR aliasing for a `static mut` requires *reasoning about your code globally*, which can be particularly difficult in the face of reentrancy and/or multithreading.
 
-<!-- TODO: Discuss possible alternatives. -->
+## Alternatives
+
+Wherever possible, it is **strongly recommended** to use instead an *immutable* `static` of a type that provides *interior mutability* behind some *locally-reasoned abstraction* (which greatly reduces the complexity of ensuring that Rust's mutability XOR aliasing requirement is upheld).
+
+In situations where no locally-reasoned abstraction is possible and you are therefore compelled still to reason globally about accesses to your `static` variable, you must now use raw pointers such as can be obtained via the [`addr_of_mut!`] macro.  By first obtaining a raw pointer rather than directly taking a reference, (the safety requirements of) accesses through that pointer will be more familiar to `unsafe` developers and can be deferred until/limited to smaller regions of code.
 
 [Undefined Behavior]: ../../reference/behavior-considered-undefined.html
 [`static mut`]: ../../reference/items/static-items.html#mutable-statics
+[`addr_of_mut!`]: https://docs.rust-lang.org/core/ptr/macro.addr_of_mut.html
 
 ## Migration
 
