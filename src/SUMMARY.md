@@ -47,3 +47,4 @@
   - [Cargo: Table and key name consistency](rust-2024/cargo-table-key-names.md)
   - [Cargo: Reject unused inherited default-features](rust-2024/cargo-inherited-default-features.md)
   - [Rustfmt: Combine all delimited exprs as last argument](rust-2024/rustfmt-overflow-delimited-expr.md)
+  - [`gen` keyword](rust-2024/gen-keyword.md)
