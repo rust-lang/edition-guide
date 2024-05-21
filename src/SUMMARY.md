@@ -44,4 +44,6 @@
   - [Disallow references to `static mut`](rust-2024/static-mut-reference.md)
   - [Public/private dependencies](rust-2024/public-private-dependencies.md)
   - [Cargo: Remove implicit features](rust-2024/cargo-remove-implicit-features.md)
+  - [Cargo: Table and key name consistency](rust-2024/cargo-table-key-names.md)
+  - [Cargo: Reject unused inherited default-features](rust-2024/cargo-inherited-default-features.md)
   - [Rustfmt: Combine all delimited exprs as last argument](rust-2024/rustfmt-overflow-delimited-expr.md)
