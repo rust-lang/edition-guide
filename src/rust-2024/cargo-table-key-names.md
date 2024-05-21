@@ -4,13 +4,13 @@
 
 ## Summary
 
-- Several table and key names in `Cargo.toml` have been removed where there was previously two ways to specify it.
-    - Removed `[project]`, use `[package]` instead.
-    - Removed `default_features`, use `default-features` instead.
-    - Removed `crate_type`, use `crate-type` instead.
-    - Removed `proc_macro`, use `proc-macro` instead.
-    - Removed `dev_dependencies`, use `dev-dependencies` instead.
-    - Removed `build_dependencies`, use `build-dependencies` instead.
+- Several table and key names in `Cargo.toml` have been removed where there were previously two ways to specify the same thing.
+    - Removed `[project]`; use `[package]` instead.
+    - Removed `default_features`; use `default-features` instead.
+    - Removed `crate_type`; use `crate-type` instead.
+    - Removed `proc_macro`; use `proc-macro` instead.
+    - Removed `dev_dependencies`; use `dev-dependencies` instead.
+    - Removed `build_dependencies`; use `build-dependencies` instead.
 
 ## Details
 

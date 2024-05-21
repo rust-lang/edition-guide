@@ -31,7 +31,7 @@ graphics = ["dep:jpeg-decoder"]
 
 ### Motivation
 
-A reason for requiring this to be explicit is that it encourages a conscious decision about the public exposure of the feature name, and makes it clearer when reading the `[features]` table which features exist.
+One reason for requiring this to be explicit is that it encourages a conscious decision about the public exposure of the feature name, and makes it clearer when reading the `[features]` table which features exist.
 This can help avoid tying the implementation details (the dependency names) to the public set of feature names.
 
 Also, removing features is a [SemVer incompatible change][semver], which may not be obvious when removing an optional dependency that you thought was private.
