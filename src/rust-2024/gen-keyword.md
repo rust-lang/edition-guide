@@ -17,9 +17,9 @@ The `gen` keyword has been reserved as part of [RFC #3513] to introduce "gen blo
 
 ## Migration
 
-Introducing the `gen` keyword can cause a problem for any identifiers that are already called `gen`. For example, any variable or function name called `gen` would clash with the new keyword. To work around this issue, Rust supports the `r#` prefix for a [raw identifier], which allows identifiers to overlap with keywords.
+Introducing the `gen` keyword can cause a problem for any identifiers that are already called `gen`. For example, any variable or function name called `gen` would clash with the new keyword. To overcome this, Rust supports the `r#` prefix for a [raw identifier], which allows identifiers to overlap with keywords.
 
-The [`keyword_idents_2024`] lint will automatically modify any identifier named `gen` to be `r#gen` so that the code continues to work on both editions. This lint is part of the `rust-2024-compatibility` lint group, which will automatically be applied when running `cargo fix --edition`. To migrate your code to be Rust 2024 Edition compatible, run:
+The [`keyword_idents_2024`] lint will automatically modify any identifier named `gen` to be `r#gen` so that code continues to work on both editions. This lint is part of the `rust-2024-compatibility` lint group, which will automatically be applied when running `cargo fix --edition`. To migrate your code to be Rust 2024 Edition compatible, run:
 
 ```sh
 cargo fix --edition
@@ -49,7 +49,7 @@ fn main() {
 }
 ```
 
-Alternatively, you can manually enable the lint to find places where the `gen` identifiers need to be modified to be `r#gen`:
+Alternatively, you can manually enable the lint to find places where `gen` identifiers need to be modified to `r#gen`:
 
 ```rust
 // Add this to the root of your crate to do a manual migration.
