@@ -207,7 +207,7 @@ mod submodule {
 ```
 
 If you have a local module or item with the same name as an external crate, a
-path begining with that name will be taken to refer to the local module or
+path beginning with that name will be taken to refer to the local module or
 item. To explicitly refer to the external crate, use the `::name` form.
 
 
