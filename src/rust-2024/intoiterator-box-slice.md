@@ -7,7 +7,7 @@ More information may be found in the tracking issue at <https://github.com/rust-
 
 - Boxed slices implement [`IntoIterator`] in *all* editions.
 - Calls to [`IntoIterator::into_iter`] are *hidden* in editions prior to 2024 when using method call syntax (i.e., `boxed_slice.into_iter()`). So, `boxed_slice.into_iter()` still resolves to `(&(*boxed_slice)).into_iter()` as it has before.
-- `boxed_slice.into_iter()` changes meaning to be the call [`IntoIterator::into_iter`] in Rust 2024.
+- `boxed_slice.into_iter()` changes meaning to call [`IntoIterator::into_iter`] in Rust 2024.
 
 [`IntoIterator`]: ../../std/iter/trait.IntoIterator.html
 [`IntoIterator::into_iter`]: ../../std/iter/trait.IntoIterator.html#tymethod.into_iter
