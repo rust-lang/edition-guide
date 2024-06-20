@@ -49,3 +49,4 @@
   - [Rustfmt: Combine all delimited exprs as last argument](rust-2024/rustfmt-overflow-delimited-expr.md)
   - [`gen` keyword](rust-2024/gen-keyword.md)
   - [Macro fragment specifiers](rust-2024/macro-fragment-specifiers.md)
+  - [`unsafe extern` blocks](rust-2024/unsafe-extern.md)
