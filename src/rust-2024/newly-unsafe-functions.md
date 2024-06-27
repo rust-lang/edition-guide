@@ -62,6 +62,7 @@ to be:
 
 ```rust
 fn main() {
+    // TODO: Audit that the environment access only happens in single-threaded code.
     unsafe { std::env::set_var("FOO", "123") };
 }
 ```
