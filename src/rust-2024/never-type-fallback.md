@@ -11,7 +11,7 @@
 When the compiler sees a value of type ! in a [coercion site],
 it implicitly inserts a coercion to allow the type checker to infer any type:
 
-```rust
+```rust,ignore (has placeholders)
 // this
 let x: u8 = panic!();
 
@@ -25,7 +25,7 @@ fn absurd<T>(_: !) -> T { ... }
 
 This can lead to compilation errors if the type cannot be inferred:
 
-```rust
+```rust,ignore (uses code from previous example)
 // this
 { panic!() };
 
@@ -36,7 +36,7 @@ This can lead to compilation errors if the type cannot be inferred:
 To prevent such errors, the compiler remembers where it inserted absurd calls,
 and if it can’t infer the type, it uses the fallback type instead:
 
-```rust
+```rust,ignore (has placeholders, uses code from previous example)
 type Fallback = /* An arbitrarily selected type! */;
 { absurd::<Fallback>(panic!()) }
 ```
@@ -67,7 +67,7 @@ The complication is that it might not be trivial to see which type needs to be s
 One of the most common patterns which are broken by this change is using `f()?;` where `f` is
 generic over the ok-part of the return type:
 
-```rust
+```rust,ignore (can't compile outside of a result-returning function)
 fn f<T: Default>() -> Result<T, ()> {
     Ok(T::default())
 }
@@ -80,7 +80,7 @@ desugaring of `?` operator it used to be inferred to `()`, but it will be inferr
 
 To fix the issue you need to specify the `T` type explicitly:
 
-```rust
+```rust,ignore (can't compile outside of a result-returning function, mentions function from previous example)
 f::<()>()?;
 // OR
 () = f()?;
@@ -88,11 +88,11 @@ f::<()>()?;
 
 Another relatively common case is `panic`king in a closure:
 
-```rust
+```rust,edition2015,should_panic
 trait Unit {}
 impl Unit for () {}
 
-fn run(f: impl FnOnce() -> impl Unit) {
+fn run<R: Unit>(f: impl FnOnce() -> R) {
     f();
 }
 
@@ -103,14 +103,14 @@ Previously `!` from the `panic!` coerced to `()` which implements `Unit`.
 However now the `!` is kept as `!` so this code fails because `!` does not implement `Unit`.
 To fix this you can specify return type of the closure:
 
-```rust
+```rust,ignore (uses function from the previous example)
 run(|| -> () { panic!() });
 ```
 
 A similar case to the `f()?` can be seen when using a `!`-typed expression in a branch and a
 function with unconstrained return in the other:
 
-```rust
+```rust,edition2015
 if true {
     Default::default()
 } else {
