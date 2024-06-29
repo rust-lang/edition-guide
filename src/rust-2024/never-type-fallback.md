@@ -1,4 +1,4 @@
-# Never type fallback to itself
+# Never type fallback change
 
 🚧 The 2024 Edition has not yet been released and hence this section is still "under construction".
 
