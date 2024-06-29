@@ -50,7 +50,7 @@ In the 2024 edition (and possibly in all editions on a later date) the fallback 
 This makes it work more intuitively, now when you pass `!` and there is no reason to coerce it to
 something else, it is kept as `!`.
 
-In some cases your code might depend on the fallback being `()`, so this can cause compilation 
+In some cases your code might depend on the fallback being `()`, so this can cause compilation
 errors or changes in behavior.
 
 [coercion site]: https://doc.rust-lang.org/reference/type-coercions.html#coercion-sites
@@ -138,4 +138,3 @@ if true {
     return
 };
 ```
-
