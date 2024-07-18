@@ -16,8 +16,6 @@ Rust 1.xx <!--TODO--> added the ability in all editions to mark [`extern` blocks
 The syntax for an unsafe `extern` block looks like this:
 
 ```rust
-# #![feature(unsafe_extern_blocks)]
-
 unsafe extern "C" {
     // sqrt (from libm) may be called with any `f64`
     pub safe fn sqrt(x: f64) -> f64;
