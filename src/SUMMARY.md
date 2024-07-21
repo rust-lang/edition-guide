@@ -50,5 +50,5 @@
   - [`gen` keyword](rust-2024/gen-keyword.md)
   - [Macro fragment specifiers](rust-2024/macro-fragment-specifiers.md)
   - [Never type fallback change](rust-2024/never-type-fallback.md)
-  - [`unsafe extern` blocks](rust-2024/unsafe-extern.md)
+  - [Unsafe `extern` blocks](rust-2024/unsafe-extern.md)
   - [Unsafe attributes](rust-2024/unsafe-attributes.md)
