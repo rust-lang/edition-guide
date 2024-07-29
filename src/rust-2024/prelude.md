@@ -104,4 +104,4 @@ However, these derive macros are still available in the standard library, they a
 use core::prelude::v1::{RustcDecodable, RustcEncodable};
 ```
 
-There is no automatic migration for this change, you will need to make the update manually.
+There is no automatic migration for this change; you will need to make the update manually.
