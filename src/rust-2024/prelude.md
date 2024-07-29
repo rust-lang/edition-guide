@@ -48,11 +48,7 @@ If in the unlikely case there is a project still using these, it is recommended 
 
 ## Migration
 
-🚧 The automatic migration for this has not yet been implemented.
-
-### Migration needed
-
-#### Conflicting trait methods
+### Conflicting trait methods
 
 When two traits that are in scope have the same method name, it is ambiguous which trait method should be used. For example:
 
@@ -74,7 +70,7 @@ fn main() {
 }
 ```
 
-We can fix this by using fully qualified syntax:
+We can fix this so that it works on all editions by using fully qualified syntax:
 
 ```rust,ignore
 fn main() {
@@ -83,7 +79,22 @@ fn main() {
 }
 ```
 
-#### `RustcEncodable` and `RustcDecodable`
+The [`rust_2024_prelude_collisions`] lint will automatically modify any ambiguous method calls to use fully qualified syntax. This lint is part of the `rust-2024-compatibility` lint group, which will automatically be applied when running `cargo fix --edition`. To migrate your code to be Rust 2024 Edition compatible, run:
+
+```sh
+cargo fix --edition
+```
+
+Alternatively, you can manually enable the lint to find places where these qualifications need to be added:
+
+```rust
+// Add this to the root of your crate to do a manual migration.
+#![warn(rust_2024_prelude_collisions)]
+```
+
+[`rust_2024_prelude_collisions`]: ../../rustc/lints/listing/allowed-by-default.html#rust-2024-prelude-collisions
+
+### `RustcEncodable` and `RustcDecodable`
 
 It is strongly recommended that you migrate to a different serialization library if you are still using these.
 However, these derive macros are still available in the standard library, they are just required to be imported from the older prelude now:
@@ -92,3 +103,5 @@ However, these derive macros are still available in the standard library, they a
 #[allow(soft_unstable)]
 use core::prelude::v1::{RustcDecodable, RustcEncodable};
 ```
+
+There is no automatic migration for this change; you will need to make the update manually.
