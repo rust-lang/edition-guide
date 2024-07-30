@@ -24,11 +24,11 @@ fn main() {
 }
 ```
 
-If you ever try to call the macro with arguments that would match a rule with a missing specifier, it is a hard error in all editions (for example, calling `foo!($name)` in the example above). However, this check was previously only performed when calling the macro, not when it was defined. A lint was added in Rust 1.17 to look at the *definition* for these missing specifiers.
+Calling the macro with arguments that would match a rule with a missing specifier (e.g., `foo!($name)`) is a hard error in all editions. However, simply defining a macro with missing fragment specifiers is not, though we did add a lint in Rust 1.17.
 
-It was determined that it would cause too much breakage in the ecosystem to make this a hard error in all editions.[^future-incompat]
+We'd like to make this a hard error in all editions, but there would be too much breakage right now. So we're starting by making this a hard error in Rust 2024.[^future-incompat]
 
-[^future-incompat]: The lint is marked as a "future-incompatible" warning. It may become a hard error in all editions in a future release. See [#40107] for more information.
+[^future-incompat]: The lint is marked as a "future-incompatible" warning to indicate that it may become a hard error in all editions in a future release. See [#40107] for more information.
 
 [#40107]: https://github.com/rust-lang/rust/issues/40107
 
@@ -36,4 +36,4 @@ It was determined that it would cause too much breakage in the ecosystem to make
 
 To migrate your code to the 2024 Edition, remove the unused matcher rule from the macro. The [`missing_fragment_specifier`] lint is on by default in all editions, and should alert you to macros with this issue.
 
-There is no automatic migration for this change. It is expected that this style of macro is extremely rare. The lint has been a future-incompatible lint since Rust 1.17, a deny-by-default lint since Rust 1.20, and warns about dependencies using this pattern since Rust 1.82.
+There is no automatic migration for this change. We expect that this style of macro is extremely rare. The lint has been a future-incompatibility lint since Rust 1.17, a deny-by-default lint since Rust 1.20, and since Rust 1.82, it has warned about dependencies that are using this pattern.
