@@ -51,5 +51,5 @@
   - [Macro fragment specifiers](rust-2024/macro-fragment-specifiers.md)
   - [Missing macro fragment specifiers](rust-2024/missing-macro-fragment-specifiers.md)
   - [Never type fallback change](rust-2024/never-type-fallback.md)
-  - [`unsafe extern` blocks](rust-2024/unsafe-extern.md)
+  - [Unsafe `extern` blocks](rust-2024/unsafe-extern.md)
   - [Unsafe attributes](rust-2024/unsafe-attributes.md)
