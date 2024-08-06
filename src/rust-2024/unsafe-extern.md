@@ -11,7 +11,7 @@ More information may be found in the tracking issue at <https://github.com/rust-
 
 ## Details
 
-Rust 1.xx <!--TODO--> added the ability in all editions to mark [`extern` blocks] with the `unsafe` keyword.[^RFC3484] Adding the `unsafe` keyword helps to emphasize that it is the responsibility of the author of the `extern` block to ensure that the signatures are correct. If the signatures are not correct, then it may result in undefined behavior.
+Rust 1.82 added the ability in all editions to mark [`extern` blocks] with the `unsafe` keyword.[^RFC3484] Adding the `unsafe` keyword helps to emphasize that it is the responsibility of the author of the `extern` block to ensure that the signatures are correct. If the signatures are not correct, then it may result in undefined behavior.
 
 The syntax for an unsafe `extern` block looks like this:
 
