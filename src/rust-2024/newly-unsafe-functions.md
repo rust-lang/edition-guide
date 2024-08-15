@@ -76,4 +76,4 @@ Alternatively, you can manually enable the lint to find places these functions a
 #![warn(deprecated_safe_2024)]
 ```
 
-[`deprecated_safe_2024`]: ../../rustc/lints/listing/allowed-by-default.html#deprecated-safe
+[`deprecated_safe_2024`]: ../../rustc/lints/listing/allowed-by-default.html#deprecated-safe-2024
