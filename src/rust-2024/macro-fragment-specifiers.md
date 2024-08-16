@@ -6,13 +6,13 @@ More information may be found in the tracking issue at <https://github.com/rust-
 ## Summary
 
 - The `expr` [fragment specifier] now also supports `const` and `_` expressions.
-    - The `expr_2021` fragment specifier has been added for backwards compatibility.
+- The `expr_2021` fragment specifier has been added for backwards compatibility.
 
 [fragment specifier]: ../../reference/macros-by-example.html#metavariables
 
 ## Details
 
-As new syntax is added to Rust, existing `macro_rules` fragment specifiers are sometimes not allowed to match on the new syntax in order to retain backwards compatibility. Supporting the new syntax in the old fragment specifiers is sometimes deferred until the next Edition, which provides an opportunity to update them.
+As new syntax is added to Rust, existing `macro_rules` fragment specifiers are sometimes not allowed to match on the new syntax in order to retain backwards compatibility. Supporting the new syntax in the old fragment specifiers is sometimes deferred until the next edition, which provides an opportunity to update them.
 
 Indeed this happened with [`const` expressions] added in 1.79 and [`_` expressions] added in 1.59. In the 2021 Edition and earlier, the `expr` fragment specifier does *not* match those expressions. This is because you may have a scenario like:
 
