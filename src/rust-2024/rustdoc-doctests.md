@@ -33,7 +33,7 @@ pub fn subtract(left: u64, right: u64) -> u64 {
 
 In this example, the two doctests will now be compiled in a single executable. Rustdoc will essentially place each example in a separate function within a single binary. The tests still run in independent processes as they did before, so any global state (like global statics) should still continue to work correctly.
 
-This change is only available in the 2024 Edition to avoid potential incompatibilities with existing doctests which may not work in a combined executable.
+This change is only available in the 2024 Edition to avoid potential incompatibilities with existing doctests which may not work in a combined executable. However, these incompatibilities are expected to be extremely rare.
 
 [doctests]: ../../rustdoc/write-documentation/documentation-tests.html
 [libtest harness]: ../../rustc/tests/index.html
@@ -73,4 +73,4 @@ This example is sensitive to the code structure of how the example is compiled. 
 
 ## Migration
 
-There is no automatic migration to determine which doctests need to be annotated with the `standalone` tag. You will need to update your crate to the 2024 Edition and then run your documentation tests and see if any of them fail. If they do fail, you will need to analyze whether the test can be rewritten to be compatible with the combined approach, or add the `standalone` tag to retain the previous behavior.
+There is no automatic migration to determine which doctests need to be annotated with the `standalone` tag. It's very unlikely that doctests will not work correctly when merged. The only way to know is to update your crate to the 2024 Edition and then run your documentation tests and see if any of them fail. If they do fail, you will need to analyze whether the test can be rewritten to be compatible with the combined approach, or add the `standalone` tag to retain the previous behavior.
