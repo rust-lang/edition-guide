@@ -31,7 +31,7 @@ pub fn subtract(left: u64, right: u64) -> u64 {
 }
 ```
 
-In this example, the two doctests will now be compiled in a single executable. Rustdoc will essentially place each example in a separate function within a single binary. Rustdoc also adds a small `main` function which tells it which test to run. The tests still run in independent processes as they did before, so any global state (like global statics) should still continue to work correctly.
+In this example, the two doctests will now be compiled in a single executable. Rustdoc will essentially place each example in a separate function within a single binary. The tests still run in independent processes as they did before, so any global state (like global statics) should still continue to work correctly.
 
 This change is only available in the 2024 Edition to avoid potential incompatibilities with existing doctests which may not work in a combined executable.
 
