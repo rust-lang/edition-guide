@@ -16,10 +16,9 @@ More information may be found in the tracking issue at <https://github.com/rust-
 
 ## Details
 
-Rust 1.xx <!--TODO--> added the ability in all editions to mark certain attributes as `unsafe` to indicate that they have soundness requirements that must be upheld.[^RFC3325] The syntax for an unsafe attribute looks like this:
+Rust 1.82 added the ability in all editions to mark certain attributes as `unsafe` to indicate that they have soundness requirements that must be upheld.[^RFC3325] The syntax for an unsafe attribute looks like this:
 
 ```rust
-# #![feature(unsafe_attributes)]
 // SAFETY: there is no other global function of this name
 #[unsafe(no_mangle)]
 pub fn example() {}
@@ -52,7 +51,6 @@ In the 2024 Edition, it is now required to mark these attributes as unsafe to em
 
 <!-- TODO: edition2024 -->
 ```rust
-# #![feature(unsafe_attributes)]
 // SAFETY: There should only be a single definition of the loop symbol.
 #[unsafe(export_name="loop")]
 fn arduino_loop() {
