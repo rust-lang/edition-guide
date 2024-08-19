@@ -54,3 +54,4 @@
   - [Never type fallback change](rust-2024/never-type-fallback.md)
   - [Unsafe `extern` blocks](rust-2024/unsafe-extern.md)
   - [Unsafe attributes](rust-2024/unsafe-attributes.md)
+  - [Rustdoc combined tests](rust-2024/rustdoc-doctests.md)
