@@ -45,7 +45,7 @@ In some situations it is not possible for rustdoc to combine examples in a singl
 * Uses the [`compile_fail`][tags] language tag, which indicates that the example fails to compile.
 * Uses the [`edition`][tags], which indicates the edition of the example.[^edition-tag]
 * Uses global attributes like the [`global_allocator`] attribute, which could potentially interfere with other tests.
-* Defines any crate-wide attributes (like `#![deny(unused)]`).
+* Defines any crate-wide attributes (like `#![feature(...)]`).
 * Defines a macro that uses `$crate`, because the `$crate` path will not work correctly.
 
 However, rustdoc is not able to automatically determine *all* situations where an example cannot be combined with other examples. In these situations, you can add the `standalone` language tag to indicate that the example should be built as a separate executable.
