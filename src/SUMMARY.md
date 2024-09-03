@@ -43,7 +43,7 @@
   - [Newly unsafe functions](rust-2024/newly-unsafe-functions.md)
   - [`unsafe_op_in_unsafe_fn` warning](rust-2024/unsafe-op-in-unsafe-fn.md)
   - [RPIT lifetime capture rules](rust-2024/rpit-lifetime-capture.md)
-  - [Disallow references to `static mut`](rust-2024/static-mut-reference.md)
+  - [Disallow references to `static mut`](rust-2024/static-mut-references.md)
   - [Cargo: Remove implicit features](rust-2024/cargo-remove-implicit-features.md)
   - [Cargo: Table and key name consistency](rust-2024/cargo-table-key-names.md)
   - [Cargo: Reject unused inherited default-features](rust-2024/cargo-inherited-default-features.md)
