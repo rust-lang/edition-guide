@@ -44,11 +44,12 @@ unsafe {
 
 Wherever possible, it is **strongly recommended** to use instead an *immutable* `static` of a type that provides *interior mutability* behind some *locally-reasoned abstraction* (which greatly reduces the complexity of ensuring that Rust's mutability XOR aliasing requirement is upheld).
 
-In situations where no locally-reasoned abstraction is possible and you are therefore compelled still to reason globally about accesses to your `static` variable, you must now use raw pointers such as can be obtained via the [`addr_of_mut!`] macro.  By first obtaining a raw pointer rather than directly taking a reference, (the safety requirements of) accesses through that pointer will be more familiar to `unsafe` developers and can be deferred until/limited to smaller regions of code.
+In situations where no locally-reasoned abstraction is possible and you are therefore compelled still to reason globally about accesses to your `static` variable, you must now use raw pointers such as can be obtained via the [`&raw const` or `&raw mut` operators][raw].  By first obtaining a raw pointer rather than directly taking a reference, (the safety requirements of) accesses through that pointer will be more familiar to `unsafe` developers and can be deferred until/limited to smaller regions of code.
 
 [Undefined Behavior]: ../../reference/behavior-considered-undefined.html
 [`static mut`]: ../../reference/items/static-items.html#mutable-statics
 [`addr_of_mut!`]: https://docs.rust-lang.org/core/ptr/macro.addr_of_mut.html
+[raw]: ../../reference/expressions/operator-expr.html#raw-borrow-operators
 
 ## Migration
 
