@@ -5,28 +5,40 @@ More information may be found in the tracking issue at <https://github.com/rust-
 
 ## Summary
 
-- The [`static_mut_refs`] lint is now a hard error that cannot be disabled.
-  This prevents taking a shared or mutable reference to a `static mut`.
+- The [`static_mut_refs`] lint level is now `deny` by default.
+  This checks for taking a shared or mutable reference to a `static mut`.
 
 [`static_mut_refs`]: ../../rustc/lints/listing/warn-by-default.html#static-mut-refs
 
 ## Details
 
-Taking a reference to a [`static mut`] is no longer allowed:
+The [`static_mut_refs`] lint detects taking a reference to a [`static mut`]. In the 2024 Edition, this lint is now `deny` by default to emphasize that you should avoid making these references.
 
-<!-- edition2024,E0796 -->
+<!-- edition2024 -->
 ```rust
 static mut X: i32 = 23;
 static mut Y: i32 = 24;
 
 unsafe {
-    let y = &X;             // ERROR: reference of mutable static
-    let ref x = X;          // ERROR: reference of mutable static
-    let (x, y) = (&X, &Y);  // ERROR: reference of mutable static
+    let y = &X;             // ERROR: shared reference to mutable static
+    let ref x = X;          // ERROR: shared reference to mutable static
+    let (x, y) = (&X, &Y);  // ERROR: shared reference to mutable static
 }
 ```
 
 Merely taking such a reference in violation of Rust's mutability XOR aliasing requirement has always been *instantaneous* [undefined behavior], **even if the reference is never read from or written to**.  Furthermore, upholding mutability XOR aliasing for a `static mut` requires *reasoning about your code globally*, which can be particularly difficult in the face of reentrancy and/or multithreading.
+
+Note that there are some cases where implicit references are automatically created without a visible `&` operator. For example, these situations will also trigger the lint:
+
+<!-- edition2024 -->
+```rust
+static mut NUMS: &[u8; 3] = &[0, 1, 2];
+
+unsafe {
+    println!("{NUMS:?}");   // ERROR: shared reference to mutable static
+    let n = NUMS.len();     // ERROR: shared reference to mutable static
+}
+```
 
 ## Alternatives
 
@@ -40,6 +52,4 @@ In situations where no locally-reasoned abstraction is possible and you are ther
 
 ## Migration
 
-🚧 The automatic migration for this has not yet been implemented.
-
-<!-- TODO: Discuss alternatives around rewriting your code. -->
+There is no automatic migration to fix these references to `static mut`. To avoid undefined behavior you must rewrite your code to use a different approach as recommended in the [Alternatives](#alternatives) section.
