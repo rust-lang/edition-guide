@@ -40,7 +40,7 @@ This change is only available in the 2024 Edition to avoid potential incompatibi
 
 [^implementation]: For more information on the details of how this work, see ["Doctests - How were they improved?"](https://blog.guillaume-gomez.fr/articles/2024-08-17+Doctests+-+How+were+they+improved%3F).
 
-### Standalone tag
+### `standalone_crate` tag
 
 In some situations it is not possible for rustdoc to combine examples into a single executable. Rustdoc will attempt to automatically detect if this is not possible. For example, a test will not be combined with others if it:
 
@@ -50,7 +50,7 @@ In some situations it is not possible for rustdoc to combine examples into a sin
 * Defines any crate-wide attributes (like `#![feature(...)]`).
 * Defines a macro that uses `$crate`, because the `$crate` path will not work correctly.
 
-However, rustdoc is not able to automatically determine *all* situations where an example cannot be combined with other examples. In these situations, you can add the `standalone` language tag to indicate that the example should be built as a separate executable. For example:
+However, rustdoc is not able to automatically determine *all* situations where an example cannot be combined with other examples. In these situations, you can add the `standalone_crate` language tag to indicate that the example should be built as a separate executable. For example:
 
 ```rust
 //! ```
@@ -59,10 +59,10 @@ However, rustdoc is not able to automatically determine *all* situations where a
 //! ```
 ```
 
-This is sensitive to the code structure of how the example is compiled and won't work with the "combined" approach because the line numbers will shift depending on how the doctests are combined. In these situations, you can add the `standalone` tag to force the example to be built separately just as it was in previous editions. E.g.:
+This is sensitive to the code structure of how the example is compiled and won't work with the "combined" approach because the line numbers will shift depending on how the doctests are combined. In these situations, you can add the `standalone_crate` tag to force the example to be built separately just as it was in previous editions. E.g.:
 
 ```rust
-//! ```standalone
+//! ```standalone_crate
 //! let location = std::panic::Location::caller();
 //! assert_eq!(location.line(), 5);
 //! ```
@@ -75,4 +75,4 @@ This is sensitive to the code structure of how the example is compiled and won't
 
 ## Migration
 
-There is no automatic migration to determine which doctests need to be annotated with the `standalone` tag. It's very unlikely that any given doctest will not work correctly when migrated. We suggest that you update your crate to the 2024 Edition and then run your documentation tests and see if any fail. If one does, you will need to analyze whether it can be rewritten to be compatible with the combined approach, or alternatively, add the `standalone` tag to retain the previous behavior.
+There is no automatic migration to determine which doctests need to be annotated with the `standalone_crate` tag. It's very unlikely that any given doctest will not work correctly when migrated. We suggest that you update your crate to the 2024 Edition and then run your documentation tests and see if any fail. If one does, you will need to analyze whether it can be rewritten to be compatible with the combined approach, or alternatively, add the `standalone_crate` tag to retain the previous behavior.
