@@ -55,3 +55,4 @@
   - [Unsafe `extern` blocks](rust-2024/unsafe-extern.md)
   - [Unsafe attributes](rust-2024/unsafe-attributes.md)
   - [Rustdoc combined tests](rust-2024/rustdoc-doctests.md)
+  - [Reserving syntax](rust-2024/reserving-syntax.md)
