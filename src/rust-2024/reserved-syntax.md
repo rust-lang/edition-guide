@@ -10,11 +10,14 @@ More information may be found in the tracking issue at <https://github.com/rust-
 
 ## Details
 
-[RFC 3593] reserved syntax in the 2024 Edition for guarded string literals that do not have a prefix to future-proof against future language changes. The 2021 Edition [reserved syntax][2021] for guarded strings with a prefix, such as `ident##"foo"##`. The 2024 Edition extends that to also reserve strings without the `ident` prefix.
+[RFC 3593] reserved syntax in the 2024 Edition for guarded string literals that do not have a prefix to make room for possible future language changes. The 2021 Edition [reserved syntax][2021] for guarded strings with a prefix, such as `ident##"foo"##`. The 2024 Edition extends that to also reserve strings without the `ident` prefix.
 
-There are two reserved syntaxes: One or more `#` immediately followed by a [string literal], and two or more `#` characters in a row.
+There are two reserved syntaxes:
 
-This reservation is done across an edition boundary because of interactions with tokenization and macros. For example, with the following macro:
+- One or more `#` characters immediately followed by a [string literal].
+- Two or more `#` characters in a row (not separated by whitespace).
+
+This reservation is done across an edition boundary because of interactions with tokenization and macros. For example, consider this macro:
 
 ```rust
 macro_rules! demo {
@@ -45,7 +48,7 @@ Starting in the 2024 Edition, the `#"foo"#` line and the `###` line now generate
 
 ## Migration
 
-The [`rust_2024_guarded_string_incompatible_syntax`] lint will identify any tokens that match the reserved syntax, and will suggest a modification to insert spaces where necessary to ensure it continues to be parsed as separate tokens.
+The [`rust_2024_guarded_string_incompatible_syntax`] lint will identify any tokens that match the reserved syntax, and will suggest a modification to insert spaces where necessary to ensure the tokens continue to be parsed separately.
 
 The lint is part of the `rust-2024-compatibility` lint group which is included in the automatic edition migration. In order to migrate your code to be Rust 2024 Edition compatible, run:
 
