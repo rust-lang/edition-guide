@@ -1,4 +1,4 @@
-# Reserving syntax
+# Reserved syntax
 
 🚧 The 2024 Edition has not yet been released and hence this section is still "under construction".
 More information may be found in the tracking issue at <https://github.com/rust-lang/rust/issues/123735>.
@@ -39,7 +39,7 @@ three tokens
 
 Starting in the 2024 Edition, the `#"foo"#` line and the `###` line now generates a compile error because those forms are now reserved.
 
-[2021]: ../rust-2021/reserving-syntax.md
+[2021]: ../rust-2021/reserved-syntax.md
 [string literal]: ../../reference/tokens.html#string-literals
 [RFC 3593]: https://rust-lang.github.io/rfcs/3593-unprefixed-guarded-strings.html
 

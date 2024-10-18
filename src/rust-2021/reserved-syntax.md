@@ -1,4 +1,4 @@
-# Reserving syntax
+# Reserved syntax
 
 ## Summary
 
