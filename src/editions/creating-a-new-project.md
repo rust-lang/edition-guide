@@ -5,7 +5,8 @@ default:
 
 ```console
 $ cargo new foo
-     Created binary (application) `foo` project
+    Creating binary (application) `foo` package
+note: see more `Cargo.toml` keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 $ cat foo/Cargo.toml
 [package]
 name = "foo"
@@ -24,7 +25,8 @@ Rust 2018 edition could be done like this:
 
 ```console
 $ cargo new --edition 2018 foo
-     Created binary (application) `foo` project
+    Creating binary (application) `foo` package
+note: see more `Cargo.toml` keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 $ cat foo/Cargo.toml
 [package]
 name = "foo"
@@ -39,12 +41,12 @@ Don't worry about accidentally using an invalid year for the edition; the
 
 ```console
 $ cargo new --edition 2019 foo
-error: "2019" isn't a valid value for '--edition <YEAR>'
-        [possible values: 2015, 2018, 2021]
+error: invalid value '2019' for '--edition <YEAR>'
+  [possible values: 2015, 2018, 2021, 2024]
 
-        Did you mean "2018"?
+  tip: a similar value exists: '2021'
 
-For more information try --help
+For more information, try '--help'.
 ```
 
 You can change the value of the `edition` key by simply editing the
