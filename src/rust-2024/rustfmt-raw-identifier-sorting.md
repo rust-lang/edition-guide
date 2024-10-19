@@ -16,7 +16,7 @@ The [Rust Style Guide] includes [rules for sorting][sorting] that `rustfmt` appl
 
 Prior to the 2024 Edition, when sorting rustfmt would use the leading `r#` token instead of the ident which led to unwanted results. For example:
 
-```rust
+```rust,ignore
 use websocket::client::ClientBuilder;
 use websocket::r#async::futures::Stream;
 use websocket::result::WebSocketError;
@@ -24,7 +24,7 @@ use websocket::result::WebSocketError;
 
 In the 2024 Edition, `rustfmt` now produces:
 
-```rust
+```rust,ignore
 use websocket::r#async::futures::Stream;
 use websocket::client::ClientBuilder;
 use websocket::result::WebSocketError;
