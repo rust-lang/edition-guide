@@ -76,3 +76,8 @@ This is sensitive to the code structure of how the example is compiled and won't
 ## Migration
 
 There is no automatic migration to determine which doctests need to be annotated with the `standalone_crate` tag. It's very unlikely that any given doctest will not work correctly when migrated. We suggest that you update your crate to the 2024 Edition and then run your documentation tests and see if any fail. If one does, you will need to analyze whether it can be rewritten to be compatible with the combined approach, or alternatively, add the `standalone_crate` tag to retain the previous behavior.
+
+Some things to watch out for and avoid are:
+
+- Checking the values of [`std::panic::Location`](https://doc.rust-lang.org/std/panic/struct.Location.html) or things that make use of `Location`. The location of the code is now different since multiple tests are now located in the same test crate.
+- Checking the value of [`std::any::type_name`](https://doc.rust-lang.org/std/any/fn.type_name.html), which now has a different module path.
