@@ -47,6 +47,7 @@
   - [Cargo: Table and key name consistency](rust-2024/cargo-table-key-names.md)
   - [Cargo: Reject unused inherited default-features](rust-2024/cargo-inherited-default-features.md)
   - [Rustfmt: Combine all delimited exprs as last argument](rust-2024/rustfmt-overflow-delimited-expr.md)
+  - [Rustfmt: Raw identifier sorting](rust-2024/rustfmt-raw-identifier-sorting.md)
   - [`gen` keyword](rust-2024/gen-keyword.md)
   - [Macro fragment specifiers](rust-2024/macro-fragment-specifiers.md)
   - [Missing macro fragment specifiers](rust-2024/missing-macro-fragment-specifiers.md)
