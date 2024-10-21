@@ -30,7 +30,7 @@
   - [IntoIterator for arrays](rust-2021/IntoIterator-for-arrays.md)
   - [Disjoint capture in closures](rust-2021/disjoint-capture-in-closures.md)
   - [Panic macro consistency](rust-2021/panic-macro-consistency.md)
-  - [Reserving syntax](rust-2021/reserving-syntax.md)
+  - [Reserved syntax](rust-2021/reserved-syntax.md)
   - [Warnings promoted to errors](rust-2021/warnings-promoted-to-error.md)
   - [Or patterns in macro-rules](rust-2021/or-patterns-macro-rules.md)
   - [C-string literals](rust-2021/c-string-literals.md)
@@ -55,3 +55,4 @@
   - [Unsafe `extern` blocks](rust-2024/unsafe-extern.md)
   - [Unsafe attributes](rust-2024/unsafe-attributes.md)
   - [Rustdoc combined tests](rust-2024/rustdoc-doctests.md)
+  - [Reserved syntax](rust-2024/reserved-syntax.md)

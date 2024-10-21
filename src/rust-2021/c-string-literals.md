@@ -69,4 +69,4 @@ Migration is only necessary for macros which may have been assuming a sequence o
 As part of the [syntax reservation] for the 2021 edition, any macro input which may run into this issue should issue a warning from the `rust_2021_prefixes_incompatible_syntax` migration lint.
 See that chapter for more detail.
 
-[syntax reservation]: reserving-syntax.md
+[syntax reservation]: reserved-syntax.md
