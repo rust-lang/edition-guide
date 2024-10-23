@@ -13,7 +13,7 @@ Since Rust 1.84.0, Cargo has opt-in support for compatibility with
 by setting [`resolver.incompatible-rust-version = "fallback"`] in `.cargo/config.toml`.
 
 Starting in Rust 2024, this will be the default.
-That is, writing `edition = "2021"` in `Cargo.toml` will imply `resolver = "3"`
+That is, writing `edition = "2024"` in `Cargo.toml` will imply `resolver = "3"`
 which will imply [`resolver.incompatible-rust-version = "fallback"`].
 
 The resolver is a global setting for a [workspace], and the setting is ignored in dependencies.
