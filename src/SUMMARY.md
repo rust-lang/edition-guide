@@ -44,6 +44,7 @@
   - [`unsafe_op_in_unsafe_fn` warning](rust-2024/unsafe-op-in-unsafe-fn.md)
   - [RPIT lifetime capture rules](rust-2024/rpit-lifetime-capture.md)
   - [Disallow references to `static mut`](rust-2024/static-mut-references.md)
+  - [Cargo: Rust-version aware resolver](rust-2024/cargo-resolver.md)
   - [Cargo: Table and key name consistency](rust-2024/cargo-table-key-names.md)
   - [Cargo: Reject unused inherited default-features](rust-2024/cargo-inherited-default-features.md)
   - [Rustfmt: Combine all delimited exprs as last argument](rust-2024/rustfmt-overflow-delimited-expr.md)
