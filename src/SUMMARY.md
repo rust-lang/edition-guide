@@ -57,3 +57,4 @@
   - [Unsafe attributes](rust-2024/unsafe-attributes.md)
   - [Rustdoc combined tests](rust-2024/rustdoc-doctests.md)
   - [Reserved syntax](rust-2024/reserved-syntax.md)
+  - [Rustdoc doctest nested `include_str!` change](rust-2024/rustdoc-doctests-nested-include-str.md)
