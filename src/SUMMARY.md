@@ -31,6 +31,7 @@
   - [Disjoint capture in closures](rust-2021/disjoint-capture-in-closures.md)
   - [Panic macro consistency](rust-2021/panic-macro-consistency.md)
   - [Reserved syntax](rust-2021/reserved-syntax.md)
+  - [Raw lifetimes](rust-2021/raw-lifetimes.md)
   - [Warnings promoted to errors](rust-2021/warnings-promoted-to-error.md)
   - [Or patterns in macro-rules](rust-2021/or-patterns-macro-rules.md)
   - [C-string literals](rust-2021/c-string-literals.md)
