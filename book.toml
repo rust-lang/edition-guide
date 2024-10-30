@@ -80,6 +80,7 @@ search.use-boolean-and = true
 "/rust-2018/platform-and-target-support/msvc-toolchain-support.html" = "../../../rustc/platform-support.html"
 "/rust-2018/platform-and-target-support/musl-support-for-fully-static-binaries.html" = "../../../rustc/platform-support.html"
 "/rust-2018/platform-and-target-support/cdylib-crates-for-c-interoperability.html" = "https://github.com/rust-lang/rfcs/blob/master/text/1510-cdylib.md"
+"/rust-2021/reserving-syntax.html" = "reserved-syntax.html"
 "/rust-next/index.html" = "../rust-2021/index.html"
 "/rust-next/edition-changes.html" = "../rust-2021/index.html"
 "/rust-next/dbg-macro.html" = "../../std/macro.dbg.html"
