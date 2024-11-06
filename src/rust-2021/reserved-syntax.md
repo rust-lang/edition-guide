@@ -2,8 +2,7 @@
 
 ## Summary
 
-- `any_identifier#`, `any_identifier"..."`, and `any_identifier'...'` are now reserved
-  syntax, and no longer tokenize.
+- `any_identifier#`, `any_identifier"..."`, `any_identifier'...'`, and `'any_identifier#` are now reserved syntax, and no longer tokenize.
 - This is mostly relevant to macros. E.g. `quote!{ #a#b }` is no longer accepted.
 - It doesn't treat keywords specially, so e.g. `match"..." {}` is no longer accepted.
 - Insert whitespace between the identifier and the subsequent `#`, `"`, or `'`
@@ -13,8 +12,8 @@
 ## Details
 
 To make space for new syntax in the future,
-we've decided to reserve syntax for prefixed identifiers and literals:
-`prefix#identifier`, `prefix"string"`, `prefix'c'`, and `prefix#123`,
+we've decided to reserve syntax for prefixed identifiers, literals, and lifetimes:
+`prefix#identifier`, `prefix"string"`, `prefix'c'`, `prefix#123`, and `'prefix#`,
 where `prefix` can be any identifier.
 (Except those prefixes that already have a meaning, such as `b'...'` (byte
 chars) and `r"..."` (raw strings).)
@@ -52,7 +51,7 @@ committed to any of them yet):
 
 ## Migration 
 
-As a part of the 2021 edition a migration lint, `rust_2021_prefixes_incompatible_syntax`, has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
+As a part of the 2021 edition a migration lint, [`rust_2021_prefixes_incompatible_syntax`], has been added in order to aid in automatic migration of Rust 2018 codebases to Rust 2021.
 
 In order to migrate your code to be Rust 2021 Edition compatible, run:
 
@@ -81,3 +80,5 @@ This `z` prefix is no longer allowed in Rust 2021, so in order to call this macr
 ```rust,ignore
 my_macro!(z "hey");
 ```
+
+[`rust_2021_prefixes_incompatible_syntax`]: ../../rustc/lints/listing/allowed-by-default.html#rust-2021-prefixes-incompatible-syntax
