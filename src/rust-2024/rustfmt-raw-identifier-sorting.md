@@ -35,16 +35,6 @@ use websocket::result::WebSocketError;
 
 ## Migration
 
-The change can be applied automatically by running `cargo fmt` or `rustfmt` with the 2024 Edition.
+The change can be applied automatically by running `cargo fmt` or `rustfmt` with the 2024 Edition. See the [Style edition] chapter for more information on migrating and how style editions work.
 
-With a `Cargo.toml` file that has `edition` set to `2024`, run:
-
-```sh
-cargo fmt
-```
-
-Or run `rustfmt` directly:
-
-```sh
-rustfmt foo.rs --style-edition 2024
-```
+[Style edition]: rustfmt-style-edition.md
