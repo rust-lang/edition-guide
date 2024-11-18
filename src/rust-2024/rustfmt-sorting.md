@@ -40,4 +40,6 @@ use std::num::{NonZeroU8, NonZeroU16, NonZeroU32, NonZeroU64};
 
 ## Migration
 
-The change can be applied automatically by running `cargo fmt` or `rustfmt` with the 2024 Edition.
+The change can be applied automatically by running `cargo fmt` or `rustfmt` with the 2024 Edition. See the [Style edition] chapter for more information on migrating and how style editions work.
+
+[Style edition]: rustfmt-style-edition.md
