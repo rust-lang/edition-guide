@@ -61,3 +61,5 @@
   - [Rustdoc combined tests](rust-2024/rustdoc-doctests.md)
   - [Rustdoc nested `include!` change](rust-2024/rustdoc-nested-includes.md)
   - [Reserved syntax](rust-2024/reserved-syntax.md)
+  - [`if let` temporary scope](rust-2024/temporary-if-let-scope.md)
+  - [Tail expression temporary scope](rust-2024/temporary-tail-expr-scope.md)
