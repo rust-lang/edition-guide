@@ -2,3 +2,9 @@
 
 [relabel]
 
+[shortcut]
+
+[merge-conflicts]
+remove = []
+add = ["S-waiting-on-author"]
+unless = ["S-blocked", "S-waiting-on-review"]
