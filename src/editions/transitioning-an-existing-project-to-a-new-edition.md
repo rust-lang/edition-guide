@@ -5,7 +5,7 @@ It will update your source code so that it is compatible with the next edition.
 Briefly, the steps to update to the next edition are:
 
 1. Run `cargo fix --edition`
-2. Edit `Cargo.toml` and set the `edition` field to the next edition, for example `edition = "2021"`
+2. Edit `Cargo.toml` and set the `edition` field to the next edition, for example `edition = "2024"`
 3. Run `cargo build` or `cargo test` to verify the fixes worked.
 
 The following sections dig into the details of these steps, and some of the issues you may encounter along the way.
@@ -93,7 +93,7 @@ The steps are roughly similar to the stable channel:
 
 1. Install the most recent nightly: `rustup update nightly`.
 2. Run `cargo +nightly fix --edition`.
-3. Edit `Cargo.toml` and place `cargo-features = ["edition2024"]` at the top (above `[package]`), and change the edition field to say `edition = "2024"`.
+3. Edit `Cargo.toml` and place `cargo-features = ["edition20xx"]` at the top (above `[package]`), and change the edition field to say `edition = "20xx"` where `20xx` is the edition you are upgrading to.
 4. Run `cargo +nightly check` to verify it now works in the new edition.
 
 > **⚠ Caution**: Features implemented in the next edition may not have automatic migrations implemented with `cargo fix`, and the features themselves may not be finished.

@@ -1,8 +1,5 @@
 # Tail expression temporary scope
 
-🚧 The 2024 Edition has not yet been released and hence this section is still "under construction".
-More information may be found in the tracking issue at <https://github.com/rust-lang/rust/issues/123739>.
-
 ## Summary
 
 - Temporary values generated in evaluation of the tail expression of a [function] or closure body, or a [block] are now dropped before local variables.

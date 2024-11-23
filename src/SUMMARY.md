@@ -38,7 +38,7 @@
 
 ## Rust 2024
 
-- [Rust 2024 🚧](rust-2024/index.md)
+- [Rust 2024](rust-2024/index.md)
   - [Language](rust-2024/language.md)
     - [RPIT lifetime capture rules](rust-2024/rpit-lifetime-capture.md)
     - [`if let` temporary scope](rust-2024/temporary-if-let-scope.md)

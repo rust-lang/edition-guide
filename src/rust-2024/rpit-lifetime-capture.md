@@ -1,7 +1,5 @@
 # RPIT lifetime capture rules
 
-🚧 The 2024 Edition has not yet been released and hence this section is still "under construction".
-
 This chapter describes changes related to the **Lifetime Capture Rules 2024** introduced in [RFC 3498], including how to use opaque type *precise capturing* (introduced in [RFC 3617]) to migrate your code.
 
 [RFC 3498]: https://github.com/rust-lang/rfcs/pull/3498
@@ -237,8 +235,7 @@ fn f<'a, T>(x: &'a (), y: T) -> impl Sized + use<'a, T> {
 
 In Rust 2024, the `use<..>` bound can often be omitted entirely, and the above can be written simply as:
 
-<!-- TODO: edition2024 -->
-```rust
+```rust,edition2024
 # #![feature(lifetime_capture_rules_2024)]
 fn f<'a, T>(x: &'a (), y: T) -> impl Sized {
     (x, y)
@@ -284,8 +281,7 @@ fn f<T>(x: &(), y: T) -> impl Sized + use<'_, T> {
 
 In Rust 2024, the `use<..>` bound can often be omitted entirely, and the above can be written simply as:
 
-<!-- TODO: edition2024 -->
-```rust
+```rust,edition2024
 # #![feature(precise_capturing)]
 # #![feature(lifetime_capture_rules_2024)]
 fn f<T>(x: &(), y: T) -> impl Sized {
