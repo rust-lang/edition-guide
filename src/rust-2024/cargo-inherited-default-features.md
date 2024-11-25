@@ -1,7 +1,5 @@
 # Cargo: Reject unused inherited default-features
 
-🚧 The 2024 Edition has not yet been released and hence this section is still "under construction".
-
 ## Summary
 
 - `default-features = false` is no longer allowed in an inherited workspace dependency if the workspace dependency specifies `default-features = true` (or does not specify `default-features`).

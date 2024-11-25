@@ -1,7 +1,5 @@
 # Cargo: Table and key name consistency
 
-🚧 The 2024 Edition has not yet been released and hence this section is still "under construction".
-
 ## Summary
 
 - Several table and key names in `Cargo.toml` have been removed where there were previously two ways to specify the same thing.

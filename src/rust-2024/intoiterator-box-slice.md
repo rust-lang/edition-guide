@@ -1,8 +1,5 @@
 # Add `IntoIterator` for `Box<[T]>`
 
-🚧 The 2024 Edition has not yet been released and hence this section is still "under construction".
-More information may be found in the tracking issue at <https://github.com/rust-lang/rust/issues/123759>.
-
 ## Summary
 
 - Boxed slices implement [`IntoIterator`] in *all* editions.
@@ -39,8 +36,7 @@ This example is allowed on all editions because previously this was an error sin
 
 However, this would normally be a breaking change because existing code that manually called `.into_iter()` on a boxed slice would change from having an iterator over references to an iterator over values. To resolve this problem, method calls of `.into_iter()` on boxed slices have edition-dependent behavior. In editions before 2024, it continues to return an iterator over references, and starting in Edition 2024 it returns an iterator over values.
 
-<!-- TODO: edition2024 -->
-```rust
+```rust,edition2024
 // Example of changed behavior in Edition 2024
 let my_boxed_slice: Box<[u32]> = vec![1, 2, 3].into_boxed_slice();
 // Example of old code that still manually calls .into_iter()

@@ -11,13 +11,13 @@ $ cat foo/Cargo.toml
 [package]
 name = "foo"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [dependencies]
 ```
 
-That `edition = "2021"` setting configures your package to be built using the
-Rust 2021 edition. No further configuration needed!
+That `edition = "2024"` setting configures your package to be built using the
+Rust 2024 edition. No further configuration needed!
 
 You can use the `--edition <YEAR>` option of `cargo new` to create the project
 using some specific edition. For example, creating a new project to use the

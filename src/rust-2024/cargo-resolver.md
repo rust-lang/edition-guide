@@ -1,7 +1,5 @@
 # Cargo: Rust-version aware resolver
 
-🚧 The 2024 Edition has not yet been released and hence this section is still "under construction".
-
 ## Summary
 
 - `edition = "2024"` implies `resolver = "3"` in `Cargo.toml` which enables a Rust-version aware dependency resolver.

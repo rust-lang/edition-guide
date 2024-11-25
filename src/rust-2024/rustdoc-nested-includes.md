@@ -1,8 +1,5 @@
 # Rustdoc nested `include!` change
 
-🚧 The 2024 Edition has not yet been released and hence this section is still "under construction".
-More information may be found in the tracking issue at <https://github.com/rust-lang/rust/issues/132230>.
-
 ## Summary
 
 When a doctest is included with `include_str!`, if that doctest itself also uses `include!`, `include_str!`, or `include_bytes!`, the path is resolved relative to the Markdown file, rather than to the Rust source file.

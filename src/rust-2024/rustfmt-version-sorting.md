@@ -1,9 +1,5 @@
 # Rustfmt: Version sorting
 
-🚧 The 2024 Edition has not yet been released and hence this section is still "under construction".
-
-More information may be found in the tracking issues at <https://github.com/rust-lang/rust/issues/123800> and <https://github.com/rust-lang/rust/issues/123802>.
-
 ## Summary
 
 `rustfmt` utilizes a new sorting algorithm.
