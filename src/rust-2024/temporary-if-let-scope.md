@@ -84,7 +84,13 @@ fn f(value: &RwLock<Option<bool>>) {
 
 In this particular example, that's probably not what you want due to the aforementioned deadlock! However, some scenarios may be assuming that the temporaries are held past the `else` clause, in which case you may want to retain the old behavior.
 
-The `if_let_rescope` lint cannot deduce with complete confidence that the program semantics are preserved when the lifetime of such temporary values are shortened. For this reason, the suggestion from this lint is *not* automatically applied when running `cargo fix --edition`. It is recommended to manually inspect the warnings emitted when running `cargo fix --edition` and determine whether or not you need to apply the suggestion.
+The [`if_let_rescope`] lint is part of the `rust-2024-compatibility` lint group which is included in the automatic edition migration. In order to migrate your code to be Rust 2024 Edition compatible, run:
+
+```sh
+cargo fix --edition
+```
+
+After the migration, it is recommended that you review all of the changes of `if let` to `match` and decide what is the behavior that you need with respect to when temporaries are dropped. If you determine that the change is unnecessary, then you can revert the change back to `if let`.
 
 If you want to manually inspect these warnings without performing the edition migration, you can enable the lint with:
 
