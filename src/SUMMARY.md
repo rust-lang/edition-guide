@@ -66,7 +66,6 @@
     - [Rustdoc nested `include!` change](rust-2024/rustdoc-nested-includes.md)
   - [Rustfmt](rust-2024/rustfmt.md)
     - [Rustfmt: Style edition](rust-2024/rustfmt-style-edition.md)
-    - [Rustfmt: Assignment operator RHS indentation](rust-2024/rustfmt-assignment-operator-rhs-indentation.md)
     - [Rustfmt: Combine all delimited exprs as last argument](rust-2024/rustfmt-overflow-delimited-expr.md)
     - [Rustfmt: Single-line `where` clauses](rust-2024/rustfmt-single-line-where-clauses.md)
     - [Rustfmt: Raw identifier sorting](rust-2024/rustfmt-raw-identifier-sorting.md)
