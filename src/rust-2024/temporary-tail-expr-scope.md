@@ -2,14 +2,14 @@
 
 ## Summary
 
-- Temporary values generated in evaluation of the tail expression of a [function] or closure body, or a [block] are now dropped before local variables.
+- Temporary values generated in evaluation of the tail expression of a [function] or closure body, or a [block] may now be dropped before local variables, and are sometimes not extended to the next larger temporary scope.
 
 [function]: ../../reference/items/functions.html
 [block]: ../../reference/expressions/block-expr.html
 
 ## Details
 
-The 2024 Edition changes the drop order of [temporary values] in tail expressions. It often comes as a surprise that, before the 2024 Edition, temporary values in tail expressions are dropped later than the local variable bindings, as in the following example:
+The 2024 Edition changes the drop order of [temporary values] in tail expressions. It often comes as a surprise that, before the 2024 Edition, temporary values in tail expressions can live longer than the block itself, and are dropped later than the local variable bindings, as in the following example:
 
 [temporary values]: ../../reference/expressions.html#temporaries
 
@@ -53,10 +53,37 @@ For more information about this error, try `rustc --explain E0597`.
 
 In 2021 the local variable `c` is dropped before the temporary created by `c.borrow()`. The 2024 Edition changes this so that the temporary value `c.borrow()` is dropped first, followed by dropping the local variable `c`, allowing the code to compile as expected.
 
-See the [temporary scope rules] for more information about how temporary scopes are extended. See the [`if let` temporary scope] chapter for a similar change made to `if let` expressions.
+### Temporary scope may be narrowed
+
+When a temporary is created in order to evaluate an expression, the temporary is dropped based on the [temporary scope rules]. Those rules define how long the temporary will be kept alive. Before 2024, temporaries from tail expressions of a block would be extended outside of the block to the next temporary scope boundary. In many cases this would be the end of a statement or function body. In 2024, the temporaries of the tail expression may now be dropped immediately at the end of the block (before any local variables in the block).
+
+This narrowing of the temporary scope may cause programs to fail to compile in 2024. For example:
+
+```rust,edition2024,E0716,compile_fail
+// This example works in 2021, but fails to compile in 2024.
+fn main() {
+    let x = { &String::from("1234") }.len();
+}
+```
+
+In this example, in 2021, the temporary `String` is extended outside of the block, past the call to `len()`, and is dropped at the end of the statement. In 2024, it is dropped immediately at the end of the block, causing a compile error about the temporary being dropped while borrowed.
+
+The solution for these kinds of situations is to lift the block expression out to a local variable so that the temporary lives long enough:
+
+```rust,edition2024
+fn main() {
+    let s = { &String::from("1234") };
+    let x = s.len();
+}
+```
+
+This particular example takes advantage of [temporary lifetime extension]. Temporary lifetime extension is a set of specific rules which allow temporaries to live longer than they normally would. Because the `String` temporary is behind a reference, the `String` temporary is extended long enough for the next statement to call `len()` on it.
+
+See the [`if let` temporary scope] chapter for a similar change made to temporary scopes of `if let` expressions.
 
 [`if let` temporary scope]: temporary-if-let-scope.md
 [temporary scope rules]: ../../reference/destructors.html#temporary-scopes
+[temporary lifetime extension]: ../../reference/destructors.html#temporary-lifetime-extension
 
 ## Migration
 
