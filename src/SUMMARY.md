@@ -42,6 +42,7 @@
   - [Language](rust-2024/language.md)
     - [RPIT lifetime capture rules](rust-2024/rpit-lifetime-capture.md)
     - [`if let` temporary scope](rust-2024/temporary-if-let-scope.md)
+    - [`let` chains in `if` and `while`](rust-2024/let-chains.md)
     - [Tail expression temporary scope](rust-2024/temporary-tail-expr-scope.md)
     - [Match ergonomics](rust-2024/match-ergonomics.md)
     - [Unsafe `extern` blocks](rust-2024/unsafe-extern.md)
