@@ -54,7 +54,7 @@
     - [`gen` keyword](rust-2024/gen-keyword.md)
     - [Reserved syntax](rust-2024/reserved-syntax.md)
   - [Standard library](rust-2024/standard-library.md)
-    - [Additions to the prelude](rust-2024/prelude.md)
+    - [Changes to the prelude](rust-2024/prelude.md)
     - [Add `IntoIterator` for `Box<[T]>`](rust-2024/intoiterator-box-slice.md)
     - [Newly unsafe functions](rust-2024/newly-unsafe-functions.md)
   - [Cargo](rust-2024/cargo.md)
