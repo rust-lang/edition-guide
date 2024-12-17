@@ -1,4 +1,4 @@
-# Additions to the prelude
+# Changes to the prelude
 
 ## Summary
 
