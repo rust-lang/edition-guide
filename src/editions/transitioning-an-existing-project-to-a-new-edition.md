@@ -88,11 +88,17 @@ edition = "2018"
 If there's no `edition` key, Cargo will default to Rust 2015. But in this case,
 we've chosen `2018`, and so our code will compile with Rust 2018!
 
+## Testing your code in the new edition
+
 The next step is to test your project on the new edition.
 Run your project tests to verify that everything still works, such as running [`cargo test`].
 If new warnings are issued, you may want to consider running `cargo fix` again (without the `--edition` flag) to apply any suggestions given by the compiler.
 
+At this point, you may still need to do some manual changes. For example, the automatic migration does not update doctests, and build-time code generation or macros may need manual updating. See the [advanced migrations chapter] for more information.
+
 Congrats! Your code is now valid in both Rust 2015 and Rust 2018!
+
+[advanced migrations chapter]: advanced-migrations.md
 
 ## Migrating to an unstable edition
 
