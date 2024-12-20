@@ -8,6 +8,7 @@ Briefly, the steps to update to the next edition are:
 2. Run `cargo fix --edition`
 3. Edit `Cargo.toml` and set the `edition` field to the next edition, for example `edition = "2024"`
 4. Run `cargo build` or `cargo test` to verify the fixes worked.
+5. Run `cargo fmt` to reformat your project.
 
 The following sections dig into the details of these steps, and some of the issues you may encounter along the way.
 
@@ -99,6 +100,21 @@ At this point, you may still need to do some manual changes. For example, the au
 Congrats! Your code is now valid in both Rust 2015 and Rust 2018!
 
 [advanced migrations chapter]: advanced-migrations.md
+
+## Reformatting with rustfmt
+
+If you use [rustfmt] to automatically maintain formatting within your project, then you should consider reformatting using the new formatting rules of the new edition.
+
+Before reformatting, if you are using a source control tool such as `git`, you may want to commit all the changes you have made up to this point before taking this step. It can be useful to put formatting changes in a separate commit, because then you can see which changes are just formatting versus other code changes, and also possibly ignore the formatting changes in `git blame`.
+
+```console
+cargo fmt
+```
+
+See the [style editions chapter] for more information.
+
+[rustfmt]: https://github.com/rust-lang/rustfmt
+[style editions chapter]: ../rust-2024/rustfmt-style-edition.md
 
 ## Migrating to an unstable edition
 
