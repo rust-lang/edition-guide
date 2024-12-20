@@ -4,9 +4,10 @@ Rust includes tooling to automatically transition a project from one edition to 
 It will update your source code so that it is compatible with the next edition.
 Briefly, the steps to update to the next edition are:
 
-1. Run `cargo fix --edition`
-2. Edit `Cargo.toml` and set the `edition` field to the next edition, for example `edition = "2024"`
-3. Run `cargo build` or `cargo test` to verify the fixes worked.
+1. Run `cargo update` to update your dependencies to the latest versions.
+2. Run `cargo fix --edition`
+3. Edit `Cargo.toml` and set the `edition` field to the next edition, for example `edition = "2024"`
+4. Run `cargo build` or `cargo test` to verify the fixes worked.
 
 The following sections dig into the details of these steps, and some of the issues you may encounter along the way.
 
@@ -31,6 +32,16 @@ trait Foo {
 This code uses an anonymous parameter, that `i32`. This is [not
 supported in Rust 2018](../rust-2018/trait-system/no-anon-params.md), and
 so this would fail to compile. Let's get this code up to date!
+
+## Updating your dependencies
+
+Before we get started, it is recommended to update your dependencies. Some dependencies, particularly some proc-macros or dependencies that do build-time code generation, may have compatibility issues with newer editions. New releases may have been made since you last updated which may fix these issues. Run the following:
+
+```console
+cargo update
+```
+
+After updating, you may want to run your tests to verify everything is working. If you are using a source control tool such as `git`, you may want to commit these changes separately to keep a logical separation of commits.
 
 ## Updating your code to be compatible with the new edition
 
