@@ -4,9 +4,11 @@ Rust includes tooling to automatically transition a project from one edition to 
 It will update your source code so that it is compatible with the next edition.
 Briefly, the steps to update to the next edition are:
 
-1. Run `cargo fix --edition`
-2. Edit `Cargo.toml` and set the `edition` field to the next edition, for example `edition = "2024"`
-3. Run `cargo build` or `cargo test` to verify the fixes worked.
+1. Run `cargo update` to update your dependencies to the latest versions.
+2. Run `cargo fix --edition`
+3. Edit `Cargo.toml` and set the `edition` field to the next edition, for example `edition = "2024"`
+4. Run `cargo build` or `cargo test` to verify the fixes worked.
+5. Run `cargo fmt` to reformat your project.
 
 The following sections dig into the details of these steps, and some of the issues you may encounter along the way.
 
@@ -31,6 +33,16 @@ trait Foo {
 This code uses an anonymous parameter, that `i32`. This is [not
 supported in Rust 2018](../rust-2018/trait-system/no-anon-params.md), and
 so this would fail to compile. Let's get this code up to date!
+
+## Updating your dependencies
+
+Before we get started, it is recommended to update your dependencies. Some dependencies, particularly some proc-macros or dependencies that do build-time code generation, may have compatibility issues with newer editions. New releases may have been made since you last updated which may fix these issues. Run the following:
+
+```console
+cargo update
+```
+
+After updating, you may want to run your tests to verify everything is working. If you are using a source control tool such as `git`, you may want to commit these changes separately to keep a logical separation of commits.
 
 ## Updating your code to be compatible with the new edition
 
@@ -77,11 +89,32 @@ edition = "2018"
 If there's no `edition` key, Cargo will default to Rust 2015. But in this case,
 we've chosen `2018`, and so our code will compile with Rust 2018!
 
+## Testing your code in the new edition
+
 The next step is to test your project on the new edition.
 Run your project tests to verify that everything still works, such as running [`cargo test`].
 If new warnings are issued, you may want to consider running `cargo fix` again (without the `--edition` flag) to apply any suggestions given by the compiler.
 
+At this point, you may still need to do some manual changes. For example, the automatic migration does not update doctests, and build-time code generation or macros may need manual updating. See the [advanced migrations chapter] for more information.
+
 Congrats! Your code is now valid in both Rust 2015 and Rust 2018!
+
+[advanced migrations chapter]: advanced-migrations.md
+
+## Reformatting with rustfmt
+
+If you use [rustfmt] to automatically maintain formatting within your project, then you should consider reformatting using the new formatting rules of the new edition.
+
+Before reformatting, if you are using a source control tool such as `git`, you may want to commit all the changes you have made up to this point before taking this step. It can be useful to put formatting changes in a separate commit, because then you can see which changes are just formatting versus other code changes, and also possibly ignore the formatting changes in `git blame`.
+
+```console
+cargo fmt
+```
+
+See the [style editions chapter] for more information.
+
+[rustfmt]: https://github.com/rust-lang/rustfmt
+[style editions chapter]: ../rust-2024/rustfmt-style-edition.md
 
 ## Migrating to an unstable edition
 
