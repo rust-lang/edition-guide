@@ -2,7 +2,7 @@
 
 ## Summary
 
-* Some expressions as the last argument in a list will now overflow instead of indent.
+* Some expressions with multi-line final arguments will now format as a single line, with the final expression overflowing.
 
 ## Details
 
