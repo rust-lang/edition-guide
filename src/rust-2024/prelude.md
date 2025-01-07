@@ -4,7 +4,6 @@
 
 - The [`Future`] and [`IntoFuture`] traits are now part of the prelude.
 - This might make calls to trait methods ambiguous which could make some code fail to compile.
-- `RustcEncodable` and `RustcDecodable` have been removed from the prelude.
 
 [`Future`]: ../../std/future/trait.Future.html
 [`IntoFuture`]: ../../std/future/trait.IntoFuture.html
@@ -29,19 +28,6 @@ It's identical to the current one, except for the following changes:
 - Added:
     - [`std::future::Future`][`Future`]
     - [`std::future::IntoFuture`][`IntoFuture`]
-- Removed:
-    - `RustcEncodable`
-    - `RustcDecodable`
-
-### `RustcEncodable` and `RustcDecodable` removal
-
-`RustcEncodable` and `RustcDecodable` are two undocumented derive macros that have been removed from the prelude.
-These were deprecated before Rust 1.0, but remained within the standard library prelude.
-The 2024 Edition has removed these from the prelude since they are not expected to be used.
-
-If in the unlikely case there is a project still using these, it is recommended to switch to a serialization library, such as those found on [crates.io].
-
-[crates.io]: https://crates.io/categories/encoding
 
 ## Migration
 
@@ -90,15 +76,3 @@ Alternatively, you can manually enable the lint to find places where these quali
 ```
 
 [`rust_2024_prelude_collisions`]: ../../rustc/lints/listing/allowed-by-default.html#rust-2024-prelude-collisions
-
-### `RustcEncodable` and `RustcDecodable`
-
-It is strongly recommended that you migrate to a different serialization library if you are still using these.
-However, these derive macros are still available in the standard library, they are just required to be imported from the older prelude now:
-
-```rust,edition2021
-#[allow(soft_unstable)]
-use core::prelude::v1::{RustcDecodable, RustcEncodable};
-```
-
-There is no automatic migration for this change; you will need to make the update manually.
