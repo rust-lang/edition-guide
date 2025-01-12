@@ -48,6 +48,295 @@ In situations where no locally-reasoned abstraction is possible and you are ther
 [`addr_of_mut!`]: https://docs.rust-lang.org/core/ptr/macro.addr_of_mut.html
 [raw]: ../../reference/expressions/operator-expr.html#raw-borrow-operators
 
+Note that the following examples are just illustrations and are not intended as full-fledged implementations. There are many details for your specific situation that may require alterations to fit your needs. These are intended to help you see different ways to approach your problem. It is recommended to read the documentation for the specific types in the standard library, the reference on [undefined behavior], the [Rustonomicon], and if you are having questions to reach out on one of the Rust forums such as the [Users Forum].
+
+[undefined behavior]: ../../reference/behavior-considered-undefined.html
+[Rustonomicon]: ../../nomicon/index.html
+[Users Forum]: https://users.rust-lang.org/
+
+### Don't use globals
+
+This is probably something you already know, but if possible it is best to avoid mutable global state. Of course this can be a little more awkward or difficult at times, particularly if you need to pass a mutable reference around between many functions.
+
+### Atomics
+
+The [atomic types][atomics] provide integers, pointers, and booleans that can be used in a `static` (without `mut`).
+
+```rust,edition2024
+# use std::sync::atomic::Ordering;
+# use std::sync::atomic::AtomicU64;
+
+// Chnage from this:
+//   static mut COUNTER: u64 = 0;
+// to this:
+static COUNTER: AtomicU64 = AtomicU64::new(0);
+
+fn main() {
+    // Be sure to analyze your use case to determine the correct Ordering to use.
+    COUNTER.fetch_add(1, Ordering::Relaxed);
+}
+```
+
+[atomics]: ../../std/sync/atomic/index.html
+
+### Mutex or RwLock
+
+When your type is more complex than an atomic, consider using a [`Mutex`] or [`RwLock`] to ensure proper access to the global value.
+
+```rust,edition2024
+# use std::sync::Mutex;
+# use std::collections::VecDeque;
+
+// Change from this:
+//     static mut QUEUE: VecDeque<String> = VecDeque::new();
+// to this:
+static QUEUE: Mutex<VecDeque<String>> = Mutex::new(VecDeque::new());
+
+fn main() {
+    QUEUE.lock().unwrap().push_back(String::from("abc"));
+    let first = QUEUE.lock().unwrap().pop_front();
+}
+```
+
+[`Mutex`]: ../../std/sync/struct.Mutex.html
+[`RwLock`]: ../../std/sync/struct.RwLock.html
+
+### OnceLock or LazyLock
+
+If you are using a `static mut` because you need to do some one-time initialization that can't be `const`, you can instead reach for [`OnceLock`] or [`LazyLock`] instead.
+
+```rust,edition2024
+# use std::sync::LazyLock;
+#
+# struct GlobalState;
+#
+# impl GlobalState {
+#     fn new() -> GlobalState {
+#         GlobalState
+#     }
+#     fn example(&self) {}
+# }
+
+// Instead of some temporary or uninitialized type like:
+//     static mut STATE: Option<GlobalState> = None;
+// use this instead:
+static STATE: LazyLock<GlobalState> = LazyLock::new(|| {
+    GlobalState::new()
+});
+
+fn main() {
+    STATE.example();
+}
+```
+
+[`OnceLock`] is similar to [`LazyLock`], but can be used if you need to pass information into the constructor, which can work well with single initialization points (like `main`), or if the inputs are available wherever you access the global.
+
+```rust,edition2024
+# use std::sync::OnceLock;
+#
+# struct GlobalState;
+#
+# impl GlobalState {
+#     fn new(verbose: bool) -> GlobalState {
+#         GlobalState
+#     }
+#     fn example(&self) {}
+# }
+#
+# struct Args {
+#     verbose: bool
+# }
+# fn parse_arguments() -> Args {
+#     Args { verbose: true }
+# }
+
+static STATE: OnceLock<GlobalState> = OnceLock::new();
+
+fn main() {
+    let args = parse_arguments();
+    let state = GlobalState::new(args.verbose);
+    let _ = STATE.set(state);
+    // ...
+    STATE.get().unwrap().example();
+}
+```
+
+[`OnceLock`]: ../../std/sync/struct.OnceLock.html
+[`LazyLock`]: ../../std/sync/struct.LazyLock.html
+
+### `no_std` one-time initialization
+
+This example is similar to [`OnceLock`] in that it provides one-time initialization of a global, but it does not require `std` which is useful in a `no_std` context. Assuming your target supports atomics, then you can use an atomic to check for the initialization of the global. The pattern might look something like this:
+
+```rust,edition2024
+# use core::sync::atomic::AtomicUsize;
+# use core::sync::atomic::Ordering;
+#
+# struct Args {
+#     verbose: bool,
+# }
+# fn parse_arguments() -> Args {
+#     Args { verbose: true }
+# }
+#
+# struct GlobalState {
+#     verbose: bool,
+# }
+#
+# impl GlobalState {
+#     const fn default() -> GlobalState {
+#         GlobalState { verbose: false }
+#     }
+#     fn new(verbose: bool) -> GlobalState {
+#         GlobalState { verbose }
+#     }
+#     fn example(&self) {}
+# }
+
+const UNINITIALIZED: usize = 0;
+const INITIALIZING: usize = 1;
+const INITIALIZED: usize = 2;
+
+static STATE_INITIALIZED: AtomicUsize = AtomicUsize::new(UNINITIALIZED);
+static mut STATE: GlobalState = GlobalState::default();
+
+fn set_global_state(state: GlobalState) {
+    if STATE_INITIALIZED
+        .compare_exchange(
+            UNINITIALIZED,
+            INITIALIZING,
+            Ordering::SeqCst,
+            Ordering::SeqCst,
+        )
+        .is_ok()
+    {
+        // SAFETY: The reads and writes to STATE are guarded with the INITIALIZED guard.
+        unsafe {
+            STATE = state;
+        }
+        STATE_INITIALIZED.store(INITIALIZED, Ordering::SeqCst);
+    } else {
+        panic!("already initialized, or concurrent initialization");
+    }
+}
+
+fn get_state() -> &'static GlobalState {
+    if STATE_INITIALIZED.load(Ordering::Acquire) != INITIALIZED {
+        panic!("not initialized");
+    } else {
+        // SAFETY: Mutable access is not possible after state has been initialized.
+        unsafe { &*&raw const STATE }
+    }
+}
+
+fn main() {
+    let args = parse_arguments();
+    let state = GlobalState::new(args.verbose);
+    set_global_state(state);
+    // ...
+    let state = get_state();
+    state.example();
+}
+```
+
+This example assumes you can put some default value in the static before it is initialized (the const `default` constructor in this example). If that is not possible, consider using either [`MaybeUninit`], dynamic trait dispatch (with a dummy type that implements a trait), or some other approach to have a default placeholder.
+
+[`MaybeUninit`]: ../../core/mem/union.MaybeUninit.html
+
+### Raw pointers
+
+In some cases you can continue to use `static mut`, but avoid creating references. For example, if you just need to pass [raw pointers] into a C library, don't create an intermediate reference. Instead you can use [raw borrow operators], like in the following example:
+
+```rust,edition2024,no_run
+# #[repr(C)]
+# struct GlobalState {
+#     value: i32
+# }
+#
+# impl GlobalState {
+#     const fn new() -> GlobalState {
+#         GlobalState { value: 0 }
+#     }
+# }
+
+static mut STATE: GlobalState = GlobalState::new();
+
+unsafe extern "C" {
+    fn example_ffi(state: *mut GlobalState);
+}
+
+fn main() {
+    unsafe {
+        // Change from this:
+        //     example_ffi(&mut STATE as *mut GlobalState);
+        // to this:
+        example_ffi(&raw mut STATE);
+    }
+}
+```
+
+Just beware that you still need to uphold the aliasing constraints around mutable pointers. This may require some internal or external synchronization or proofs about how it is used across threads, interrupt handlers, and reentrancy.
+
+[raw borrow operators]: ../../reference/expressions/operator-expr.html#raw-borrow-operators
+[raw pointers]: ../../reference/types/pointer.html#raw-pointers-const-and-mut
+
+### `UnsafeCell` with `Sync`
+
+[`UnsafeCell`] does not impl `Sync`, so it cannot be used in a `static`. You can create your own wrapper around [`UnsafeCell`] to add a `Sync` impl so that it can be used in a `static` to implement interior mutability. This approach can be useful if you have external locks or other guarantees that uphold the safety invariants required for mutable pointers.
+
+Note that this is largely the same as the [raw pointers](#raw-pointers) example. The wrapper helps to emphasize how you are using the type, and focus on which safety requirements you should be careful of. But otherwise they are roughly the same.
+
+```rust,edition2024
+# use std::cell::UnsafeCell;
+#
+# fn with_interrupts_disabled<T: Fn()>(f: T) {
+#     // A real example would disable interrupts.
+#     f();
+# }
+#
+# #[repr(C)]
+# struct GlobalState {
+#     value: i32,
+# }
+#
+# impl GlobalState {
+#     const fn new() -> GlobalState {
+#         GlobalState { value: 0 }
+#     }
+# }
+
+#[repr(transparent)]
+pub struct SyncUnsafeCell<T>(UnsafeCell<T>);
+
+unsafe impl<T> Sync for SyncUnsafeCell<T> {}
+
+static STATE: SyncUnsafeCell<GlobalState> = SyncUnsafeCell(UnsafeCell::new(GlobalState::new()));
+
+fn set_value(value: i32) {
+    with_interrupts_disabled(|| {
+        let state = STATE.0.get();
+        unsafe {
+            // SAFETY: This value is only ever read in our interrupt handler,
+            // and interrupts are disabled, and we only use this in one thread.
+            (*state).value = value;
+        }
+    });
+}
+```
+
+The standard library has a nightly-only (unstable) variant of [`UnsafeCell`] called [`SyncUnsafeCell`]. This example above shows a very simplified version of the standard library type, but would be used roughly the same way.
+
+[`UnsafeCell`]: ../../std/cell/struct.UnsafeCell.html
+[`SyncUnsafeCell`]: ../../std/cell/struct.SyncUnsafeCell.html
+
+### Safe references
+
+In some cases it may be safe to create a reference of a `static mut`. The whole point of the [`static_mut_refs`] lint is that this is very hard to do correctly! However, that's not to say it is *impossible*. If you have a situation where you can guarantee that the aliasing requirements are upheld, such as guaranteeing the static is narrowly scoped (only used in a small module or function), has some internal or external synchronization, accounts for interrupt handlers and reentrancy, etc., then taking a reference may be fine.
+
+There are two approaches you can take for this. You can either allow the [`static_mut_refs`] lint (preferably as narrowly as you can), or convert raw pointers to a reference, as with `&mut *&raw mut MY_STATIC`.
+
+<!-- TODO: Should we prefer one or the other here? -->
+
 ## Migration
 
 There is no automatic migration to fix these references to `static mut`. To avoid undefined behavior you must rewrite your code to use a different approach as recommended in the [Alternatives](#alternatives) section.
