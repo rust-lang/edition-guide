@@ -48,7 +48,9 @@ In situations where no locally-reasoned abstraction is possible and you are ther
 [`addr_of_mut!`]: https://docs.rust-lang.org/core/ptr/macro.addr_of_mut.html
 [raw]: ../../reference/expressions/operator-expr.html#raw-borrow-operators
 
-Note that the following examples are just illustrations and are not intended as full-fledged implementations. There are many details for your specific situation that may require alterations to fit your needs. These are intended to help you see different ways to approach your problem. It is recommended to read the documentation for the specific types in the standard library, the reference on [undefined behavior], the [Rustonomicon], and if you are having questions to reach out on one of the Rust forums such as the [Users Forum].
+Note that the following examples are just illustrations and are not intended as full-fledged implementations. Do not copy these as-is. There are details for your specific situation that may require alterations to fit your needs. These are intended to help you see different ways to approach your problem.
+
+It is recommended to read the documentation for the specific types in the standard library, the reference on [undefined behavior], the [Rustonomicon], and if you are having questions to reach out on one of the Rust forums such as the [Users Forum].
 
 [undefined behavior]: ../../reference/behavior-considered-undefined.html
 [Rustonomicon]: ../../nomicon/index.html
