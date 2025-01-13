@@ -332,6 +332,9 @@ fn set_value(value: i32) {
 
 The standard library has a nightly-only (unstable) variant of [`UnsafeCell`] called [`SyncUnsafeCell`]. This example above shows a very simplified version of the standard library type, but would be used roughly the same way. It can provide even better isolation, so do check out its implementation for more details.
 
+This example includes a fictional `with_interrupts_disabled` function which is the type of thing you might see in an embedded environment. For example, the [`critical-section`] crate provides a similar kind of functionality that could be used for an embedded environment.
+
+[`critical-section`]: https://crates.io/crates/critical-section
 [`UnsafeCell`]: ../../std/cell/struct.UnsafeCell.html
 [`SyncUnsafeCell`]: ../../std/cell/struct.SyncUnsafeCell.html
 
