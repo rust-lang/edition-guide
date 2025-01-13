@@ -241,7 +241,7 @@ fn main() {
 }
 ```
 
-This example assumes you can put some default value in the static before it is initialized (the const `default` constructor in this example). If that is not possible, consider using either [`MaybeUninit`], dynamic trait dispatch (with a dummy type that implements a trait), or some other approach to have a default placeholder.
+This example assumes you can put some default value in the static before it is initialized (the const `default` constructor in this example). If that is not possible, consider using either [`MaybeUninit`], or dynamic trait dispatch (with a dummy type that implements a trait), or some other approach to have a default placeholder.
 
 [`MaybeUninit`]: ../../core/mem/union.MaybeUninit.html
 
