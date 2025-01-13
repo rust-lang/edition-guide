@@ -330,7 +330,7 @@ fn set_value(value: i32) {
 }
 ```
 
-The standard library has a nightly-only (unstable) variant of [`UnsafeCell`] called [`SyncUnsafeCell`]. This example above shows a very simplified version of the standard library type, but would be used roughly the same way.
+The standard library has a nightly-only (unstable) variant of [`UnsafeCell`] called [`SyncUnsafeCell`]. This example above shows a very simplified version of the standard library type, but would be used roughly the same way. It can provide even better isolation, so do check out its implementation for more details.
 
 [`UnsafeCell`]: ../../std/cell/struct.UnsafeCell.html
 [`SyncUnsafeCell`]: ../../std/cell/struct.SyncUnsafeCell.html
