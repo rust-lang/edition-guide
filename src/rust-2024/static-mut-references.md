@@ -308,7 +308,7 @@ Note that this is largely the same as the [raw pointers](#raw-pointers) example.
 #[repr(transparent)]
 pub struct SyncUnsafeCell<T>(UnsafeCell<T>);
 
-unsafe impl<T> Sync for SyncUnsafeCell<T> {}
+unsafe impl<T: Sync> Sync for SyncUnsafeCell<T> {}
 
 static STATE: SyncUnsafeCell<GlobalState> = SyncUnsafeCell(UnsafeCell::new(GlobalState::new()));
 
