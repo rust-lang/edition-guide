@@ -346,6 +346,10 @@ There are two approaches you can take for this. You can either allow the [`stati
 
 <!-- TODO: Should we prefer one or the other here? -->
 
+#### Short-lived references
+
+If you must create a reference to a `static mut`, then it is recommended to minimize the scope of how long that reference exists. Avoid squirreling the reference away somewhere, or keeping it alive through a large section of code. Keeping it short-lived helps with auditing, and verifying that exclusive access is maintained for the duration. Using pointers should be your default unit, and only convert the pointer to a reference on demand when absolutely required.
+
 ## Migration
 
 There is no automatic migration to fix these references to `static mut`. To avoid undefined behavior you must rewrite your code to use a different approach as recommended in the [Alternatives](#alternatives) section.
