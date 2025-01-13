@@ -243,7 +243,11 @@ fn main() {
 
 This example assumes you can put some default value in the static before it is initialized (the const `default` constructor in this example). If that is not possible, consider using either [`MaybeUninit`], or dynamic trait dispatch (with a dummy type that implements a trait), or some other approach to have a default placeholder.
 
+There are community-provided crates that can provide similar one-time initialization, such as the [`static-cell`] crate (which supports targets that do not have atomics by using [`portable-atomic`]).
+
 [`MaybeUninit`]: ../../core/mem/union.MaybeUninit.html
+[`static-cell`]: https://crates.io/crates/static_cell
+[`portable-atomic`]: https://crates.io/crates/portable-atomic
 
 ### Raw pointers
 
