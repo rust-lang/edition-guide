@@ -67,6 +67,5 @@
   - [Rustfmt](rust-2024/rustfmt.md)
     - [Rustfmt: Style edition](rust-2024/rustfmt-style-edition.md)
     - [Rustfmt: Formatting fixes](rust-2024/rustfmt-formatting-fixes.md)
-    - [Rustfmt: Combine all delimited exprs as last argument](rust-2024/rustfmt-overflow-delimited-expr.md)
     - [Rustfmt: Raw identifier sorting](rust-2024/rustfmt-raw-identifier-sorting.md)
     - [Rustfmt: Version sorting](rust-2024/rustfmt-version-sorting.md)
