@@ -68,7 +68,7 @@ The [atomic types][atomics] provide integers, pointers, and booleans that can be
 # use std::sync::atomic::Ordering;
 # use std::sync::atomic::AtomicU64;
 
-// Chnage from this:
+// Change from this:
 //   static mut COUNTER: u64 = 0;
 // to this:
 static COUNTER: AtomicU64 = AtomicU64::new(0);
