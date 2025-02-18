@@ -1,8 +1,8 @@
-# Cargo: Rust version–aware resolver
+# Cargo: Rust-version–aware resolver
 
 ## Summary
 
-- `edition = "2024"` implies `resolver = "3"` in `Cargo.toml` which enables a Rust version–aware dependency resolver.
+- `edition = "2024"` implies `resolver = "3"` in `Cargo.toml` which enables a Rust-version–aware dependency resolver.
 
 ## Details
 
@@ -19,7 +19,7 @@ The setting is only honored for the top-level package of the workspace.
 If you are using a [virtual workspace], you will still need to explicitly set the [`resolver` field]
 in the `[workspace]` definition if you want to opt-in to the new resolver.
 
-For more details on how Rust version–aware dependency resolution works, see [the Cargo book](../../cargo/reference/resolver.html#rust-version).
+For more details on how Rust-version–aware dependency resolution works, see [the Cargo book](../../cargo/reference/resolver.html#rust-version).
 
 [`package.rust-version`]: ../../cargo/reference/rust-version.html
 [`resolver.incompatible-rust-version = "fallback"`]: ../../cargo/reference/config.html#resolverincompatible-rust-versions

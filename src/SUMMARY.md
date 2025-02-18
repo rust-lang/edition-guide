@@ -58,7 +58,7 @@
     - [Add `IntoIterator` for `Box<[T]>`](rust-2024/intoiterator-box-slice.md)
     - [Newly unsafe functions](rust-2024/newly-unsafe-functions.md)
   - [Cargo](rust-2024/cargo.md)
-    - [Cargo: Rust version–aware resolver](rust-2024/cargo-resolver.md)
+    - [Cargo: Rust-version–aware resolver](rust-2024/cargo-resolver.md)
     - [Cargo: Table and key name consistency](rust-2024/cargo-table-key-names.md)
     - [Cargo: Reject unused inherited default-features](rust-2024/cargo-inherited-default-features.md)
   - [Rustdoc](rust-2024/rustdoc.md)
