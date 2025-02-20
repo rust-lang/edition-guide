@@ -2,7 +2,7 @@
 
 ## Summary
 
-- Temporary values generated in evaluation of the tail expression of a [function] or closure body, or a [block] may now be dropped before local variables, and are sometimes not extended to the next larger temporary scope.
+- Temporary values generated in evaluation of the tail expression of a [function], a closure body, or a [block], may now be dropped before local variables, and are sometimes not extended to the next larger temporary scope.
 
 [function]: ../../reference/items/functions.html
 [block]: ../../reference/expressions/block-expr.html
