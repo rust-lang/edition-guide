@@ -41,9 +41,9 @@ fn f(value: &RwLock<Option<bool>>) {
     }
     // <--- Read lock is dropped here in 2024
     else {
-        let mut s = value.write().unwrap();
-        if s.is_none() {
-            *s = Some(true);
+        let mut v = value.write().unwrap();
+        if v.is_none() {
+            *v = Some(true);
         }
     }
 }
