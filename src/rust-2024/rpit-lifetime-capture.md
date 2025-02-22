@@ -17,7 +17,6 @@ This chapter describes changes related to the **Lifetime Capture Rules 2024** in
 *Capturing* a generic parameter in an RPIT (return-position impl Trait) opaque type allows for that parameter to be used in the corresponding hidden type.  In Rust 1.82, we added `use<..>` bounds that allow specifying explicitly which generic parameters to capture.  Those will be helpful for migrating your code to Rust 2024, and will be helpful in this chapter for explaining how the edition-specific implicit capturing rules work.  These `use<..>` bounds look like this:
 
 ```rust
-# #![feature(precise_capturing)]
 fn capture<'a, T>(x: &'a (), y: T) -> impl Sized + use<'a, T> {
     //                                ~~~~~~~~~~~~~~~~~~~~~~~
     //                             This is the RPIT opaque type.
@@ -34,7 +33,6 @@ fn capture<'a, T>(x: &'a (), y: T) -> impl Sized + use<'a, T> {
 The generic parameters that are captured affect how the opaque type can be used.  E.g., this is an error because the lifetime is captured despite the fact that the hidden type does not use the lifetime:
 
 ```rust,compile_fail
-# #![feature(precise_capturing)]
 fn capture<'a>(_: &'a ()) -> impl Sized + use<'a> {}
 
 fn test<'a>(x: &'a ()) -> impl Sized + 'static {
@@ -46,7 +44,6 @@ fn test<'a>(x: &'a ()) -> impl Sized + 'static {
 Conversely, this is OK:
 
 ```rust
-# #![feature(precise_capturing)]
 fn capture<'a>(_: &'a ()) -> impl Sized + use<> {}
 
 fn test<'a>(x: &'a ()) -> impl Sized + 'static {
@@ -61,7 +58,6 @@ If the `use<..>` bound is not present, then the compiler uses edition-specific r
 In all editions, all in-scope type and const generic parameters are captured implicitly when the `use<..>` bound is not present.  E.g.:
 
 ```rust
-# #![feature(precise_capturing)]
 fn f_implicit<T, const C: usize>() -> impl Sized {}
 //                                    ~~~~~~~~~~
 //                         No `use<..>` bound is present here.
@@ -73,7 +69,6 @@ fn f_explicit<T, const C: usize>() -> impl Sized + use<T, C> {}
 In Rust 2021 and earlier editions, when the `use<..>` bound is not present, generic lifetime parameters are only captured when they appear syntactically within a bound in RPIT opaque types in the signature of bare functions and associated functions and methods within inherent impls.  However, starting in Rust 2024, these in-scope generic lifetime parameters are unconditionally captured.  E.g.:
 
 ```rust
-# #![feature(precise_capturing)]
 fn f_implicit(_: &()) -> impl Sized {}
 // In Rust 2021 and earlier, the above is equivalent to:
 fn f_2021(_: &()) -> impl Sized + use<> {}
@@ -88,7 +83,6 @@ This makes the behavior consistent with RPIT opaque types in the signature of as
 Generic parameters from an outer impl are considered to be in scope when deciding what is implicitly captured.  E.g.:
 
 ```rust
-# #![feature(precise_capturing)]
 struct S<T, const C: usize>((T, [(); C]));
 impl<T, const C: usize> S<T, C> {
 //   ~~~~~~~~~~~~~~~~~
@@ -110,7 +104,6 @@ impl<T, const C: usize> S<T, C> {
 Similarly, generic lifetime parameters introduced into scope by a higher-ranked `for<..>` binder are considered to be in scope.  E.g.:
 
 ```rust
-# #![feature(precise_capturing)]
 trait Tr<'a> { type Ty; }
 impl Tr<'_> for () { type Ty = (); }
 
@@ -129,7 +122,6 @@ fn f_2021() -> impl for<'a> Tr<'a, Ty = impl Copy + use<>> {}
 Anonymous (i.e. unnamed) generic parameters created by the use of APIT (argument position impl Trait) are considered to be in scope.  E.g.:
 
 ```rust
-# #![feature(precise_capturing)]
 fn f_implicit(_: impl Sized) -> impl Sized {}
 //               ~~~~~~~~~~
 //           This is called APIT.
@@ -161,7 +153,6 @@ fn f<'a>(x: &'a ()) -> impl Sized { *x }
 ...into:
 
 ```rust
-# #![feature(precise_capturing)]
 fn f<'a>(x: &'a ()) -> impl Sized + use<> { *x }
 ```
 
@@ -187,7 +178,6 @@ fn f<'a>(x: &'a (), y: impl Sized) -> impl Sized { (*x, y) }
 The code cannot be converted automatically because of the use of APIT and the fact that the generic type parameter must be named in the `use<..>` bound.  To convert this code to Rust 2024 without capturing the lifetime, you must name that type parameter.  E.g.:
 
 ```rust
-# #![feature(precise_capturing)]
 # #![deny(impl_trait_overcaptures)]
 fn f<'a, T: Sized>(x: &'a (), y: T) -> impl Sized + use<T> { (*x, y) }
 //       ~~~~~~~~
@@ -223,7 +213,6 @@ fn f<'a, T>(x: &'a (), y: T) -> impl Sized + Captures<(&'a (), T)> {
 With the `use<..>` bound syntax, the `Captures` trick is no longer needed and can be replaced with the following in all editions:
 
 ```rust
-# #![feature(precise_capturing)]
 fn f<'a, T>(x: &'a (), y: T) -> impl Sized + use<'a, T> {
     (x, y)
 }
@@ -236,7 +225,6 @@ fn f<'a, T>(x: &'a (), y: T) -> impl Sized + use<'a, T> {
 In Rust 2024, the `use<..>` bound can often be omitted entirely, and the above can be written simply as:
 
 ```rust,edition2024
-# #![feature(lifetime_capture_rules_2024)]
 fn f<'a, T>(x: &'a (), y: T) -> impl Sized {
     (x, y)
 }
@@ -269,7 +257,6 @@ This trick was less baroque than the `Captures` trick, but also less correct.  A
 Using precise capturing, you can write the above instead, in all editions, as:
 
 ```rust
-# #![feature(precise_capturing)]
 fn f<T>(x: &(), y: T) -> impl Sized + use<'_, T> {
     (x, y)
 }
@@ -282,8 +269,6 @@ fn f<T>(x: &(), y: T) -> impl Sized + use<'_, T> {
 In Rust 2024, the `use<..>` bound can often be omitted entirely, and the above can be written simply as:
 
 ```rust,edition2024
-# #![feature(precise_capturing)]
-# #![feature(lifetime_capture_rules_2024)]
 fn f<T>(x: &(), y: T) -> impl Sized {
     (x, y)
 }
