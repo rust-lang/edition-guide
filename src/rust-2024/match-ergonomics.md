@@ -53,7 +53,7 @@ In Rust 2021 and earlier editions, we allow this oddity:
 let [x, mut y] = &[(), ()]; // x: &(), mut y: ()
 ```
 
-Here, because we pass the shared reference in the pattern, the default binding mode switches to `ref`.  But then, in these editions, writing `mut` on the binding resets the default binding mode to `move`.
+Here, because we pass the shared reference in the scrutinee, the default binding mode switches to `ref`.  But then, in these editions, writing `mut` on the binding resets the default binding mode to `move`.
 
 This can be surprising as it's not intuitive that mutability should affect the type.
 
