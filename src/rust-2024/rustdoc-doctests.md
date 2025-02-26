@@ -6,7 +6,7 @@
 
 ## Details
 
-Prior the the 2024 Edition, rustdoc's "test" mode would compile each code block in your documentation as a separate executable. Although this was relatively simple to implement, it resulted in a significant performance burden when there were a large number of documentation tests. Starting with the 2024 Edition, rustdoc will attempt to combine documentation tests into a single binary, significantly reducing the overhead for compiling doctests.
+Prior to the 2024 Edition, rustdoc's "test" mode would compile each code block in your documentation as a separate executable. Although this was relatively simple to implement, it resulted in a significant performance burden when there were a large number of documentation tests. Starting with the 2024 Edition, rustdoc will attempt to combine documentation tests into a single binary, significantly reducing the overhead for compiling doctests.
 
 ```rust
 /// Adds two numbers
