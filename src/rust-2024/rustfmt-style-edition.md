@@ -48,7 +48,7 @@ for both parsing and the 2024 edition of the Style Guide:
 rustfmt lib.rs --edition 2024
 ```
 
-The style edition can also be set in a `rustfmt.toml` configuration file:
+The style edition can also be set in a `rustfmt.toml` or `.rustfmt.toml` configuration file:
 ```toml
 style_edition = "2024"
 ``` 
@@ -73,7 +73,7 @@ Running `cargo fmt` or `rustfmt` with the 2024 edition or style edition will
 automatically migrate formatting over to the 2024 style edition formatting.
 
 Projects who have contributors that may utilize their editor's format-on-save
-features are also strongly encouraged to add a `.rustfmt.toml` file to their project
+features are also strongly encouraged to add a `rustfmt.toml` file to their project
 that includes the corresponding `style_edition` utilized within their project, or to
 encourage their users to ensure their local editor format-on-save feature is
 configured to use that same `style_edition`.
