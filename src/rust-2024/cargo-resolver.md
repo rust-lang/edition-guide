@@ -17,7 +17,7 @@ which will imply [`resolver.incompatible-rust-version = "fallback"`].
 The resolver is a global setting for a [workspace], and the setting is ignored in dependencies.
 The setting is only honored for the top-level package of the workspace.
 If you are using a [virtual workspace], you will still need to explicitly set the [`resolver` field]
-in the `[workspace]` definition if you want to opt-in to the new resolver.
+in the `[workspace]` definition if you want to opt in to the new resolver.
 
 For more details on how Rust-version aware dependency resolution works, see [the Cargo book](../../cargo/reference/resolver.html#rust-version).
 

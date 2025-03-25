@@ -252,7 +252,7 @@ fn f<'a, T: 'a>(x: &'a (), y: T) -> impl Sized + 'a {
 }
 ```
 
-This trick was less baroque than the `Captures` trick, but also less correct.  As we can see in the example above, even though any lifetime components within `T` are independent from the lifetime `'a`, we're required to add a `T: 'a` bound in order to make the trick work.  This created undue and surprising restrictions on callers.
+This trick was less baroque than the `Captures` trick, but also less correct.  As we can see in the example above, even though any lifetime components within `T` are independent of the lifetime `'a`, we're required to add a `T: 'a` bound in order to make the trick work.  This created undue and surprising restrictions on callers.
 
 Using precise capturing, you can write the above instead, in all editions, as:
 
