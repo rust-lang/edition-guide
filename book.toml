@@ -1,6 +1,5 @@
 [book]
 authors = ["The Rust Project Developers"]
-multilingual = false
 src = "src"
 title = "The Rust Edition Guide"
 
