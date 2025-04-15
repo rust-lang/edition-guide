@@ -18,7 +18,7 @@ Over time it has become evident that certain functions in the standard library s
 
 ### `std::env::{set_var, remove_var}`
 
-It can be unsound to call [`std::env::set_var`] or [`std::env::remove_var`] in a multi-threaded program due to safety limitations of the way the process environment is handled on some platforms. The standard library originally defined these as safe functions, but it was later determined that was not correct.
+It can be unsound to call [`std::env::set_var`] or [`std::env::remove_var`] in a multithreaded program due to safety limitations of the way the process environment is handled on some platforms. The standard library originally defined these as safe functions, but it was later determined that was not correct.
 
 It is important to ensure that these functions are not called when any other thread might be running. See the [Safety] section of the function documentation for more details.
 

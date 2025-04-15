@@ -38,7 +38,7 @@ Just beware that if you build multiple workspace members at the same time, the f
 
 When using `cargo fix --edition`, Cargo will automatically update your `Cargo.toml` file to remove `default-features = false` in this situation.
 
-If you would prefer to update your `Cargo.toml` manually, check for any warnings when running a build and remove the corresponding entries.
+If you prefer to update your `Cargo.toml` manually, check for any warnings when running a build and remove the corresponding entries.
 Previous editions should display something like:
 
 ```text
