@@ -1,14 +1,14 @@
 # Missing macro fragment specifiers
 
+> **NOTE**: `missing_fragment_specifier` was originally made a hard error only for the 2024 Edition. In the time since this edition was released, the lint has been made into a hard error for all editions.
+
 ## Summary
 
-- The [`missing_fragment_specifier`] lint is now a hard error.
-
-[`missing_fragment_specifier`]: ../../rustc/lints/listing/deny-by-default.html#missing-fragment-specifier
+- The `missing_fragment_specifier` lint is now a hard error.
 
 ## Details
 
-The [`missing_fragment_specifier`] lint detects a situation when an **unused** pattern in a `macro_rules!` macro definition has a meta-variable (e.g. `$e`) that is not followed by a fragment specifier (e.g. `:expr`). This is now a hard error in the 2024 Edition.
+The `missing_fragment_specifier` lint detects a situation when an **unused** pattern in a `macro_rules!` macro definition has a meta-variable (e.g. `$e`) that is not followed by a fragment specifier (e.g. `:expr`). This is now a hard error in the 2024 Edition.
 
 ```rust,compile_fail
 macro_rules! foo {
@@ -31,6 +31,6 @@ We'd like to make this a hard error in all editions, but there would be too much
 
 ## Migration
 
-To migrate your code to the 2024 Edition, remove the unused matcher rule from the macro. The [`missing_fragment_specifier`] lint is on by default in all editions, and should alert you to macros with this issue.
+To migrate your code to the 2024 Edition, remove the unused matcher rule from the macro. The `missing_fragment_specifier` lint is on by default in all editions, and should alert you to macros with this issue.
 
 There is no automatic migration for this change. We expect that this style of macro is extremely rare. The lint has been a future-incompatibility lint since Rust 1.17, a deny-by-default lint since Rust 1.20, and since Rust 1.82, it has warned about dependencies that are using this pattern.
