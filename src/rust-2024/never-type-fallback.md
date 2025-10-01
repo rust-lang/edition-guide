@@ -3,9 +3,9 @@
 ## Summary
 
 - Never type (`!`) to any type ("never-to-any") coercions fall back to never type (`!`) rather than to unit type (`()`).
-- The [`never_type_fallback_flowing_into_unsafe`] lint is now `deny` by default.
+- The `never_type_fallback_flowing_into_unsafe` lint is now `deny` by default.
 
-[`never_type_fallback_flowing_into_unsafe`]: ../../rustc/lints/listing/warn-by-default.html#never-type-fallback-flowing-into-unsafe
+<!-- [`never_type_fallback_flowing_into_unsafe`]: ../../rustc/lints/listing/error-by-default.html#never-type-fallback-flowing-into-unsafe -->
 
 ## Details
 
@@ -57,7 +57,7 @@ In some cases your code might depend on the fallback type being `()`, so this ca
 
 ### `never_type_fallback_flowing_into_unsafe`
 
-The default level of the [`never_type_fallback_flowing_into_unsafe`] lint has been raised from `warn` to `deny` in the 2024 Edition. This lint helps detect a particular interaction with the fallback to `!` and `unsafe` code which may lead to undefined behavior. See the link for a complete description.
+The default level of the `never_type_fallback_flowing_into_unsafe` lint has been raised from `warn` to `deny` in the 2024 Edition. This lint helps detect a particular interaction with the fallback to `!` and `unsafe` code which may lead to undefined behavior. See the link for a complete description.
 
 ## Migration
 
