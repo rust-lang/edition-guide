@@ -3,7 +3,7 @@
 | Info | |
 | --- | --- |
 | RFC | [#3085](https://github.com/rust-lang/rfcs/pull/3085) |
-| Release version | 1.56.0 |
+| Release version | [1.56.0](https://blog.rust-lang.org/2021/10/21/Rust-1.56.0/) |
 
 The Rust 2021 Edition contains several changes that bring new capabilities and more consistency to the language,
 and opens up room for expansion in the future.
