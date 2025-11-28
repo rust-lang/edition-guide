@@ -55,35 +55,49 @@ In 2021 the local variable `c` is dropped before the temporary created by `c.bor
 
 ### Temporary scope may be narrowed
 
-When a temporary is created in order to evaluate an expression, the temporary is dropped based on the [temporary scope rules]. Those rules define how long the temporary will be kept alive. Before 2024, temporaries from tail expressions of a block would be extended outside the block to the next temporary scope boundary. In many cases this would be the end of a statement or function body. In 2024, the temporaries of the tail expression may now be dropped immediately at the end of the block (before any local variables in the block).
+When a temporary is created in order to evaluate an expression, the temporary is dropped based on the [temporary scope rules]. Those rules define how long the temporary will be kept alive. Before 2024, temporaries from tail expressions of a block would live past the block to the next temporary scope boundary. In many cases this would be the end of a statement or function body. In 2024, the temporaries of the tail expression may now be dropped immediately at the end of the block (before any local variables in the block).
 
 This narrowing of the temporary scope may cause programs to fail to compile in 2024. For example:
 
 ```rust,edition2024,E0716,compile_fail
 // This example works in 2021, but fails to compile in 2024.
 fn main() {
-    let x = { &String::from("1234") }.len();
+    let x = { String::from(" 1234 ").trim() }.len();
 }
 ```
 
-In this example, in 2021, the temporary `String` is extended outside of the block, past the call to `len()`, and is dropped at the end of the statement. In 2024, it is dropped immediately at the end of the block, causing a compile error about the temporary being dropped while borrowed.
+In this example, in 2021, the temporary `String` lives past the call to `len()` and is dropped at the end of the statement. In 2024, it is dropped immediately at the end of the block, causing a compile error about the temporary being dropped while borrowed.
 
-The solution for these kinds of situations is to lift the block expression out to a local variable so that the temporary lives long enough:
+One solution for these kinds of situations is to lift the temporary out to a local variable so that it lives long enough:
 
 ```rust,edition2024
 fn main() {
-    let s = { &String::from("1234") };
-    let x = s.len();
+    let s = String::from(" 1234 ");
+    let x = { s.trim() }.len();
 }
 ```
-
-This particular example takes advantage of [temporary lifetime extension]. Temporary lifetime extension is a set of specific rules which allow temporaries to live longer than they normally would. Because the `String` temporary is behind a reference, the `String` temporary is extended long enough for the next statement to call `len()` on it.
 
 See the [`if let` temporary scope] chapter for a similar change made to temporary scopes of `if let` expressions.
 
 [`if let` temporary scope]: temporary-if-let-scope.md
 [temporary scope rules]: ../../reference/destructors.html#temporary-scopes
-[temporary lifetime extension]: ../../reference/destructors.html#temporary-lifetime-extension
+
+### Interaction with temporary lifetime extension
+
+[Temporary lifetime extension] is a set of specific rules which allow temporaries to live longer than they normally would, including past block tail expressions. For example:
+
+```rust,edition2024
+fn main() {
+    let x = { &String::from("1234") }.len();
+}
+```
+
+Because the expression evaluating to the temporary `String` is the operand of a borrow expression, that temporary's scope may be extended.
+In this case, it appears syntactically in an [extending] position within the block, so the temporary `String` is extended outside of the block, past the call to `len()`.
+Since the block does not however appear in an extending position for the `let` statement as a whole, the temporary `String` is not extended further and is dropped at the end of the statement.
+
+[Temporary lifetime extension]: ../../reference/destructors.html#temporary-lifetime-extension
+[extending]: ../../reference/destructors.html#extending-based-on-expressions
 
 ## Migration
 
