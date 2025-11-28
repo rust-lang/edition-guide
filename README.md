@@ -17,12 +17,12 @@ You can also build the book and read it locally if you'd like.
 
 ### Requirements
 
-Building the book requires [mdBook] 0.4. To get it:
+Building the book requires [mdBook] 0.5. To get it:
 
 [mdBook]: https://github.com/rust-lang/mdBook
 
 ```bash
-$ cargo install mdbook
+$ cargo install mdbook@^0.5
 ```
 
 ### Building
